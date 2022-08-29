@@ -1,0 +1,43 @@
+Type: Book
+Package: placeholder
+Title: SDD I UMONS version 2022
+Version: 2022.0.0
+Depends: 
+    learnitdown
+Imports: 
+    bookdown,
+    broom,
+    broom.mixed,
+    car,
+    DT,
+    faraway,
+    fortunes,
+    GGally,
+    ggplot2,
+    ggpubr,
+    ggridges,
+    glue,
+    knitr,
+    lmerTest,
+    mosaic,
+    multcomp,
+    nparcomp,
+    pander,
+    pwr,
+    rmarkdown,
+    scales,
+    SciViews
+    sessioninfo,
+    skimr,
+    vembedr
+Remotes: 
+    SciViews/svMisc,
+    SciViews/svBase,
+    SciViews/svFlow,
+    SciViews/data.io,
+    SciViews/chart,
+    SciViews/exploreit,
+    SciViews/SciViews,
+    rstudio/learnr,
+    rstudio/gradethis,
+    SciViews/learnitdown,
