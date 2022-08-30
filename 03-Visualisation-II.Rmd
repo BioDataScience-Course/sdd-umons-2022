@@ -86,22 +86,22 @@ Vous pouvez décrypter votre histogramme sur base des **modes**[^03-visualisatio
 
 ```{r histo-mode, fig.cap = "Histogrammes montrant les modes et symétries : A. histogramme unimodal et symétrique, B. histogramme bimodal et asymétrique, C. histogramme unimodal et asymétrique, D. histogramme multimodal et symétrique.", echo=FALSE, message=FALSE, warning=FALSE}
 set.seed(1000)
-df1 <- tibble(x = rnorm(5000, 35, 5))
+df1 <- dtx(x = rnorm(5000, 35, 5))
 g1 <- chart(data = df1, ~ x) +
   geom_histogram() +
   labs(x = "Unimodal & symétrique", y = "Effectifs")
 
-df2 <- rbind(df1, tibble(x = rnorm(7000, 60, 5)))
+df2 <- rbind(df1, dtx(x = rnorm(7000, 60, 5)))
 g2 <- chart(data = df2, ~ x) +
   geom_histogram() +
   labs(x = "Bimodal & symétrique", y = "Effectifs")
 
-df3 <- tibble(x = rlnorm(3000, 0, 0.6))
+df3 <- dtx(x = rlnorm(3000, 0, 0.6))
 g3 <- chart(data = df3, ~ x) +
   geom_histogram() +
   labs(x = "Unimodal & asymétrique", y = "Effectifs")
 
-df4 <- rbind(df2, tibble(x = rnorm(3000, 80, 5)))
+df4 <- rbind(df2, dtx(x = rnorm(3000, 80, 5)))
 g4 <- chart(data = df4, ~ x) +
   geom_histogram() +
   labs(x = "Multimodal & symétrique", y = "Effectifs")
@@ -199,7 +199,8 @@ L'histogramme est maintenant séparé en trois en fonction des niveaux de la var
 nbins <- 25
 chart(data = iris, ~ sepal_length %fill=% species | species) +
   # histogramme d'arrière-plan en gris ne tenant pas compte de la variable species
-  geom_histogram(data = collect(select(iris, -species)), fill = "grey", bins = nbins) + 
+  geom_histogram(data = collect_dtx(select(iris, -species)),
+    fill = "grey", bins = nbins) + 
   geom_histogram(show.legend = FALSE, bins = nbins) +
   ylab("Effectifs") +
   scale_fill_viridis_d()
@@ -296,7 +297,7 @@ Le graphique en violon est constitué de deux graphiques de densité en miroir. 
 
 zooplankton %>.%
   filter(., class %in% c("Annélide", "Calanoïde", "Cyclopoïde", "Décapode")) %>.%
-  collect(.) %>.%
+  collect_dtx(.) %>.%
   chart(data = ., size ~ class %fill=% class) +
     geom_violin(show.legend = FALSE)  +
     theme(axis.text.x  = element_text(colour = "#a80039", size = 15), 

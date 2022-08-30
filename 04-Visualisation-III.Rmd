@@ -285,9 +285,9 @@ Ce graphique est plus difficile à réaliser à l'aide de `chart()` ou `ggplot()
 Partons d'un exemple fictif pour vous convaincre qu'un graphique en barres est souvent plus lisible qu'un graphique en camembert. Combien d'observations comptez-vous pour la lettre **H** ?
 
 ```{r, echo=FALSE}
-df <- tibble(
-  Index    = 1:347,
-  Facteur  = as.factor(rep(LETTERS[1:10],
+df <- dtx(
+  Index   = 1:347,
+  Facteur = as.factor(rep(LETTERS[1:10],
     times = c(10, 1, 1, 50, 2, 78, 101, 24, 31, 49)
   ))
 )
@@ -368,7 +368,7 @@ La boite de dispersion est une représentation graphique codifiée de ces cinq n
 [^04-visualisation-iii-2]: Il est possible de modifier la transparence des points et/ou de les déplacer légèrement vers la gauche ou vers la droite de manière aléatoire pour résoudre le problème de chevauchement des points sur un graphique en nuage de points univarié.
 
 ```{r nuage-de-points, fig.cap="Nuage de points univarié.", echo=FALSE}
-df <- tibble(x = x)
+df <- dtx(x = x)
 chart(data = df, x ~ 0) +
   geom_point() +
   theme(axis.text.x = element_blank(),
@@ -411,7 +411,7 @@ Vous observez à la Fig. \@ref(fig:boxplot-construct) que certaines valeurs mini
 ggplot_box_legend <- function(family = "sans") {
   # Create data to use in the boxplot legend
   set.seed(100)
-  sample_df <- data.frame(
+  sample_df <- dtx(
     parameter = "test",
     values    = sample(500))
   
@@ -554,7 +554,7 @@ La formule à employer est `YNUM (size) ~ XFACTOR (class)`. Ensuite, pour réali
 Lors de la réalisation de boites de dispersion, vous devez être vigilant au nombre d'observations qui se cachent sous chacune d'elles. En effet, réaliser une boite de dispersion à partir d'échantillons ne comportant que cinq valeurs ou moins n'a *aucun* sens !
 
 ```{r boxplot-points, fig.cap= "Piège des boites de dispersion : trop peu d'observations disponibles pour `a`.", echo= FALSE}
-df <- tibble(
+df <- dtx(
   Facteur = rep(c("A", "B", "C"), times = c(4, 11, 8)), 
   Valeur  = c(55, 83, 120, 26, 1, 71, 55, 68, 78, 60, 83, 120,
               82, 53, 26, 1, 71, 78, 60, 83, 120, 53, 26))
@@ -719,7 +719,7 @@ if (exists("assignment"))
 
 ## Différents moteurs graphiques
 
-<center>![Prolifération des standards d'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
+<center>![Prolifération des standards d\'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
 
 Depuis le début, l'ensemble des graphiques que nous vous avons proposés utilise la fonction `chart()` du package {chart}. Cependant, il ne s'agit pas de la seule fonction permettant de réaliser des graphiques dans R, loin de là. En fait, {chart} est tout récent et a été développé pour homogénéiser autant que possible les graphiques issus de trois moteurs graphiques différents : {ggplot2}, {lattice} et les graphiques de base. La fonction `chart()` a d'autres avantages également :
 

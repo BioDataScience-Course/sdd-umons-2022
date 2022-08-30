@@ -197,7 +197,7 @@ Il s'agit du quantile 6,76. Le graphique correspondant est le suivant :
 .x2 <- .x
 .x2[.x > 6.7603] <- NA
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
+chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
   Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
@@ -263,7 +263,7 @@ On pourra aussi dire que la moyenne d'un échantillon de neuf observations issu 
 .x1[.x > 6.4627] <- NA
 .x2[.x < 9.5373] <- NA
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
+chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
   Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
@@ -339,7 +339,7 @@ Comme pour tout en statistique, nous devons accepter un certain risque de nous t
 .x4[.x < .mu + .s * qt(0.05, df = 8, lower.tail = FALSE)] <- NA
 
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
+chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
   Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
@@ -511,7 +511,7 @@ Le raisonnement est le suivant. Sous $H_0$, la distribution de $\Delta rear$ est
 .x2[.x < qt(0.025, df = 198, lower.tail = FALSE)] <- NA
 
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)),
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)),
   Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
@@ -626,7 +626,7 @@ Notez que la valeur *P* a été divisée par deux par rapport au test bilatéral
 .x1 <- .x
 .x1[.x < qt(0.05, df = 198, lower.tail = FALSE)] <- NA
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)),
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)),
   Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +

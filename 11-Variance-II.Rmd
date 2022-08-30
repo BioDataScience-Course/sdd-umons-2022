@@ -60,9 +60,8 @@ read("crabs", package = "MASS", lang = "fr") %>.%
 #chart$base(interaction.plot(crabs2$species, crabs2$sex, crabs2$aspect5))
 # Version avec ggplot2
 crabs2 %>.%
-  group_by(., species, sex) %>.%
-  summarise(., aspect5_groups = mean(aspect5)) %>.%
-  collect(.) %>.%
+  group_by(., species, sex) |> summarise(aspect5_groups = mean(aspect5)) %>.%
+  collect_dtx(.) %>.%
   print(.) %>.% # Tableau des moyennes par groupes
   chart(data = ., aspect5_groups ~ species %col=% sex %group=% sex) +
     geom_line() +
@@ -77,12 +76,11 @@ Au niveau de la description préliminaire des données, nous pourrons utiliser u
 
 ```{r}
 crabs2 %>.%
-  group_by(., species, sex) %>.%
-  summarise(.,
+  group_by(., species, sex) |> summarise(
     mean  = mean(aspect5),
     sd    = sd(aspect5),
     count = sum(!is.na(aspect5))) %>.%
-  collect(.)
+  collect_dtx(.)
 ```
 
 Pour la visualisation graphique, nous sommes tributaires du nombre d'observations. Avec moins d'une petite dizaine d'observations, nous représenterons des points pour chaque observation et superposerons les moyennes. Lorsque le nombre est plus grand nous pourrons utiliser soit les boites de dispersion, soit le graphique en violon si ce nombre est encore plus grand. Voyons cela sur notre exemple (les "snippets" dans le menu `chart: bivariate` peuvent être utilisés comme point de départ auquel nous ajoutons la seconde variable facteur pour les facettes multi-graphiques séparée par un `|`). La Fig. \@ref(fig:crabs2boxplot) montre ce que cela donne si l'on opte pour les boites de dispersion.
@@ -100,7 +98,7 @@ chart(data = crabs2, aspect5 ~ species | sex) +
   geom_jitter(width = 0.05, alpha = 0.5) +
   geom_point(data = group_by(crabs2, species, sex) |>
     summarise(means = mean(aspect5, na.rm = TRUE)) |>
-    collect(),
+    collect_dtx(),
     f_aes(means ~ species), size = 3, col = "red")
 ```
 
@@ -165,7 +163,7 @@ Le modèle ANOVA que nous venons de faire s'appelle un **modèle croisé** parce
 ```{r}
 crabs2 %>.%
   count(., species, sex) %>.%
-  collect(.)
+  collect_dtx(.)
 ```
 
 Le modèle **croisé sans interactions** que nous avions utilisés est cependant *incomplet* puisque, pour considérer tous les cas possibles, il faut aussi considérer que ces interactions puissent exister et les inclure directement dans le modèle. Le **modèle complet** s'écrit comme ceci :
@@ -309,20 +307,19 @@ Si nous n'avons plus que deux mesures par laboratoire au lieu de deux fois quatr
 
 ```{r}
 eggs %>.%
-  group_by(., Technician) %>.%
-  summarise(., Fat_mean = mean(Fat), Lab = unique(Lab)) %->%
+  group_by(., Technician) |> summarise(
+    Fat_mean = mean(Fat), Lab = unique(Lab)) %->%
   eggs_means
 skimr::skim(eggs_means)
 ```
 
 ```{r}
 eggs_means %>.%
-  group_by(., Lab) %>.%
-  summarise(.,
+  group_by(., Lab) |> summarise(
     mean  = mean(Fat_mean),
     sd    = sd(Fat_mean),
     count = sum(!is.na(Fat_mean))) %>.%
-  collect(.)
+  collect_dtx(.)
 ```
 
 Représentation graphique et vérification de l'homoscédasticité.
@@ -332,7 +329,7 @@ chart(eggs_means, Fat_mean ~ Lab) +
   geom_point() +
   geom_point(data = group_by(eggs_means, Lab) |>
     summarise(means = mean(Fat_mean, na.rm = TRUE)) |>
-    collect(),
+    collect_dtx(),
     f_aes(means ~ Lab), size = 3, col = "red")
 ```
 
@@ -348,7 +345,7 @@ anova(anova. <- lm(data = eggs_means, Fat_mean ~ Lab))
 
 ```{r}
 anova. %>.%
-  broom::augment(.) %>.%
+  augment(.) %>.%
   car::qqPlot(.$.std.resid, distribution = "norm",
     envelope = 0.95, col = "Black", xlab = "Quantiles théoriques (distri. normale)",
     ylab = "Résidus standardisés")
@@ -407,7 +404,7 @@ Les deux facteurs sont significatifs au seuil $\alpha$ de 5%. Pour finir, une an
 
 ```{r}
 anova. %>.%
-  broom::augment(.) %>.%
+  augment(.) %>.%
   car::qqPlot(.$.std.resid, distribution = "norm",
     envelope = 0.95, col = "Black", xlab = "Quantiles théoriques (distri. normale)",
     ylab = "Résidus standardisés")
@@ -418,7 +415,7 @@ Nous pouvons ensuite vérifier visuellement l'égalité des variances (bien mieu
 ```{r}
 #plot(anova., which = 1)
 anova. %>.%
-  chart(broom::augment(.), .resid ~ .fitted) +
+  chart(augment(.), .resid ~ .fitted) +
   geom_point() +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE, method = "loess", formula = y ~ x) +
@@ -479,7 +476,7 @@ N'oublions par de réaliser une petite analyse des résidus de ce modèle pour v
 ```{r}
 library(broom.mixed) # Required for mixed models
 split_plot %>.%
-  broom::augment(.) %>.%
+  augment(.) %>.%
   car::qqPlot(.$.resid, distribution = "norm",
     envelope = 0.95, col = "Black", xlab = "Quantiles théoriques (distri. normale)",
     ylab = "Résidus standardisés")
@@ -488,7 +485,7 @@ split_plot %>.%
 ```{r}
 #plot(split_plot, which = 1)
 split_plot %>.%
-  chart(broom::augment(.), .resid ~ .fitted) +
+  chart(augment(.), .resid ~ .fitted) +
   geom_point() +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE, method = "loess", formula = y ~ x) +
@@ -609,7 +606,7 @@ L'analyse des résidus donne ceci :
 
 ```{r}
 repeated %>.%
-  broom::augment(.) %>.%
+  augment(.) %>.%
   car::qqPlot(.$.resid, distribution = "norm",
     envelope = 0.95, col = "Black", xlab = "Quantiles théoriques (distri. normale)",
     ylab = "Résidus standardisés")
@@ -618,7 +615,7 @@ repeated %>.%
 ```{r}
 #plot(repeated, which = 1)
 repeated %>.%
-  chart(broom::augment(.), .resid ~ .fitted) +
+  chart(augment(.), .resid ~ .fitted) +
   geom_point() +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE, method = "loess", formula = y ~ x) +
@@ -749,7 +746,7 @@ v[v > 3 & v <= 5]
 Les indiçages fonctionnent aussi pour des objets bi- or multidimensionnels. Dans ce cas, nous utiliserons deux ou plusieurs instructions d'indiçage à l'intérieur des `[]`, séparées par un virgule. Pour un tableau à deux dimensions comme une matrice ou un data frame, le premier élément sélectionne les lignes et le second les colonnes.
 
 ```{r}
-df <- as_dtt(tribble(
+df <- as_dtx(tribble(
   ~x, ~y, ~z,
   1,  2,  3,
   4,  5,  6

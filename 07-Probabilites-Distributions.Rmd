@@ -215,7 +215,7 @@ $$\mathrm{P(A\, \mathrm{ou}\, B)} = \mathrm{P}(A) + \mathrm{P(B)} - \mathrm{P}(A
 Comme un tableau de contingence indique le nombre de fois que des évènements ont pu être observés, il peut servir de base à des calculs de probabilités. Partons du dénombrement de fumeur en fonction du revenu dans une population.
 
 ```{r}
-tabac <- dtf(
+tabac <- dtx(
   revenu_faible = c(634,  1846, 2480),
   revenu_moyen  = c(332,  1622, 1954),
   revenu_eleve  = c(247,  1868, 2115),
@@ -304,7 +304,7 @@ Il s'agit d'évènements successifs **non-indépendants**. En effet, le retrait 
 La comparaison des probabilités théoriques et observées constitue l’un des piliers des statistiques. Le raisonnement est le suivant\ : si les probabilités observées sont suffisamment proches des probabilités théoriques, alors, nous pouvons considérer que les évènements sont générés selon un mécanisme identique ou proche de celui qui est à la base de la loi de distribution théorique correspondante.
 ```
 
-<center>![Même dans la vie de tous les jours, les calculs de probabilités peuvent être utiles, enfin... d\'après xkcd.](https://imgs.xkcd.com/comics/boyfriend.png)</center>
+<center>![Même dans la vie de tous les jours, les calculs de probabilités peuvent être utiles, enfin... d'après xkcd.](https://imgs.xkcd.com/comics/boyfriend.png)</center>
 
 Avant d'explorer ces lois de distributions statistiques, nous devons d'abord introduire la distinction entre **probabilité discrète** et **probabilité continue**. Une probabilité discrète est associée à une variable qualitative ou à la rigueur, à une variable continue discrète qui peut prendre un nombre fini -et généralement relativement petit- de valeurs. A chaque valeur est associé un évènement. Chaque évènement a une certaine probabilité de se produire dans un contexte donné. *Jusqu'à présent, nous n'avons traité que ce cas-là.* Par contre, une variable quantitative continue peut prendre un nombre infini de valeurs matérialisées généralement par l'ensemble des nombres réels. Dans ce cas, l'association d'un évènement à une valeur de la variable, et d'une probabilité à chaque évènement reste vraie en théorie. Mais en pratique, ces probabilités dites continues ne sont pas calculables par les équations étudiées jusqu'ici. Par contre, les **lois de distributions continues** permettent des calculs, moyennant une petite astuce que nous dévoilerons plus loin dans ce chapitre.
 
@@ -321,7 +321,7 @@ $$\mathrm{P}(E) = \frac{1}{n_E}$$
 La distribution uniforme est d'application pour les jeux de hasard (dés, boules de loto, ...). En biologie, elle est plus rare. Dans le cas d'un sexe ratio de 1:1 (autant de mâles que de femelles), la probabilité qu'un nouveau né soit un mâle ou une femelle suit une distribution uniforme et vaut 1/2. La distribution spatiale des individus dans une population biologique peut être uniforme lorsque les individus interagissent de telle manière que la distance entre eux soit identique (par exemple, dans un groupe de manchots *Aptenodytes patagonicus* sur la banquise). Imaginons un animal hypothétique pour lequel la portée peut être de 1 à 4 petits de manière équiprobable. Nous avons alors 1/4 des portées qui présentent respectivement, 1, 2, 3 ou 4 petits (Fig. \@ref(fig:unif1)).
 
 ```{r unif1, echo=FALSE, fig.cap="Probabilité du nombre de petits dans une portée qui suivrait un distribution strictement uniforme entre 1 et 4."}
-tibble(Portée = 1:4, Probabilité = 1/4) %>.%
+dtx(Portée = 1:4, Probabilité = 1/4) %>.%
   chart(., Probabilité ~ Portée) +
   geom_bar(stat = "identity", width = 0.03)
 ```
@@ -353,7 +353,7 @@ La représentation graphique d'une loi de distribution continue est un outil uti
 #curve(.d(x), xlim = range(.x), xaxs = "i", n = 1000, col = .col,
 #  add = .add, xlab = "Quantiles", ylab = "Probability density") # Curve
 #abline(h = 0, col = "gray") # Baseline
-ch_unif <- chart(data = tibble(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+ch_unif <- chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
   geom_line() +
@@ -368,7 +368,7 @@ Une autre représentation courante est la **densité de probabilité cumulée** 
 ```{r unif-cumul, echo=FALSE, fig.cap="Probabilité cumulée qu'un nouvel insecte butineur arrive dans un intervalle de 0 à 4 min si, en moyenne, un insecte arrive toutes les 4 min."}
 .dc <- function(x) punif(x, min = .min, max = .max)             # Density function
 
-chart(data = tibble(Quantiles = .x, Prob = .dc(.x)), Prob ~ Quantiles) +
+chart(data = dtx(Quantiles = .x, Prob = .dc(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .dc(.x)), fill = "gray", alpha = 0.2) +
   geom_line() +
@@ -520,14 +520,14 @@ Les calculs sur base d'une distribution binomiale sont assez similaires à ceux 
 Puisqu'il s'agit d'une distribution discrète, un petit nombre d'évènements possibles existent. Le snippet `.ibtable` retourne l'ensemble des valeurs possibles pour $j$ allant de 1 à $n$ en une seule étape. Les autres snippets devraient maintenant vous être familiers.
 
 ```{r}
-(.table <- dtt(success = 0:6,
+(.table <- dtx(success = 0:6,
   probability = dbinom(0:6, size = 6, prob = 0.75)))
 ```
 
 La représentation graphique donne la Fig. \@ref(fig:binom).
 
 ```{r binom, echo=FALSE, fig.cap="Probabilité d'avoir *j* enfants sains parmi 6 dans des familles dont les deux parents sont porteurs hétérozygotes du gène de la mucoviscidose."}
-dtt(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
+dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
   chart(., Probabilité ~ Quantile) +
   geom_bar(stat = "identity", width = 0.05)
 ```
@@ -535,7 +535,7 @@ dtt(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
 La situation la plus probable est donc d'avoir cinq enfants sains sur six. Nous pouvons aussi observer que, lorsque $p$ s'éloigne de 0.5, les probabilités à l'extrême opposée tendent assez rapidement vers zéro (ici, la probabilité de n'avoir qu'un seul, ou aucun enfant sain). La distribution binomiale trouve de très nombreuses applications en biologie, en écologie, en génétique et dans d'autres disciplines. Elle permet même de représenter vos chances de réussite à l'examen de science des données biologiques ! Voici, pour finir, l'allure d'une distribution binomiale pour laquelle la probabilité du succès est égale à la probabilité d'échec (0.5). Cette distribution est symétrique.
 
 ```{r binom2, echo=FALSE, fig.cap="Probabilité d'avoir des garçons parmi une fratrie de 6 enfants (si le sexe ratio de 1:1)."}
-dtt(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.5)) %>.%
+dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.5)) %>.%
   chart(., Probabilité ~ Quantile) +
   geom_bar(stat = "identity", width = 0.05)
 ```
@@ -589,7 +589,7 @@ $$P(Y=k) = P(Y=k-1) \times \frac{\lambda}{k}$$
 Le calcul se réalise de proche en proche en partant de la probabilité de ne jamais observer l'évènement. Comme l'évènement est rare, la probabilité tend très rapidement vers une valeur extrêmement faible. Seul le calcul des quelques premiers termes est donc nécessaire. A titre d'exercice, faites le calcul pour notre exemple d'un échantillon de la population belge, avec $\lambda = 1$ comme paramètre. La densité de probabilité pour cette distribution est représentée à la Fig. \@ref(fig:poisson).
 
 ```{r poisson, echo=FALSE, fig.cap="Probabilité d'occurence de mucoviscidose dans un échantillon aléatoire de 1600 belges."}
-dtt(Quantile = 0:8, Probabilité = dpois(0:8, lambda = 1)) %>.%
+dtx(Quantile = 0:8, Probabilité = dpois(0:8, lambda = 1)) %>.%
   chart(., Probabilité ~ Quantile) +
   geom_bar(stat = "identity", width = 0.05)
 ```
@@ -628,7 +628,7 @@ La distribution normale est la distribution la plus utilisée en statistique. El
 #  add = .add, xlab = "Quantiles", ylab = "Probability density") # Curve
 #abline(h = 0, col = "gray") # Baseline
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
   geom_line() +
@@ -672,7 +672,7 @@ La probabilité qu'une observation soit dans un intervalle de $\pm 1 \sigma$ aut
 .q <- function(p) qnorm(p, mean = .mu, sd = .s) # Quantile for lower-tail prob
 .label <- bquote(N(.(.mu), .(.s)))               # Curve parameters
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
   geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
@@ -724,7 +724,7 @@ Par facilité, on défini ses deux paramètres de manière relative à la moyenn
 .q <- function(p) qlnorm(p, meanlog = .mul, sdlog = .sl) # Quantile for lower-tail prob
 .label <- bquote(logN(.(.mul), .(.sl))) # Curve parameters
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
   geom_line() +
@@ -777,7 +777,7 @@ C'est légèrement mieux, mais la distribution ne parait pas parfaitement symét
 q_obs <- quantile(eggs$log_area, probs = probas)
 # quantiles theoriques selon la distribution normale réduite
 q_theo <- qnorm(probas, mean = 0, sd = 1)
-qq <- dtt(q_obs = q_obs, q_theo = q_theo)
+qq <- dtx(q_obs = q_obs, q_theo = q_theo)
 qq
 ```
 

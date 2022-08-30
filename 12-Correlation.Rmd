@@ -34,7 +34,7 @@ Plus la variance est élevée, plus les observations sont dispersées autour de 
 
 ```{r, echo=FALSE, results='hide', fig.width=9, fig.height=3}
 set.seed(653643)
-df <- dtt(
+df <- dtx(
   X  = rnorm(100),
   Y1 = X + rnorm(100, sd = 0.2),
   Y2  = rnorm(100),
@@ -164,7 +164,7 @@ La matrice est représentée par des ellipses de plus en plus allongées au fur 
 zoo <- read("zooplankton", package = "data.io")
 zoo %>.%
   select(., size:density) %>.%
-  collect(.) %>.%
+  collect_dtx(.) %>.% # Parce que correlation() n'est pas une fonction tidy
   correlation(.) ->
   zoo_cor
 plot(zoo_cor)

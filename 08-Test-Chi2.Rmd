@@ -75,7 +75,7 @@ Tout cela reste très abstrait. Prenons un exemple concret simple. Le bec-crois�
 Comme des individus à bec croisé à gauche et d'autres à bec croisé à droite se rencontrent dans la même population, Groth (1992) a comptabilisé les deux types dans un échantillon aléatoire et représentatif de plus de 3000 oiseaux. Il a obtenu le tableau suivant :
 
 ```{r}
-(crossbill <- dtt(cb = c(rep("left", 1895), rep("right", 1752))))
+(crossbill <- dtx(cb = c(rep("left", 1895), rep("right", 1752))))
 ```
 
 Ce tableau peut être résumé sous la forme d'un tableau de contingence :
@@ -189,7 +189,7 @@ Pour répondre à la question, il nous faut une loi de distribution statistique 
 #curve(.d(x), xlim = range(.x), xaxs = "i", n = 1000, col = .col,
 #  add = .add, xlab = "Quantiles", ylab = "Probability density") # Curve
 #abline(h = 0, col = "gray") # Baseline
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
   geom_line() +
@@ -223,7 +223,7 @@ q_ref <- qchisq(0.05, df = 1, lower.tail = FALSE)
 .x2 <- .x
 .x2[.x2 < q_ref] <- NA
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
   geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
@@ -323,7 +323,7 @@ Comme toujours, le test $\chi^2$ d'indépendance est assorti de conditions d'app
 Prenons le jeu de données concernant le test d'une molécule potentiellement anti-cancéreuse, le timolol :
 
 ```{r}
-(timolol <- dtt(
+(timolol <- dtx(
   traitement = c(
     rep("timolol", 160), rep("placebo", 147)),
   patient = c(
@@ -333,7 +333,7 @@ Prenons le jeu de données concernant le test d'une molécule potentiellement an
 ```
 
 ```{r, echo=FALSE, eval=FALSE}
-timolol1 <- dtt(
+timolol1 <- dtx(
   traitement = c("timolol", "timolol", "placebo", "placebo"),
   patient    = c("sain",    "malade",  "sain",    "malade"),
   freq       = c(44,        116,       19,        128)
@@ -455,7 +455,7 @@ crabs %>.%
     species = fct_recode(species, `**Variété bleue**` = "B", `**Variété orange**` = "O"),
     sex = fct_recode(sex, `Femelle` = "F", Mâle = "M")
   ) %>.%
-  collect(.) %>.%
+  collect_dtx(.) %>.% # Because with() & table() are not tidy functions
   with(., table(species, sex)) %>.% # Tableau de contingence à 2 entrées
   knitr::kable(., caption = "Nombre de crabes mesurés par variété et par sexe.",
     align = "c", escape = FALSE)
@@ -527,7 +527,7 @@ C'est exactement le même raisonnement que nous pouvons appliquer à nos donnée
 ```{r}
 crabs %>.%
   mutate(., rear_length = rear / length) %>.% # Calcul de rear_length
-  collect(.) %>.%
+  collect_dtx(.) %>.%
   chart(data = ., rear_length ~ species %fill=% sex) +
     geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
     ylab("Ratio largeur arrière/longueur")
@@ -540,7 +540,7 @@ Notre métrique `rear_length` est naturellement ultra-simple. Elle ne permet pas
 ```{r}
 crabs %>.%
   mutate(., rear_length2 = rear / (0.3 * length + 2.4)) %>.%  # Calcul de rear_length2
-  collect(.) %>.%
+  collect_dtx(.) %>.%
   chart(data = ., rear_length2 ~ species %fill=% sex) +
     geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
     ylab("Ratio largeur arrière/(0.3*longueur + 2.4)")
@@ -551,7 +551,7 @@ De même, nous pouvons utiliser l'indice `front_width = front / (0.43 * width)` 
 ```{r}
 crabs %>.%
   mutate(., front_width = front / (0.43 * width)) %>.% # Calcul de front_width
-  collect(.) %>.%
+  collect_dtx(.) %>.%
   chart(data = ., front_width ~ species %fill=% sex) +
     geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
     ylab("Ratio lobe frontal/(0.43*largeur)")

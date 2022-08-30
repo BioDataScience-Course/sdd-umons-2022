@@ -142,14 +142,14 @@ Avec l'indice $j = 1 .. k$ populations et l'indice $i = 1 .. n$ observations du 
 Le graphique à la Fig. \@ref(fig:anova1) représente une situation typique à trois sous-populations.
 
 ```{r anova1, echo = FALSE, fig.cap="Décomposition de la variance dans un cas à trois populations A, B et C fictives."}
-dat <- data.frame(Population = c("A", "A", "A", "B", "B", "B", "C", "C", "C"),
+dat <- dtx(Population = c("A", "A", "A", "B", "B", "B", "C", "C", "C"),
   Réponse = c(2.2, 2.4, 3.3, 4.9, 5.2, 6.1, 4.3, 6.4, 6.5))
 means <- c(mean(dat$Réponse), tapply(dat$Réponse, dat$Population, mean))
-annot <- data.frame(x = c(1.1, 1.4, 1.7, 2.1, 2.4, 2.7),
+annot <- dtx(x = c(1.1, 1.4, 1.7, 2.1, 2.4, 2.7),
   ystart = c(means[1], means[1], means[2], means[1], means[1], means[3]),
   yend = c(2.2, means[2], 2.2, 4.9, means[3], 4.9),
   color = c(2L, 2L, 2L, 3L, 3L, 3L))
-annot2 <- data.frame(xstart = c(0.95, 1.95), xend = c(1.75, 2.75),
+annot2 <- dtx(xstart = c(0.95, 1.95), xend = c(1.75, 2.75),
   y = c(2.2, 4.9), color = 2:3)
 library(ggplot2)
 chart(data = dat, Réponse ~ Population %col=% Population) +
@@ -188,10 +188,10 @@ D'une part, nous nous trouvons dans une situation d'additivité de la variance s
 
 ```{r anova2, echo=FALSE, fig.cap="A. Cas fictif avec moyennes probablement égales entre populations (étalement des points bien plus large que l'écart entre les moyennes), B. cas où les moyennes sont probablement différentes (écart des moyennes \"inter\" bien plus grand que l'étalement des points en \"intra\"-population)."}
 set.seed(25431)
-dat1 <- dtt(
+dat1 <- dtx(
   Y = rnorm(30, sd = 0.3),
   Population = rep(c("A", "B", "C"), each = 10))
-dat2 <- dtt(
+dat2 <- dtx(
   Y = rnorm(30, sd = 0.1) + rep(c(0, -1, 1), each = 10),
   Population = rep(c("A", "B", "C"), each = 10))
 pl1 <- chart(data = dat1, Y ~ Population) +
@@ -272,7 +272,7 @@ q_ref <- qf(0.05, df1 = .df1, df2 = .df2, lower.tail = FALSE)
 .x2 <- .x
 .x2[.x2 < q_ref] <- NA
 
-chart(data = dtt(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
   geom_hline(yintercept = 0, col = "gray") +
   geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
   geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
@@ -361,18 +361,14 @@ bartlett.test(data = crabs2, aspect ~ group)
 Nous rejetons $H_0$. Il n'y a pas homoscédasticité. Calculons par exemple le logarithme népérien de `aspect` et réessayons :
 
 ```{r}
-crabs2 %>.%
-  mutate(., log_aspect = ln(aspect)) %->%
-  crabs2
+crabs2 %<-% mutate(crabs2, log_aspect = ln(aspect))
 bartlett.test(data = crabs2, log_aspect ~ group)
 ```
 
 Ici cela ne fonctionne pas. Cela fait pire qu'avant. La transformation inverse (`exp()`) peut être essayée mais ne stabilise pas suffisamment la variance. Après divers essais, il s'avère qu'une transformation puissance cinq stabilise bien la variance.
 
 ```{r}
-crabs2 %>.%
-  mutate(., aspect5 = aspect^5) %->%
-  crabs2
+crabs2 %<-% mutate(crabs2, aspect5 = aspect^5)
 bartlett.test(data = crabs2, aspect5 ~ group)
 ```
 
@@ -384,7 +380,7 @@ chart(data = crabs2, aspect5 ~ group) +
   geom_jitter(width = 0.05, alpha = 0.5) +
   geom_point(data = group_by(crabs2, group) |>
     summarise(means = mean(aspect5, na.rm = TRUE)) |>
-    collect(),
+    collect_dtx(),
     f_aes(means ~ group), size = 3, col = "red") +
   ylab("(ratio largeur arrière/max)^5")
   
@@ -401,7 +397,7 @@ crabs2 %>.%
     mean  = mean(aspect5),
     sd    = sd(aspect5),
     count = sum(!is.na(aspect5))) %>.%
-  collect(.)
+  collect_dtx(.)
 ```
 
 Ensuite l'ANOVA proprement dite :
@@ -416,7 +412,7 @@ Ce n'est qu'une fois l'ANOVA réalisée que nous pouvons calculer et visionner l
 
 ```{r anova-resid, echo=FALSE, fig.cap="Graphique quantile-quantile des résidus pour l'analyse de `aspect^5`."}
 anova. %>.%
-  broom::augment(.) %>.%
+  augment(.) %>.%
   car::qqPlot(.$.std.resid, distribution = "norm",
     envelope = 0.95, col = "Black", xlab = "Quantiles théoriques (distri. normale)",
     ylab = "Résidus")

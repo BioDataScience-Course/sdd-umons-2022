@@ -113,7 +113,7 @@ L'encodage d'un petit tableau cas par variables directement dans R est facile. C
 
 ```{r}
 # Spécification colonne par colonne avec tibble()
-(df <- as_dtt(tibble(
+(df <- as_dtx(tibble(
   x = c(1, 2),
   y = c(3, 4)
 )))
@@ -121,7 +121,7 @@ L'encodage d'un petit tableau cas par variables directement dans R est facile. C
 
 ```{r}
 # Spécification ligne par ligne avec tribble()
-(df1 <- as_dtt(tribble(
+(df1 <- as_dtx(tribble(
   ~x, ~y,
    1,  3,
    2,  4
@@ -184,7 +184,7 @@ anthirrhinum
 Une troisième possibilité est d'utiliser un tableau indiquant les **fréquences d'occurence** dans une colonne (`freq` ci-dessus). Ce n'est **pas** un tableau cas par variables, mais une forme bien plus concise et pratique pour pré-encoder les données qui devront être ensuite transformées en tableau de contingence à l'aide de la fonction `xtabs()`. Voici un exemple pour un tableau de contingence à double entrée. Notez que le tableau cas par variable correspondant devrait contenir 44 + 116 + 19 + 128 = 307 lignes et serait plus fastidieux à construire et à manipuler (même en utilisant la fonction `rep()`).
 
 ```{r}
-timolol <- tibble(
+timolol <- dtx(
   traitement = c("timolol", "timolol", "placebo", "placebo"),
   patient    = c("sain",    "malade",  "sain",    "malade"),
   freq       = c(44,        116,       19,        128)
@@ -220,7 +220,7 @@ combine_charts(list(tab1, tab2), nrow = 2)
 Différentes fonctions dans R existent également pour convertir un tableau de contingence en tableau cas par variables (ou en tous cas, en un tableau similaire). Par exemple, `as_dtt()` renvoie un tableau indiquant les fréquences d'occurrences dans une colonne nommée `N` :
 
 ```{r}
-(timolol2 <- as_dtt(timolol_table))
+(timolol2 <- as_dtx(timolol_table))
 ```
 
 Si vous insistez, vous pouvez aussi obtenir un tableau cas par variables (mais celui-ci est très long et peu pratique à manipuler) à l'aide de la fonction `uncount()`[^06-donnees-qualitatives-2] :
@@ -253,7 +253,7 @@ Exemple de métadonnées :
 Vous avez pu vous apercevoir que la fonction `read()` permet d'ajouter certaines métadonnées comme les unités aux variables d'un jeu de données. Cependant, il n'est pas toujours possible de rajouter les métadonnées dans un tableau sous forme électronique, mais il faut toujours les consigner dans un **cahier de laboratoire**, et ensuite les **retranscrire dans le rapport**. La fonction `labelise()` vous permet de rajouter le **label** et les **unités** de mesure pour vos différentes variables directement dans le tableau. Par exemple, voici l'encodage direct d'un petit jeu de données qui mesure la distance du saut (`jump`) en cm de grenouilles taureaux en fonction de leur masse (`weight`) en g pour 5 individus différents (`ind`). Vous pouvez annoter ce dataframe de la façon suivante :
 
 ```{r}
-frog <- as_dtt(tribble(
+frog <- as_dtx(tribble(
   ~ind, ~jump, ~weight,
    1,    71,    204,
    2,    70,    240,
@@ -442,7 +442,7 @@ Lors d'expérience sur des personnes, le respect de la vie privée **doit** êtr
 Voici un petit tableau qui correspond à ce que vous ne pourrez **pas faire** (nom et prénom explicitement mentionnés dans le tableau) :
 
 ```{r}
-(biometry_marvel <- as_dtt(tribble(
+(biometry_marvel <- as_dtx(tribble(
   ~id,                 ~sex ,~weight, ~height,
    "Banner Bruce",     "M",  95,      1.91,
    "Stark Tonny",      "M",  80,      1.79,
@@ -454,7 +454,7 @@ Voici un petit tableau qui correspond à ce que vous ne pourrez **pas faire** (n
 Vous devez fournir un code permettant de garder l'anonymat des sondés à l'ensemble des personnes étudiées vis à vis des analystes qui vont utiliser ces données. Cependant, le code doit permettre au chercheur ayant pris ces mesures de les retrouver dans son cahier de laboratoire, si besoin. Une façon de procéder consiste à attribuer un numéro au hasard par tirage dans une urne à chacune des personnes chargées des mesures. Ensuite, chaque expérimentateur attribue lui-même un second numéro aux différentes personnes qu'il mesure. Prenons par exemple le scientifique n°24 (seul lui sait qu'il porte ce numéro). Il attribue un code de 1 à *n* à chaque personne étudiée. En combinant le code secret de l'expérimentateur et le code individu, cela donne un identifiant unique de la forme `24_1`, `24_2`, etc. Il pourra alors encoder sa partie comme suit :
 
 ```{r}
-(biometry_marvel1 <- as_dtt(tribble(
+(biometry_marvel1 <- as_dtx(tribble(
   ~id,     ~sex , ~weight, ~height,
    "24_1",  "M",  95,      1.91,
    "24_2",  "M",  80,      1.79,
@@ -466,7 +466,7 @@ Vous devez fournir un code permettant de garder l'anonymat des sondés à l'ense
 Il garde néanmoins les correspondances dans son carnet de laboratoire, au cas où il faudrait faire des vérifications ou revenir à la donnée originale.
 
 ```{r}
-(biometrie_correspondance <- dtt(
+(biometrie_correspondance <- dtx(
   name = biometry_marvel$id,
   id   = biometry_marvel1$id
 ))
@@ -488,7 +488,7 @@ A partir des données du tableau général consolidé, personne à part lui ne p
 Le **format long** d'un tableau de données correspond à un encodage en un minimum de colonnes, les données étant réparties sur un plus grand nombre de lignes en comparaison du **format large** qui regroupe les données dans plusieurs colonnes successives. Voici un exemple fictif d'un jeu de données au format long :
 
 ```{r, echo=FALSE}
-as_dtt(tribble(
+as_dtx(tribble(
   ~sex, ~traitment, ~value,
    "m",  "control",  1.2,
    "f",  "control",  3.4,
@@ -502,7 +502,7 @@ as_dtt(tribble(
 Voici maintenant le même jeu de données présenté dans le format large :
 
 ```{r, echo=FALSE}
-as_dtt(tribble(
+as_dtx(tribble(
   ~sex, ~control, ~test1, ~test2,
    "m",  1.2,      4.8,    0.9,
    "f",  3.4,      3.1,    1.2
@@ -530,7 +530,7 @@ Prenons l'exemple d'un jeu de données provenant de l'article scientifique suiva
 [^06-donnees-qualitatives-5]: Les analyses métagénomiques coûtent très cher. Il est souvent impossible de faire des réplicats. Un seul échantillon d'ADN a donc été séquencé ici pour chaque communauté.
 
 ```{r}
-shotgun_wide <- as_dtt(tibble(
+shotgun_wide <- as_dtx(tibble(
   kingdom = c("Archaea", "Bacteria", "Eukaryota", "Viruses",
               "other sequences", "unassigned", "unclassified sequences"),
   c1      = c( 98379, 6665903, 81593, 1245, 757, 1320419, 15508),
@@ -644,7 +644,7 @@ Pour empiler des tableaux l'un au dessus de l'autre, la fonction la plus simple 
 Pour la première série de mesures, ils ont encodé deux fichiers qu'ils ont du par la suite rassembler. Le groupe 1 a encodé le tableau suivant :
 
 ```{r}
-physico1 <- as_dtt(tibble(
+physico1 <- as_dtx(tibble(
   sample      = c("A0", "B0", "A0", "B0", "A0", "B0", "A0", "B0"),
   student     = c("st1", "st1", "st2", "st2", "st3", "st3", "st4", "st4"),
   ph          = c(7.94, 7.94, 7.94, 7.99, 7.94, 7.99, 7.94, 7.99),
@@ -658,7 +658,7 @@ rmarkdown::paged_table(physico1)
 Le groupe 2 a encodé ce tableau :
 
 ```{r}
-physico2 <- as_dtt(tibble(
+physico2 <- as_dtx(tibble(
   sample      = c("A0", "B0", "A0", "B0"),
   student     = c( "st5", "st5", "st6", "st6"),
   ph          = c(7.94, 7.99, 7.93, 7.99),
@@ -681,7 +681,7 @@ rmarkdown::paged_table(physico)
 Pour combiner des tableaux de données par les colonnes, de gauche à droite, la fonction la plus simple à utiliser est `bind_cols()`. Les étudiants ont également réalisé des prélèvements d'eau qui ont été dosés par colorimétrie avec un analyseur automatique. Les échantillons des deux groupes ont été mesurés dans la même série par l'appareil, ce qui donne le tableau suivant pour les nutriments :
 
 ```{r}
-nutrients <- as_dtt(tibble(
+nutrients <- as_dtx(tibble(
   sample  = rep(c("A0", "B0"), times = 6),
   student = rep(c("st4", "st6", "st5", "st2", "st1", "st3"), each = 2),
   po4     = c(2.445, 0.374, 2.446, 0.394, 2.433, 0.361,

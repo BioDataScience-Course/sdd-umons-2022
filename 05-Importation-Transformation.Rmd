@@ -23,7 +23,7 @@ Le contenu du module \@ref(intro) doit être parfaitement maîtrisé. Il est ég
 Il est possible d'encoder des très petits jeux de données dans R. La fonction `tribble()` permet de le faire facilement. Notez que les noms des colonnes du tableau sont à rentrer sous forme de **formules** (`~ var`), que chaque entrée est séparée par une virgule, et que les chaînes de caractères sont entourées de guillemets. Les espaces sont optionnels et peuvent être utilisés pour aligner les données afin que le tout soit plus lisible. Des commentaires peuvent être utilisés éventuellement en fin de ligne (un dièse `#` suivi du commentaire).
 
 ```{r}
-small_dataset <- as_dtt(tribble(
+small_dataset <- as_dtx(tribble(
   ~treatment, ~dose, ~response,
    "control",   0.5,     18.35,
    "control",   1.0,     26.43, # This value needs to be double-checked
@@ -165,7 +165,7 @@ Faites toujours la distinction entre **données brutes** et **données nettoyée
 Les packages R comme {data.io}, {chart} ou encore {flow}, fournissent une série de fonctions supplémentaires. Certains d'entre eux proposent également des jeux de données. Ici aussi, `read()` permet de les récupérer, même si c'est la fonction `data()` qui est souvent utilisée à cet effet dans R. Comparons `read()` et `data()` dans le cas des données issues de packages R. Avec `data()`, vous n'assignez pas le jeu de données à un nom. Ce nom vous est **imposé** comme le nom initial du jeu de données :
 
 ```{r}
-data("urchin_bio", package = "data.io") # package = optionnel si déjà chargé
+data("urchin_bio", package = "data.io")
 ```
 
 Le jeu de données `urchin_bio` n'est pas véritablement chargé dans l'environnement utilisateur avec `data()`. Seulement une "promesse" de chargement (`Promise`) est enregistrée. Voyez dans l'onglet **Environnement** ce qui apparaît. Ce n'est qu'à la première utilisation du jeu de données que le tableau est véritablement chargé. Par exemple :
@@ -228,12 +228,14 @@ Il vous est conseillé d'employer l'argument `lang = "fr"` lors de vos différen
 ```{r}
 urchin_en %>.%
   filter(., origin == "Farm") %>.%
+  collect_dtx(.) %>.% # head() is not a tidy function => need to collect first
   head(.)
 ```
 
 ```{r}
 urchin_fr %>.%
   filter(., origin == "Farm") %>.%
+  collect_dtx(.) %>.%
   head(.)
 ```
 
@@ -242,6 +244,7 @@ Pas d'adaptation nécessaire du code pour passer de `urchin_en` à `urchin_fr`.
 ```{r}
 urchin_FR %>.%
   filter(., origin == "Pêcherie") %>.%
+  collect_dtx(.) %>.%
   head(.)
 ```
 
@@ -394,7 +397,7 @@ chart(biometry, formula = ~ age %fill=% age_rec) +
 Les données qualitatives sont souvent représentées par du texte (nom d'une couleur par exemple) et importées sous forme de chaînes de caractère (`character`) par défaut dans R à partir de la fonction `read()`. Vous devez les convertir de manière explicite à l'aide de `as.factor()`, `factor()`, `as.ordered()` ou `ordered()` par la suite. Voici un exemple :
 
 ```{r}
-df <- tibble(
+df <- dtx(
   color     = c("blue", "green", "blue", "red", "green"),
   intensity = c("low",  "low",   "high", "mid", "high"))
 df
@@ -607,15 +610,23 @@ La fonction `transmute()` effectue la même opération, mais en plus, elle laiss
 
 La fonction `group_by()` ne change rien dans le tableau lui-même, mais ajoute une annotation qui indique que les calculs ultérieurs devront être effectués sur des sous-ensembles du tableau en parallèle. Ceci est surtout utile avec `summarise()` (voir ci-dessous). Pour annuler le regroupement, il suffit d'utiliser `ungroup()`.
 
+À noter que toutes les fonctions qui collectent les résultats, à savoir `as_dtx()`, `collect_dtx()` et les assignations alternatives `%<-%` et `%->%` dégroupent automatiquement les données. Ceci est voulu afin d'éviter que l'on oublie plus tard que l'objet a un regroupement enregistré et que vous ne réaliser par la suite des calculs non voulus (par groupes alors que vous pensez travailler individu par individu parce que vous avez oublié que vous aviez appliqué `group_by()` plus haut dans votre code).
+
 ```{r}
-urchin_by_orig %<-% group_by(urchin, origin)
+urchin_by_orig <- group_by(urchin, origin)
 head(urchin_by_orig)
 ```
 
-<!-- PhG: ici j'ai un problème car le `group_by()` me crée un grouped_df, tbl_df, tbl, data.frame. Donc, mon data.table a été converti en un tibble qui est surcalssé (et mon code ne rétabli pas le bon format en cas de surclassement) ! -->
+```{r}
+# collect_dtx() ou %<-% / %->% dégroupent automatiquement
+urchin_collected %<-% urchin_by_orig
+urchin_collected
+```
 
 ```{r}
-identical(ungroup(urchin_by_orig), urchin)
+# Except for the comment, these two objects are identical
+comment(urchin_collected) <- comment(urchin)
+identical(urchin_collected, urchin)
 ```
 
 ### `summarise()`
@@ -638,12 +649,12 @@ knitr::kable(tooth_summary, digits = 2,
 Voici les mêmes calculs, mais effectués séparément pour les deux types de supplémentations alimentaires :
 
 ```{r}
-tooth_by_supp <- group_by(tooth, supp)
-tooth_summary2 %<-% summarise(tooth_by_supp,
+group_by(tooth, supp) |> summarise(
   "moyenne" = mean(len), 
   "minimum" = min(len), 
   "médiane" = median(len), 
-  "maximum" = max(len))
+  "maximum" = max(len)) %->%
+  tooth_summary2
 knitr::kable(tooth_summary2, digits = 2,
   caption = "Allongement des dents chez des cochons d'Inde en fonction du supplément jus d'orange (OJ) ou vitamine C (VC).")
 ```
@@ -653,17 +664,18 @@ knitr::kable(tooth_summary2, digits = 2,
 -   Tout comme lors de réalisation d'une boite de dispersion, vous devez être particulièrement vigilant au nombre d'observation par sous-groupe. Pensez toujours à ajoutez à chaque tableau de résumé des données, le nombre d'observation par sous-groupe grâce à la fonction `n()`.
 
 ```{r}
-tooth_summary2 %<-% summarise(tooth_by_supp,
+ group_by(tooth, supp) |> summarise(
   "moyenne" = mean(len), 
   "minimum" = min(len), 
   "médiane" = median(len), 
   "maximum" = max(len),
-  "n"       = n())
+  "n"       = n()) %->%
+  tooth_summary2
 knitr::kable(tooth_summary2, digits = 2,
   caption = "Allongement des dents chez des cochons d'Inde en fonction du supplément jus d'orange (OJ) ou vitamine C (VC).")
 ```
 
--   `summarise()` calcule ses variables dans le même environnement que le tableau de départ. Donc, si vous utiliser des noms de colonnes qui existent déjà, elles seraient écrasées par le résultat du calcul. Avec un ata.table, ceci n'est pas permis (le code fonctionnera pourtant dans un autre contexte avec un data.frame, c'est pourquoi nous convertissons d'abord `tooth` avec `as_dtf()`). Voici un exemple concret :
+-   `summarise()` calcule ses variables dans le même environnement que le tableau de départ. Donc, si vous utiliser des noms de colonnes qui existent déjà, elles seraient écrasées par le résultat du calcul. Avec un data.table, ceci n'est pas permis (le code fonctionnera pourtant dans un autre contexte avec un data.frame, c'est pourquoi nous convertissons d'abord `tooth` avec `as_dtf()`). Voici un exemple concret :
 
 ```{r}
 tooth_summary3 %<-% summarise(as_dtf(tooth),
@@ -751,8 +763,7 @@ knitr::kable(biometry_tab, rows = NULL, digits = 1,
 biometry %>.%
   mutate(., bmi = weight / (height/100)^2) %>.%
   filter(., age <= 25) %>.%
-  group_by(., gender) %>.%
-  summarise(.,
+  group_by(., gender) |> summarise(
     mean   = mean(bmi),
     median = median(bmi),
     number = n()) %>.%
