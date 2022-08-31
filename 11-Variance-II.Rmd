@@ -60,8 +60,8 @@ read("crabs", package = "MASS", lang = "fr") %>.%
 #chart$base(interaction.plot(crabs2$species, crabs2$sex, crabs2$aspect5))
 # Version avec ggplot2
 crabs2 %>.%
-  group_by(., species, sex) |> summarise(aspect5_groups = mean(aspect5)) %>.%
-  collect_dtx(.) %>.%
+  fgroup_by(., species, sex) |> fsummarise(
+    aspect5_groups = mean(aspect5)) %>.%
   print(.) %>.% # Tableau des moyennes par groupes
   chart(data = ., aspect5_groups ~ species %col=% sex %group=% sex) +
     geom_line() +
@@ -76,11 +76,10 @@ Au niveau de la description préliminaire des données, nous pourrons utiliser u
 
 ```{r}
 crabs2 %>.%
-  group_by(., species, sex) |> summarise(
+  fgroup_by(., species, sex) |> fsummarise(
     mean  = mean(aspect5),
     sd    = sd(aspect5),
-    count = sum(!is.na(aspect5))) %>.%
-  collect_dtx(.)
+    count = sum(!is.na(aspect5)))
 ```
 
 Pour la visualisation graphique, nous sommes tributaires du nombre d'observations. Avec moins d'une petite dizaine d'observations, nous représenterons des points pour chaque observation et superposerons les moyennes. Lorsque le nombre est plus grand nous pourrons utiliser soit les boites de dispersion, soit le graphique en violon si ce nombre est encore plus grand. Voyons cela sur notre exemple (les "snippets" dans le menu `chart: bivariate` peuvent être utilisés comme point de départ auquel nous ajoutons la seconde variable facteur pour les facettes multi-graphiques séparée par un `|`). La Fig. \@ref(fig:crabs2boxplot) montre ce que cela donne si l'on opte pour les boites de dispersion.
@@ -96,9 +95,8 @@ La Fig. \@ref(fig:crabs2boxplot2) est une version améliorée avec les observat
 chart(data = crabs2, aspect5 ~ species | sex) +
   geom_boxplot() +
   geom_jitter(width = 0.05, alpha = 0.5) +
-  geom_point(data = group_by(crabs2, species, sex) |>
-    summarise(means = mean(aspect5, na.rm = TRUE)) |>
-    collect_dtx(),
+  geom_point(data = fgroup_by(crabs2, species, sex) |> fsummarise(
+    means = mean(aspect5, na.rm = TRUE)),
     f_aes(means ~ species), size = 3, col = "red")
 ```
 
@@ -163,7 +161,7 @@ Le modèle ANOVA que nous venons de faire s'appelle un **modèle croisé** parce
 ```{r}
 crabs2 %>.%
   count(., species, sex) %>.%
-  collect_dtx(.)
+  collect_dtx(.) # Nécessaire car count() est une fonction tidy
 ```
 
 Le modèle **croisé sans interactions** que nous avions utilisés est cependant *incomplet* puisque, pour considérer tous les cas possibles, il faut aussi considérer que ces interactions puissent exister et les inclure directement dans le modèle. Le **modèle complet** s'écrit comme ceci :
@@ -248,9 +246,7 @@ skimr::skim(eggs)
 Commençons par corriger l'encodage erroné des techniciens qui ferait penser que seulement deux personnes ont travaillé dans l'ensemble des six laboratoires.
 
 ```{r}
-eggs %>.%
-  mutate(., Technician = interaction(Lab, Technician)) %->%
-  eggs
+eggs <- fmutate(eggs, Technician = interaction(Lab, Technician))
 skimr::skim(eggs)
 ```
 
@@ -259,9 +255,8 @@ Nous avons à présent douze techniciens notés `I.one`, `I.two`, `II.one`, `II.
 ```{r nested, fig.cap="Mesures de fractions en matières grasses dans des oeufs dans six laboratoires, par douze techniciens différents. Les points rouges sont les moyennes par technicien."}
 chart(data = eggs, Fat ~ Lab %col=% Technician) +
   geom_jitter(width = 0.05, alpha = 0.5) +
-  geom_point(data = group_by(eggs, Lab, Technician) |>
-    summarise(means = mean(Fat, na.rm = TRUE)) |>
-    collect(),
+  geom_point(data = fgroup_by(eggs, Lab, Technician) |> fsummarise(
+    means = mean(Fat, na.rm = TRUE)),
     f_aes(means ~ Lab), size = 3, col = "red")
 ```
 
@@ -283,7 +278,7 @@ Nous devons maintenant vérifier la distribution normale des résidus dans ce mo
 
 ```{r nestedqqplot, echo=FALSE, fig.cap="Graphique quantile-quantile des résidus pour l'ANOVA à deux facteurs hiérarchisés pour la variable `Fat` du jeu de données `eggs`."}
 anova. %>.%
-  broom::augment(.) %>.%
+  augment(.) %>.%
   car::qqPlot(.$.std.resid, distribution = "norm",
     envelope = 0.95, col = "Black", xlab = "Quantiles théoriques (distri. normale)",
     ylab = "Résidus standardisés")
@@ -307,7 +302,7 @@ Si nous n'avons plus que deux mesures par laboratoire au lieu de deux fois quatr
 
 ```{r}
 eggs %>.%
-  group_by(., Technician) |> summarise(
+  fgroup_by(., Technician) |> fsummarise(
     Fat_mean = mean(Fat), Lab = unique(Lab)) %->%
   eggs_means
 skimr::skim(eggs_means)
@@ -315,11 +310,10 @@ skimr::skim(eggs_means)
 
 ```{r}
 eggs_means %>.%
-  group_by(., Lab) |> summarise(
+  fgroup_by(., Lab) |> fsummarise(
     mean  = mean(Fat_mean),
     sd    = sd(Fat_mean),
-    count = sum(!is.na(Fat_mean))) %>.%
-  collect_dtx(.)
+    count = sum(!is.na(Fat_mean)))
 ```
 
 Représentation graphique et vérification de l'homoscédasticité.
@@ -327,9 +321,8 @@ Représentation graphique et vérification de l'homoscédasticité.
 ```{r}
 chart(eggs_means, Fat_mean ~ Lab) +
   geom_point() +
-  geom_point(data = group_by(eggs_means, Lab) |>
-    summarise(means = mean(Fat_mean, na.rm = TRUE)) |>
-    collect_dtx(),
+  geom_point(data = fgroup_by(eggs_means, Lab) |> fsummarise(
+    means = mean(Fat_mean, na.rm = TRUE)),
     f_aes(means ~ Lab), size = 3, col = "red")
 ```
 
@@ -415,7 +408,8 @@ Nous pouvons ensuite vérifier visuellement l'égalité des variances (bien mieu
 ```{r}
 #plot(anova., which = 1)
 anova. %>.%
-  chart(augment(.), .resid ~ .fitted) +
+  augment(.) %>.%
+  chart(., .resid ~ .fitted) +
   geom_point() +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE, method = "loess", formula = y ~ x) +
@@ -485,7 +479,8 @@ split_plot %>.%
 ```{r}
 #plot(split_plot, which = 1)
 split_plot %>.%
-  chart(augment(.), .resid ~ .fitted) +
+  augment(.) %>.%
+  chart(., .resid ~ .fitted) +
   geom_point() +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE, method = "loess", formula = y ~ x) +
@@ -615,7 +610,8 @@ repeated %>.%
 ```{r}
 #plot(repeated, which = 1)
 repeated %>.%
-  chart(augment(.), .resid ~ .fitted) +
+  augment(.) %>.%
+  chart(., .resid ~ .fitted) +
   geom_point() +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE, method = "loess", formula = y ~ x) +
@@ -837,12 +833,14 @@ zoo %>%
   collect()
 ```
 
+Attention : rappelez-vous ici que `fgroup_by()` et `fsummarise()` ne spont pas compatibles avec `n()` et d'autre part que avec les fonctions tidy, il faut collecter le résultat à l'aide de `%<-%`, %-\>%`ou`collect_dtx()\` à la fin du pipeline.
+
 Nous obtenons un objet `tibble`, et non pas un objet spécifique au traitement réalisé. C'est dans la philosophie de tidyverse que d'utiliser et réutiliser autant que possible un `tibble` qui permet de contenir des données "bien rangées" (ou "tidy data" en anglais, d'où le nom de ce style, **tidy**verse pour "univers bien rangé").
 
-Comme contingenter des observations est une opération fréquente, il existe *exceptionnellement* une fonction dédiée qui fait le travail en une seule opération : `count()` (mais il faut tout de même réculméter le résultat à l'aide de l'assignzation alternative `%<-%` ou `%->%` ou en utilisant `collect()`).
+Comme contingenter des observations est une opération fréquente, il existe *exceptionnellement* une fonction dédiée qui fait le travail en une seule opération : `count()` (mais il faut tout de même récupéter le résultat à l'aide de l'assignation alternative `%<-%` ou `%->%` ou en utilisant `collect_dtx()`).
 
 ```{r}
-count(zoo, class) |> collect()
+count(zoo, class) |> collect_dtx()
 ```
 
 Le résultat est le même. Comparons maintenant la fonction `table()` de base et `count()` de tidyverse du point de vue des arguments. `table()` prend un vecteur comme argument. A nous de l'extraire du data frame à l'aide de `zoo$class`, ce qui donne `table(zoo$class)`. Par contre, `count()` comme toute fonction tidyverse qui se respecte, prend comme premier argument un `tibble` ou un `data.frame`, bref un tableau cas par variables. C'est ensuite au niveau du second argument que l'on spécifie la variable que nous souhaitons utiliser à partir de ce tableau. Ici, plus besoin d'indiquer que c'est une variable qui vient du tableau `zoo`, car `count()` le sait déjà. Bien que ce ne soit pas évident au premier cou d'œil, `count()` ne respecte **pas** la syntaxe de base de R et évalue `class` de manière particulière[^11-variance-ii-6]. Au final, l'appel à `table()` nécessite de comprendre ce que fait l'opérateur `$`. Au contraire, l'instruction tidyverse `count(zoo, class)` se lit et se comprend très bien presque comme si c'était écrit en anglais. Vous lisez en effet "compte dans zoo la classe" (avantage), mais le coût en est une évaluation non standard de ses arguments (inconvénient qui ne peut pas apparaître à ce stade mais que vous constaterez plus tard quand vous ferez des choses plus évoluées avec ces instructions).
@@ -888,6 +886,13 @@ Avec tidyverse, nous savons déjà que `mutate()` est le verbe à employer pour 
 
 ```{r}
 zoo2 %<-% mutate(zoo2, log_area = log10(area))
+head(zoo2)
+```
+
+Toujours penser à collecter le résultat à l'aide de l'assignation alternative `%<-%` au lieu de `<-`, ... ou alors utiliser la fonction non tidy `fmutate()`, ce qui est en général une meilleure solution si une seule instruction consitute le pipeline comme ici :
+
+```{r}
+zoo2 <- fmutate(zoo2, log_area = log10(area))
 head(zoo2)
 ```
 

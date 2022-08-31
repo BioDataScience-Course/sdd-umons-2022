@@ -24,11 +24,9 @@ Les tests *t* de Student et de Wilcoxon sont limités à la comparaison de deux 
 
 ```{r}
 crabs <- read("crabs", package = "MASS", lang = "fr")
-crabs %>.%
-  mutate(., group  = labelise(
+crabs2 <- fmutate(crabs, group  = labelise(
     factor(paste(species, sex, sep = "-")),
-    "Groupe espèce - sexe", units = NA)) %->%
-  crabs2
+    "Groupe espèce - sexe", units = NA))
 ```
 
 La Fig. \@ref(fig:crabs-rear) montre la largeur à l'arrière de la carapace chez les quatre groupes ainsi individualisés. Une représentation graphique adéquate avant de réaliser notre analyse ici lorsque le nombre de répliquas est important est le graphique en violon sur lequel nous superposons au moins les moyennes, et de préférence, les points également. Si le nombre de répliquas est plus faible, mais toujours supérieur à 7-8, nous pourrions utiliser le même type de graphique mais avec des boites de dispersion plutôt (voir plus loin, Fig. \@ref(fig:anova2)). Avec encore moins de répliquas nous présenterons les points et les moyennes uniquement.
@@ -37,14 +35,13 @@ La Fig. \@ref(fig:crabs-rear) montre la largeur à l'arrière de la carapace che
 chart(data = crabs2, rear ~ group) +
   geom_violin() +
   geom_jitter(width = 0.05, alpha = 0.5) +
-  geom_point(data = group_by(crabs2, group) |>
-    summarise(means = mean(rear, na.rm = TRUE)) |>
-    collect(),
+  geom_point(data = fgroup_by(crabs2, group) |> fsummarise(
+    means = mean(rear, na.rm = TRUE)),
     f_aes(means ~ group), size = 3, col = "red")
   
 ```
 
-Nous en profitons également pour essayer l'astuce proposée au module précédent. Au lieu de travailler sur la variable `rear` seule, nous allons étudier l'aspect ratio entre largeur à l'arrière (`rear`) et largeur maximale (`width`) de la carapace afin de nous débarrasser d'une source de variabilité triviale qui est qu'un grand crabe est grand partout, et de même un petit crabe est petit pour toutes ses mesures. Nous prenons soin également de libeller cette nouvelle variable correctement avec `labelise()`. Enfin, nous ne conservons que les variables `species`, `sex`, `group` et `aspect` avec `select()` :
+Nous en profitons également pour essayer l'astuce proposée au module précédent. Au lieu de travailler sur la variable `rear` seule, nous allons étudier l'aspect ratio entre largeur à l'arrière (`rear`) et largeur maximale (`width`) de la carapace afin de nous débarrasser d'une source de variabilité triviale qui est qu'un grand crabe est grand partout, et de même un petit crabe est petit pour toutes ses mesures. Nous prenons soin également de libeller cette nouvelle variable correctement avec `labelise()`. Enfin, nous ne conservons que les variables `species`, `sex`, `group` et `aspect` avec `select()` (possible uassi avec `fmutate()` et `fselect()` bien sûr) :
 
 ```{r}
 crabs2 %>.%
@@ -64,9 +61,8 @@ Nous voyons également que la variable `aspect` semble avoir une distribution bi
 chart(data = crabs2, aspect ~ group) +
   geom_violin() +
   geom_jitter(width = 0.05, alpha = 0.5) +
-  geom_point(data = group_by(crabs2, group) |>
-    summarise(means = mean(aspect, na.rm = TRUE)) |>
-    collect(),
+  geom_point(data = fgroup_by(crabs2, group) |> fsummarise(
+    means = mean(aspect, na.rm = TRUE)),
     f_aes(means ~ group), size = 3, col = "red")
   
 ```
@@ -197,17 +193,15 @@ dat2 <- dtx(
 pl1 <- chart(data = dat1, Y ~ Population) +
   geom_boxplot() +
   geom_jitter(width = 0.05) +
-  geom_point(data = group_by(dat1, Population) |>
-    summarise(means = mean(Y, na.rm = TRUE)) |>
-    collect(),
+  geom_point(data = fgroup_by(dat1, Population) |> fsummarise(
+    means = mean(Y, na.rm = TRUE)),
     f_aes(means ~ Population), size = 3, col = "red") +
   ylim(-1.5, 1.5)
 pl2 <- chart(data = dat2, Y ~ Population) +
   geom_boxplot() +
   geom_jitter(width = 0.05) +
-  geom_point(data = group_by(dat2, Population) |>
-    summarise(means = mean(Y, na.rm = TRUE)) |>
-    collect(),
+  geom_point(data = fgroup_by(dat2, Population) |> fsummarise(
+    means = mean(Y, na.rm = TRUE)),
     f_aes(means ~ Population), size = 3, col = "red") +
   ylim(-1.5, 1.5)
 combine_charts(list(pl1, pl2))
@@ -361,14 +355,14 @@ bartlett.test(data = crabs2, aspect ~ group)
 Nous rejetons $H_0$. Il n'y a pas homoscédasticité. Calculons par exemple le logarithme népérien de `aspect` et réessayons :
 
 ```{r}
-crabs2 %<-% mutate(crabs2, log_aspect = ln(aspect))
+crabs2 <- fmutate(crabs2, log_aspect = ln(aspect))
 bartlett.test(data = crabs2, log_aspect ~ group)
 ```
 
 Ici cela ne fonctionne pas. Cela fait pire qu'avant. La transformation inverse (`exp()`) peut être essayée mais ne stabilise pas suffisamment la variance. Après divers essais, il s'avère qu'une transformation puissance cinq stabilise bien la variance.
 
 ```{r}
-crabs2 %<-% mutate(crabs2, aspect5 = aspect^5)
+crabs2 <- fmutate(crabs2, aspect5 = aspect^5)
 bartlett.test(data = crabs2, aspect5 ~ group)
 ```
 
@@ -378,9 +372,8 @@ La Fig. \@ref(fig:crabs1) montre la distribution dans les différents groupes de
 chart(data = crabs2, aspect5 ~ group) +
   geom_violin() +
   geom_jitter(width = 0.05, alpha = 0.5) +
-  geom_point(data = group_by(crabs2, group) |>
-    summarise(means = mean(aspect5, na.rm = TRUE)) |>
-    collect_dtx(),
+  geom_point(data = fgroup_by(crabs2, group) |> fsummarise(
+    means = mean(aspect5, na.rm = TRUE)),
     f_aes(means ~ group), size = 3, col = "red") +
   ylab("(ratio largeur arrière/max)^5")
   
@@ -392,12 +385,10 @@ Nous poursuivons sur une description des données utile pour l'ANOVA[^10-varianc
 
 ```{r}
 crabs2 %>.%
-  group_by(., group) %>.%
-  summarise(.,
+  fgroup_by(., group) |> fsummarise(
     mean  = mean(aspect5),
     sd    = sd(aspect5),
-    count = sum(!is.na(aspect5))) %>.%
-  collect_dtx(.)
+    count = sum(!is.na(aspect5)))
 ```
 
 Ensuite l'ANOVA proprement dite :

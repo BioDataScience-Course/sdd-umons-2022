@@ -480,8 +480,10 @@ Dans notre cas, cela donne :
 
 ```{r}
 crabs %>.%
-  group_by(., sex) %>.%
-  summarise(., mean = mean(rear), var = var(rear), n = n()) %->%
+  group_by(., sex) |> summarise(
+    mean = mean(rear),
+    var  = var(rear),
+    n    = n()) %->%
   crabs_stats
 crabs_stats
 # Calcul de Delta rear et de son intervalle de confiance à 95%
@@ -678,7 +680,7 @@ Nous calculons la moyenne de cette différence notée `delta_f_r`. Nous résumon
 -   l'erreur standard dans `se_f_r` (pour rappel, $SE = \frac{s_x}{\sqrt{n}}$),
 -   la valeur de `t_obs` reportée selon la distribution *t* réduite, donc, en divisant `mean_f_r` par `se_f_r`.
 
-Ici, comme nous utilisons des variables créées dans le `summarise()` à l'intérieur même de la fonction, nous ne pouvons pas le faire avec un **data.table** et devons convertir `crabs` en **data.frame** à l'aide de `as_dtf()`.
+Ici, comme nous utilisons des variables créées dans le `summarise()` à l'intérieur même de la fonction, nous ne pouvons pas le faire avec un **data.table**, ni avec `fsummarise()` car il nous faut aussi utiliser `n()`. La solution dans ce cas est de recourir au calcul par défaut du package {dplyr} (et non de {dtplyr} comme nous l'avons fait jusqu'ici). Pour ce faire, il suffit de convertir `crabs` en **data.frame** à l'aide de `as_dtf()`. Notez aussi que dans le cas de l'utilisation d'un **data.frame**, l'étape de collecte à la fin n'est pas non plus nécessaire.
 
 ```{r}
 as_dtf(crabs) %>.%
@@ -743,12 +745,12 @@ rmarkdown::paged_table(sleep)
 Nous avons `extra`, le nombre d'heures supplémentaires de sommeil suite à l'administration de médicaments, soit le `1`, soit le `2`. Le tableau se présente comme pour effectuer un test *t* indépendant (une variable numérique `extra` et une variable facteur à deux niveaux `group`). Cependant, regardez aussi la variable `ID` qui est l'identifiant de la personne testée. **Vous constatez que les mêmes identifiants** reviennent parmi les deux groupes. C'est en réalité un design apparié, mais mal encodé. Nous allons d'abord restructurer ce tableau correctement avant d'appliquer le test adéquat.
 
 ```{r}
-sleep2 %<-% spread(sleep, key = group, value = extra)
+sleep2 %<-% pivot_wider(sleep, names_from = group, values_from = extra)
 names(sleep2) <- c("id", "med1", "med2")
 rmarkdown::paged_table(sleep2)
 ```
 
-Dans `sleep2`nous avons un véritable tableau cas par variable c'est-à-dire, une ligne par individu. Nous avons alors deux variables numériques `med1` et `med2` mesurées sur les mêmes individus. Le test apparié suivant est correct. Un test indépendant effectué sur `sleep` aurait été **incorrect** !
+Dans `sleep2` nous avons un véritable tableau cas par variable c'est-à-dire, une ligne par individu. Nous avons alors deux variables numériques `med1` et `med2` mesurées sur les mêmes individus. Le test apparié suivant est correct. Un test indépendant effectué sur `sleep` aurait été **incorrect** !
 
 -   $H_0: \overline{med1 - med2} = 0$
 -   $H_1: \overline{med1 - med2} \neq 0$

@@ -227,15 +227,13 @@ Il vous est conseillé d'employer l'argument `lang = "fr"` lors de vos différen
 
 ```{r}
 urchin_en %>.%
-  filter(., origin == "Farm") %>.%
-  collect_dtx(.) %>.% # head() is not a tidy function => need to collect first
+  fsubset(., origin == "Farm") %>.%
   head(.)
 ```
 
 ```{r}
 urchin_fr %>.%
-  filter(., origin == "Farm") %>.%
-  collect_dtx(.) %>.%
+  fsubset(., origin == "Farm") %>.%
   head(.)
 ```
 
@@ -243,8 +241,7 @@ Pas d'adaptation nécessaire du code pour passer de `urchin_en` à `urchin_fr`.
 
 ```{r}
 urchin_FR %>.%
-  filter(., origin == "Pêcherie") %>.%
-  collect_dtx(.) %>.%
+  fsubset(., origin == "Pêcherie") %>.%
   head(.)
 ```
 
@@ -449,15 +446,15 @@ table(iris20$species)
 
 Dans le module \@ref(visu3), vous avez réalisé vos premiers remaniements de données dans le cadre des graphiques en barres. Nous ne nous sommes pas étendu sur les fonctions utilisées à cette occasion. Le **remaniement des données est une étape cruciale en analyse des données** et il faut en maîtriser au moins les principaux outils. Heureusement, il est déjà possible d'aller loin en combinant une petite dizaine d'outils simples. Les cinq principaux (les plus utilisés) dans l'approche [Tidyverse](https://www.tidyverse.org) utilisée ici sont :
 
--   sélectionner des colonnes au sein d'un jeu de données avec `select()`
+-   sélectionner des colonnes au sein d'un jeu de données avec `select()`/`fselect()`
 
--   filtrer des lignes dans un jeu de données avec `filter()`
+-   filtrer des lignes dans un jeu de données avec `filter()`/`fsubset()`
 
--   calculer de nouvelles variables dans un jeu de données avec `mutate()`
+-   calculer de nouvelles variables dans un jeu de données avec `mutate()`/`fmutate()`
 
--   regrouper les données au sein d'un tableau avec `group_by()`
+-   regrouper les données au sein d'un tableau avec `group_by()`/`fgroup_by()`
 
--   résumer les variables d'un jeu de données avec `summarise()`
+-   résumer les variables d'un jeu de données avec `summarise()`/`fsummarise()`
 
 Ces outils provenant du package {dplyr} sont décrits en détails dans le [chapitre 5 de "R for Data Science"](http://r4ds.had.co.nz/transform.html). Nous allons nous familiariser avec eux via une approche pratique sur base d'exemples concrets.
 
@@ -466,7 +463,7 @@ urchin <- read("urchin_bio", package = "data.io", lang = "fr")
 rmarkdown::paged_table(urchin)
 ```
 
-### `select()`
+### `select()`/`fselect()`
 
 ![](images/sdd1_05/select.gif)
 
@@ -474,31 +471,55 @@ Lors de l'utilisation de vos jeux de données, vous serez amené à réduire vos
 
 [^05-importation-transformation-4]: Voyez `?select_helpers` pour une panoplie de fonctions supplémentaires qui permettent une sélection "intelligente" des variables.
 
+La fonction `select()` est une fonction du "tidyverse" (nous l'appelerons désormais une **fonction tidy**) qui a un comportement particulier dans R. Une fonction relativement équivalente, mais "non-tidy" est `fselect()`. Ces deux fonctions sont souvent interchageables, mais pas toujours.
+
+Avec les fonctions tidy, il faut prendre soin de **collecter** les résultats à la fin si on travaille avec des objets de classe **data.table** comme c'est le cas par défaut avec `SciViews::R` (le package {dtplyr} gère alors le calcul). Dans `SciViews::R`, on utilisera l'**assignation alternative** `%<-%` ou `%->%`, ou alors, on utilisera explicitement `collect_dtx()` pour récupérer un data frame utilisable avec les fonctions non-tidy :
+
 ```{r}
-urchin1 %<-% select(urchin, origin, solid_parts, test)
+urchin1 %<-% select(urchin, origin, solid_parts, test) # assignation alternative
 rmarkdown::paged_table(urchin1)
 ```
 
+ou encore (mais c'est plus lourd ici) :
+
 ```{r}
-urchin2 %<-% select(urchin, c(1, 4, 14))
+urchin1 <- select(urchin, origin, solid_parts, test) |> collect_dtx()
+rmarkdown::paged_table(urchin1)
+```
+
+Avec la forme non-tidy `fselect()`, ces précautions ne sont pas nécessaires. Toutefois, comme nous le verrons juste après, la fonction `fselect()`, bien que plus raide dans de nombreux cas, est aussi plus limitée. Il est donc utile de ma\^triser les deux.
+
+```{r}
+urchin1 <- fselect(urchin, origin, solid_parts, test) # Assignation normale
+rmarkdown::paged_table(urchin1)
+```
+
+Une autre forme :
+
+```{r}
+urchin2 <- fselect(urchin, c(1, 4, 14))
 rmarkdown::paged_table(urchin2)
 ```
+
+Attention : la fonction `fselect()` n'est pas toujours utilisable pour remplacer la fonction `select()`. Par exemple, l'instruction `contains()` est utile pour sélectionner les valriables dont le nom contient une chaine de caractères. Mais cette forme n'est pas comprise par `fselect()`. De plus, avec `select()` il faut utiliser l'assignation alternative `%<-%` au lieu de `<-` pour "collecter" les résultats à la fin de traitement.
 
 ```{r}
 urchin3 %<-% select(urchin, origin, contains("weight"))
 rmarkdown::paged_table(urchin3)
 ```
 
+Idem pour `ends_with()` et d'autres operateurs du genre :
+
 ```{r}
 urchin4 %<-% select(urchin, ends_with("ht"))
 rmarkdown::paged_table(urchin4)
 ```
 
-### `filter()`
+### `filter()`/`fsubset()`
 
 ![](images/sdd1_05/filter.gif)
 
-De même que toutes les colonnes d'un tableau ne sont pas forcément utiles, il est souvent nécessaire de sélectionner les lignes en fonction de critères particuliers pour restreindre l'analyse à une sous-population données, ou pour éliminer les cas qui ne correspondent pas à ce que vous voulez. La fonction `filter()` effectue ce travail. Repartons du jeu de données `urchin_bio` simplifié à trois variables (`urchin2`).
+De même que toutes les colonnes d'un tableau ne sont pas forcément utiles, il est souvent nécessaire de sélectionner les lignes en fonction de critères particuliers pour restreindre l'analyse à une sous-population données, ou pour éliminer les cas qui ne correspondent pas à ce que vous voulez. `filter()` est une fonction tidy qui effectue ce travail. L'équivalent non-tidy porte un nom légèrement différent : `fsubset()`. Repartons du jeu de données `urchin_bio` simplifié à trois variables (`urchin2`).
 
 ```{r}
 rmarkdown::paged_table(urchin2)
@@ -517,9 +538,19 @@ Si vous voulez sélectionner uniquement un niveau `lvl` d'une variable facteur `
 | Plus petit que        |    `<`    | `fact <  "lvl"` |
 | Plus petit ou égale à |   `<=`    | `fact <= "lvl"` |
 
+En version tidy avec `%<-%` :
+
 ```{r, echo = TRUE}
 # Tous les oursins sauf ceux issus de la pêche
 urchin_sub1 %<-% filter(urchin2, origin != "Fishery")
+rmarkdown::paged_table(urchin_sub1)
+```
+
+... et le même en version non-tidy, l'assignation normale ne pose pas de problème ici :
+
+```{r, echo = TRUE}
+# Tous les oursins sauf ceux issus de la pêche
+urchin_sub1 <- fsubset(urchin2, origin != "Fishery")
 rmarkdown::paged_table(urchin_sub1)
 ```
 
@@ -527,7 +558,7 @@ Vous pouvez aussi utiliser une variable numérique pour filtrer les données. Le
 
 ```{r}
 # Oursins plus hauts que 20mm
-urchin_sub2 %<-% filter(urchin2, height > 20)
+urchin_sub2 <- fsubset(urchin2, height > 20)
 rmarkdown::paged_table(urchin_sub2)
 ```
 
@@ -535,7 +566,7 @@ Vous pouvez combiner différentes comparaisons avec les opérateurs "et" (`&`) e
 
 ```{r}
 # Oursins plus hauts que 20 mm ET issus d'élevage ("Farm")
-urchin_sub3 %<-% filter(urchin2, height > 20 & origin == "Farm") 
+urchin_sub3 <- fsubset(urchin2, height > 20 & origin == "Farm") 
 rmarkdown::paged_table(urchin_sub3)
 ```
 
@@ -544,15 +575,15 @@ Avec des variables facteurs composées de nombreux niveaux comme on peut en retr
 ```{r}
 zooplankton <- read("zooplankton", package = "data.io", lang  = "FR")
 # Garde uniquement les copépodes (correspondant à 4 groupes distincts)
-copepoda %<-% filter(zooplankton,
+copepoda <- fsubset(zooplankton,
   class %in% c("Calanoïde", "Cyclopoïde",  "Harpacticoïde", "Poecilostomatoïde"))
 rmarkdown::paged_table(collect(select(copepoda, ecd:perimeter, class)))
 ```
 
-Enfin, la détection et l'élimination de lignes contenant des valeurs manquantes (encodées comme `NA`) est spéciale. En effet, vous ne pouvez pas écrire quelque chose comme `x == NA` car ceci se lit comme "x est égale à ... je ne sais pas quoi", ce qui renvoie à son tour `NA` pour toutes les comparaisons quelles qu'elles soient. Vous pouvez utiliser la fonction spécialement prévue pour ce test `is.na()`. Ainsi, `is.na(x)` effectue en réalité ce que vous voulez et peut être utilisée à l'intérieur de `filter()`. Cependant, il existe une fonction spécialement prévue pour débarrasser les tableaux des lignes contenant des valeurs manquantes : `drop_na()` du package {tidyr}. Si vous spécifier des noms de colonnes (facultatifs), la fonction ira rechercher les valeurs manquantes uniquement dans ces colonnes-là, sinon, elle scrutera tout le tableau.
+Enfin, la détection et l'élimination de lignes contenant des valeurs manquantes (encodées comme `NA`) est spéciale. En effet, vous ne pouvez pas écrire quelque chose comme `x == NA` car ceci se lit comme "x est égale à ... je ne sais pas quoi", ce qui renvoie à son tour `NA` pour toutes les comparaisons quelles qu'elles soient. Vous pouvez utiliser la fonction spécialement prévue pour ce test `is.na()`. Ainsi, `is.na(x)` effectue en réalité ce que vous voulez et peut être utilisée à l'intérieur de `filter()`. Cependant, il existe une fonction spécialement prévue pour débarrasser les tableaux des lignes contenant des valeurs manquantes : `drop_na()` du package {tidyr}. Si vous spécifier des noms de colonnes (facultatifs), la fonction ira rechercher les valeurs manquantes uniquement dans ces colonnes-là, sinon, elle scrutera tout le tableau. Attention : `drop_na()` est une fonction tidy. Les précautions sont nécessaires pour collecter les résultats (`%<-%`) :
 
 ```{r}
-urchin_sub4 %<-% drop_na(urchin)
+urchin_sub4 %<-% drop_na(urchin) # %<-% à la place de <- avec une fonction tidy
 rmarkdown::paged_table(urchin_sub4)
 ```
 
@@ -560,11 +591,11 @@ rmarkdown::paged_table(urchin_sub4)
 
 `r h5p(44, height = 270, toc = "Filtrer un tableau")`
 
-### `mutate()`
+### `mutate()`/`fmutate()`
 
 ![](images/sdd1_05/mutate.gif)
 
-La fonction `mutate()` permet de calculer de nouvelles variables (si le nom fourni n'existe pas encore dans le jeu de donnée) ou écrase les variables existantes de même nom. Repartons du jeu de données `urchin`. Pour calculer de nouvelles variables, vous pouvez employer :
+La fonction tidy `mutate()` permet de calculer de nouvelles variables (si le nom fourni n'existe pas encore dans le jeu de donnée) ou écrase les variables existantes de même nom. La fonction non-tidy équivalente est `fmutate()`. Repartons du jeu de données `urchin`. Pour calculer de nouvelles variables, vous pouvez employer :
 
 -   les opérateurs arithmétiques :
     -   addition : `+`
@@ -576,7 +607,7 @@ La fonction `mutate()` permet de calculer de nouvelles variables (si le nom four
     -   division entière : `%/%`
 
 ```{r, echo= TRUE}
-urchin %<-% mutate(urchin, 
+urchin <- fmutate(urchin, 
   sum_skel  =  lantern + spines + test, 
   ratio     = sum_skel / skeleton,
   skeleton2 = skeleton^2)
@@ -592,30 +623,32 @@ rmarkdown::paged_table(collect(select(urchin, skeleton:spines, sum_skel:skeleton
     -   ...
 
 ```{r, echo = TRUE}
-urchin %<-% mutate(urchin,
+urchin <- fmutate(urchin,
   skeleton_log  = log(skeleton), 
   skeleton_sqrt = sqrt(skeleton))
 rmarkdown::paged_table(collect(select(urchin, skeleton, skeleton_log, skeleton_sqrt)))
 ```
 
-La fonction `transmute()` effectue la même opération, mais en plus, elle laisse tomber les variables d'origine pour ne garder *que* les nouvelles variables calculées.
+La fonction tidy `transmute()` effectue la même opération, mais en plus, elle laisse tomber les variables d'origine pour ne garder *que* les nouvelles variables calculées. Il n'y as pas d'équivalent non-tidy.
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(43, height = 270, toc = "Calculer de nouvelles variable")`
 
-### `group_by()`
+### `group_by()`/`fgroup_by()`
 
 ![](images/sdd1_05/group_by.gif)
 
-La fonction `group_by()` ne change rien dans le tableau lui-même, mais ajoute une annotation qui indique que les calculs ultérieurs devront être effectués sur des sous-ensembles du tableau en parallèle. Ceci est surtout utile avec `summarise()` (voir ci-dessous). Pour annuler le regroupement, il suffit d'utiliser `ungroup()`.
+La fonction tidy `group_by()` ou la fonction non-tidy `fgroup_by()` ne changnte rien dans le tableau lui-même, mais ajoutent une annotation qui indique que les calculs ultérieurs devront être effectués sur des sous-ensembles du tableau en parallèle. Ceci est surtout utile avec `summarise()`/`fsummarise()` (voir ci-dessous). Pour annuler le regroupement, il suffit d'utiliser `ungroup()`/`fungroup()`.
 
-À noter que toutes les fonctions qui collectent les résultats, à savoir `as_dtx()`, `collect_dtx()` et les assignations alternatives `%<-%` et `%->%` dégroupent automatiquement les données. Ceci est voulu afin d'éviter que l'on oublie plus tard que l'objet a un regroupement enregistré et que vous ne réaliser par la suite des calculs non voulus (par groupes alors que vous pensez travailler individu par individu parce que vous avez oublié que vous aviez appliqué `group_by()` plus haut dans votre code).
+À noter que toutes les fonctions qui collectent les résultats, à savoir `as_dtx()`, `collect_dtx()` et les assignations alternatives `%<-%` et `%->%` dégroupent automatiquement les données. Ceci est voulu afin d'éviter que l'on oublie plus tard que l'objet a un regroupement enregistré et que vous ne réaliser par la suite des calculs non voulus (par groupes alors que vous pensez travailler individu par individu parce que vous avez oublié que vous aviez appliqué `group_by()`/`fgroup_by()` plus haut dans votre code). **Il faut toujours préciser les groupes aussi proche que possibnle de leur utilisation, et dégrouper éventuellement à la fin lorsqu'on n'en a plus besoin.**
 
 ```{r}
 urchin_by_orig <- group_by(urchin, origin)
 head(urchin_by_orig)
 ```
+
+Noter la seconde ligne ci-dessus : `Groups: origin` qui indique quels regroupements sont actifs dans le tableau.
 
 ```{r}
 # collect_dtx() ou %<-% / %->% dégroupent automatiquement
@@ -629,15 +662,15 @@ comment(urchin_collected) <- comment(urchin)
 identical(urchin_collected, urchin)
 ```
 
-### `summarise()`
+### `summarise()`/`fsummarise()`
 
 ![](images/sdd1_05/summarise.gif)
 
-Si vous voulez résumer vos données (calcul de la moyenne, médiane, etc.), vous pouvez réaliser ceci sur une variable en particulier avec les fonctions dédiées. Par exemple `mean(urchin$skeleton)` renvoie la masse moyenne de squelette pour tous les oursins (ce calcul donne `NA` dès qu'il y a des valeurs manquantes, mais l'argument `na.rm = TRUE` permet d'obtenir un résultat en ne tenant pas compte de ces données manquantes : `mean(urchin$skeleton, na.rm = TRUE)`). Cela devient vite laborieux s'il faut réitérer ce genre de calcul sur plusieurs variables du jeu de données, et assembler ensuite les résultats dans un petit tableau synthétique. D'autant plus, s'il faut séparer d'abord le jeu de données en sous-groupes pour faire ces calculs. La fonction `summarise()` reporte automatiquement ces calculs, en tenant compte automatiquement des regroupements proposés via `group_by()`.
+Si vous voulez résumer vos données (calcul de la moyenne, médiane, etc.), vous pouvez réaliser ceci sur une variable en particulier avec les fonctions dédiées. Par exemple `mean(urchin$skeleton)` renvoie la masse moyenne de squelette pour tous les oursins (ce calcul donne `NA` dès qu'il y a des valeurs manquantes, mais l'argument `na.rm = TRUE` permet d'obtenir un résultat en ne tenant pas compte de ces données manquantes : `mean(urchin$skeleton, na.rm = TRUE)`). Cela devient vite laborieux s'il faut réitérer ce genre de calcul sur plusieurs variables du jeu de données, et assembler ensuite les résultats dans un petit tableau synthétique. D'autant plus, s'il faut séparer d'abord le jeu de données en sous-groupes pour faire ces calculs. La fonction tidy `summarise()`, ou son équivalent non-tidy `fsummarise()` reporte automatiquement ces calculs, en tenant compte automatiquement des regroupements proposés via `group_by()`/`fgroup_by()`.
 
 ```{r}
 tooth <- read("ToothGrowth", package = "datasets", lang = "fr")
-tooth_summary %<-% summarise(tooth,
+tooth_summary <- fsummarise(tooth,
   "moyenne" = mean(len), 
   "minimum" = min(len), 
   "médiane" = median(len), 
@@ -646,10 +679,11 @@ knitr::kable(tooth_summary, digits = 2,
   caption = "Allongement des dents chez des cochons d'Inde recevant de l'acide ascorbique.")
 ```
 
-Voici les mêmes calculs, mais effectués séparément pour les deux types de supplémentations alimentaires :
+Voici les mêmes calculs, mais effectués séparément pour les deux types de supplémentations alimentaires (ici, comme on utilise `%->%` à la fin du pipeline, on peut utiliser indifféremment le couple `fgroup_by()`/`fsummarise()`ou `group_by()`/`summarise()`. Aussi, on utilise l'opérateur de pipe "léger" `|>` au lieu de `%>.%` entre `(f)group_by()` et `(f)summarise()` sur la même ligne pour indiquer que ce n'est qu'une seule étape dans le calcul puisque `group_by()`/`fgroup_by()` ne fait en réalité aucun calcul) :
 
 ```{r}
-group_by(tooth, supp) |> summarise(
+tooth %>.%
+  fgroup_by(., supp) |> fsummarise(
   "moyenne" = mean(len), 
   "minimum" = min(len), 
   "médiane" = median(len), 
@@ -661,10 +695,11 @@ knitr::kable(tooth_summary2, digits = 2,
 
 ##### Pièges et astuces {.unnumbered}
 
--   Tout comme lors de réalisation d'une boite de dispersion, vous devez être particulièrement vigilant au nombre d'observation par sous-groupe. Pensez toujours à ajoutez à chaque tableau de résumé des données, le nombre d'observation par sous-groupe grâce à la fonction `n()`.
+-   Tout comme lors de réalisation d'une boite de dispersion, vous devez être particulièrement vigilant au nombre d'observation par sous-groupe. Pensez toujours à ajoutez à chaque tableau de résumé des données, le nombre d'observation par sous-groupe grâce à la fonction `n()`. Cependant, cette fonction n'est **pas** disponible avec `fgroup_by()` et `fsummarise()`. Vous *devez* donc absolument utiliser `group_by()` et `summarise()` icic, sinon, vous aurez une erreur !
 
 ```{r}
- group_by(tooth, supp) |> summarise(
+tooth %>.% 
+  group_by(., supp) |> summarise(
   "moyenne" = mean(len), 
   "minimum" = min(len), 
   "médiane" = median(len), 
@@ -691,6 +726,18 @@ L'écart type est... `NA` ??? Pour comprendre ce qui s'est passé, il faut lire 
 -   l'écart type de `len` est ensuite calculé. Attendez une minute, de quel `len`s'agit-il ici ? Et bien la dernière en date, soit celle qui contient **une seule valeur**, la moyenne. Or, `sd()` nécessite au moins **deux** valeurs pour que l'écart type puisse être calculé, sinon, `NA` est renvoyé. C'est encore heureux ici, car nous aurions pu faire un calcul qui renvoie un résultat, ... mais qui n'est pas celui qu'on croit !
 
 Conclusion : ne nommez **jamais** vos variables créées avec `summarise()` exactement comme les variables de votre tableau en entrée.
+
+Toutefois, `fsummarise()` fonctionne différemment et n'a pas de problèmes dans ce cas-là:
+
+```{r}
+tooth_summary4 <- fsummarise(tooth,
+  "len" = mean(len), # Notez le même nom à gauche et à droite du = (len)
+  "len_sd" = sd(len))
+knitr::kable(tooth_summary4, digits = 2,
+  caption = "Exemple de résumé des données correct avec `fsummarise()`.")
+```
+
+Faites bien attention : les couples de fonctions avec et sans "f" comme `select()`/`fselect()`, `mutate()`/`fmutate()` ou `summarise()`/`fsummarise()` se ressemblent très fort au niveau de l'interface. On pourrait donc être tenté de croire qu'elles sont parfaitement interchangeables. La plupart du temps, c'est le cas. Cependnant, elles fonctionnement radicalement différemment en interne et des différences existent, sont connues, et ne sont *pas* des bugs. Vérifiez toujours votre code !
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -746,7 +793,7 @@ knitr::kable(
 biometry <- mutate(biometry, bmi = weight / (height/100)^2)
 biometry_25 <- filter(biometry, age <= 25)
 biometry_25 <- group_by(biometry_25, gender)
-biometry_tab %<-% summarise(biometry_25,
+biometry_tab %<-% summarise(biometry_25, # %<-% au lieu de <- en dernière étape
   mean   = mean(bmi), 
   median = median(bmi),
   number = n())
@@ -766,8 +813,9 @@ biometry %>.%
   group_by(., gender) |> summarise(
     mean   = mean(bmi),
     median = median(bmi),
-    number = n()) %>.%
-  knitr::kable(., rows = NULL, digits = 1, 
+    number = n()) %->%
+  biometry_tab
+  knitr::kable(biometry_tab, rows = NULL, digits = 1, 
     col = c("Genre", "Moyenne", "Médiane", "Observations"),
     caption = "IMC d'hommes (M) et femmes (W) de 25 ans maximum.")
 
@@ -776,6 +824,14 @@ biometry %>.%
 Le pipe `%>.%` injecte le résultat précédent dans l'instruction suivante à travers l'objet `.` Ainsi, en seconde ligne `mutate(.)`, `.` se réfère à `biometry`. A la ligne suivante, `filter(.)`, le `.` se réfère au résultat issu de l'opération `mutate()`, et ainsi de suite. La logique d'enchaînement des opérations sur le résultat, à chaque fois, du calcul précédent est donc le fondement de cet opérateur "pipe".
 
 Le pipe permet d'éviter de répéter le nom des objets (version avec variables intermédiaires), ce qui alourdit inutilement le code et le rend moins agréable à la lecture. L'imbrication des fonctions dans la première version est catastrophique pour la compréhension du code car les arguments des fonctions de plus haut niveau sont repoussés loin. Par exemple, l'argument de l'appel à `group_by()` (`gender`) se retrouve quatre lignes plus loin. Et encore, nous avons pris soin d'indenter le code pour repérer sur un plan vertical qui appartient à qui, mais imaginez ce que cela donne si l'instruction est mise à plat sur une seule ligne ! Le code le plus clair à la lecture est définitivement celui avec chaînage des opérations. Or, un code plus lisible est plus compréhensible... et donc, moins bogué.
+
+Pensez toujours à assigner le résultat de la dernière étape de votre pipeline avec l'opérateur `%->%` qui va dégrouper les données (s'il y avait un `group_by()` dans le pipeline). Cela évite des problèmes plus tard, si on oublie que le regroupement est là ! Il va aussi collecter les résultats du pipeline, c'est-à-dire effectuer l'équivalent de `collect_dtx()`, en un objet data frame dans sa forme par défaut (classe **data.frame**, **data.table** ou **tbl_bf**). Si vous n'avez pas modifié les options de `SciViews::R`, cette classe sera un **data.table**.
+
+### Opérateur pipe de base ou léger `|>`
+
+L'opérateur de base de R à partir de sa version 4.1 est `|>`. Il est plus limité que `%>.%` et se contente d'injecter l'expression de gauche comme premier argument dans l'expression de droite. Donc, `x |> log(base = 3)` est strictement équivalent à `log(x, base = 3)`. Cet opérateur est donc cosmétique afin de présenter du code plus complexe de manière plus lisible. Notez bien que contrairement à `%>.%`, vous ne devez pas et même **ne pouvez pas** préciser où l'expression de gauche est injectée à l'aide du point `.`. Ainsi, `x |> log(., base = 3)` sera une erreur.
+
+En `SciViews::R` nous utilisons `%>.%` pour relier les différentes étapes d'un pipeline complexe et bien indiquer qu'il s'agit d'une étape suivante. Le `%>.%` peut se lire à haute voix "... et ensuite...". L"opérateur pipe léger `|>` s'utilise au sein d'un même étape pour réarranger le code de manière plus lisible. C'est le cas dans `group_by(., var) |> summarise(....)` qui est plus lisible que `summarise(group_by(., var), ...)`.
 
 ##### À vous de jouer ! {.unnumbered}
 

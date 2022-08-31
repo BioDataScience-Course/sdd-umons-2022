@@ -199,7 +199,7 @@ L'histogramme est maintenant séparé en trois en fonction des niveaux de la var
 nbins <- 25
 chart(data = iris, ~ sepal_length %fill=% species | species) +
   # histogramme d'arrière-plan en gris ne tenant pas compte de la variable species
-  geom_histogram(data = collect_dtx(select(iris, -species)),
+  geom_histogram(data = fselect(iris, -species),
     fill = "grey", bins = nbins) + 
   geom_histogram(show.legend = FALSE, bins = nbins) +
   ylab("Effectifs") +
@@ -296,8 +296,7 @@ Le graphique en violon est constitué de deux graphiques de densité en miroir. 
 ```{r violin-plot, fig.cap="Graphe en violon de la distribution de la taille en fonction des groupes taxonomiques dans un échantillon de zooplancton. Les couleurs pour les axes servent à mettre des éléments en évidence. En pratique, les axes seront noirs.", echo=FALSE, message=FALSE, warning=FALSE}
 
 zooplankton %>.%
-  filter(., class %in% c("Annélide", "Calanoïde", "Cyclopoïde", "Décapode")) %>.%
-  collect_dtx(.) %>.%
+  fsubset(., class %in% c("Annélide", "Calanoïde", "Cyclopoïde", "Décapode")) %>.%
   chart(data = ., size ~ class %fill=% class) +
     geom_violin(show.legend = FALSE)  +
     theme(axis.text.x  = element_text(colour = "#a80039", size = 15), 
@@ -314,7 +313,7 @@ Les instructions en R pour produire un diagramme en violon à l'aide de la fonct
 # Importation du jeu de données
 zooplankton <- read("zooplankton", package = "data.io", lang = "FR")
 # Réduction du jeu de données 
-zooplankton_sub %<-% filter(zooplankton,
+zooplankton_sub <- fsubset(zooplankton,
   class %in% c("Annélide", "Calanoïde", "Cyclopoïde", "Décapode"))
 # Réalisation du graphique
 chart(data = zooplankton_sub, size ~ class) +

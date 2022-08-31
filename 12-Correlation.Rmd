@@ -163,8 +163,7 @@ La matrice est représentée par des ellipses de plus en plus allongées au fur 
 ```{r}
 zoo <- read("zooplankton", package = "data.io")
 zoo %>.%
-  select(., size:density) %>.%
-  collect_dtx(.) %>.% # Parce que correlation() n'est pas une fonction tidy
+  fselect(., size:density) %>.%
   correlation(.) ->
   zoo_cor
 plot(zoo_cor)
@@ -227,7 +226,7 @@ mean_var <- function(x, na.rm = FALSE){
 
 ans_x %>.%
   purrr::map_dfr(., mean_var) %>.%
-  mutate(., variable = names(ans_x)) %>.%
+  fmutate(., variable = names(ans_x)) %>.%
   knitr::kable(., col.names = c("Moyenne", "Variance", "Ecart-type", "Variable"))
 ```
 
@@ -238,7 +237,7 @@ Que valent les moyennes, les variances les écart-types pour les quatre variable
 ```{r}
 ans_y %>.%
   purrr::map_dfr(., mean_var) %>.%
-  mutate(., variable = names(ans_y)) %>.%
+  fmutate(., variable = names(ans_y)) %>.%
   knitr::kable(., col.names = c("Moyenne", "Variance", "Ecart-type", "Variable"))
 ```
 

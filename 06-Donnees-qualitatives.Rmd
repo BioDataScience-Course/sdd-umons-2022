@@ -541,7 +541,7 @@ shotgun_wide <- as_dtx(tibble(
 rmarkdown::paged_table(shotgun_wide)
 ```
 
-Ce tableau est clair et lisible... seulement, est-il correctement encodé en cas par variables d'après vous ? Quelle que soit la réponse à cette question, il est toujours possible de passer de ce format large à un format long dans R de la façon suivante :
+Ce tableau est clair et lisible... seulement, est-il correctement encodé en cas par variables d'après vous ? Quelle que soit la réponse à cette question, il est toujours possible de passer de ce format large à un format long dans R de la façon suivante (`pivot_longer()` étant une fonction tidy, des précautions de collection des résultats avec, par exempler, `%<-%` sont nécessaires) :
 
 ```{r}
 shotgun_long %<-% pivot_longer(shotgun_wide, cols = c(c1, c4, c7, c10),
@@ -584,7 +584,7 @@ Très souvent, lorsqu'il est impossible de réaliser un graphique avec `chart()`
 
 `r h5p(55, height = 270, toc = "Transformation de long vers large")`
 
-Pour passer du format long au format large (traitement inverse à `pivot_longer()`), il faut utiliser la fonction `pivot_wider()`. Ainsi pour retrouver le tableau d'origine (ou quelque chose de très semblable) à partir de `shotgun_long` nous utiliserons :
+Pour passer du format long au format large (traitement inverse à `pivot_longer()`), il faut utiliser la fonction tidy `pivot_wider()`. Ainsi pour retrouver le tableau d'origine (ou quelque chose de très semblable) à partir de `shotgun_long` nous utiliserons :
 
 ```{r}
 shotgun_wide2 %<-% pivot_wider(shotgun_long,
@@ -608,14 +608,14 @@ crabs <- read("crabs", package = "MASS", lang = "fr")
 rmarkdown::paged_table(crabs)
 ```
 
-La fonction `unite()` permet de combiner facilement les colonnes `sex` et `species` comme montré dans l'exemple ci-dessous. N'hésitez pas à faire appel à la page d'aide de la fonction via `?unite` pour vous guider.
+La fonction tidy `unite()` permet de combiner facilement les colonnes `sex` et `species` comme montré dans l'exemple ci-dessous. N'hésitez pas à faire appel à la page d'aide de la fonction via `?unite` pour vous guider.
 
 ```{r}
 crabs %<-% unite(crabs, col = "sp_sex", sex, species, sep = "_")
 rmarkdown::paged_table(crabs)
 ```
 
-La fonction complémentaire à `unite()` est `separate()`. Elle permet de séparer une variable en deux ou plusieurs colonnes séparées. Donc, pour retrouver un tableau similaire à celui d'origine, nous pourrons faire :
+La fonction tidy complémentaire à `unite()` est `separate()`. Elle permet de séparer une variable en deux ou plusieurs colonnes séparées. Donc, pour retrouver un tableau similaire à celui d'origine, nous pourrons faire :
 
 ```{r}
 crabs %<-% separate(crabs, col = "sp_sex", into = c("sex", "species"), sep = "_")
@@ -669,7 +669,7 @@ physico2 <- as_dtx(tibble(
 rmarkdown::paged_table(physico2)
 ```
 
-L'empilement des deux tableaux de données en un seul se fait via la fonction `bind_rows()` lorsque les tableaux contiennent les mêmes variables présentées exactement dans le même ordre comme ici :
+L'empilement des deux tableaux de données en un seul se fait via la fonction tidy `bind_rows()` lorsque les tableaux contiennent les mêmes variables présentées exactement dans le même ordre comme ici :
 
 ```{r}
 physico %<-% bind_rows(physico1, physico2)
@@ -678,7 +678,7 @@ rmarkdown::paged_table(physico)
 
 ### Empilement à droite
 
-Pour combiner des tableaux de données par les colonnes, de gauche à droite, la fonction la plus simple à utiliser est `bind_cols()`. Les étudiants ont également réalisé des prélèvements d'eau qui ont été dosés par colorimétrie avec un analyseur automatique. Les échantillons des deux groupes ont été mesurés dans la même série par l'appareil, ce qui donne le tableau suivant pour les nutriments :
+Pour combiner des tableaux de données par les colonnes, de gauche à droite, la fonction la plus simple à utiliser est la fonction tidy `bind_cols()`. Les étudiants ont également réalisé des prélèvements d'eau qui ont été dosés par colorimétrie avec un analyseur automatique. Les échantillons des deux groupes ont été mesurés dans la même série par l'appareil, ce qui donne le tableau suivant pour les nutriments :
 
 ```{r}
 nutrients <- as_dtx(tibble(
@@ -701,7 +701,7 @@ rmarkdown::paged_table(oceano)
 
 Qu'observez vous ?
 
-Effectivement nos deux tableaux de données n'ont pas les lignes dans le même ordre. Il faut être vigilant lors de ce genre de combinaison de tableaux. Il est préférable d'employer des fonctions de fusion de tableaux plus complexes comme `full_joint()` (ci-dessous). Pour utiliser correctement `bind_cols()`, il faut vous assurer que les lignes des deux tableaux correspondent exactement, par exemple, en utilisant `arrange()` :
+Effectivement nos deux tableaux de données n'ont pas les lignes dans le même ordre. Il faut être vigilant lors de ce genre de combinaison de tableaux. Il est préférable d'employer des fonctions tidy de fusion de tableaux plus complexes comme `full_joint()` (ci-dessous). Pour utiliser correctement `bind_cols()`, il faut vous assurer que les lignes des deux tableaux correspondent exactement, par exemple, en utilisant la fonction tidy `arrange()` :
 
 ```{r}
 nutrients2 %<-% arrange(nutrients, student, sample)
@@ -719,7 +719,7 @@ Après vérification de l'adéquation des lignes, nous n'aurons plus besoin des 
 
 ### Fusion de tableaux
 
-La fusion fera intervenir une ou plusieurs colonnes communes des deux tableaux pour déterminer quelles lignes du premier correspondent aux lignes du second. Ainsi, la fusion des tableaux est assurée d'être réalisée correctement quel que soit l'ordre des lignes dans les deux tableaux d'origine. Utilisons `full_join()` en joignant les lignes en fonction des valeurs de `student` et `sample` :
+La fusion fera intervenir une ou plusieurs colonnes communes des deux tableaux pour déterminer quelles lignes du premier correspondent aux lignes du second. Ainsi, la fusion des tableaux est assurée d'être réalisée correctement quel que soit l'ordre des lignes dans les deux tableaux d'origine. Utilisons la fonction tidy `full_join()` en joignant les lignes en fonction des valeurs de `student` et `sample` :
 
 ```{r}
 oceano %<-% full_join(nutrients, physico, by = c("student", "sample"))
@@ -732,7 +732,7 @@ Observez bien ce dernier tableau. L'ordre retenu est celui de `nutrients` (le pr
 rmarkdown::paged_table(physico)
 ```
 
-Il existe, en fait, plusieurs versions pour la fusion de tableaux, représentées par une série de fonctions `xxx_join()`. Lorsque les lignes entre les deux tableaux fusionnés correspondent parfaitement comme dans l'exemple traité ici, les différentes variantes ont le même effet. Mais lorsque des lignes diffèrent, les variantes ont leur importance :
+Il existe, en fait, plusieurs versions pour la fusion de tableaux, représentées par une série de fonctions tidy `xxx_join()`. Lorsque les lignes entre les deux tableaux fusionnés correspondent parfaitement comme dans l'exemple traité ici, les différentes variantes ont le même effet. Mais lorsque des lignes diffèrent, les variantes ont leur importance :
 
 -   `full_join()` garde toutes les lignes,
 

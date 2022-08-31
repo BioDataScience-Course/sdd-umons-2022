@@ -32,7 +32,7 @@ $$\sim variable \ facteur$$
 
 ```{r barres-facteur, fig.cap= "Exemple d'un graphique en barres montrant le dénombrement des niveaux d'une variable facteur, avec les éléments importants du graphique mis en évidence en couleurs.", echo=FALSE, message=FALSE}
 zooplankton <- read("zooplankton", package = "data.io", lang = "FR")
-copepoda %<-% filter(zooplankton,
+copepoda <- fsubset(zooplankton,
   class %in% c("Calanoïde", "Cyclopoïde",  "Harpacticoïde", "Poecilostomatoïde"))
 
 chart(data = copepoda, ~ class) +
@@ -59,7 +59,7 @@ Les instructions dans R pour produire un graphique en barres à l'aide de la fon
 # Importation du jeu de données
 (zooplankton <- read("zooplankton", package = "data.io", lang = "FR"))
 # Réduction du jeu de données à quatre classes seulement
-(copepoda %<-% filter(zooplankton,
+(copepoda <- fsubset(zooplankton,
   class %in% c("Calanoïde", "Cyclopoïde",  "Harpacticoïde",  "Poecilostomatoïde")))
 # Réalisation du graphique
 chart(data = copepoda, ~ class) +
@@ -102,7 +102,7 @@ Nous utilisons `head()` et `tail()` pour extraire les quelques lignes de début 
 Vous commencez à comprendre que si vous effectuez maintenant la comparaison `year_measure < 2017` lorsque cette variable est encodée comme facteur, ça ne fonctionnera pas comme vous le souhaitez ! Si on est chanceux, un message d'erreur ou d'avis ("warning") est imprimé. C'est le cas de `filter()` que nous avons déjà utilisé.
 
 ```{r, error=TRUE}
-biometry2 %<-% filter(biometry, year_measure < 2017) 
+biometry2 <- fsubset(biometry, year_measure < 2017) 
 ```
 
 Notez au passage que `filter()` n'utilise pas la notation `biometry$year_measure`, mais prend un premier argument qui est le jeu de données `biometry`, et la suite se réfère aux variables de ce jeu de données telle que `year_measure` en priorité aux autres variables disponibles dans l'environnement utilisateur de R. C'est donc une approche bien plus puissante que la notation traditionnelle. Aussi `filter()` renvoie tout le tableau remanié. Donc, nous devons l'affecté simplement à une variable qui contient ce tableau (`biometry2` ici).
@@ -121,7 +121,7 @@ Le calcul explicite et sûr est donc le suivant :
 # Transforme de manière sûre factor -> numeric (double)
 biometry$year_measure <- as.numeric(as.character(biometry$year_measure))
 # Filtre les données sur une copie du tableau
-biometry2 %<-% filter(biometry, year_measure < 2017)
+biometry2 <- fsubset(biometry, year_measure < 2017)
 # Retransforme en variable factor
 biometry2$year_measure <- as.factor(biometry2$year_measure)
 # Vérification
@@ -719,7 +719,7 @@ if (exists("assignment"))
 
 ## Différents moteurs graphiques
 
-<center>![Prolifération des standards d\'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
+<center>![Prolifération des standards d'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
 
 Depuis le début, l'ensemble des graphiques que nous vous avons proposés utilise la fonction `chart()` du package {chart}. Cependant, il ne s'agit pas de la seule fonction permettant de réaliser des graphiques dans R, loin de là. En fait, {chart} est tout récent et a été développé pour homogénéiser autant que possible les graphiques issus de trois moteurs graphiques différents : {ggplot2}, {lattice} et les graphiques de base. La fonction `chart()` a d'autres avantages également :
 
