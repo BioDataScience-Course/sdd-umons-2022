@@ -150,11 +150,17 @@ L'ensemble de vos réponses sont collectées et utilisée afin de construire la 
 
 Votre progression au sein de exercices de chaque module est mis à votre disposition à la fin de chaque module ou bien depuis Moodle.
 
+```{block, type='warning'}
+Les notes des exercices plus faciles de niveau 1 et 2 sont comptabilisés séparément des exercices plus difficiles. Il faut obtenir au moins 50% des points dans les exercices de niveau 3 et 4 pour bénéficier également de la note des exercices faciles de niveau 1 et 2. **Votre objectif est donc de bien vous préparer et de réussir vos projets, challenges et interrogations en présentiel.** Les exercices faciles vous aident à bien vous préparer. **Faites les sérieusement, c'est dans votre intérêt.**
+
+L'évaluation est **continue** tout au long de l'année. Il n'y a pas d'examen en fin d'année et il n'y a pas moyen non plus de repasser un examen en seconde session. La présence aux séances est **obligatoire** pour cette raison et toute absence in,justifiée vous coutera un zéro pour la matière concernée.
+```
+
 ### Plan du cours {.unnumbered}
 
 Le plan du cours est une forme de contrat entre les étudiants et les encadrants. Ce document structure les attentes de vos encadrants. Veuillez consulter ce document attentivement.
 
--   [Plan du cours de Science des données biologiques I : années 2021-2022](https://github.com/BioDataScience-Course/BioDataScience-Common/blob/main/docs/plan_de_cours/sdd1_plan_cours_2022-2023.md)
+-   [Plan du cours de Science des données biologiques I : années 2022-2023](https://github.com/BioDataScience-Course/BioDataScience-Common/tree/2022-2023/docs/plan_de_cours/sdd1_plan_cours_2022-2023.md)
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -174,7 +180,7 @@ if (exists("assignment2"))
       'S-BIOG-006' = !"A00Ga_{YY}M_issues",
       'S-BIOG-921' = !"A00Ga_{YY}C_issues"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/g/qqAiEV2e",
+      'S-BIOG-006' = "https://classroom.github.com/a/4xQ25Ghf",
       'S-BIOG-921' = "https://classroom.github.com/a/..."),
     course.ends = c(
       'S-BIOG-006' = !"{W[53]+5} 23:59:59",

@@ -22,7 +22,7 @@ learnitdown <- list(
   YY = 22,                               # The academic year short id
   W = as.Date("2022-09-11") + (0:52)*7,  # Sundays before each academic week
   Q1 = as.Date("2022-09-11") + (0:13)*7, # We consider 14 weeks from second one
-  Q2 = as.Date("2022-02-05") + c(0:7, 10:15)*7 # Q2 starts 07/02 w22 but w30-31 are holidays
+  Q2 = as.Date("2023-02-05") + c(0:7, 10:15)*7 # Q2 starts 07/02 w22 but w30-31 are holidays
 )
 
 # We use glue() often for variables replacement from learnitdown, so, we

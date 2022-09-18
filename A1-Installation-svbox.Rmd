@@ -2,6 +2,10 @@
 
 # Installation de la SciViews Box {#svbox}
 
+```{block, type='warning'}
+**À partir de cette année, nous allons passer sur un logiciel déployé sur le cloud avec Saturn Cloud. Vous n'avez donc rien à installer localement sur votre ordinateur et vous pouvez ignorer tout ce qui suit ! Cette section est maintenue au cas où le déploiement sur Saturn Cloud poserait problème et qu'il faudrait revenir à l'ancien système.**
+```
+
 ```{r echo=FALSE, out.width="256px", fig.align='right'}
 knitr::include_graphics('images/sdd1_01/svBox-256.png')
 ```
