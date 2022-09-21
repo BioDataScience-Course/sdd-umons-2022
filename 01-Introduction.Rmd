@@ -14,39 +14,43 @@
 
 ```{block, type='note'}
 
-Les liens cliquables qui vont sont proposés dans ce cours ont été sélectionné pour vous. La section prérequis vous permet de vous assurer que vous avez toutes les connaissances nécessaires afin de suivre le module dans les meilleures conditions possibles.
+Les liens cliquables qui vont sont proposés dans ce cours ont été sélectionné pour vous. La section **Prérequis** vous permet de vous assurer que vous avez toutes les connaissances nécessaires pour aborder le module dans les meilleures conditions possibles.
 
 **Cliquez sur ces liens**
 
 ```
 
-Tous les exercices de ce cours vont être réalisés sur un ordinateur. De ce fait, vous devez en maîtriser les éléments de base. Un [ordinateur](https://www.coursinfo.fr/decouverte/ordinateur/) peut sembler être un outil simple et familier. Il est pourtant bien plus complexe qu'il n'y parait. - Les comptes sur un ordinateur
+Tous les exercices de ce cours vont être réalisés sur un ordinateur. De ce fait, vous devez en maîtriser les éléments de base. Un [ordinateur](https://www.coursinfo.fr/decouverte/ordinateur/) peut sembler être un outil simple et familier. Il est pourtant bien plus complexe qu'il n'y parait.
 
-Il n'est pas rare d'avoir un ordinateur qui est utilisé par plusieurs personnes. Afin que chaque utilisateur puisse avoir un espace personnel dédié, on va créer plusieurs comptes. Vous retrouvez la procédure [sous Windows](https://support.microsoft.com/fr-fr/windows/ajouter-ou-supprimer-des-comptes-sur-votre-pc-104dc19f-6430-4b49-6a2b-e4dbd1dcdf32) et [sous Mac](https://support.apple.com/fr-be/guide/mac-help/mtusr001/mac). Chaque type de compte ne se vaut pas. Le compte administrateur est le compte qui a le plus de droits sur un ordinateur. Il faut par exemple avoir l'accès un compte administrateur pour installer certains programmes.
+-   Gestion des comptes sur votre ordinateur
 
--   L'organisation des fichiers sur un ordinateur
+Il n'est pas rare d'avoir un ordinateur qui soit utilisé par plusieurs personnes. Afin que chaque utilisateur puisse avoir un espace personnel dédié, vous allez devoir créer plusieurs comptes. Vous retrouvez la procédure [sous Windows](https://support.microsoft.com/fr-fr/windows/ajouter-ou-supprimer-des-comptes-sur-votre-pc-104dc19f-6430-4b49-6a2b-e4dbd1dcdf32) et [sous MacOS](https://support.apple.com/fr-be/guide/mac-help/mtusr001/mac). Chaque type de compte ne se vaut pas. Le compte administrateur est le compte qui a le plus de droits sur un ordinateur. Il faut par exemple avoir les droits d'un compte administrateur pour pouvoir installer la plupart des logiciels. **Si plusieurs étudiants utilisent un même ordinateur, vous devez obligatoirement créer des comptes séparés, sans quoi l'activité des différents utilisateurs sera capturée de manière erronée dans la base de données liée au cours et votre progression ne sera pas notée correctement !**
 
-Un ordinateur est composé d'un ou de plusieurs disques durs. Une [arborescence de dossiers](https://www.coursinfo.fr/decouverte/windows/quest-ce-quun-dossier-un-fichier-et-une-arborescence-de-dossiers/) va être mise en place afin de ranger les fichiers sur chaque disque dur. On peut se représenter chaque disque comme une armoire avec des tiroirs. Les principaux dossiers sont le dossier `bureau` (*desktop*), `documents` (*documents*) ou encore `téléchargements` (*downloads*).
+-   Organisation des fichiers sur un ordinateur
 
--   Les raccourcis clavier
+Votre ordinateur contient un ou plusieurs disques durs. Une [arborescence de dossiers](https://www.coursinfo.fr/decouverte/windows/quest-ce-quun-dossier-un-fichier-et-une-arborescence-de-dossiers/) va être mise en place afin de ranger les fichiers sur chaque disque dur. On peut se représenter chaque disque comme une armoire avec des tiroirs. Les principaux dossiers sont le dossier `bureau` (*desktop*), `documents` (*documents*) ou encore `téléchargements` (*downloads*). **Vous devez comprendre les base de l'organisation des dossiers et des fichiers dans votre ordinateur, ainsi que leur manipulation via l'explorateur de fichiers (Windows) ou le Finder (MacOS) avant d'aborder le module.**
 
-Les raccourcis clavier sont prévus afin d'optimiser votre temps et donc votre productivité. Prenez le temps de les revoir [sous Windows 10](https://www.lecotentin.fr/raccourcis-clavier), [sous Mac](https://www.journaldunet.com/solutions/dsi/1194040-raccourci-clavier-mac/) ou encore [sous Ubuntu](https://www.clubic.com/tutoriels/article-862426-1-raccourcis-clavier-ubuntu-indispensables.html).
+-   Raccourcis clavier
 
--   Les captures d'écran
+Les raccourcis clavier vous pemrettent d'optimiser votre productivité. Prenez un peu de temps pour vérifier que vous en connaissez les principaux via ces pages : [sous Windows](https://www.lecotentin.fr/raccourcis-clavier), [sous MacOS](https://www.journaldunet.com/solutions/dsi/1194040-raccourci-clavier-mac/) ou encore [sous Linux Ubuntu](https://www.clubic.com/tutoriels/article-862426-1-raccourcis-clavier-ubuntu-indispensables.html). **Les raccourcis clavier ne sont pas indispensables, mais ils vous feront gagner du temps lors des exercices, cela peut être très utile lorsque le temps est limité.**
 
-Lorsque l'on a un problème sur un ordinateur, une capture d'écran bien réalisée permet souvent de cibler un problème et peut remplacer une longue explication textuelle. Vous pouvez retrouver des tutoriels pour réaliser une capture d'écran [sous Windows](https://www.commentcamarche.net/informatique/windows/149-faire-des-captures-d-ecran-avec-windows-10/) ou [sous Mac](https://www.commentcamarche.net/informatique/macos/737-faire-des-captures-d-ecran-sur-mac/). Le plus important est de cibler la problématique que vous souhaitez capturer. Il est bien souvent inutile de sélectionner tout le bureau de l'ordinateur.
+-   Captures d'écran
+
+Lorsque vous rencontrez un problème avec votre ordinateur ou un de ses logiciels, une capture d'écran bien réalisée permet souvent d'illustrer utilement votre question sur un forum et peut remplacer une longue explication textuelle. Vous pouvez retrouver des tutoriels pour réaliser une capture d'écran [sous Windows](https://www.commentcamarche.net/informatique/windows/149-faire-des-captures-d-ecran-avec-windows-10/) ou [sous Mac](https://www.commentcamarche.net/informatique/macos/737-faire-des-captures-d-ecran-sur-mac/). Le plus important est de cibler la zone à capturer. Il est donc bien souvent inutile de sélectionner tout le bureau de l'ordinateur, voire toute la fenêtre de l'application. **Durant les cours de science des données, vous serez amené à poser des questions et à illustrer vos propos à l'aide de copies d'écran. Vous êtes supposés capable de le faire. Les photos d'écran prises à l'aide d'un smartphone ne sont pas acceptables car elles sont toujours bien moins lisibles que la copie directe de l'écran avec les outils ad hoc.**
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Note : lorsque vous voyez le petit logo "H5P" comme ci-dessous, cela signifie que vous avez maintenant un exercice interactif. Cet exercice peut prendre différentes formes (quiz, présentation ou vidéo contenant des questions, vrais ou faux, cliquer sur une image ...).*
+*Note : lorsque vous voyez le petit logo "H5P" comme ci-dessous, cela signifie que vous avez maintenant un exercice interactif. Cet exercice peut prendre différentes formes (quiz, présentation ou vidéo contenant des questions, vrais ou faux, cliquer sur une image, ...).*
 
 `r h5p(140, height = 270, toc = NULL)`
 
--   Les navigateurs web
+-   Navigateurs Web
 
-Un [navigateurs web](https://www.1min30.com/dictionnaire-du-web/navigateur-web-browser) est un logiciel qui permet d'accéder au web. Le web n'est pas un synonyme d'internet comme vous pouvez le lire sur la formation [comprendre le web](https://openclassrooms.com/fr/courses/1946386-comprendre-le-web/6874966-distinguez-le-web-et-internet) d'[Open Classroom](https://openclassrooms.com/fr/). Vous avez déjà tous entendu d'au moins l'un de ces logiciels Google Chrome, Microsoft Edge, Mozilla Firefox ou encore Safari. Google Chrome est le logiciel que nous vous conseillons. Il est parfaitement compatible avec les outils liés à ce cours.
+Un [navigateurs Web](https://www.1min30.com/dictionnaire-du-web/navigateur-web-browser) est un logiciel qui permet d'accéder au Web. Le Web n'est pas un synonyme d'internet comme vous pouvez le lire dans la formation [comprendre le Web](https://openclassrooms.com/fr/courses/1946386-comprendre-le-web/6874966-distinguez-le-web-et-internet) d'[Open Classroom](https://openclassrooms.com/fr/). Les navigateurs Web principaux sont Google Chrome, Microsoft Edge, Mozilla Firefox ou encore Safari sous MacOS. **Pour ce cours en ligne vous allez devoir naviguer sur le Web et utiliser divers outils comme Rstudio Server qui sont accessibles depuis une page Web. Par conséquent, vous devez être capable d'utiliser un navigateur Web pour afficher des pages, effectuer une recherche, créer une liste de "bookmarks", etc. Chaque navigateur Web a ses particularités et les pages que vous utiliserez ne fonctionnent pas forcément toutes avec ces différents navigateurs. Nous ne pouvons pas les tester avec toutes les options possibles (type de navigateur, version et système Windows, MacOS ou Linux, cela fait énormément de combinaisons possibles). Par conséquent, nous sommes obligés de restreindre la liste des navigateurs Web utilisables pour le cours à la version la plus récente de Google Chrome (tous systèmes) ou Edge (sous Windows), ou Safari (sous MacOS) ou Chromium (sous Linux). Les autres (Firefox, Opera, Brave, Vivaldi, Internet Explorer, etc.) ne sont pas autorisés car non testés, ou incompatibles. Firefox en particulier, ne fonctionne pas avec différentes pages du cours, de GitHub ou autres.**
 
 Le préambule de ce cours vous a également permis d'en apprendre davantage sur le matériel pédagogique, l'approche pédagogie ou encore la méthode d'évaluation. Vérifiez votre compréhension des notions vues avec l'exercice suivant.
+
+<!-- Ajouter un lien vers la présentation pour la pédagogie et rappeler l'aide-mémoire relatif à ce point -->
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -73,7 +77,7 @@ Il y a 30 ans, pas d'internet (ou un embryon d'internet disponible uniquement po
 
 -   En 2020, quantité d'information ajoutée sur Internet : 1000 milliards de milliards par semaine (écrivez ce nombre en chiffres également).
 
--   Comparaison de puissance de traitement du cerveau humain *versus* un ordinateur : 89 milliards de neurones et travail en multitâche d'un côté, contre 2 milliards de transistors pour un travail essentiellement monotâche pour le petit carré de silicium. Il faut bien avouer que c'est difficile à comparer (combien de transistors équivalent à un neurone ?). Une étude a montré en 2017 que l'un des cinq ordinateurs les plus puissants du moment a été capable de simuler le fonctionnement d'environ 1% du cerveau humain en une seconde. Il lui a fallu 40 minutes de calcul pour y arriver. Intel (l'un des principaux constructeurs de processeurs) estimait il y a à peine quelques années que l'évolution permettra d'égaler le cerveau humain en terme de vitesse de traitement vers 2020... On y est, l'intelligence artificielle est partout autour de nous, mais ne nous remplace pas encore (heureusement !). Consommation électrique d'un supercalculateur : se mesure en mégawatts, alors que le cerveau humain consomme 12-13W seulement !
+-   Comparaison de puissance de traitement du cerveau humain *versus* un ordinateur : 89 milliards de neurones et travail en multitâche d'un côté, contre 2 milliards de transistors pour un travail essentiellement monotâche pour le petit carré de silicium. Il faut bien avouer que c'est difficile à comparer (combien de transistors équivalent à un neurone ?). Une étude a montré en 2017 que l'un des cinq ordinateurs les plus puissants du moment a été capable de simuler le fonctionnement d'environ 1% du cerveau humain en une seconde. Il lui a fallu 40 minutes de calcul pour y arriver. Intel (l'un des principaux constructeurs de processeurs) estimait il y a à peine quelques années que l'évolution permettra d'égaler le cerveau humain en terme de vitesse de traitement vers 2020... On a dépassé cette date, l'intelligence artificielle est partout autour de nous, mais ne nous remplace pas encore (heureusement !). De plus, la consommation électrique d'un supercalculateur se mesure en mégawatts, alors que le cerveau humain consomme 12-13W seulement, soit un ordre de grandeur d'un million de fois moins !
 
 -   Aujourd'hui et encore plus à l'avenir, le cerveau humain et le (super)-ordinateur constitué par une constellation de machines mondialement interconnectées se complètement merveilleusement bien. La quantité d'information disponible est telle que sans l'ordinateur, nous ne pouvons pas la valoriser,... mais le cerveau humain est et reste le chef d'orchestre qui décide, qui dirige la façon dont ces données sont valorisées. Ce chef d'orchestre a un nom : le **scientifique des données**.
 
@@ -85,7 +89,7 @@ Ce petit rappel historique et ces quelques informations concernant les données 
 
 ## Découverte des outils
 
-À la fin de ce premier module, vous aurez réalisé votre première analyse complète en biologie. Nous avons cependant besoin d'outils.
+À la fin de ce premier module, vous aurez réalisé votre première analyse complète en biologie. Nous avons cependant besoin d'outils (logiciels) pour y arriver.
 
 La science des données requiert d'employer des outils performants que nous avons sélectionnés pour vous parmi la multitude de logiciels disponibles parce que nous faisons le pari que ce seront les outils qui vous seront les plus utiles... dans les 30 prochaines années, c'est-à-dire pendant une bonne partie de votre carrière (voir un [poster présentant la philosophie du cours](https://github.com/BioDataScience-Course/sdd_presentations/raw/master/2018_rennes/poster_rennes_ge.pdf)).
 
@@ -464,4 +468,3 @@ Bravo ! Vous arrivez au bout de votre premier module. Cette dernière section vo
 ##### Progression {.unnumbered}
 
 `r launch_report("01", height = 800)`
-

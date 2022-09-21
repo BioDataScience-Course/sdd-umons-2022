@@ -12,18 +12,16 @@ Si une mise-à-jour du package est disponible, elle sera installée. Si d'autres
 
 Après la mise à jour éventuelle du package, la liste des tutoriels vous est proposée :
 
-    1: A00La_decouverte
-    2: A01La_outils
-    3: A02La_base
-    4: A02Lb_progression
+    1: A00La_discovery
+    2: A01La_tools
+    3: A01Lb_git
+    4: A02La_base
     ...
 
-![](images/annexe_a3/learnr.gif)
-
-Sélectionnez le tutoriel désiré dans la boite de dialogue (si lancée à partir de l'addin) ou entrez le numéro correspondant au tutoriel que vous voulez exécuter. Un document learnr interactif apparaît. Par exemple, en entrant `1` suivi de la touche `Entrée`, vous êtes redirigé vers le tutoriel concernant la découverte de R et intitulé `A00La_decouverte`.
+Sélectionnez le tutoriel désiré dans la boite de dialogue (si lancé à partir de l'addin) ou entrez le numéro correspondant au tutoriel que vous voulez exécuter dans la console. Un document learnr interactif apparaît. Par exemple, en entrant `1` suivi de la touche `Entrée`, vous êtes redirigé vers le tutoriel concernant la découverte de R et intitulé `A00La_discovery`.
 
 ```{block, type='warning'}
-L'onglet **Tutorial** donne également accès aux différents tutoriels, mais la liste n'est **pas** mise-à-jour automatiquement. **Vous devez donc vous assurer que cette liste correspond bien aux versions les plus récentes des exercices en ayant exécuté au moins une fois `BioDataScience1::run()` au cours de la session actuelle.** Ensuite, si une mise-à-jour a été installée, il faut aussi rafraîchir la liste des tutoriels présentés dans l'onglet **Tutorial** en allant dans le menu `Session` -> `Restart R`.
+L'onglet **Tutorial** donne également accès aux différents tutoriels, mais la liste n'est **pas** mise-à-jour automatiquement. **Vous devez donc vous assurer que cette liste correspond bien aux versions les plus récentes des exercices en ayant exécuté au moins une fois `BioDataScience1::run()` au cours de la session actuelle.** Ensuite, si une mise-à-jour a été installée, il faut aussi rafraîchir la liste des tutoriels présentés dans l'onglet **Tutorial** en allant dans le menu de RStudio `Session` -> `Restart R`.
 
 Dans certains cas, le lancement des tutoriels à partir de l'addin ou à partir de `BioDataScience1::run()` lance la compilation du tutoriel dans l'onglet **Jobs**, mais ce tutoriel ne s'affiche *pas* dans **Tutorial** ensuite. C'est un bug dans RStudio. Si c'est le cas, vous pouvez alors relacer le tutoriel à partir de l'onglet **Tutorial** en cliquant sur le bouton **Start Tutorial**, et normalement, il doit apparaître maintenant.
 ```
@@ -32,7 +30,7 @@ La première chose à vérifier à l'ouverture du tutoriel interactif est le nom
 
 ![](images/annexe_a3/learnr2b.png)
 
-Si vous êtes correctement enregistré, un bandeau bleu l'indiquera avec votre login GitHub en gras comme ci-dessus. Dans le cas contraire, un message sur fond jaune ou rouge (selon le contexte) indiquera le contraire. De même, si vous voyez également un message sur fond rouge qui indique que la base de données est inaccessible, cela signifie que vous n'êtes pas correctement connecté à l'Internet ou que votre connexion Internet ne permet *pas* d'accéder à la base de données qui enregistre votre activité. Essayez un autre réseau, ou même, essayez en redémarrant complètement votre ordinateur. Si la base de données est actuellement inaccessible, vous pouvez toujours effectuer les exercices, mais votre activité sera temporairement enregistrée localement sur votre ordinateur. Dès la prochain e connexion fructueuse, et dès la soumissions d'un exercice learnr, l'ensemble de votre activité sera alors enregistrée d'un coup dans la base.
+Si vous êtes correctement enregistré, un bandeau bleu l'indiquera avec votre login GitHub en gras comme ci-dessus. Dans le cas contraire, un message sur fond jaune ou rouge (selon le contexte) indiquera le contraire. De même, si vous voyez également un message sur fond rouge qui indique que la base de données est inaccessible, cela signifie que vous n'êtes pas correctement connecté à l'Internet ou que votre connexion Internet ne permet *pas* d'accéder à la base de données qui enregistre votre activité. Essayez un autre réseau, ou même, essayez en redémarrant complètement votre ordinateur (ou la machine virtuelle sur le cloud). Si la base de données est actuellement inaccessible, vous pouvez toujours effectuer les exercices, mais votre activité sera temporairement enregistrée localement sur votre ordinateur. Dès la prochaine connexion fructueuse, et dès la soumissions d'un exercice learnr, l'ensemble de votre activité sera alors enregistrée d'un coup dans la base de données.
 
 ## Organisation d'un learnr
 
@@ -43,15 +41,15 @@ Le learnr est un outil pédagogique mis au point afin de proposer des tutoriels 
 -   Une série d'exercices
 -   Conclusion
 
-Vous retrouvez d'ailleurs cette structure en haut à gauche de ce dernier. Chaque page du tutoriel est importante et nécessite votre attention.
+Vous retrouvez d'ailleurs cette structure en haut à gauche dans la page de celui-ci. Chaque page du tutoriel est importante et nécessite votre attention.
 
 ### Objectifs
 
-Cette section détaillera l'ensemble des notions que vous allez apprendre à maîtriser durant ce tutoriel. Dans le cadre de ce premier tutoriel, l'objectif est de découvrir comment fonctionne un learnr à l'aide de différentes questions de culture générale.
+Cette section détaillera l'ensemble des notions que vous allez apprendre à maîtriser durant ce tutoriel. Par exmple, pour le premier tutoriel, l'objectif est de découvrir comment fonctionne un learnr à l'aide de différentes questions de culture générale.
 
 ### Introduction
 
-Cette section facultative vous placera dans le contexte du tutoriel interactif avec un rappel succinct des notions théoriques indispensables afin de répondre à la série d'exercices. **Cette section ne remplace pas les autres matériels pédagogiques qui vous sont proposés.** Vous devez donc travailler dans l'ordre proposé dans le présent manuel au sein de chaque module pour vous préparer correctement au learnr de test en fin de section.
+Cette section facultative vous placera dans le contexte du tutoriel interactif avec un rappel succinct des notions théoriques indispensables afin de répondre à la série d'exercices. **Cette section ne remplace pas les autres matériels pédagogiques qui vous sont proposés.** Vous devez donc travailler et étudier la section du cours correspondant *avant* de vous lancer dans le tutoriel dans un second temps... sinon, il ne servira à rien.
 
 ### Divers exercices
 
@@ -59,15 +57,15 @@ Cette ou ces sections peuvent être de longueur variable en fonction de la diffi
 
 Pour les quiz, vous devez cliquer sur le bouton bleu `Submit Answer`. En cas d'erreur, vous avez la possibilité de réessayer dans les questions formatives (mais pas dans les questions d'évaluation), moyennant la perte de points.
 
-Des zones de codes R vous sont proposées dans certains exercices. Elles vous permettent d'expérimenter directement des instructions dans R depuis le document learnr. Pour exécuter ces instructions, il faut cliquer sur `Run Code`. **Vous pouvez le faire autant de fois que vous le voulez.** Modifiez le code, cliquez `Run Code`, analysez le résultat, modifiez votre code, recliquez `Run Code`, etc... jusqu'à ce que vous soyez satisfait du résultat. Finissez l'exercice et soumettez votre réponse en cliquant sur `Submit Answer`.
+Des zones de codes R vous sont proposées dans certains exercices. Elles vous permettent d'expérimenter directement des instructions dans R depuis le document learnr. Pour exécuter ces instructions, il faut cliquer sur le bouton `Run Code`. **Vous pouvez le faire autant de fois que vous le voulez, et ce, sans perte de points.** Modifiez le code, cliquez `Run Code`, analysez le résultat, modifiez votre code, recliquez `Run Code`, etc... jusqu'à ce que vous soyez satisfait du résultat. Finissez l'exercice et soumettez votre réponse en cliquant sur le bouton `Submit Answer`.
 
 ![](images/annexe_a3/learnr2.gif)
 
 Selon le cas, vous pouvez alors avoir un encart bleu qui indique simplement que votre réponse est enregistrée, ou alors si l'exercice est assorti d'une correction automatique, vous verrez un encart vert en cas de bonne réponse, ou un encart rouge qui vous donne un indice sur ce qui est incorrect (**attention : ces message d'aide sont élaborés automatiquement par l'ordinateur et ne sont pas toujours fiables en l'état actuel ; concentrez-vous surtout sur le fait que la réponse n'est pas celle attendue et tentez de déterminer ce qui ne va pas**).
 
-Des boutons `Hint`, lorsqu'ils sont présents, vous proposent des aides si vous êtes bloqués. Un bouton `Solution` ou le dernier `Hint` affiché après celui qui indique que le suivant sera la solution à la question... montrent ce qu'il fallait entrer. **N'allez pas voir directement la solution. Essayez d'abord par vous même !**
+Des boutons `Hint`, lorsqu'ils sont présents, vous proposent des aides si vous êtes bloqués. Un bouton `Solution` ou le dernier `Hint` affiché après celui qui indique que le suivant sera la solution à la question... montrent ce qu'il fallait entrer. **N'allez pas voir directement la solution. Essayez d'abord par vous même !** Ces aides supplémentaires sont, en effet, à utiliser en dernier recours si vous êtes bloqué, mais vous perdrez des points à chaque "hint" vu.
 
-Quelle que soit la façon dont vous répondez à une question, vous obtenez au moins la moitié des points. Si vous avez été voir la solution avant de chercher la réponse par vous-même, nous considérons que c'est parce que vous n'arrivez pas à résoudre cet exercice seul. Dans le cadre d'une auto-évaluation, nous vous faisons confiance pour analyser la réponse et essayer de comprendre où sont vos lacunes pour progresser. *Si vous ne le faites pas, vous n'apprendrez rien, et vous serez incapables de résoudre les exercices dans les assignations GitHub ensuite.* Dans ce cas, le calcul est vite fait : moitié des points pour les exercices d'auto-évaluation et une note très basse aux exercices sur GitHub donnera au final... un échec dans la matière ! Au moins vous solliciter les aides pour obtenir la réponse, au plus vous obtiendrai une bonne note pour cet exercice. Mais ne perdez pas de temps sur les exercices qui vous semblent difficiles et utilisez les aides à bon escient, notamment les `Hint`s en haut des boites `Code R`.
+Quelle que soit la façon dont vous répondez à une question, vous obtenez au moins la moitié des points. Si vous avez été voir la solution avant de chercher la réponse par vous-même, nous considérons que c'est parce que vous n'arrivez pas à résoudre cet exercice seul. Dans le cadre d'une auto-évaluation, nous vous faisons confiance pour analyser la réponse et essayer de comprendre où sont vos lacunes pour progresser. *Si vous ne le faites pas, vous n'apprendrez rien, et vous serez incapables de résoudre les exercices dans les projets GitHub ensuite.* Dans ce cas, le calcul est vite fait : moitié des points pour les exercices d'auto-évaluation et une note très basse aux projets sur GitHub donnera au final... un échec dans la matière ! Au moins vous solliciter les aides pour obtenir la réponse, au plus vous obtiendrai une bonne note pour cet exercice. Mais ne perdez pas de temps sur les exercices qui vous semblent difficiles et utilisez les aides à bon escient, notamment les `Hint`s en haut des boites `Code R`.
 
 ### Conclusion
 

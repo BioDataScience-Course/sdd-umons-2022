@@ -4,7 +4,7 @@ Cette annexe comprend une description détaillée des différents outils utilis�
 
 ## RStudio {#rs}
 
-Une fois que vous avez démarré la SciViews Box à partir du lanceur rapide (ou directement à partir de VirtualBox), vous pourrez accéder à RStudio de plusieurs façons. Rappelons toutefois que, pour les étudiants UMONS, la seule façon qui assure un enregistrement correct passe par le bouton bleu "RStudio" dans le cours après avoir vérifié que la bannière noire d'enregistrement est bien présente en haut de page. Vous entrez dans RStudio en y entrant les informations suivantes :
+Une fois que vous avez démarré la SciViews Box, vous pourrez accéder à RStudio. Si cela vous est demandé, vous entrez dans RStudio en y entrant les informations suivantes :
 
 -   Username : **sv**
 -   Password : **sv**
@@ -39,46 +39,46 @@ Le dernier bouton de la barre d'outils générale, intitulé **Project** permet 
 
 Vous avez maintenant repéré les éléments fondamentaux de l'interface de RStudio.
 
-*A ce stade vous pouvez vous familiariser avec l'aide-mémoire relatif à l'IDE RStudio. Vous verrez qu'il y a beaucoup de fonctionnalités accessibles à partir de la fenêtre principale de RStudio. Ne vous laissez pas intimider : vous les apprendrez progressivement au fur et à mesure de l'utilisation du logiciel.*
+*A ce stade vous pouvez vous familiariser avec l'aide-mémoire relatif à l'IDE RStudio. Vous verrez qu'il y a beaucoup de fonctionnalités accessibles à partir de la fenêtre principale de RStudio. Ne vous laissez pas intimider : vous les apprendrez progressivement au fur et à mesure de l'utilisation du logiciel.*
 
 ### Projet dans RStudio {#rs-projet}
 
-Un projet sert, dans RStudio, à organiser son travail. Un projet va regrouper l'ensemble des **jeux de données**, des **rapports**, des **présentations**, des **scripts** d'une **analyse** généralement en relation avec une ou plusieurs expériences ou observations réalisés sur le terrain ou en laboratoire. Voici à quoi ressemble l'interface de RStudio lorsque vous ouvrez un projet :
+Un projet sert, dans RStudio, à organiser son travail. Il va regrouper l'ensemble des **jeux de données**, des **rapports**, des **présentations**, des **scripts** (fichiers composés d'une série d'instructions réalisant un traitement particulier) d'une analyse, généralement en relation avec une ou plusieurs expériences ou observations réalisés sur le terrain ou en laboratoire. Voici à quoi ressemble l'interface de RStudio lorsque vous ouvrez un projet :
 
 ![](images/annexe_a2/project1.png)
 
-Notez que le nom du projet est mentionné en haut à droite. Notez également, que le répertoire de base de votre projet est le répertoire actif dans l'onglet **Console** (`~/shared/projects/mon_premier_projet/` dans l'exemple), et que l'onglet **Files** affiche son contenu. Un fichier `mon_premier_projet.Rproj` y est placé automatiquement par RStudio. Ce fichier contient les paramètres de configuration propres à ce projet[^a2-utilisation-git-1]. C'est aussi une excellente façon de repérer qu'un répertoire est la base d'un projet RStudio, en repérant ce fameux fichier `.Rproj`.
+Notez que le nom du projet est mentionné en haut à droite. Notez également, que le répertoire de base de votre projet est le répertoire actif dans l'onglet **Console** (`~/shared/projects/mon_premier_projet/` dans l'exemple, mais dans Saturn Cloud ce sera probablement plutôt `~/workspace/mon_premier_projet`). Remarquez aussi que l'onglet **Files** affiche son contenu. Un fichier `mon_premier_projet.Rproj` y est placé automatiquement par RStudio. Ce fichier contient les paramètres de configuration propres à ce projet[^a2-utilisation-git-1]. C'est aussi une excellente façon de repérer qu'un répertoire est la base d'un projet RStudio, en repérant ce fameux fichier `.Rproj`.
 
-[^a2-utilisation-git-1]: N'éditer **jamais** à la main un fichier `.Rproj`. Laisser RStudio s'en occuper tout seul.
+[^a2-utilisation-git-1]: N'éditer **jamais** à la main un fichier `.Rproj`. Laisser RStudio s'en occuper !
 
 #### Création d'un projet {#create-project}
 
 Créez votre premier projet en suivant les quatre étapes suivantes :
 
--   **Étape 1.** Dans RStudio, Sélectionnez le bouton tout à droite dans la barre d'outils générale de RStudio qui ouvre un menu contextuel relatif aux projets. Sélectionnez y l'entrée `New Project...`.
+-   **Étape 1 :** dans RStudio, sélectionnez le bouton tout à droite dans la barre d'outils générale de RStudio qui ouvre un menu contextuel relatif aux projets. Sélectionnez y l'entrée `New Project...`.
 
--   **Étape 2.** Une boite de dialogue s'ouvre. Sélectionnez `New Directory` pour créer votre projet dans un nouveau dossier. Il est également possible d'employer un dossier existant comme point de départ `Existing Directory`).
+-   **Étape 2 :** une boite de dialogue s'ouvre. Sélectionnez `New Directory` pour créer votre projet dans un nouveau dossier. Il est également possible d'employer un dossier existant comme point de départ `Existing Directory`).
 
--   **Étape 3.** Sélectionnez `New Project` tout en haut dans l'écran suivant qui vous propose également des projets particuliers (que nous n'utiliserons pas pour l'instant).
+-   **Étape 3 :** sélectionnez `New Project` tout en haut dans l'écran suivant qui vous propose également des projets particuliers (que nous n'utiliserons pas pour l'instant).
 
--   **Étape 4.** Ensuite, RStudio vous demander quelques informations pour préconfigurer votre projet.
+-   **Étape 4 :** ensuite, RStudio vous demander quelques informations pour préconfigurer votre projet.
 
-    -   Nommez le projet : `Directory name`. Indiquez ici `project_test`
-    -   Indiquez où vous voulez le placer : `Create project as subdirectory of`. Sélectionnez le sous-dossier `projects` dans le dossier `shared` partagé entre la SciViews Box et la machine hôte.
-    -   Sélectionnez `Create a git repository`
-    -   Désélectionnez `Use packrat with this project`(**il est important de ne pas sélectionner packrat, sous peine de dupliquer de nombreux packages R dans votre projet**)
+    -   Nommez le projet dans `Directory name`. Indiquez ici `project_test`
+    -   Indiquez où vous voulez le placer dans `Create project as subdirectory of`. Sélectionnez le sous-dossier `workspace` dans Saturn Cloud ou le sous-dossier `projects` dans le dossier `shared` partagé entre la SciViews Box et la machine hôte si vous travaillez en local.
+    -   Cochez l'option `Create a git repository`.
+    -   Déscochez l'option `Use renv with this project`(**il est très important de ne pas sélectionner renv, sous peine de réinstaller et dupliquer de nombreux dossiers et fichiers -nommés des "packages" R- dans votre projet**)
 
-Vous utilisez aussi le menu spécial projet pour créer un nouveau projet (`New Project...`), ouvrir un projet existant (`Open Project...`) ou encore fermer un projet (`Close Project`). Vous remarquez également que les derniers projets employés sont placés sous les trois options citées ci-dessus afin d'y accéder plus rapidement.
+Vous utilisez le menu déroulant `Project:` en haut à droite pour créer un nouveau projet (`New Project...`), mais aussi pour réouvrir un projet existant (`Open Project...`) ou fermer le projet actuel (`Close Project`). Vous remarquez également que les derniers projets employés sont placés en dessous afin d'y accéder plus rapidement.
 
 ![](images/annexe_a2/project.png)
 
 ```{block, type='warning'}
-**Un projet ne doit bien sûr être créé qu'une seule fois\ !** Une fois les étapes ci-dessus effectuées, vous retournez simplement à votre projet en ouvrant le menu contextuel projets et en sélectionnant votre projet dans la liste. S'il n'y apparait pas, choisissez `Open Project...` et sélectionnez le fichier `.Rproj` relatif à votre projet. Ne créez bien évidemment **jamais** de projet à l'intérieur des dossiers d'un autre projet, surtout si vous utilisez Git. Sinon, RStudio va s'emméler les pinceaux\ !
+**Un projet ne doit bien sûr être créé qu'une seule fois !** Une fois les étapes ci-dessus effectuées, vous retournez simplement à votre projet en ouvrant le menu contextuel projets et en sélectionnant votre projet dans la liste. S'il n'y apparaît pas, choisissez `Open Project...` et sélectionnez le fichier `.Rproj` relatif à votre projet. Ne créez bien évidemment **jamais** de projet à l'intérieur des dossiers d'un autre projet, surtout si vous utilisez Git. Sinon, RStudio va s'enméler les pinceaux !
 ```
 
 #### Organisation d'un projet
 
-Le répertoire `projects` contient maintenant un projet RStudio intitulé `project_test`. Depuis la SciViews Box, il se situe dans :
+Le dossier `workspace` (Saturn Cloud) ou `projects` (SciViews Box en local) contient maintenant un projet RStudio intitulé `project_test`. Depuis la SciViews Box, il se situe dans (version locale) :
 
     /home
       /sv
@@ -88,9 +88,9 @@ Le répertoire `projects` contient maintenant un projet RStudio intitulé `proje
               project_test.Rproj   # Fichier de configuration du projet créé par RStudio
               .gitignore           # Fichier relatif à la gestion de version 
 
-Vous devez maintenant structurer votre projet afin d'avoir différents sous-répertoires pour organiser au mieux le travail. Ceci concerne à la fois les données et les rapports d'analyse en lien avec ce projet.
+Vous devez maintenant structurer votre projet afin d'avoir différents sous-dossiers pour organiser au mieux le travail. Ceci concerne à la fois les données et les rapports d'analyse en lien avec ce projet.
 
-Cliquez sur le bouton `New Folder` dans la barre d'outils de l'onglet **`Files`** et appelez ce nouveau dossier `data`. Ajoutez également les dossiers `analysis` et `R`. Vous pouvez faire cela depuis RStudio, mais aussi depuis le système hôte si c'est plus confortable pour vous.
+Cliquez sur le bouton `New Folder` dans la barre d'outils de l'onglet **`Files`** et appelez ce nouveau dossier `data`. Ajoutez également les dossiers `analysis` et `R`.
 
     /home
       /sv
@@ -113,11 +113,11 @@ L'organisation cohérente d'un projet est indispensable pour le bon fonctionneme
 
 L'utilisation d'un projet permet de structurer de manière cohérente son travail. Vous allez maintenant devoir rendre votre projet **portable**.
 
-Un projet RStudio pourra être qualifié de portable s'il est possible de déplacer son répertoire de base et tout ce qu'il contient (ou le renommer) sans que les analyses qu'il contient n'en soient affectées. Ceci est utile pour copier, par exemple, le projet d'un PC à un autre, ou si vous décidez de restructurer vos fichiers sur le disque dur.
+Un projet RStudio pourra être qualifié de portable s'il est possible de déplacer son répertoire de base et tout ce qu'il contient (ou le renommer) sans que les analyses qu'il réalise n'en soient affectées. Ceci est utile pour copier, par exemple, le projet d'un PC à un autre, ou si vous décidez de restructurer vos fichiers sur le disque dur.
 
 -   La première règle est de placer tous les fichiers nécessaires dans le dossier du projet ou dans un sous-dossier. C'est ce que nous venons de faire plus haut.
 
--   La seconde règle est de référencer les différents fichiers au sein du projet avec des **chemins relatifs**. Nous allons maintenant apprendre à faire cela.
+-   La seconde règle est de référencer les différents fichiers au sein du projet avec des **chemins relatifs**. Nous allons maintenant apprendre à faire cela. Partons d'un projet qui contient les dossiers et ficihers suivants :
 
 <!-- -->
 
@@ -134,58 +134,62 @@ Un projet RStudio pourra être qualifié de portable s'il est possible de dépla
                .gitignore             # Fichier relatif à la gestion de version
                R                      # Le dossier qui comprend tous les scripts d'analyse
 
-Les différents systèmes d'exploitations (Windows, MacOS, Linux) utilisent des conventions différentes pour les chemins d'accès aux fichiers. Dans notre cas, la machine virtuelle utilise un système d'exploitation **Linux**. La barre oblique (`/` dite "slash" en anglais) sépare les différents dossiers imbriqués sous Linux et sous MacOS. Le système d'exploitation Windows utilise pour sa part, la barre oblique inversée (`\`, dite "backslash" en anglais, mais dans R et RStudio, vous pourrez également utiliser le slash `/`, ce que nous vous conseillons de faire toujours pour un maximum de compatibilité entre systèmes). Par exemple, votre fichier `dataset.csv` se référence comme suit dans la SciViews Box, donc sous Linux :
+Les différents systèmes d'exploitations (Windows, MacOS, Linux) utilisent des conventions différentes pour les chemins d'accès aux fichiers. Dans notre cas, la machine virtuelle utilise un système d'exploitation **Linux**. La barre oblique (`/` dite "slash" en anglais) sépare les différents dossiers imbriqués sous Linux et sous MacOS. Le système d'exploitation Windows utilise pour sa part, la barre oblique inversée (`\`, dite "backslash" en anglais, mais dans R et RStudio, vous pourrez également utiliser le slash `/`, ce que nous vous conseillons de faire toujours pour un maximum de compatibilité entre systèmes). Par exemple, votre fichier `dataset.csv` qui contient les données du projet hypothétique d'exemple se référence comme suit dans la SciViews Box, donc sous Linux :
 
     /home/sv/shared/projects/project_test/data/dataset.csv 
 
-Ce chemin d'accès est le plus détaillé. Il est dit **chemin d'accès absolu** au fichier. Vous noterez qu'il est totalement dépendant de la structure actuelle des dossiers sur le disque. Si vous renommez `project_test` ou si vous le déplacez ailleurs, la référence au fichier sera cassée ! Ainsi, si vous partagez votre projet avec un collaborateur qui le place ailleurs sur son disque dur, le chemin d'accès devra être adapté sans quoi l'analyse ne pourra plus s'exécuter correctement.
+Ce chemin d'accès est le plus détaillé. Il est dit **chemin d'accès absolu** au fichier. Vous noterez qu'il est totalement dépendant de la structure actuelle des dossiers sur le disque. Si vous renommez `project_test` ou si vous le déplacez ailleurs, la référence au fichier sera cassée ! Ainsi, si vous partagez votre projet, généré avec une SciViews Box fonctionnant en local avec un collaborateur qui utilise Saturn Cloud, il clonera votre projet probablement dans `/home/jovyan/workspace/project_test`. Par conséquent, le chemin d'accès aux données devra être adapté en `/home/jovyan/workspace/project_test/data/dataset.csv`, sans quoi l'analyse ne pourra plus s'exécuter correctement sur sa machine.
 
 Décodons ce chemin d'accès :
 
 -   `/`, racine du système
 -   `/home/sv/`, notre dossier personnel comme utilisateur `sv`
--   `/home/sv/shared/`, le dossier partagé entre la SciViews Box et notre PC hôte
+-   `/home/sv/shared/`, le dossier partagé entre la SciViews Box en local et notre PC hôte
 -   `/home/sv/shared/projects/project_test/`, le dossier de base de notre projet
 -   `/home/sv/shared/projects/project_test/data/`, le répertoire qui contient le fichier `dataset.csv`.
 
-Le répertoire utilisateur `/home/<user>` est différent sous MacOS (il s'appelle `/Users/<user>`) et sous Windows (il se nomme généralement `C:\Users\<user>`). Comme c'est un répertoire clé, et qu'il est impossible d'écrire un chemin absolu qui soit le même partout, il existe un raccourcis : le "tilde" (`~`) qui signifie "mon répertoire utilisateur". Ainsi, vous pouvez aussi accéder à votre jeu de données `dataset.csv` comme ceci :
+Le répertoire utilisateur `/home/<user>` est différent sous MacOS (il s'appelle `/Users/<user>`) et sous Windows (il se nomme généralement `C:\Users\<user>`). Comme c'est un répertoire clé, et qu'il est impossible d'écrire un chemin absolu qui soit le même partout, il existe un raccourci : le "tilde" (`~`) qui signifie "mon répertoire utilisateur". Ainsi, vous pouvez aussi accéder à votre jeu de données `dataset.csv` comme ceci :
 
     ~/shared/projects/project_test/data/datasets.csv
 
-Ce chemin d'accès est déjà plus "portable" d'un système à l'autre et d'un utilisateur à l'autre. Il est donc à préférer. Notez que sous R, vous devez doubler les backslashs sous Windows (`~\\Documents\\...`). Ce n'est ni très esthétique, ni compatible avec les deux autres systèmes. Heureusement, R comprend aussi le slash comme séparateur sous Windows, de sorte que la même syntaxe peut être utilisée partout ! **Nous vous conseillons donc d'utiliser aussi systématiquement les slashs sous Windows dans R ou RStudio.** Si cette façon d'écrire le chemin d'accès est compatible entre les trois systèmes d'exploitation, elle ne permet toujours pas de déplacer ou de renommer notre projet.
+Ce chemin d'accès est déjà plus "portable" d'un système à l'autre et d'un utilisateur à l'autre. Il est donc à préférer [^a2-utilisation-git-2]. Si cette façon d'écrire le chemin d'accès est compatible entre les trois systèmes d'exploitation, elle ne permet toujours pas de déplacer ou de renommer notre projet.
+
+[^a2-utilisation-git-2]: Notez que sous R, vous devez doubler les backslashs sous Windows (`~\\Documents\\...`). Ce n'est ni très esthétique, ni compatible avec les deux autres systèmes. Heureusement, R comprend aussi le slash comme séparateur sous Windows, de sorte que la même syntaxe peut être utilisée partout ! **Nous vous conseillons donc d'utiliser aussi systématiquement les slashs sous Windows dans R ou RStudio.**
 
 L'utilisation d'un **chemin relatif** permet de définir la position d'un fichier par rapport à un autre dossier qui est dit le **répertoire actif**. A titre d'exemple, nous voulons faire référence au jeu de données `dataset.csv` depuis notre rapport `rapport_test.Rmd`.
 
-Demandez-vous d'abord quel est le **répertoire actif**. Pour un fichier R Markdown ou R Notebook, c'est facile, c'est le dossier qui contient ce fichier. Dans la console R, cela peut varier selon le contexte. Si vous avez ouvert un projet, c'est le répertoire de base du projet par défaut, mais cela peut être modifié. **Le répertoire actif pour R est toujours indiqué en gris à côté de l'onglet Console dans RStudio.** Vous pouvez aussi interroger R à l'aide de l'instruction `getwd()`:
+Demandez-vous d'abord quel est le **répertoire actif**. Pour un fichier R Markdown ou R Notebook, c'est facile, c'est le dossier qui contient ce fichier. Dans la console R, cela peut varier selon le contexte. Si vous avez ouvert un projet, c'est le répertoire de base du projet par défaut, mais cela peut être modifié. **Le répertoire actif pour la console R est toujours indiqué en première ligne à côté de l'icône de R et de son numéro de version.** Vous pouvez aussi interroger R à l'aide de l'instruction `getwd()` qui vous indiquera alors quel est le répertoire actif :
 
 ```{r, eval=FALSE}
 getwd()
 ```
 
-Vous pouvez réaliser cela dans un chunk R dans votre document R Notebook par exemple :
+Vous apprendrez que vous pouvez réaliser cela dans un "script" R (fichier regroupant une succession d'instructions), ou dans un "chunk" R (zone spéciale contenant des instructions à exécuter dans votre document) dans votre R Notebook :
 
 ![](images/annexe_a2/chemin_relatif.png)
 
-Une fois que vous connaissez le répertoire actif, vous naviguez *à partir de* celui-ci. Il existe une convention pour reculer d'un dossier dans la hiérarchie : pour cela vous indiquez `..` à la place d'un nom de dossier. Voici ce que cela donne :
+Une fois que vous connaissez le répertoire actif, vous naviguez *à partir de* celui-ci. Il existe une convention pour reculer d'un dossier dans la hiérarchie. Pour cela vous indiquez `..` à la place d'un nom de dossier. Voici ce que cela donne :
 
     ../data/dataset.csv
 
-Comment lit-on ceci ? Tout d'abord, notez (c'est très important) que le chemin d'accès ne commence pas par `/` (Linux ou MacOS), ou `C:/` (ou toute autre lettre, sous Windows). C'est le signe que l'on ne part pas de la racine du système de fichier, mais du **répertoire actif**. Ensuite, les différents éléments se décryptent comme suit :
+C'est un **chemin relatif**. Comment le lit-on ? Tout d'abord, notez (c'est très important) que le chemin d'accès ne commence pas par `/` (Linux ou MacOS), ou `C:\` (ou toute autre lettre, sous Windows). C'est le signe que l'on ne part pas de la racine du système de fichier, mais du **répertoire actif**. Ensuite, les différents éléments se décryptent comme suit :
 
 -   `~/shared/projects/project_test/analysis`, répertoire actif au départ pour le document R Notebook
--   `..`, retour en arrière d'un niveau. On est donc dans `~/shared/projects/project_test`
--   `/data`, naviguer dans le sous-dossier `data`. On est donc maintenant dans `~/shared/projects/project_test/data`. C'est le répertoire qui contient le fichier qui nous intéresse
--   `/datasets.csv`, le nom du fichier référencé.
+-   `..` retourne en arrière d'un niveau. On est donc dans `~/shared/projects/project_test`
+-   `/data` navigue dans le sous-dossier `data`. On est donc maintenant dans `~/shared/projects/project_test/data`. C'est le répertoire qui contient le fichier qui nous intéresse
+-   `/datasets.csv` référence bien le fichier qui nous intéresse.
 
-*A noter que si le fichier se trouve déjà dans le répertoire actif, le chemin relatif se résume au nom du fichier directement !*
+*A noter que si le fichier se trouve déjà dans le répertoire actif, le chemin relatif se résume au nom du fichier directement. C'est donc très simple dans ce cas.*
 
-Nulle part dans ce chemin relatif n'apparaît le nom du répertoire de projet, ni d'aucun autre répertoire parent. Ainsi, il est possible de renommer ou déplacer le projet sans casser la référence relative à n'importe quel fichier à l'intérieur de ce projet. Donc, en utilisant uniquement des références relatives, **le projet reste parfaitement portable**.
+Nulle part dans ce chemin relatif n'apparaît le nom du dossier de base du projet, ni d'aucun autre dossier parent. Ainsi, il est possible de renommer ou déplacer le projet sans casser la référence relative à n'importe quel fichier à l'intérieur de ce projet. Donc, en utilisant uniquement des références relatives, **le projet reste parfaitement portable**, y compris entre Saturn Cloud et une SciViews Box locale.
 
-<!-- TODO: expliquer l'utilisation de `here::here()` comme moyen alternatif de se référer à des fichiers dans un projet de manière reproductible. -->
+#### Chemins portables avec here::here()
+
+Il existe un autre mécanisme qui permet de référencer vos fichiers à l'intérieur de votre projet tout en assurant sa portabilité : la fonction `here::here()`. Quel que soit l'endroit où vous vous situez dans le projet, ou dans n'importe lequel de ses sous-dossiers, cette fonction pointera toujours vers le dossier de base du projet, donc dans notre exemple, `~/shared/projects/project_test`. La fonction accepte un ou plusieurs arguments sous forme de chaînes de caractères entre guillemets et séparés par une virgule qui complète le chemin d'accès depuis ce répertoire de base. Donc, vous pouvez écrire `here::here("data", "datasets.csv)`. Cela produira `/home/sv/shared/projects/project_test/data/datasets.csv` qui est bien le chemin d'accès souhaité. Comme ce chemin d'accès est construit à la demande, première partie correspondant au répertoire de base sera toujours bien calculée, même si le projet est déplacé ou renommé. Notez que vous auriez très bien pu aussi indiquer `here::here("data/datasets.csv)`, cela fonctionnera aussi.
 
 ### Scripts R dans RStudio {#script}
 
-Un script R est une suite d'instructions qui peuvent être interprétées pour effectuer nos analyses. Ce script est stocké dans un fichier dont l'extension est `.R`, et que l'on placera de préférence dans le sous-dossier `R` de notre projet.
+Un script R est une suite d'instructions qui peuvent être interprétées pour effectuer nos analyses. Ce script est stocké dans un fichier dont l'extension est `.R` (attention : "R" majuscule), et que l'on placera de préférence dans le sous-dossier `R` de notre projet.
 
 ![](images/annexe_a2/rscript.png)
 
@@ -193,7 +197,7 @@ Un script R s'ouvre dans la fenêtre d'édition de RStudio. Les parties de texte
 
 ![](images/annexe_a2/rscript1.png)
 
-Afin de bien documenter vos scripts, Commencez-les toujours par quelques lignes de commentaires qui contiennent un titre, le nom du ou des auteurs, la date, un copyright éventuel, ... L'utilisation de sections comme à la ligne 6 ci-dessus est vivement conseillée. Ces sections sont créée à l'aide de l'entrée de menu `Code` -\> `Insert Section...` dans RStudio. Elles sont reprises dans le bas de la fenêtre édition pour une navigation rapide dans le script.
+Afin de bien documenter vos scripts, commencez-les toujours par quelques lignes de commentaires qui contiennent un titre, le nom du ou des auteurs, la date, un copyright éventuel, et une description courte de ce qu'il fait ... L'utilisation de sections comme à la ligne 6 ci-dessus est vivement conseillée. Ces sections sont créée à l'aide de l'entrée de menu `Code` -\> `Insert Section...` dans RStudio. Elles sont reprises dans un menu déroulant depuis le bas de la fenêtre d'édition pour une navigation rapide dans le script.
 
 #### Création d'un script R
 
@@ -203,61 +207,57 @@ Vous avez à votre disposition plusieurs méthodes pour ouvrir un nouveau script
 
 #### Utilisation d'un script R
 
-Un script R est un document natif de R. Ce dernier va interpréter les instructions qui compose le script et qui ne sont pas précédées d'un dièse (cliquez sur `Run` dans la barre d'outils de la fenêtre d'édition, ou utilisez le raccourci clavier `Ctrl+Enter` ou `Cmd+Enter` sur MacOS pour exécuter des instructions).
+Un script R est un document natif de R. Ce dernier va interpréter les instructions qui compose le script et qui ne sont pas précédées d'un dièse (cliquez sur `Run` dans la barre d'outils de la fenêtre d'édition, ou utilisez le raccourci clavier `Ctrl+Enter` ou `Cmd+Enter` sur MacOS pour exécuter les instructions les unes après les autres).
 
 `r img("annexe_a2/rscript.gif")`
 
 Un script R doit être organisé de manière cohérente afin d'être exécutable de haut en bas. Dans l'exemple ci-dessus, on commence par :
 
--   **Étape 1.** Importer les principaux outils avec l'instruction `SciViews::R`.
+-   **Étape 1 :** importer les principaux outils avec l'instruction `SciViews::R`.
 
--   **Étape 2.** Utiliser l'instruction `urchin <- read("urchin_bio", package = "data.io")` pour importer le jeu de données `urchin_bio` provenant du package {data.io} et l'assigner à `urchin`. On retrouve à présent `urchin` dans l'environnement global (`Global environment` dans l'onglet **Environnement** dans le fenêtre en haut à droite) de RStudio.
+-   **Étape 2 :** utiliser l'instruction `urchin <- read("urchin_bio", package = "data.io")` pour lire le jeu de données `urchin_bio` provenant du package {data.io} (un "package" R est une sorte d'addin qui pent contenir des nouvelles fonctions, des jeux de données et de la documentation) et l'"assigner" à `urchin` (le nom sous lequel nous avons choisi de se référer à l'"objet" créé, ici, la version des données dans un tableau en mémoire dans R). On retrouve à présent `urchin` dans l'environnement global (`Global environment` dans l'onglet **Environnement** dans le fenêtre en haut à droite) de RStudio. Cet onglet liste, en effet, tous les objets en mémoire dans la session actuelle de R.
 
--   **Étape 3.** `.?urchin` et `View(urchin)` donnent des renseignements sur le jeu de données en renvoyant vers la page d'aide du jeu de données et en ouvrant ce jeu de données dans une fenêtre de visualisation.
+-   **Étape 3 :** `.?urchin` et `View(urchin)` entrés à la console R (et validées en appuyant sur la touche `<entrée>`) donnent des renseignements sur le jeu de données en renvoyant vers la page d'aide du jeu de données et en ouvrant ce jeu de données dans une fenêtre de visualisation.
 
--   **Étape 4.** Réaliser des graphiques avec la fonction `chart()`.
+-   **Étape 4 :** réaliser des graphiques avec une fonction de R nommée `chart()`. Une fonction est un petit programme qui réalise une tâche particulière sur base d'éléments forunis en entrée, et que l'on nomme **arguments de la fonction**. À l'issue du traitement, la fonction renvoie un résultat que l'on peut envoyer vers une autre fonction ou "assigner" à un nom pour le réutiliser plus tard.
 
-Notez que les instructions exécutées dans le script sont envoyées dans la fenêtre `Console` en bas à gauche.
+Notez que les instructions exécutées dans le script sont envoyées dans la fenêtre `Console` en bas à gauche et que le résultat de leur exécution est affiché directement en dessous dans la même fenêtre.
 
 ### R Markdown/R Notebook {#Rmd}
 
-Un document R Markdown est un fichier dont l'extension est `.Rmd`. Il combine à la fois des instructions R (pour les analyses) et le langage Markdown (pour le texte). Le R Markdown ne vous permet pas de visualiser directement le résultat final d'un rapport d'analyse[^a2-utilisation-git-2]
+Un document R Markdown est un fichier dont l'extension est `.Rmd`. Il combine à la fois des instructions R (pour les analyses) et le langage Markdown (pour le formattage de texte). Le R Markdown ne vous permet pas de visualiser directement le résultat final d'un rapport d'analyse[^a2-utilisation-git-3]
 
-[^a2-utilisation-git-2]: Les systèmes d'édition professionnels dissocient en effet le fond de la forme : vous rédiger d'abord le contenu, et ensuite, vous indiquer le style à lui appliquer.
+[^a2-utilisation-git-3]: Les systèmes d'édition professionnels dissocient en effet le fond de la forme : vous rédiger d'abord le contenu, et ensuite, vous indiquer le style à lui appliquer.
 
 `r img("annexe_a2/rmd.gif")`
 
-Tout comme dans un script R, les instructions doivent être également exécutées lors de la réalisation du rapport. Une forme spéciale de document R Markdown est le **R Notebook**. Ce dernier est un peu un intermédiaire entre un script R et un R Markdown. Il se présente de manière très similaire à ce dernier, mais vous pouvez également exécuter le code qu'il contient ligne par ligne comme dans un script.
+Tout comme dans un script R, les instructions doivent être également exécutées lors de la réalisation du rapport. Une forme spéciale de document R Markdown est le **R Notebook**. Ce dernier est un peu un intermédiaire entre un script R et un R Markdown. Il se présente de manière très similaire à ce dernier, mais vous pouvez également exécuter le code qu'il contient ligne par ligne comme dans un script R.
 
 Un document R Markdown / R Notebook se structure de la manière suivante :
 
 -   Un préambule, encore appelé entête YAML (du nom du langage utilisé pour y encoder des informations)
--   Des zones d'édition
-    -   Le langage employé est le Markdown
--   Des zones de code R
-    -   Ces zones de codes sont appelées des **chunks**
+-   Des zones d'édition (le langage employé est le Markdown)
+-   Des zones de code R appelées des **chunks**
 
 ![](images/annexe_a2/rmd1.png)
 
 Le **préambule** est nécessairement situé au tout début du document et est délimité à l'aide de trois tirets `---` sans rien d'autre sur une ligne au début et à la fin. Le préambule comporte un ensemble d'entrées de type `nom: valeur` qui configurent le document ou la façon dont il sera compilé en rapport final. Nous pouvons y indiquer le titre principal, le ou les auteurs, la date, ...
 
-Le reste du document R Markdown est subdivisé en zones successives et contrastés sur des fonds de couleurs différentes dans RStudio. On y retrouve :
+Le reste du document R Markdown est subdivisé en zones successives et contrastés sur des fonds de couleurs différentes qui alternent zones d'éditions et chunks. Ces chunks seront interprétés pour réaliser un calcul, un graphique, un tableau, etc. Le résultat de ce traitement sera placé à cet endroit dans le rapport final. La présentation diffère profondément selon que le document est édité en mode "source" ou en mode "visuel". On passe d'un mode à l'autre grâce aux deux boutons `Source` et `Visual` entre la barre d'outil supérieure et le document.
 
--   Les zones de texte des parties Markdown où vous pouvez écrire votre prose.
--   Les **chunks** contenant du code, des instructions qui seront interprétées pour réaliser un calcul, un graphique, un tableau, etc. Le résultat de ce traitement sera placé à cet endroit dans le rapport final. Ces chunks sont balisés en entrée par trois apostrophes inverses suivies d'accolades contenant des instructions relatives au programme à utiliser, par exemple, ```` ```{r} ```` pour des chunks faisant appel au logiciel **R**, et sont terminés par trois apostrophes inverses (```` ``` ````).
+![](images/annexe_a2/markdown_source_visual.png)
 
-Dans les zones Markdown, vous pouvez ajouter des balises qui permettront de formater votre texte dans la version finale de votre rapport. Par exemple, un ou plusieurs dièses (plus communément connu par sont appellation en anglais : *hastag*) en début de ligne suivi d'un espace indique que la suite correspond à un titre. Titre de niveau 1 avec un seul dièse, de niveau 2 avec deux dièses, et ainsi de suite jusqu'à 6 niveaux possibles. Dans la capture d'écran ci-dessous, nous avons remplacé tout le contenu par défaut d'un R Notebook (à part le préambule) par une série de titres de niveau 1 correspondant à la structure générale d'un rapport scientifique :
+En mode "visuel", le document présente un rendu qui suggère la présentation finale, un peu comme Microsoft Word, mais gardez bien à l'esprit que le rendu final réel dépendra du style que vous appliquerez et du format de sortie choisi dans notre cas (dissociation entre contenu et rendu, contrairement à Word). Dans le mode visuel, vous effectuez la mise en forme de votre texte via les outils en second rang de la barre d'outil juste après le bouton `Visual`. Par exemple pour créer un titre niveau 2, vous cliquerez sur le quatrième item qui indique le format actuel (probablement `Normal`, et vous sélectionnerez `Header 2.` Le paragraphe où se trouve le curseur est alors transformé en titre de niveau 2. Pour transformer un paragraphe en liste, vous irez dans `Format` -\> `Bullets & Numbering` -\> `Bulletted List`, et ainsi de suite. Les différents items parlent d'eux-même pour la majorité. Explorez-les et expérimentez sur un document de test pour vous les approprier.
 
--   Introduction
--   Objectif
--   Matériel et méthodes
--   Résultats
--   Discussion
--   Conclusions
+Le mode "source" est intéressant car il expose la structure et le formatage du document en "brut de décoffrage". Cela vous permet de voir comment le formatage Markdown est encodé dans le texte. Si vous basculer le document dans ce mode, vous découvrirez, par exemple, qu'un titre niveau deux commence par deux dièses suivies d'un espace (`## titre niveau 2`) et qu'une liste à points commence par un tiret suivi de 3 espaces (`-   item de liste à points`). Ce mode permet aussi un contrôle plus fin sur le contenu de votre document, mais comme il nécessite de connaitre la signification des balises Markdown, vous préférerez certainement le mode visuel au début. En cours d'édition, vous pouvez basculer d'un mode à l'autre librement quand vous le souhaitez.
+
+Toujours en mode source, les chunks sont balisés en entrée par trois apostrophes inverses suivies d'accolades contenant des instructions relatives au programme à utiliser sur une seule ligne, par exemple, ```` ```{r} ```` pour des chunks faisant appel au logiciel **R**, et sont terminés par trois apostrophes inverses (```` ``` ````), également sur une ligne sans rien d'autre. Entre les deux, les instructions R et les commentaires avec un dièse devant se présentent exactement comme dans un script R.
+
+Structurez le contenu narratif de votre document Markdown à l'aide de titres de niveaux appropriés. Vous pouvez utiliser jusqu'à six niveaux de titres préfixés à l'aide de un à six dièses et d'une espace. Utilisez donc un titre de niveau un pour le titre **Introduction** et des titres de niveau deux pour les sous-parties de votre introduction, et ainsi de suite.
 
 #### Création d'un R Markdown/Notebook
 
-Vous avez à votre disposition deux méthodes pour ouvrir un nouveau R Notebook dans RStudio. Voyez l'animation ci-dessous.
+Vous avez à votre disposition deux méthodes pour créer un nouveau R Notebook dans RStudio et l'ouvrir pour édition. Voyez l'animation ci-dessous.
 
 `r img("annexe_a2/rmd2.gif")`
 
@@ -278,16 +278,16 @@ Le bouton `Run` propose plusieurs actions intéressantes :
 -   Exécuter la/les ligne(s) d'instruction sélectionnée(s) : `Run Selected Line(s)`
 -   Exécuter le chunk en entier : `Run Current Chunk`
 -   Exécuter tous les chunk précédents : `Run All Chunk Above`
--   Redémarrer la console R et exécuter tous les chunks : `Restart R and Run All Chunks`. **Cette action est particulière intéressante pour s'assurer que le document est réellement reproductible !**
+-   Redémarrer R et exécuter tous les chunks dans la foulée : `Restart R and Run All Chunks`. **Cette action est particulière intéressante pour s'assurer que le document est réellement reproductible !**
 -   ...
 
 ![](images/annexe_a2/rmd4.png)
 
-Après la phase d'édition du texte (et des instructions dans les chunks pour un document R Notebook), vous pouvez visualiser votre rapport final en cliquant sur le bouton `Preview` (Notebook) ou `Knit` (Markdown).
+Après la phase d'édition du texte et des instructions dans les chunks, vous pouvez visualiser votre rapport final en cliquant sur le bouton `Preview` (Notebook) ou `Knit` (Markdown). Dans le cas du Notebook, vous devrez obligatoirement avoir exécuté les chunks auparavant. Pour le Markdown, ce n'est pas nécessaires puisque leur exécution fait partie intrinsèque de la compilation du document final.
 
 ![](images/annexe_a2/rmd5.png)
 
-Le rapport est rapidement généré avec un rendu simple et professionnel. Par défaut, ce rapport présente le texte que vous avez écrit, avec les résultats que vous avez choisi de générer via R, mais également les instructions que vous avez employées pour obtenir ces résultats. Ceci permet de mieux comprendre, directement dans le rapport, comment tout cela a été calculé. Il est possible de cacher le code (dans un document généré depuis un Notebook R), ou d'indiquer une directive de compilation dans les chunks pour éviter que le code ne s'imprime dans le rapport final. Voyez les options en cliquant sur le petit engrenage à côté de la flèche verte en haut à droite du chunk. Consultez l'aide-mémoire de R Markdown accessible à partir du menu RStudio `Help` -\> `Cheatsheets` -\> `R Markdown Reference Guide`, voir **chunk options** p. 2-3 pour plus d'informations sur les nombreuses options disponibles.
+Le rapport est rapidement généré avec un rendu simple et professionnel. Par défaut, ce rapport présente le texte que vous avez écrit, avec les résultats que vous avez choisi de générer via R, mais également les instructions que vous avez employées pour obtenir ces résultats. Ceci permet de mieux comprendre, directement dans le rapport, comment tout cela a été calculé. Il est possible de cacher le code (dans un document généré depuis un Notebook R), ou d'indiquer une directive de compilation dans les chunks pour éviter que le code ne s'imprime dans le rapport final. Voyez les options en cliquant sur le petit engrenage à côté de la flèche verte en haut à droite du chunk. Consultez l'aide-mémoire de R Markdown accessible à partir du menu RStudio `Help` -\> `Cheat Sheets` -\> `R Markdown Reference Guide`, voir **chunk options** p. 2-3 pour plus d'informations sur les nombreuses options disponibles.
 
 Par exemple, en ajoutant la directive `echo=FALSE` dans la balise d'entrée d'un chunk (```` ```{r, echo=FALSE} ````), on empêche d'imprimer le code de ce chunk dans le rapport.
 
@@ -307,11 +307,11 @@ Un réseau social a été conçu autour de Git pour sauvegarder vos projets sur 
 
 ### Votre activité et profil
 
-Pour vous montrer différentes sections sur GitHub, nous utiliserons le compte de [GuyliannEngels](https://github.com/GuyliannEngels). Une fois connecter sur Github, nous nous trouvons sur une page qui nous montre notre activité sur ce réseau. A droite de la page, nous pouvons observer les derniers dépôts (On parle de `Repositories` dans GitHub) sur lesquels vous avez travaillé et au centre votre activité récente.
+Pour vous montrer différentes sections sur GitHub, nous utiliserons le compte de [GuyliannEngels](https://github.com/GuyliannEngels). Une fois connecté sur Github, nous nous trouvons sur une page qui nous montre notre activité sur ce réseau. En bas de la page, nous pouvons observer les dépôts épinglés (section "Pinned") que vous considérez comme les plus importants.
 
 ![](images/annexe_a2/github1.png)
 
-Nous pouvons également visiter notre profil. A droite, il y a une photo et une petite présentation vous concernant tout comme vous le retrouvez sur tout réseau social, au centre vos projets récents (`Popular repositories`) et vos contributions générale sur ce réseau social. Les contributions sur le réseau est très important. Il indique de manière globale votre travail ou plutôt votre apport sur vos différents projets.
+Plus bas dans la page, il y a un graphique qui représente vos contributions au cours du temps. Il indique de manière globale votre travail, c'est-à-dire vo contributions dans les différents projets.
 
 ![](images/annexe_a2/github3.png)
 
@@ -319,43 +319,103 @@ Dans notre exemple, nous pouvons observer 983 contributions sur l'année écoul�
 
 ### Vos projets
 
-Sur GitHub, vous pouvez héberger vos projets (qui se nomment sur GitHub `repositories`). Notre exemple se base sur le projet [sdd-umons-2021](https://github.com/BioDataScience-Course/sdd-umons-2021), que vous pouvez librement consulter. Il s'agit en effet d'un dépôt public. Vous avez la possibilité d'avoir des projets publics ou privés.
+GitHub vous sert à héberger vos projets (qui se nomment des `repositories`). Notre exemple se base sur le projet [sdd-umons-2022](https://github.com/BioDataScience-Course/sdd-umons-2022), que vous pouvez librement consulter et qui contient les sources du présent ouvrage en ligne. Il s'agit en effet d'un dépôt public. Vous avez la possibilité d'avoir des projets publics ou privés.
 
-Les projets publics sont visibles par tous. La collaboration est le point central de GitHub. Un dépôt public peut être vu par tous. Il peuvent y apporter des modifications et puis vous soumettre les modifications. Nous reviendrons plus tard sur ces apports par la communauté. Pour des projets plus sensibles, vous avez la possibilité d'avoir des projets privés.
+Les projets publics sont visibles par tous. La collaboration est la pierre angulaire de GitHub. Donc, tout le monde peut y apporter des modifications dans des copies de vos dépôts et puis vous les proposer d'une manière qui vous permet d'examiner les améliorations suggérées, de les discuter, et enfin de les incorporer ou de le rejeter. Cela s'appelle un **Pull request**, mais nous y reviendrons plus tard. Pour des projets plus sensibles, vous avez la possibilité d'avoir des projets privés.
 
-Un dépôt sur GitHub est proposé de la manière suivante. Vous pouvez observer le nom du dépôt et la personne ou l'organisation qui travaille sur ce projet (`BioDataScience-Course/sdd-umons-2021`). Dans notre cas, tous les projets relatifs au cours de sciences des données biologiques sont hébergés sur [BioDataScience-Course](https://github.com/BioDataScience-Course) (Il en sera de même pour tous les travaux que vous réaliserez dans le cadre des cours). Sous le nom du dépôt, vous pouvez observer, le dépôts sur lequel ce projet s'inspire (`phgrosjean/bookdown-test`).
+La référence à un dépôt sur GitHub est composée de deux éléments. Le premier est le nom de la personne ou de l'organisation auquel le dépôt appartient. Le second élément est le nom du dépôt lui-même. la personne ou l'organisation qui travaille sur ce projet. Dans notre exemple, nous aurons donc `BioDataScience-Course/sdd-umons-2022`. Tous les projets relatifs au cours de sciences des données biologiques à l'UMONS sont hébergés dans l'organisation [BioDataScience-Course](https://github.com/BioDataScience-Course) (Il en sera de même pour tous les travaux que vous réaliserez dans le cadre de vos cours).
 
-Vous pouvez observer une première barre d'outils comprenant les sections `Code`, `Issues`, `Pull requests`, `Projects`, `Security`, `Insights` et `Settings` (toutes les sections ne seront pas détaillées dans cet ouvrage).
+Vous pouvez observer une première barre d'outils comprenant les sections `Code`, `Issues`, `Pull requests`, `Projects`, `Actions`, `Projects`, `Wiki`, `Security`, `Insights` et `Settings` (toutes les sections ne seront pas détaillées dans cet ouvrage).
 
 `r img("annexe_a2/github5.gif")`
 
-#### `Code`
+#### Code
 
-Dans cette section, vous pouvez observer une nouvelle barre d'outils qui comprend les sections suivantes : `commits`, `branches`, `releases`, `environment`, `contributors` et `View license`.
+Dans cette section, vous pouvez visualiser le contenu des différents fichiers qui se trouvent dans le dépôt. Vous naviguez dans les sous-dossiers simplement en cliquant dessus. La visualisation des fichiers propose éventuellement plusieurs présentations dont le mode "Raw" pour voir le texte brut. C'est l'équivalent du mode "Source" dans l'éditeur de documents R Markdown de RStudio. Le bouton vert `Code` dans cette section est important. C'est grâce à lui que vous pourrez récupérer le contenu du dépôt. On parle de **cloner** un dépôt.
 
 `r img("annexe_a2/github4.gif")`
 
-Nous pouvons observer pas moins de 270 `commits` (Rappelez vous qu'un état d'avancement d'un projet est un `commit`).
+Comme il s'agit d'un système de gestion de versions, toutes les versions successives du dépôts sont stockées et accessibles, mais au départ, vous ne voyer que la dernière version. Chaque fois que vous enregistrez une version, vous réaliser un **commit**. Le nombre de commits et des informations à son propos sont présentées dans la barre grisée sous les quelques boutons.
 
 `r img("annexe_a2/github6.gif")`
 
-#### `Issues` {#issues-annexe}
+#### Issues {#issues-annexe}
 
-Cette section est prévue afin de discuter, de réfléchir et de collaborer sur un projet commun.
+Cette section est prévue pour discuter des problèmes ou des idées à développer. C'est une sorte de petit forum de discussion. Vous utiliserez ces "issues" pour poser vos questions à vos enseignants et pour interagir entre vous dans les projets de groupe.
 
 `r img("annexe_a2/github7.gif")`
 
-#### `Insights`
+#### Insights
 
-La section `Insights` nous renseigne sur l'activité de notre projet. On peut y voir par exemple les contributeurs (`Contributors`) du projet. Nous avons donc quatre personnes qui ont contribué à cet ouvrage.
+La section `Insights` nous renseigne sur l'activité du projet. On peut y voir par exemple les contributeurs du projet, le nombre de commits réalisés par chacun, etc.
 
 `r img("annexe_a2/github8.gif")`
 
-Les informations fournies dans cette section sont employées dans le cadre des corrections des travaux de groupes.
+Concernant vos projets dans le cadre du cours, ces informations sont employées pour évaluer la contribution de chacun dans les travaux de groupes et ajuster la note en fonction.
+
+### Permettre à RStudio de communiquer avec GitHub
+
+Dans le cours de Science des Données vous utiliserez RStudio pour éditer vos documents et travailler avec R. Mais d'autre part, vous partagerez vos œuvres via GitHub. C'est d'ailleurs un schéma classique que nous vous conseillons d'adopter aussi en dehors du cours ! Les professionnels travaillent tous comme cela. Nous devons donc trouver un moyen de permettre à RStudio de communiquer avec GitHub. Les fonctionnalités existent, dans l'onglet **Git** (qui n'apparait que si vous êtes dans un projet géré par git). Encore faut-il indiquer à GitHub que vous autoriser votre RStudio à accéder à votre compte et à vos dépôts. Pour cela, deux solution très différentes existent : le code d'accès personnel **PAT**, un code généré par GitHub et que vous incluez dans votre SciViews Box, ou la **clé SSH**, une clé privée/publique générée au contraire dans votre logiciel et dont vous renseignez la partie publique à GitHub pour qu'il puisse l'utiliser. Nous allons voir ces deux méthodes successivement, sachant que la version locale de la SciViews Box utilise le PAT, alors que c'est plus facile d'utiliser la clé SSH dans Saturn Cloud.
+
+#### Personal Access Token {#github-pat}
+
+L'authentification dans GitHub peut se faire via un *Personal Access Token* (PAT). Il s'agit d'une sorte de mot de passe long et compliqué (donc bien sécurisé) que GitHub génère pour vous et que vous devez renseigner à tout logiciel souhaitant accéder à votre compte. Ce système d'authentification ne doit être réalisé qu'une seule fois dans RStudio. La procédure est la suivante.
+
+1.  Dans RStudio (que vous aurez lancé au préalable via la machine virtuelle en local), entrez la commande suivante dans votre console et appuyez sur `<enter>`.
+
+    usethis::create_github_token()
+
+![](images/annexe_a2/github_pat1.png)
+
+Vous êtes automatiquement redirigé vers GitHub dans votre navigateur Web (il faut peut-être s'y identifier). Vous êtes face à une page qui s'appelle "New personal access token". Les champs sont déjà préremplis.
+
+![](images/annexe_a2/github_pat2.png)
+
+2.  Modifiez la date d'expiration
+
+Vous pouvez conserver les options telles quelles. Cependant, votre clé d'authentification a une durée de validité limitée à 30 jours par défaut. C'est une bonne pratique de renouveler ses mots de passe régulièrement, mais chaque mois... c'est un peu court. Dans le champ `Expiration`, nous vous conseillons de changer la valeur pour couvrir toute votre année académique.
+
+![](images/annexe_a2/github_pat3.png)
+
+3.  Générez votre "token" en cliquant sur le bouton vert "Generate token" tout en bas de la page.
+
+Vous vous retrouver à présent dans une nouvelle page GitHub qui liste tous vos PATs (vous n'en aurez probablement qu'un seul à ce stade). Votre token est affiché dans un encadré en vert avec une petite icône de presse-papier à sa droite. Cliquez sur cette icône presse-papier pour le copier. **Attention : une fois sorti de la page, vous ne pourrez plus jamais voir ce token (mais vous pourrez en recréer d'autres si nécessaire, pas de panique).**
+
+```{block, type='warning'}
+À ce propos, **n'enregistrer pas ce token sur votre ordinateur, tout comme d'ailleurs n'importe quel mot de passe, à moins d'utiliser un logiciel coffre-fort comme [Keeweb](https://keeweb.info)**, mais ici ce n'est pas nécessaire. Aucun de vos mots de passe ne doit se trouver dans vos notes, vos fichiers Word ou Excel, votre messagerie, etc. ni dans votre ordinateur, ni dans votre smartphone. C'est une faute grave et une brèche de sécurité énorme que vous offrez aux hackers mal intentionnés que de stocker en clair vos mots de passe sous forme électronique.
+```
+
+![](images/annexe_a2/github_pat4.png)
+
+4.  Revenez dans RStudio dans l'onglet **Console**. Comme indiqué dans les instructions, exécutez maintenant la commande suivante (puis appuyez sur `<enter>`):
+
+    gitcreds::gitcreds_set()
+
+5.  Vous avez un message qui vous demande votre token. Collez-le dans la Console à l'aide du raccourci \<Ctrl+V\> (ou \<Command+V\> sur le Mac) ou clic bouton droit dans la Console et sélection de l'entrée de menu contextuel **Paste**. Votre token est collé dans la Console. Validez ensuite avec la touche `<enter>`.
+
+![](images/annexe_a2/github_pat5.png)
+
+Votre token doit à présent être enregistré dans la SciViews Box.
+
+![](images/annexe_a2/github_pat6.png)
+
+Une fois cela réalisé, vous pourrez travailler dans GitHub depuis RStudio (clone de dépôts, push/pull, ...). Si plus tard, vous perdez ce lien et que Rstudio se plaint de ne pas pouvoir communiquer avec GitHub et vous demande un mot de passe, vous devez alors régénérer un autre token et suivre la même procédure à nouveau.
+
+#### Clé SSH dans Saturn Cloud
+
+Le principe de la clé SSH est assez différent. Vous créez dans votre ordinateur une paire de clés. L'une est publique et sert à encoder les données à un bout de la chaîne. L'autre est privée et ne réside *que* sur votre ordinateur. Elle est nécessaire pour pouvoir décoder les données. Donc, avec la clé publique, on peut encoder mais pas décoder. La procédure de création des clés privée/publique est un rien plus compliquée que la génération du PAT. Mais Saturn Cloud nous propose de le faire pour nous, et en plus, de générer une seule paire de clés pour l'ensemble de nos ressources. C'est donc bien pratique. *La procédure relative à la clé SSH entre SaturnCloud et GitHub est intégrée dans la page du site accessible depuis le bouton bleu **RStudio** en haut à droite. Cependant, au cas où vous devriez refaire l'opération, elle est brièvement rappelée ci-dessous.*
+
+Dans [SatunCloud](https://saturncloud.io), vous vous identifiez dans votre compte. Ensuite, vous cliquez sur **USER** et choisissez **Manage** <votre_login>. Là, vous avez une page nommée **Access Keys**. C'est la boite du milieu indiquée **Git SSH Key** qui nous intéresse. Vous allez créer cette clé (en demandant à SaturnCloud de le faire pour vous). Ensuite, vous verrez une boite de dialogue qui expose la clé publique ainsi générée. Cliquez sur l'icône en forme de presse-papier pour la copier.
+
+Rendez-vous dans un second temps sur [GitHub.com](https://github.com) où vous vous identifiez et vous allez dans les paramètres de votre compte. Pour cela, vous cliquez sur votre avatar en haut à droite de la page du site et vous sélectionnez **Settings** dans le menu déroulant. Vous allez dans la section **SSH and GPG keys** à gauche, puis dans **SSH keys** vous cliquez sur le bouton **New SSH key**. Vous indiquez un titre qui ne soit pas déjà utilisé si vous avez déjà d'autres clés enregistrées (nous vous conseillons `Saturn-Cloud`). Enfin, vous collez la clé publique depuis le presse-papier dans le champ **Key**. Vous terminer l'opération en cliquant sur le bouton **Add SSH key**. En principe, la communication entre RStudio et GitHub est effective à présent. Cette clé n'expire pas et ne doit pas être recréée. Mais si vous suspectez un problème, vous pouvez toujours en recréer un autre dans Saturn Cloud. Ensuite, dans GitHub vous effacez l'ancienne et ajouter la nouvelle de la même façon.
+
+```{block, type='note'}
+Que ce soit via un PAT ou via la clé SSH, RStudio ne doit vous demander aucun mot de passe et ne doit pas afficher de message d'erreur de connexion lors d'opérations de clonage de dépôt, de pulls et de pushes. Lorsque vous clonerez vos dépôts depuis GitHub, vous devrez par contre penser à utiliser lé référence **HTTPS** si vous utiliser un PAT, et la référence **SSH** si vous utilisez une clé SSH. **Si vous inversez les références, cela ne fonctionnera pas !**
+```
 
 ### Créer un dépôt {#create-repository}
 
-Lorsque nous souhaitons créer un nouveau projet sur GitHub, nous devons l'initialiser comme suit :
+Lorsque nous souhaitons créer un nouveau dépôt GitHub, nous devons l'initialiser comme suit :
 
 `r img("annexe_a2/github10.gif")`
 
@@ -367,15 +427,15 @@ Nous devons décider d'utiliser ou non un "template" existant parmi la liste des
 
 -   `Owner`
 
-Nous devons décider du responsable du dépôt soit une organisation ou un responsable.
+Nous devons décider du responsable du dépôt soit une organisation ou une personne.
 
 -   `Repository name`
 
-Nous devons définir un nom pertinent pour notre projet.
+Nous devons choisir un nom court mais pertinent pour notre dépôt et qui ne soit pas déjà utilisé dans l'organisation ou l'espace de l'utilisateur sélectionné.
 
 -   `Description`
 
-Nous pouvons proposer une courte description de notre dépôt.
+Nous pouvons indiquer ici une courte description de notre dépôt.
 
 -   `Public` ou `Private`
 
@@ -383,65 +443,49 @@ Nous devons décider si notre projet est public ou privé.
 
 -   `README`
 
-Nous pouvons éditer un fichier de présentation qui se nomme le README. Ce dernier est un fichier qui va présenter succinctement notre projet. On peut l'éditer depuis GitHub directement. Si ce fichier est au format Markdown (nettement conseillé), il se nommera alors `README.md`.
+Nous pouvons éditer un fichier de présentation qui se nomme "README". Ce dernier va présenter succinctement notre projet. On peut l'éditer depuis GitHub directement. Si ce fichier est au format Markdown (nettement conseillé), il se nommera alors `README.md`. Ainsi, vous pourrez formater les titres et le texte dans ce fichier.
 
 -   `.gitignore`
 
-Il est intéressant de configurer le dépôt avec un fichier `.gitignore` orienté sur l'utilisation de **R**. GitHub peut en effet héberger des projets avec des langages très variés.
+Il est intéressant de configurer le dépôt avec un fichier `.gitignore` orienté sur l'utilisation de **R**. GitHub peut en effet héberger des projets dans des langages informatiques très variés.
 
 -   `license`
 
-Nous pouvons adjoindre à notre projet une licence. Il en existe plusieurs afin d'expliquer précisément ce que l'on a le droit de faire ou non avec votre dépôt.
+Nous pouvons adjoindre à notre projet une licence. Il en existe plusieurs qui définissent précisément ce que l'on a le droit de faire ou non avec votre dépôt. Le site <https://choosealicense.com> peut vous aider à choisir la licence la plus appropriée en fonction du contenu que vous souhaitez y héberger. Une fois votre dépôt configuré, il ne vous reste plus qu'à le **cloner** comme expliqué dans la section \@ref(github-clone).
 
-Le site <https://choosealicense.com> peut vous aider à définir votre licence.
+### Cloner un dépôt existant via RStudio {#github-clone}
 
-Une fois votre dépôt configuré, il ne vous reste plus qu'à le cloner comme expliqué dans la section \@ref(github-clone).
-
-### Cloner un dépôt existant {#github-clone}
-
-Lorsque nous souhaitons travailler sur un de nos projets, il faut commencer par le cloner pour avoir une copie en local de ce dernier.
-
-#### Via RStudio
+Lorsque nous souhaitons travailler sur un de nos projets hébergé dans un dépôt GitHub, il faut commencer par le cloner pour avoir une copie en local de ce dernier. Notez que "local" signifie ici dans la machine sur laquelle nous travaillons. Si nous utilisons une ressource sur Saturn Cloud ou tout autre service sur le cloud comme RStudio Cloud, par exemple, le contenu du dépôt sera recopié dans la machine sur le cloud. Ce contenu sera donc "local" de manière relative au logiciel qui s'y exécute.
 
 `r img("annexe_a2/github9.gif")`
 
-Pour commencer, vous devez copier le lien menant à votre dépôt sur GitHub. Il vous suffit de cliquer sur le bouton vert `Code`et de copier l'URL proposée (vous avez d'ailleurs un bouton en forme de presse-papier à cet effet).
+Pour commencer, vous devez copier le lien menant à votre dépôt GitHub. Il vous suffit de cliquer sur le bouton vert `Code` dans la section du même nom et de copier l'URL proposée dans le presse-papier (vous avez d'ailleurs un bouton avec une icone suggérant la copie pour le faire). **Mais attention, avant de faire cela, il faut déterminer quel format doit être copié.** Si vous vous identifiez via un PAT, il faut récupérer la version **HTTPS**. Si vous utilisez une clé SSH, vous devez utiliser la version **SSH**. Donc pour simplifier, si vous utiliser la SciViews Box en local choisissez **HTTPS**. Si au contraire, vous utilisez la SciViews Box dans Saturn Cloud, choisissez la version **SSH**.
 
 Ensuite, vous devez vous rendre dans RStudio et cliquer sur `Project` en haut à droite, suivi de `New Project...` (Si les projets restent encore un peu flous pour vous, rendez vous dans la section \@ref(#rs-projet)). Une nouvelle fenêtre s'ouvre. Vous devez sélectionner `Version Control`, puis `Git` dans les préférences successives.
 
-Pour finir, vous devez renseigner l'URL précédemment copiée depuis GitHub, choisir un nom à votre dépôt (Laissez le nom par défaut est une bonne pratique), choisir un dossier pour cloner votre dépôt (le sous-dossier `projects`, du dossier `shared` est dédié à cela) et créer une copie en local de votre projet en cliquant sur `Create Project`. Vous êtes enfin prêt à éditer votre projet. N'oubliez pas de réaliser des Commit, des Pull et des Push.
+Pour finir, vous devez :
 
-#### Via GitHub Desktop
+-   renseigner l'URL précédemment copiée depuis GitHub,
 
-Github Desktop est un programme mis au point afin de faciliter l'utilisation de GitHub. Cloner un dépôt avec GitHub Desktop est d'une simplicité déconcertante.
+-   choisir un nom à votre dépôt (une bonne pratique est de nommer votre projet du même nom que votre dépôt),
 
-Depuis Github, cliquez sur le bouton vert `Code` puis `Open with GitHub Desktop` et enfin acceptez l'ouverture de `Github Deskop`.
+-   choisir un dossier pour cloner votre dépôt (le sous-dossier `projects`, du dossier `shared` est dédié à cela en version locale, ou le dossier `workspace` dans la version Saturn Cloud) et
 
-`r img("annexe_a2/githubdesktop.gif")`
+-   créer une copie en local de votre projet en cliquant sur `Create Project`.
 
-Dans GitHub Desktop, une fenêtre de configuration s'ouvre, il suffit de sélectionner le dossier où l'on souhaite placer le dépôt.
-
-`r img("annexe_a2/githubdesktop2.gif")`
-
-```{block, type='note'}
-
-Cette fonction n'est disponible que sur la version Mac et Windows de GitHub Desktop
-
-```
+Vous êtes à présent prêt à éditer votre projet. Vous réaliserez des **commit**, des **pull** et des **push** pour enregistrer des versions successives de votre travail et pour les synchroniser avec le dépôt GitHub. Vous apprenez à faire cela dans le module 1 du cours.
 
 ### Déposer un projet déjà créé
 
-Nous avons créé un projet dans RStudio et l'avons configuré avec le gestionnaire de version Git comme présenté dans l'annexe \@ref(create-project). Cependant, après avoir progressé dans ce projet (et réalisé plusieurs `Commit`), nous souhaitons le partager sur GitHub. Rassurez-vous, il ne faut pas tout recommencer. Il aurait cependant été plus simple de réfléchir dès le début du projet à cette éventualité, mais cela reste parfaitement faisable à ce stade.
+Nous avons créé un projet dans RStudio et l'avons configuré avec le gestionnaire de version git comme présenté dans l'annexe \@ref(create-project). Cependant, après avoir progressé dans ce projet (et réalisé plusieurs **commits**), nous souhaitons le partager à présent via GitHub. Rassurez-vous, il ne faut pas tout recommencer. Il aurait été plus simple de réfléchir dès le début du projet à cette éventualité et de créer le dépôt GitHub en premier lieu, mais cela reste parfaitement faisable à ce stade de transformer un projet local RStudio en un dépôt GitHub.
 
 > Une bonne pratique avant de vous lancer dans un nouveau projet et de se poser et de réfléchir aux objectifs du projets et aux moyens à mettre en œuvre pour atteindre ces objectifs.
 
-#### Via RStudio
-
-Nous partons d'un projet RStudio d'exemple qui se nomme `repos-example`. Comme vous pouvez le voir, ce projet comprend trois `Commit` mais nous ne pouvons ni faire des `Pull` et des `Push`. C'est tout à fait normal puisque notre projet n'existe pas sur GitHub.
+Nous partons d'un projet RStudio d'exemple qui se nomme `repos-example`. Comme vous pouvez le voir, ce projet comprend trois **commits** mais nous ne pouvons pas faire de **pull** ou **push**, puisque notre projet n'est pas lié à un dépôt distant.
 
 `r img("annexe_a2/github1.gif")`
 
-Pour déposer un projet RStudio existant sur GitHub, vous devez commencer par créer un nouveau dépôt dans Github qui ressemble très fortement à l'annexe \@ref(create-repository). Avec une particularité que vous ne devez pas configurer le `README`, le `.gitignore` et la `license`. Comme le dépôt est vide, GitHub vous propose plusieurs options pour le remplir, dont `…or push an existing repository from the command line` . Il s'agit donc de mettre en ligne (`Push`) un projet existant sous forme de dépôt Git local.
+Pour déposer un projet RStudio existant sur GitHub, vous devez commencer par créer un nouveau dépôt dans Github qui ressemble très fortement à l'annexe \@ref(create-repository). Avec une particularité que vous ne devez pas configurer le `README`, le `.gitignore` et la `license`. Comme le dépôt est vide, GitHub vous propose plusieurs options pour le remplir, dont `…or push an existing repository from the command line` . Il s'agit donc de mettre en ligne (**push**) un projet existant sous forme de dépôt local git.
 
 `r img("annexe_a2/github12.gif")`
 
@@ -449,78 +493,30 @@ Dans votre projet RStudio, sélectionnez le menu `Tools` puis `Shell...`. Un ong
 
 `r img("annexe_a2/github13.gif")`
 
-Afin de vérifier que votre projet RStudio est correctement mis en ligne sur GitHub, vous pouvez recharger votre page dans <https://github.com>.
+Afin de vérifier que votre projet RStudio est correctement mis en ligne dans GitHub, vous pouvez recharger votre page dans <https://github.com>.
 
 `r img("annexe_a2/github14.gif")`
 
-#### Via GitHub Desktop
-
-Nous partons d'un projet RStudio d'exemple qui se nomme `repos-example2` similaire au projet présenté précédemment.
-
-`r img("annexe_a2/githubdesktop3.gif")`
-
-Dans GitHub Desktop, vous devez sélectionner le menu `File`, puis `Add Local Repository...`. Vous devez commencer par sélectionner le dossier de votre projet, puis de publier votre dépôt (`publish repository`). C'est à nouveau un programme très simple d'utilisation.
-
-`r img("annexe_a2/githubdesktop4.gif")`
-
 ### Copier un dépôt
 
-Lorsque vous souhaitez apporter votre aide sur un projet qui n'est pas le vôtre. Vous devez réaliser un `Fork` puis un `Clone`. N'oubliez pas que la base de GitHub est de faciliter la collaboration. Afin de soumettre vos modifications au projet de départ, il faut faire un `Pull requests`. Cette étape permet de proposer vos modifications au responsable du projet original sous une forme qui lui permet de visualiser et de discuter les changements proposés. Ce dernier pourra accepter ou refuser vos modifications.
-
-### Personal Access Token {#github-pat}
-
-L'authentification sur GitHub requiert l'utilisation d'un *Personal Access Token* (PAT). Ce système d'authentification ne doit être réalisé qu'une seule fois dans RStudio. La procédure est la suivante.
-
-1.  Dans RStudio (que vous aurez lancé au préalable via la machine virtuelle ou Renku), entrez la commande suivante dans votre console et tapez sur <Enter>
-
-<!-- -->
-
-    usethis::create_github_token()
-
-![](images/annexe_a2/github_pat1.png)
-
-Vous êtes automatiquement redirigé vers GitHub dans votre browser Web (il faut peut-être s'y identifier). Vous êtes face à une page qui s'appelle "New personal access token". Les champs sont déjà préremplis.
-
-![](images/annexe_a2/github_pat2.png) 2. Modifiez la date d'expiration de ce dernier
-
-Vous pouvez conserver tout cela tel quel. Cependant, votre clé d'authentification (*token*) a un durée limitée de validité par défaut de 30 jours. Dans le champ `Expiration`, nous vous conseillons de changer cette valeur pour couvrir toute votre année académique.
-
-![](images/annexe_a2/github_pat3.png)
-
-3.  Générez votre token en cliquant sur le bouton vert "Generate token" tout en bas de la page.
-
-Vous vous retrouver à présent dans une nouvelle page GitHub qui liste tous vos PATs (vous n'en aurez probablement qu'un seul à ce stade). La valeur de votre token est affichée dans un encadré en vert avec une petite icône de presse-papier à sa droite. Cliquez sur cette icône presse-papier pour copier la valeur de votre token. Attention: une fois sorti de la page, vous ne pourrez plus jamais voir ce token (mais vous pourrez en recréer d'autres si nécessaire, pas de panique).
-
-![](images/annexe_a2/github_pat4.png) 4. Revenez dans RStudio dans l'onglet Console. Comme indiqué dans les instructions, exécutez maintenant la commande suivante (puis <enter>):
-
-    gitcreds::gitcreds_set()
-
-5.  Vous avez un message qui vous demande votre token. Collez-le dans la Console à l'aide du raccourci \<Ctrl+V\> (ou \<Command+V\> sur le Mac) ou clic bouton droit dans la Console et sélection de l'entrée de menu contextuel Paste. La chaîne de caractère correspondante de votre token est collée dans la Console. Tapez ensuite sur la touche <enter>.
-
-![](images/annexe_a2/github_pat5.png)
-
-Votre token doit à présent être enregistré dans la SciViews Box.
-
-![](images/annexe_a2/github_pat6.png)
-
-Une fois cela réalisé, vous pourrez de nouveau faire vos push et pull dans GitHub...
+Lorsque vous souhaitez apporter votre aide à un projet qui n'est pas le vôtre, vous devez réaliser un **fork** puis un **clone**. N'oubliez pas que la base de GitHub est de faciliter la collaboration. Afin de soumettre vos modifications au projet de départ, il faut faire un **pull request**. Cette étape permet de proposer vos modifications au responsable du projet original sous une forme qui lui permet de visualiser et de discuter les changements proposés. Il pourra alors, en connaissance de cause, accepter ou refuser vos modifications.
 
 ## GitHub Classroom {#github-classroom}
 
-**GitHub Classroom** est une extension de GitHub qui facilite le travail avec GitHub dans le contexte d'exercices à réaliser dans le cadre d'un cours. Vous serez amené à cloner et modifier des dépôts issus de GitHub Classroom pour réaliser vos assignations GitHub dans nos cours de Science des Données Biologiques.
+**GitHub Classroom** est une extension de GitHub qui facilite le travail avec GitHub dans le contexte d'exercices à réaliser pour un cours. Vous serez amené à cloner et modifier des dépôts issus de GitHub Classroom pour réaliser vos projets GitHub dans nos cours de Science des Données Biologiques.
 
-Nous avons fait le choix de configurer vos dépôts afin qu'il soient privés par défaut. De cette façon, vos travaux ne sont visibles que par vous et vos professeurs. Mais vous êtes libre de les rendre publics à tout moment en allant modifier les paramètres de vos dépôts. Cela peut être utile pour montrer ce que vous êtes capables de faire (par exemple pour un stage ou même plus tard lorsque vous postulerez pour un emploi).
+Nous avons fait le choix de configurer vos dépôts afin qu'il soient privés par défaut. De cette façon, vos travaux ne sont visibles que par vous et vos enseignants. Mais vous êtes libre de les rendre publics à tout moment en allant modifier les paramètres dans GitHub. Cela peut être utile pour montrer ce que vous êtes capables de faire (par exemple pour un stage ou même plus tard lorsque vous postulerez pour un emploi).
 
-Vous rencontrerez tout au long de cet ouvrage des encarts d'exercice avec l'icône GitHub comme ci-dessous. Il s'agit d'assignations GitHub Classroom. Il vous suffit de cliquer sur le lien mis à votre disposition et de suivre les instructions pour que le dépôt GitHub relatif à cet exercice soit créé pour vous dans l'espace GitHub [BioDataScience-Course](https://github.com/BioDataScience-Course).
+Vous rencontrerez tout au long de cet ouvrage des encarts d'exercice avec l'icône GitHub comme ci-dessous. Il s'agit d'assignations GitHub Classroom. Il vous suffit de cliquer sur le lien mis à votre disposition et de suivre les instructions pour que le dépôt GitHub relatif à cet exercice soit créé pour vous dans l'organisation GitHub [BioDataScience-Course](https://github.com/BioDataScience-Course).
 
 ![](images/annexe_a2/github-classroom.png)
 
-Ce lien vous redirige vers le site GitHub Classroom. Il vous suffit à nouveau uniquement d'accepter l'assignation (**Accept assigment**).
+Ce lien vous redirige vers le site GitHub Classroom. Il vous suffit juste d'accepter l'assignation (**Accept assigment**).
 
 ![](images/annexe_a2/github-classroom1.png)
 
-Votre travail individuel ou par groupe se configure avant de vous proposer de retourner sur GitHub afin de voir votre dépôt en utilisant le lien proposé.
+Votre travail individuel ou par groupe se configure avant de vous proposer de retourner sur GitHub afin de voir votre dépôt en utilisant le lien proposé dans la page qui apparait une fois la configuration terminée.
 
 ![](images/annexe_a2/github-classroom2.png)
 
-Depuis GitHub, vous devez cloner votre dépôt pour y avoir accès en local comme expliqué dans la section \@ref(github-clone). Vous êtes enfin prêt à éditer votre projet. N'oubliez pas de réaliser des Commit, des Pull et des Push.
+Depuis GitHub, vous devez cloner votre dépôt pour y avoir accès en local comme expliqué dans la section \@ref(github-clone). Vous êtes alors prêt à éditer votre projet dans RStudio. N'oubliez pas de réaliser des **commits**, des **pulls** et des **pushes** régulièrement en indiquant des messages courts mais explicites sur les modifications effectuées dans les messages de vos commits.
