@@ -279,7 +279,7 @@ if (exists("assignment"))
       'S-BIOG-006' = !"A03Ia_{YY}M_distributions", 
       'S-BIOG-921' = !"A03Ia_{YY}C_distributions"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/0LYLOJgj", 
+      'S-BIOG-006' = "https://classroom.github.com/a/...", 
       'S-BIOG-921' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[7]+1} 13:00:00"),
@@ -431,11 +431,13 @@ La gestion du conflit se termine par la réalisation d'un `commit` avec un messa
 Lorsque vous vous lancez dans un projet ou revenez vers lui, il faut toujours faire un `pull` afin de vous assurer que vous travaillez bien avec la dernière version en ligne sur GitHub. 
 
 Lorsque vous avez terminé de travailler sur un projet. Il est conseillé de faire toujours un `commit`, suivi d'un `pull` en vérifiant bien si des modifications sont réalisées qu'il n'y a pas de conflits (sinon, on les règle directement) et enfin un `push`. **Ne laissez jamais trainer un conflit\ ! C'est une situation transitoire normale de votre dépôt, mais qui nécessite une intervention rapide pour l'éliminer avant que d'autres `commits`ne viennent rendre la situation plus complexe.**
+```
 
-##### À vous de jouer ! {-}
+##### À vous de jouer ! {.unnumbered}
 
-**Note\ : le projet GitHub Classroom suivant est un exercice à réaliser en *binôme*. Ce projet est également transmodule, ce qui signifie que vous reviendrez dessus à plusieurs reprises au fur et à mesure de votre progression dans la matière afin de compléter votre analyse de ces données, toujours en binômes. Vous formez les binômes librement comme bon vous semble.**
+**Note : le projet GitHub Classroom suivant est un exercice à réaliser en *binôme*. Ce projet est également transmodule, ce qui signifie que vous reviendrez dessus à plusieurs reprises au fur et à mesure de votre progression dans la matière afin de compléter votre analyse de ces données, toujours en binômes. Vous formez les binômes librement comme bon vous semble.**
 
+```{r assign_A03Ga_urchin, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A03Ga_urchin", part = "I",
     url = "https://github.com/BioDataScience-Course/A03Ga_urchin",
@@ -443,7 +445,7 @@ if (exists("assignment2"))
       'S-BIOG-006' = !"A03Ga_{YY}M_urchin", 
       'S-BIOG-921' = !"A03Ga_{YY}C_urchin"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/FB5UbPvX", 
+      'S-BIOG-006' = "https://classroom.github.com/a/...", 
       'S-BIOG-921' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[7]+1} 13:00:00"),

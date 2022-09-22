@@ -8,7 +8,7 @@ Une fois que vous avez démarré la SciViews Box, vous pourrez accéder à RStud
 
 -   Username : **sv**
 -   Password : **sv**
--   Cochez éventuellement **Stay signed in** pour éviter de devoir réentrer ces informations continuellement :
+-   Cochez éventuellement **Stay signed in** pour éviter de devoir rentrer ces informations continuellement :
 
 ![](images/annexe_a2/rstudio1.png)
 
@@ -25,7 +25,7 @@ Pour l'instant, aucun document de travail n'est encore ouvert. Pour en créer un
 
 ![](images/annexe_a2/rstudio3.png)
 
-Le menu **Session** permet d'interagir directement avec **R** qui est lancé automatiquement en arrière plan dès que RStudio est ouvert. Par exemple, il est possible de relancer **R** à partir d'une entrée dans ce menu (`Session -> Restart R`) :
+Le menu **Session** permet d'interagir directement avec **R** qui est lancé automatiquement en arrière-plan dès que RStudio est ouvert. Par exemple, il est possible de relancer **R** à partir d'une entrée dans ce menu (`Session -> Restart R`) :
 
 ![](images/annexe_a2/rstudio4.png)
 
@@ -39,15 +39,15 @@ Le dernier bouton de la barre d'outils générale, intitulé **Project** permet 
 
 Vous avez maintenant repéré les éléments fondamentaux de l'interface de RStudio.
 
-*A ce stade vous pouvez vous familiariser avec l'aide-mémoire relatif à l'IDE RStudio. Vous verrez qu'il y a beaucoup de fonctionnalités accessibles à partir de la fenêtre principale de RStudio. Ne vous laissez pas intimider : vous les apprendrez progressivement au fur et à mesure de l'utilisation du logiciel.*
+*À ce stade, vous pouvez vous familiariser avec l'aide-mémoire relatif à l'IDE RStudio. Vous verrez qu'il y a beaucoup de fonctionnalités accessibles à partir de la fenêtre principale de RStudio. Ne vous laissez pas intimider : vous les apprendrez progressivement au fur et à mesure de l'utilisation du logiciel.*
 
 ### Projet dans RStudio {#rs-projet}
 
-Un projet sert, dans RStudio, à organiser son travail. Il va regrouper l'ensemble des **jeux de données**, des **rapports**, des **présentations**, des **scripts** (fichiers composés d'une série d'instructions réalisant un traitement particulier) d'une analyse, généralement en relation avec une ou plusieurs expériences ou observations réalisés sur le terrain ou en laboratoire. Voici à quoi ressemble l'interface de RStudio lorsque vous ouvrez un projet :
+Un projet sert, dans RStudio, à organiser son travail. Il va regrouper l'ensemble des **jeux de données**, des **rapports**, des **présentations**, des **scripts** (fichiers composés d'une série d'instructions réalisant un traitement particulier) d'une analyse, généralement en relation avec une ou plusieurs expériences ou observations réalisées sur le terrain ou en laboratoire. Voici à quoi ressemble l'interface de RStudio lorsque vous ouvrez un projet :
 
 ![](images/annexe_a2/project1.png)
 
-Notez que le nom du projet est mentionné en haut à droite. Notez également, que le répertoire de base de votre projet est le répertoire actif dans l'onglet **Console** (`~/shared/projects/mon_premier_projet/` dans l'exemple, mais dans Saturn Cloud ce sera probablement plutôt `~/workspace/mon_premier_projet`). Remarquez aussi que l'onglet **Files** affiche son contenu. Un fichier `mon_premier_projet.Rproj` y est placé automatiquement par RStudio. Ce fichier contient les paramètres de configuration propres à ce projet[^a2-utilisation-git-1]. C'est aussi une excellente façon de repérer qu'un répertoire est la base d'un projet RStudio, en repérant ce fameux fichier `.Rproj`.
+Notez que le nom du projet est mentionné en haut à droite. Notez également que le répertoire de base de votre projet est le répertoire actif dans l'onglet **Console** (`~/shared/projects/mon_premier_projet/` dans l'exemple, mais dans SaturnCloud ce sera probablement plutôt `~/workspace/mon_premier_projet`). Remarquez aussi que l'onglet **Files** affiche son contenu. Un fichier `mon_premier_projet.Rproj` y est placé automatiquement par RStudio. Ce fichier contient les paramètres de configuration propres à ce projet[^a2-utilisation-git-1]. C'est aussi une excellente façon de repérer qu'un répertoire est la base d'un projet RStudio, en repérant ce fameux fichier `.Rproj`.
 
 [^a2-utilisation-git-1]: N'éditer **jamais** à la main un fichier `.Rproj`. Laisser RStudio s'en occuper !
 
@@ -55,7 +55,7 @@ Notez que le nom du projet est mentionné en haut à droite. Notez également, q
 
 Créez votre premier projet en suivant les quatre étapes suivantes :
 
--   **Étape 1 :** dans RStudio, sélectionnez le bouton tout à droite dans la barre d'outils générale de RStudio qui ouvre un menu contextuel relatif aux projets. Sélectionnez y l'entrée `New Project...`.
+-   **Étape 1 :** dans RStudio, sélectionnez le bouton tout à droite dans la barre d'outils générale de RStudio qui ouvre un menu contextuel relatif aux projets. Sélectionnez-y l'entrée `New Project...`.
 
 -   **Étape 2 :** une boite de dialogue s'ouvre. Sélectionnez `New Directory` pour créer votre projet dans un nouveau dossier. Il est également possible d'employer un dossier existant comme point de départ `Existing Directory`).
 
@@ -66,17 +66,17 @@ Créez votre premier projet en suivant les quatre étapes suivantes :
     -   Nommez le projet dans `Directory name`. Indiquez ici `project_test`
     -   Indiquez où vous voulez le placer dans `Create project as subdirectory of`. Sélectionnez le sous-dossier `workspace` dans Saturn Cloud ou le sous-dossier `projects` dans le dossier `shared` partagé entre la SciViews Box et la machine hôte si vous travaillez en local.
     -   Cochez l'option `Create a git repository`.
-    -   Déscochez l'option `Use renv with this project`(**il est très important de ne pas sélectionner renv, sous peine de réinstaller et dupliquer de nombreux dossiers et fichiers -nommés des "packages" R- dans votre projet**)
+    -   Décochez l'option `Use renv with this project`(**il est très important de ne pas sélectionner renv, sous peine de réinstaller et dupliquer de nombreux dossiers et fichiers -nommés des "packages" R- dans votre projet**)
 
 Vous utilisez le menu déroulant `Project:` en haut à droite pour créer un nouveau projet (`New Project...`), mais aussi pour réouvrir un projet existant (`Open Project...`) ou fermer le projet actuel (`Close Project`). Vous remarquez également que les derniers projets employés sont placés en dessous afin d'y accéder plus rapidement.
 
 ![](images/annexe_a2/project.png)
 
 ```{block, type='warning'}
-**Un projet ne doit bien sûr être créé qu'une seule fois !** Une fois les étapes ci-dessus effectuées, vous retournez simplement à votre projet en ouvrant le menu contextuel projets et en sélectionnant votre projet dans la liste. S'il n'y apparaît pas, choisissez `Open Project...` et sélectionnez le fichier `.Rproj` relatif à votre projet. Ne créez bien évidemment **jamais** de projet à l'intérieur des dossiers d'un autre projet, surtout si vous utilisez Git. Sinon, RStudio va s'enméler les pinceaux !
+**Un projet ne doit bien sûr être créé qu'une seule fois !** Une fois les étapes ci-dessus effectuées, vous retournez simplement à votre projet en ouvrant le menu contextuel projets et en sélectionnant votre projet dans la liste. S'il n'y apparaît pas, choisissez `Open Project...` et sélectionnez le fichier `.Rproj` relatif à votre projet. Ne créez bien évidemment **jamais** de projet à l'intérieur des dossiers d'un autre projet, surtout si vous utilisez Git. Sinon, RStudio va s'emmêler les pinceaux !
 ```
 
-#### Organisation d'un projet
+#### Organisation d'un projet {#orga-projet}
 
 Le dossier `workspace` (Saturn Cloud) ou `projects` (SciViews Box en local) contient maintenant un projet RStudio intitulé `project_test`. Depuis la SciViews Box, il se situe dans (version locale) :
 
@@ -109,7 +109,7 @@ Vous obtenez donc un projet configuré de la manière suivante :
 
 L'organisation cohérente d'un projet est indispensable pour le bon fonctionnement et la clarté de vos analyses de données.
 
-#### Chemins relatifs dans un projet
+#### Chemins relatifs dans un projet {#chemins-relatifs}
 
 L'utilisation d'un projet permet de structurer de manière cohérente son travail. Vous allez maintenant devoir rendre votre projet **portable**.
 
@@ -117,7 +117,7 @@ Un projet RStudio pourra être qualifié de portable s'il est possible de dépla
 
 -   La première règle est de placer tous les fichiers nécessaires dans le dossier du projet ou dans un sous-dossier. C'est ce que nous venons de faire plus haut.
 
--   La seconde règle est de référencer les différents fichiers au sein du projet avec des **chemins relatifs**. Nous allons maintenant apprendre à faire cela. Partons d'un projet qui contient les dossiers et ficihers suivants :
+-   La seconde règle est de référencer les différents fichiers au sein du projet avec des **chemins relatifs**. Nous allons maintenant apprendre à faire cela. Partons d'un projet qui contient les dossiers et fichiers suivants :
 
 <!-- -->
 
@@ -134,7 +134,7 @@ Un projet RStudio pourra être qualifié de portable s'il est possible de dépla
                .gitignore             # Fichier relatif à la gestion de version
                R                      # Le dossier qui comprend tous les scripts d'analyse
 
-Les différents systèmes d'exploitations (Windows, MacOS, Linux) utilisent des conventions différentes pour les chemins d'accès aux fichiers. Dans notre cas, la machine virtuelle utilise un système d'exploitation **Linux**. La barre oblique (`/` dite "slash" en anglais) sépare les différents dossiers imbriqués sous Linux et sous MacOS. Le système d'exploitation Windows utilise pour sa part, la barre oblique inversée (`\`, dite "backslash" en anglais, mais dans R et RStudio, vous pourrez également utiliser le slash `/`, ce que nous vous conseillons de faire toujours pour un maximum de compatibilité entre systèmes). Par exemple, votre fichier `dataset.csv` qui contient les données du projet hypothétique d'exemple se référence comme suit dans la SciViews Box, donc sous Linux :
+Les différents systèmes d'exploitation (Windows, MacOS, Linux) utilisent des conventions différentes pour les chemins d'accès aux fichiers. Dans notre cas, la machine virtuelle utilise un système d'exploitation **Linux**. La barre oblique (`/` dite "slash" en anglais) sépare les différents dossiers imbriqués sous Linux et sous MacOS. Le système d'exploitation Windows utilise pour sa part, la barre oblique inversée (`\`, dite "backslash" en anglais, mais dans R et RStudio, vous pourrez également utiliser le slash `/`, ce que nous vous conseillons de faire toujours pour un maximum de compatibilité entre systèmes). Par exemple, votre fichier `dataset.csv` qui contient les données du projet hypothétique d'exemple se référence comme suit dans la SciViews Box, donc sous Linux :
 
     /home/sv/shared/projects/project_test/data/dataset.csv 
 
@@ -179,13 +179,13 @@ C'est un **chemin relatif**. Comment le lit-on ? Tout d'abord, notez (c'est tr�
 -   `/data` navigue dans le sous-dossier `data`. On est donc maintenant dans `~/shared/projects/project_test/data`. C'est le répertoire qui contient le fichier qui nous intéresse
 -   `/datasets.csv` référence bien le fichier qui nous intéresse.
 
-*A noter que si le fichier se trouve déjà dans le répertoire actif, le chemin relatif se résume au nom du fichier directement. C'est donc très simple dans ce cas.*
+*À noter que si le fichier se trouve déjà dans le répertoire actif, le chemin relatif se résume au nom du fichier directement. C'est donc très simple dans ce cas.*
 
 Nulle part dans ce chemin relatif n'apparaît le nom du dossier de base du projet, ni d'aucun autre dossier parent. Ainsi, il est possible de renommer ou déplacer le projet sans casser la référence relative à n'importe quel fichier à l'intérieur de ce projet. Donc, en utilisant uniquement des références relatives, **le projet reste parfaitement portable**, y compris entre Saturn Cloud et une SciViews Box locale.
 
-#### Chemins portables avec here::here()
+#### Chemins portables avec here::here() {#here}
 
-Il existe un autre mécanisme qui permet de référencer vos fichiers à l'intérieur de votre projet tout en assurant sa portabilité : la fonction `here::here()`. Quel que soit l'endroit où vous vous situez dans le projet, ou dans n'importe lequel de ses sous-dossiers, cette fonction pointera toujours vers le dossier de base du projet, donc dans notre exemple, `~/shared/projects/project_test`. La fonction accepte un ou plusieurs arguments sous forme de chaînes de caractères entre guillemets et séparés par une virgule qui complète le chemin d'accès depuis ce répertoire de base. Donc, vous pouvez écrire `here::here("data", "datasets.csv)`. Cela produira `/home/sv/shared/projects/project_test/data/datasets.csv` qui est bien le chemin d'accès souhaité. Comme ce chemin d'accès est construit à la demande, première partie correspondant au répertoire de base sera toujours bien calculée, même si le projet est déplacé ou renommé. Notez que vous auriez très bien pu aussi indiquer `here::here("data/datasets.csv)`, cela fonctionnera aussi.
+Il existe un autre mécanisme qui permet de référencer vos fichiers à l'intérieur de votre projet tout en assurant sa portabilité : la fonction `here::here()`. Quel que soit l'endroit où vous vous situez dans le projet, ou dans n'importe lequel de ses sous-dossiers, cette fonction pointera toujours vers le dossier de base du projet, donc dans notre exemple, `~/shared/projects/project_test`. La fonction accepte un ou plusieurs arguments sous forme de chaînes de caractères entre guillemets et séparés par une virgule qui complètent le chemin d'accès depuis ce répertoire de base. Donc, vous pouvez écrire `here::here("data", "datasets.csv)`. Cela produira `/home/sv/shared/projects/project_test/data/datasets.csv` qui est bien le chemin d'accès souhaité. Comme ce chemin d'accès est construit à la demande, première partie correspondant au répertoire de base sera toujours bien calculée, même si le projet est déplacé ou renommé. Notez que vous auriez très bien pu aussi indiquer `here::here("data/datasets.csv)`, cela fonctionnera aussi.
 
 ### Scripts R dans RStudio {#script}
 
@@ -197,7 +197,7 @@ Un script R s'ouvre dans la fenêtre d'édition de RStudio. Les parties de texte
 
 ![](images/annexe_a2/rscript1.png)
 
-Afin de bien documenter vos scripts, commencez-les toujours par quelques lignes de commentaires qui contiennent un titre, le nom du ou des auteurs, la date, un copyright éventuel, et une description courte de ce qu'il fait ... L'utilisation de sections comme à la ligne 6 ci-dessus est vivement conseillée. Ces sections sont créée à l'aide de l'entrée de menu `Code` -\> `Insert Section...` dans RStudio. Elles sont reprises dans un menu déroulant depuis le bas de la fenêtre d'édition pour une navigation rapide dans le script.
+Afin de bien documenter vos scripts, commencez-les toujours par quelques lignes de commentaires qui contiennent un titre, le nom du ou des auteurs, la date, un copyright éventuel, et une description courte de ce qu'il fait ... L'utilisation de sections comme à la ligne 6 ci-dessus est vivement conseillée. Ces sections sont créées à l'aide de l'entrée de menu `Code` -\> `Insert Section...` dans RStudio. Elles sont reprises dans un menu déroulant depuis le bas de la fenêtre d'édition pour une navigation rapide dans le script.
 
 #### Création d'un script R
 
@@ -207,7 +207,7 @@ Vous avez à votre disposition plusieurs méthodes pour ouvrir un nouveau script
 
 #### Utilisation d'un script R
 
-Un script R est un document natif de R. Ce dernier va interpréter les instructions qui compose le script et qui ne sont pas précédées d'un dièse (cliquez sur `Run` dans la barre d'outils de la fenêtre d'édition, ou utilisez le raccourci clavier `Ctrl+Enter` ou `Cmd+Enter` sur MacOS pour exécuter les instructions les unes après les autres).
+Un script R est un document natif de R. Ce dernier va interpréter les instructions qui composent le script et qui ne sont pas précédées d'un dièse (cliquez sur `Run` dans la barre d'outils de la fenêtre d'édition, ou utilisez le raccourci clavier `Ctrl+Enter` ou `Cmd+Enter` sur MacOS pour exécuter les instructions les unes après les autres).
 
 `r img("annexe_a2/rscript.gif")`
 
@@ -215,17 +215,17 @@ Un script R doit être organisé de manière cohérente afin d'être exécutable
 
 -   **Étape 1 :** importer les principaux outils avec l'instruction `SciViews::R`.
 
--   **Étape 2 :** utiliser l'instruction `urchin <- read("urchin_bio", package = "data.io")` pour lire le jeu de données `urchin_bio` provenant du package {data.io} (un "package" R est une sorte d'addin qui pent contenir des nouvelles fonctions, des jeux de données et de la documentation) et l'"assigner" à `urchin` (le nom sous lequel nous avons choisi de se référer à l'"objet" créé, ici, la version des données dans un tableau en mémoire dans R). On retrouve à présent `urchin` dans l'environnement global (`Global environment` dans l'onglet **Environnement** dans le fenêtre en haut à droite) de RStudio. Cet onglet liste, en effet, tous les objets en mémoire dans la session actuelle de R.
+-   **Étape 2 :** utiliser l'instruction `urchin <- read("urchin_bio", package = "data.io")` pour lire le jeu de données `urchin_bio` provenant du package {data.io} (un "package" R est une sorte d'addin qui peut contenir des nouvelles fonctions, des jeux de données et de la documentation) et l'"assigner" à `urchin` (le nom sous lequel nous avons choisi de nous référer à l'"objet" créé, ici, la version des données dans un tableau en mémoire dans R). On retrouve à présent `urchin` dans l'environnement global (`Global environment` dans l'onglet **Environnement** dans la fenêtre en haut à droite) de RStudio. Cet onglet liste, en effet, tous les objets en mémoire dans la session actuelle de R.
 
 -   **Étape 3 :** `.?urchin` et `View(urchin)` entrés à la console R (et validées en appuyant sur la touche `<entrée>`) donnent des renseignements sur le jeu de données en renvoyant vers la page d'aide du jeu de données et en ouvrant ce jeu de données dans une fenêtre de visualisation.
 
--   **Étape 4 :** réaliser des graphiques avec une fonction de R nommée `chart()`. Une fonction est un petit programme qui réalise une tâche particulière sur base d'éléments forunis en entrée, et que l'on nomme **arguments de la fonction**. À l'issue du traitement, la fonction renvoie un résultat que l'on peut envoyer vers une autre fonction ou "assigner" à un nom pour le réutiliser plus tard.
+-   **Étape 4 :** réaliser des graphiques avec une fonction de R nommée `chart()`. Une fonction est un petit programme qui réalise une tâche particulière sur base d'éléments fournis en entrée, et que l'on nomme **arguments de la fonction**. À l'issue du traitement, la fonction renvoie un résultat que l'on peut envoyer vers une autre fonction ou "assigner" à un nom pour le réutiliser plus tard.
 
 Notez que les instructions exécutées dans le script sont envoyées dans la fenêtre `Console` en bas à gauche et que le résultat de leur exécution est affiché directement en dessous dans la même fenêtre.
 
 ### R Markdown/R Notebook {#Rmd}
 
-Un document R Markdown est un fichier dont l'extension est `.Rmd`. Il combine à la fois des instructions R (pour les analyses) et le langage Markdown (pour le formattage de texte). Le R Markdown ne vous permet pas de visualiser directement le résultat final d'un rapport d'analyse[^a2-utilisation-git-3]
+Un document R Markdown est un fichier dont l'extension est `.Rmd`. Il combine à la fois des instructions R (pour les analyses) et le langage Markdown (pour le formatage de texte). Le R Markdown ne vous permet pas de visualiser directement le résultat final d'un rapport d'analyse[^a2-utilisation-git-3]
 
 [^a2-utilisation-git-3]: Les systèmes d'édition professionnels dissocient en effet le fond de la forme : vous rédiger d'abord le contenu, et ensuite, vous indiquer le style à lui appliquer.
 
@@ -241,19 +241,19 @@ Un document R Markdown / R Notebook se structure de la manière suivante :
 
 ![](images/annexe_a2/rmd1.png)
 
-Le **préambule** est nécessairement situé au tout début du document et est délimité à l'aide de trois tirets `---` sans rien d'autre sur une ligne au début et à la fin. Le préambule comporte un ensemble d'entrées de type `nom: valeur` qui configurent le document ou la façon dont il sera compilé en rapport final. Nous pouvons y indiquer le titre principal, le ou les auteurs, la date, ...
+Le **préambule** est nécessairement situé au tout début du document et est délimité à l'aide de trois tirets `---` sans rien d'autre sur une ligne au début et à la fin. Le préambule comporte un ensemble d'entrées de type `nom: valeur` qui configurent le document ou la façon dont il sera compilé en rapport final. Nous pouvons y indiquer le titre principal, le ou les auteurs, la date ...
 
-Le reste du document R Markdown est subdivisé en zones successives et contrastés sur des fonds de couleurs différentes qui alternent zones d'éditions et chunks. Ces chunks seront interprétés pour réaliser un calcul, un graphique, un tableau, etc. Le résultat de ce traitement sera placé à cet endroit dans le rapport final. La présentation diffère profondément selon que le document est édité en mode "source" ou en mode "visuel". On passe d'un mode à l'autre grâce aux deux boutons `Source` et `Visual` entre la barre d'outil supérieure et le document.
+Le reste du document R Markdown est subdivisé en zones successives et contrastées sur des fonds de couleurs différentes qui alternent zones d'éditions et chunks. Ces chunks seront interprétés pour réaliser un calcul, un graphique, un tableau, etc. Le résultat de ce traitement sera placé à cet endroit dans le rapport final. La présentation diffère profondément selon que le document est édité en mode "source" ou en mode "visuel". On passe d'un mode à l'autre grâce aux deux boutons `Source` et `Visual` entre la barre d'outils supérieure et le document.
 
 ![](images/annexe_a2/markdown_source_visual.png)
 
-En mode "visuel", le document présente un rendu qui suggère la présentation finale, un peu comme Microsoft Word, mais gardez bien à l'esprit que le rendu final réel dépendra du style que vous appliquerez et du format de sortie choisi dans notre cas (dissociation entre contenu et rendu, contrairement à Word). Dans le mode visuel, vous effectuez la mise en forme de votre texte via les outils en second rang de la barre d'outil juste après le bouton `Visual`. Par exemple pour créer un titre niveau 2, vous cliquerez sur le quatrième item qui indique le format actuel (probablement `Normal`, et vous sélectionnerez `Header 2.` Le paragraphe où se trouve le curseur est alors transformé en titre de niveau 2. Pour transformer un paragraphe en liste, vous irez dans `Format` -\> `Bullets & Numbering` -\> `Bulletted List`, et ainsi de suite. Les différents items parlent d'eux-même pour la majorité. Explorez-les et expérimentez sur un document de test pour vous les approprier.
+En mode "visuel", le document présente un rendu qui suggère la présentation finale, un peu comme Microsoft Word, mais gardez bien à l'esprit que le rendu final réel dépendra du style que vous appliquerez et du format de sortie choisi dans notre cas (dissociation entre contenu et rendu, contrairement à Word). Dans le mode visuel, vous effectuez la mise en forme de votre texte via les outils en second rang de la barre d'outils juste après le bouton `Visual`. Par exemple pour créer un titre niveau 2, vous cliquerez sur le quatrième item qui indique le format actuel (probablement `Normal`, et vous sélectionnerez `Header 2.` Le paragraphe où se trouve le curseur est alors transformé en titre de niveau 2. Pour transformer un paragraphe en liste, vous irez dans `Format` -\> `Bullets & Numbering` -\> `Bulletted List`, et ainsi de suite. Les différents items parlent d'eux-mêmes pour la majorité. Explorez-les et expérimentez sur un document de test pour vous les approprier.
 
-Le mode "source" est intéressant car il expose la structure et le formatage du document en "brut de décoffrage". Cela vous permet de voir comment le formatage Markdown est encodé dans le texte. Si vous basculer le document dans ce mode, vous découvrirez, par exemple, qu'un titre niveau deux commence par deux dièses suivies d'un espace (`## titre niveau 2`) et qu'une liste à points commence par un tiret suivi de 3 espaces (`-   item de liste à points`). Ce mode permet aussi un contrôle plus fin sur le contenu de votre document, mais comme il nécessite de connaitre la signification des balises Markdown, vous préférerez certainement le mode visuel au début. En cours d'édition, vous pouvez basculer d'un mode à l'autre librement quand vous le souhaitez.
+Le mode "source" est intéressant, car il expose la structure et le formatage du document en "brut de décoffrage". Cela vous permet de voir comment le formatage Markdown est encodé dans le texte. Si vous basculez le document dans ce mode, vous découvrirez, par exemple, qu'un titre de niveau deux commence par deux dièses suivis d'un espace (`## titre niveau 2`) et qu'une liste à points commence par un tiret suivi de 3 espaces (`-   item de liste à points`). Ce mode permet aussi un contrôle plus fin sur le contenu de votre document, mais comme il nécessite de connaitre la signification des balises Markdown, vous préférerez certainement le mode visuel au début. En cours d'édition, vous pouvez basculer d'un mode à l'autre librement quand vous le souhaitez.
 
 Toujours en mode source, les chunks sont balisés en entrée par trois apostrophes inverses suivies d'accolades contenant des instructions relatives au programme à utiliser sur une seule ligne, par exemple, ```` ```{r} ```` pour des chunks faisant appel au logiciel **R**, et sont terminés par trois apostrophes inverses (```` ``` ````), également sur une ligne sans rien d'autre. Entre les deux, les instructions R et les commentaires avec un dièse devant se présentent exactement comme dans un script R.
 
-Structurez le contenu narratif de votre document Markdown à l'aide de titres de niveaux appropriés. Vous pouvez utiliser jusqu'à six niveaux de titres préfixés à l'aide de un à six dièses et d'une espace. Utilisez donc un titre de niveau un pour le titre **Introduction** et des titres de niveau deux pour les sous-parties de votre introduction, et ainsi de suite.
+Structurez le contenu narratif de votre document Markdown à l'aide de titres de niveaux appropriés. Vous pouvez utiliser jusqu'à six niveaux de titres préfixés à l'aide d'un à six dièses et d'une espace. Utilisez donc un titre de niveau un pour le titre **Introduction** et des titres de niveau deux pour les sous-parties de votre introduction, et ainsi de suite.
 
 #### Création d'un R Markdown/Notebook
 
@@ -267,7 +267,7 @@ Vous avez à votre disposition deux méthodes pour créer un nouveau R Notebook 
 
 Pour exécuter un chunk, vous pouvez :
 
--   cliquer sur le bouton **Play**, sous forme d'une flèche verte pointant vers la droite, situé en haut à droite du chunk
+-   cliquer sur le bouton **Play**, sous forme d'une flèche verte pointant vers la droite, située en haut à droite du chunk
 -   cliquer sur `Run` et sélectionner `Run Current Chunk` dans le menu déroulant qui apparaît
 -   Employer le raccourci clavier `Ctrl+Shift+Enter`
 
@@ -278,12 +278,12 @@ Le bouton `Run` propose plusieurs actions intéressantes :
 -   Exécuter la/les ligne(s) d'instruction sélectionnée(s) : `Run Selected Line(s)`
 -   Exécuter le chunk en entier : `Run Current Chunk`
 -   Exécuter tous les chunk précédents : `Run All Chunk Above`
--   Redémarrer R et exécuter tous les chunks dans la foulée : `Restart R and Run All Chunks`. **Cette action est particulière intéressante pour s'assurer que le document est réellement reproductible !**
+-   Redémarrer R et exécuter tous les chunks dans la foulée : `Restart R and Run All Chunks`. **Cette action est particulièrement intéressante pour s'assurer que le document est réellement reproductible !**
 -   ...
 
 ![](images/annexe_a2/rmd4.png)
 
-Après la phase d'édition du texte et des instructions dans les chunks, vous pouvez visualiser votre rapport final en cliquant sur le bouton `Preview` (Notebook) ou `Knit` (Markdown). Dans le cas du Notebook, vous devrez obligatoirement avoir exécuté les chunks auparavant. Pour le Markdown, ce n'est pas nécessaires puisque leur exécution fait partie intrinsèque de la compilation du document final.
+Après la phase d'édition du texte et des instructions dans les chunks, vous pouvez visualiser votre rapport final en cliquant sur le bouton `Preview` (Notebook) ou `Knit` (Markdown). Dans le cas du Notebook, vous devrez obligatoirement avoir exécuté les chunks auparavant. Pour le Markdown, ce n'est pas nécessaire puisque leur exécution fait partie intrinsèque de la compilation du document final.
 
 ![](images/annexe_a2/rmd5.png)
 
@@ -407,10 +407,10 @@ Le principe de la clé SSH est assez différent. Vous créez dans votre ordinate
 
 Dans [SatunCloud](https://saturncloud.io), vous vous identifiez dans votre compte. Ensuite, vous cliquez sur **USER** et choisissez **Manage** <votre_login>. Là, vous avez une page nommée **Access Keys**. C'est la boite du milieu indiquée **Git SSH Key** qui nous intéresse. Vous allez créer cette clé (en demandant à SaturnCloud de le faire pour vous). Ensuite, vous verrez une boite de dialogue qui expose la clé publique ainsi générée. Cliquez sur l'icône en forme de presse-papier pour la copier.
 
-Rendez-vous dans un second temps sur [GitHub.com](https://github.com) où vous vous identifiez et vous allez dans les paramètres de votre compte. Pour cela, vous cliquez sur votre avatar en haut à droite de la page du site et vous sélectionnez **Settings** dans le menu déroulant. Vous allez dans la section **SSH and GPG keys** à gauche, puis dans **SSH keys** vous cliquez sur le bouton **New SSH key**. Vous indiquez un titre qui ne soit pas déjà utilisé si vous avez déjà d'autres clés enregistrées (nous vous conseillons `Saturn-Cloud`). Enfin, vous collez la clé publique depuis le presse-papier dans le champ **Key**. Vous terminer l'opération en cliquant sur le bouton **Add SSH key**. En principe, la communication entre RStudio et GitHub est effective à présent. Cette clé n'expire pas et ne doit pas être recréée. Mais si vous suspectez un problème, vous pouvez toujours en recréer un autre dans Saturn Cloud. Ensuite, dans GitHub vous effacez l'ancienne et ajouter la nouvelle de la même façon.
+Rendez-vous dans un second temps sur [GitHub.com](https://github.com) où vous vous identifiez et vous allez dans les paramètres de votre compte. Pour cela, vous cliquez sur votre avatar en haut à droite de la page du site et vous sélectionnez **Settings** dans le menu déroulant. Vous allez dans la section **SSH and GPG keys** à gauche, puis dans **SSH keys** vous cliquez sur le bouton **New SSH key**. Vous indiquez un titre qui ne soit pas déjà utilisé si vous avez déjà d'autres clés enregistrées (nous vous conseillons `SaturnCloud`). Enfin, vous collez la clé publique depuis le presse-papier dans le champ **Key**. Vous terminer l'opération en cliquant sur le bouton **Add SSH key**. En principe, la communication entre RStudio et GitHub est effective à présent. Cette clé n'expire pas et ne doit pas être recréée. Mais si vous suspectez un problème, vous pouvez toujours en recréer un autre dans Saturn Cloud. Ensuite, dans GitHub vous effacez l'ancienne et ajouter la nouvelle de la même façon.
 
 ```{block, type='note'}
-Que ce soit via un PAT ou via la clé SSH, RStudio ne doit vous demander aucun mot de passe et ne doit pas afficher de message d'erreur de connexion lors d'opérations de clonage de dépôt, de pulls et de pushes. Lorsque vous clonerez vos dépôts depuis GitHub, vous devrez par contre penser à utiliser lé référence **HTTPS** si vous utiliser un PAT, et la référence **SSH** si vous utilisez une clé SSH. **Si vous inversez les références, cela ne fonctionnera pas !**
+Que ce soit via un PAT ou via la clé SSH, RStudio ne doit vous demander aucun mot de passe et ne doit pas afficher de message d'erreur de connexion lors d'opérations de clonage de dépôt, de pulls et de pushes. Lorsque vous clonerez vos dépôts depuis GitHub, vous devrez par contre penser à utiliser la référence **HTTPS** si vous utiliser un PAT, et la référence **SSH** si vous utilisez une clé SSH. **Si vous inversez les références, cela ne fonctionnera pas !**
 ```
 
 ### Créer un dépôt {#create-repository}

@@ -697,7 +697,7 @@ if (exists("assignment"))
       'S-BIOG-006' = !"A04Ia_{YY}M_graphe_avance", 
       'S-BIOG-921' = !"A04Ia_{YY}C_graphe_avance"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/ncOdTu9s", 
+      'S-BIOG-006' = "https://classroom.github.com/a/...", 
       'S-BIOG-921' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[9]+1} 10:00:00"),
@@ -719,7 +719,7 @@ if (exists("assignment"))
 
 ## Différents moteurs graphiques
 
-<center>![Prolifération des standards d'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
+<center>![Prolifération des standards d\'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
 
 Depuis le début, l'ensemble des graphiques que nous vous avons proposés utilise la fonction `chart()` du package {chart}. Cependant, il ne s'agit pas de la seule fonction permettant de réaliser des graphiques dans R, loin de là. En fait, {chart} est tout récent et a été développé pour homogénéiser autant que possible les graphiques issus de trois moteurs graphiques différents : {ggplot2}, {lattice} et les graphiques de base. La fonction `chart()` a d'autres avantages également :
 
@@ -918,7 +918,7 @@ if (exists("challenge"))
     course.ids = c(
       'S-BIOG-006' = !"A04Ca_{YY}M_charts"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/8jo-RgSe"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[9]+5} 08:00:00"),
     course.ends = c(

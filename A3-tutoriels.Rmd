@@ -6,7 +6,7 @@ Allez dans le bouton **Addins** dans la barre d'outils de RStudio et sélectionn
 
     BioDataScience1::run()
 
-Si une mise-à-jour du package est disponible, elle sera installée. Si d'autres packages R peuvent également être mis à jour, cela vous sera demandé. Dans ce cas, **refusez la mise à jour des autres packages R** en indiquant `3` puis la touche `Entrée` pour l'option `None` (à part le package {BioDataScience1} nous voulons conserver les versions de tous les autres packages R identiques à la version installée avec la SciViews Box par soucis de compatibilité et reproductibilité de nos analyses).
+Si une mise à jour du package est disponible, elle sera installée. Si d'autres packages R peuvent également être mis à jour, cela vous sera demandé. Dans ce cas, **refusez la mise à jour des autres packages R** en indiquant `3` puis la touche `Entrée` pour l'option `None` (à part le package {BioDataScience1} nous voulons conserver les versions de tous les autres packages R identiques à la version installée avec la SciViews Box par souci de compatibilité et reproductibilité de nos analyses).
 
 ![](images/annexe_a3/BioDataScience1%20update.png)
 
@@ -30,7 +30,7 @@ La première chose à vérifier à l'ouverture du tutoriel interactif est le nom
 
 ![](images/annexe_a3/learnr2b.png)
 
-Si vous êtes correctement enregistré, un bandeau bleu l'indiquera avec votre login GitHub en gras comme ci-dessus. Dans le cas contraire, un message sur fond jaune ou rouge (selon le contexte) indiquera le contraire. De même, si vous voyez également un message sur fond rouge qui indique que la base de données est inaccessible, cela signifie que vous n'êtes pas correctement connecté à l'Internet ou que votre connexion Internet ne permet *pas* d'accéder à la base de données qui enregistre votre activité. Essayez un autre réseau, ou même, essayez en redémarrant complètement votre ordinateur (ou la machine virtuelle sur le cloud). Si la base de données est actuellement inaccessible, vous pouvez toujours effectuer les exercices, mais votre activité sera temporairement enregistrée localement sur votre ordinateur. Dès la prochaine connexion fructueuse, et dès la soumissions d'un exercice learnr, l'ensemble de votre activité sera alors enregistrée d'un coup dans la base de données.
+Si vous êtes correctement enregistré, un bandeau bleu l'indiquera avec votre login GitHub en gras comme ci-dessus. Dans le cas contraire, un message sur fond jaune ou rouge (selon le contexte) indiquera le contraire. De même, si vous voyez également un message sur fond rouge qui indique que la base de données est inaccessible, cela signifie que vous n'êtes pas correctement connecté à l'Internet ou que votre connexion Internet ne permet *pas* d'accéder à la base de données qui enregistre votre activité. Essayez un autre réseau, ou même, essayez en redémarrant complètement votre ordinateur (ou la machine virtuelle sur le cloud). Si la base de données est actuellement inaccessible, vous pouvez toujours effectuer les exercices, mais votre activité sera temporairement enregistrée localement sur votre ordinateur. Dès la prochaine connexion fructueuse, et dès la soumission d'un exercice learnr, l'ensemble de votre activité sera alors enregistrée d'un coup dans la base de données.
 
 ## Organisation d'un learnr
 
@@ -45,7 +45,7 @@ Vous retrouvez d'ailleurs cette structure en haut à gauche dans la page de celu
 
 ### Objectifs
 
-Cette section détaillera l'ensemble des notions que vous allez apprendre à maîtriser durant ce tutoriel. Par exmple, pour le premier tutoriel, l'objectif est de découvrir comment fonctionne un learnr à l'aide de différentes questions de culture générale.
+Cette section détaillera l'ensemble des notions que vous allez apprendre à maîtriser durant ce tutoriel. Par exemple, pour le premier tutoriel, l'objectif est de découvrir comment fonctionne un learnr à l'aide de différentes questions de culture générale.
 
 ### Introduction
 
@@ -61,11 +61,11 @@ Des zones de codes R vous sont proposées dans certains exercices. Elles vous pe
 
 ![](images/annexe_a3/learnr2.gif)
 
-Selon le cas, vous pouvez alors avoir un encart bleu qui indique simplement que votre réponse est enregistrée, ou alors si l'exercice est assorti d'une correction automatique, vous verrez un encart vert en cas de bonne réponse, ou un encart rouge qui vous donne un indice sur ce qui est incorrect (**attention : ces message d'aide sont élaborés automatiquement par l'ordinateur et ne sont pas toujours fiables en l'état actuel ; concentrez-vous surtout sur le fait que la réponse n'est pas celle attendue et tentez de déterminer ce qui ne va pas**).
+Selon le cas, vous pouvez alors avoir un encart bleu qui indique simplement que votre réponse est enregistrée, ou alors si l'exercice est assorti d'une correction automatique, vous verrez un encart vert en cas de bonne réponse, ou un encart rouge qui vous donne un indice sur ce qui est incorrect (**attention : ces messages d'aide sont élaborés automatiquement par l'ordinateur et ne sont pas toujours fiables en l'état actuel ; concentrez-vous surtout sur le fait que la réponse n'est pas celle attendue et tentez de déterminer ce qui ne va pas**).
 
-Des boutons `Hint`, lorsqu'ils sont présents, vous proposent des aides si vous êtes bloqués. Un bouton `Solution` ou le dernier `Hint` affiché après celui qui indique que le suivant sera la solution à la question... montrent ce qu'il fallait entrer. **N'allez pas voir directement la solution. Essayez d'abord par vous même !** Ces aides supplémentaires sont, en effet, à utiliser en dernier recours si vous êtes bloqué, mais vous perdrez des points à chaque "hint" vu.
+Des boutons `Hint`, lorsqu'ils sont présents, vous proposent des aides si vous êtes bloqués. Un bouton `Solution` ou le dernier `Hint` affiché après celui qui indique que le suivant sera la solution à la question... montrent ce qu'il fallait entrer. **N'allez pas voir directement la solution. Essayez d'abord par vous-même !** Ces aides supplémentaires sont, en effet, à utiliser en dernier recours si vous êtes bloqué, mais vous perdrez des points à chaque "hint" vu.
 
-Quelle que soit la façon dont vous répondez à une question, vous obtenez au moins la moitié des points. Si vous avez été voir la solution avant de chercher la réponse par vous-même, nous considérons que c'est parce que vous n'arrivez pas à résoudre cet exercice seul. Dans le cadre d'une auto-évaluation, nous vous faisons confiance pour analyser la réponse et essayer de comprendre où sont vos lacunes pour progresser. *Si vous ne le faites pas, vous n'apprendrez rien, et vous serez incapables de résoudre les exercices dans les projets GitHub ensuite.* Dans ce cas, le calcul est vite fait : moitié des points pour les exercices d'auto-évaluation et une note très basse aux projets sur GitHub donnera au final... un échec dans la matière ! Au moins vous solliciter les aides pour obtenir la réponse, au plus vous obtiendrai une bonne note pour cet exercice. Mais ne perdez pas de temps sur les exercices qui vous semblent difficiles et utilisez les aides à bon escient, notamment les `Hint`s en haut des boites `Code R`.
+Quelle que soit la façon dont vous répondez à une question, vous obtenez au moins la moitié des points. Si vous avez été voir la solution avant de chercher la réponse par vous-même, nous considérons que c'est parce que vous n'arrivez pas à résoudre cet exercice seul. Dans le cadre d'une auto-évaluation, nous vous faisons confiance pour analyser la réponse et essayer de comprendre où sont vos lacunes pour progresser. *Si vous ne le faites pas, vous n'apprendrez rien, et vous serez incapables de résoudre les exercices dans les projets GitHub ensuite.* Dans ce cas, le calcul est vite fait : moitié des points pour les exercices d'auto-évaluation et une note très basse aux projets sur GitHub donnera au final... un échec dans la matière ! Au moins vous sollicitez les aides pour obtenir la réponse, au plus vous obtiendrez une bonne note pour cet exercice. Mais ne perdez pas de temps sur les exercices qui vous semblent difficiles et utilisez les aides à bon escient, notamment les `Hint`s en haut des boites `Code R`.
 
 ### Conclusion
 

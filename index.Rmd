@@ -53,7 +53,7 @@ Cet ouvrage est le premier d'une série de trois volumes traitant de la science 
 
 La matière est divisée en 12 modules représentant chacun 6h de travail en présentiel. Chaque module nécessitera environ 8h (variable en fonction de votre rythme et de votre technique d'apprentissage) de travail à domicile. **Une séance de 2h est programmée en début d'année afin d'installer les logiciels (SciViews Box, R, RStudio), et de se familiariser avec eux.**
 
-Les six premiers modules vont font découvrir les logiciels nécessaires pour effectuer les exercices de ce cours : R, RStudio, git. Ils sont également consacrés à l'importation, le remaniement et la **visualisation** de données biologiques.
+Les six premiers modules vous font découvrir les logiciels nécessaires pour effectuer les exercices de ce cours : R, RStudio, git. Ils sont également consacrés à l'importation, le remaniement et la **visualisation** de données biologiques.
 
 Les six modules suivants s'attaquent à l'**inférence** statistique, c'est-à-dire, l'art de tirer des conclusions sur l'observation d'un phénomène biologique en présence d'incertitude, de variation entre individus et d'erreur de mesure qui sont impossible à éviter en biologie. Il s'agit ici d'utiliser de manière correcte les tests d'hypothèses statistiques et de réaliser des analyses de données reproductibles.
 
@@ -65,9 +65,9 @@ Le matériel pédagogique est aussi varié que possible. Vous pourrez ainsi pioc
 
 -   des [exercices H5P](http://www.h5p.org) repérables par le logo [![h5p](images/list-h5p.png)](https://wp.sciviews.org/h5p/){target="_parent"} sur lequel vous pouvez cliquer pour avoir plus d'informations sur leur utilisation,
 
--   des [applications Shiny](https://shiny.rstudio.com/) qui sont des véritables petits programmes avec interface Web écrits en R. Ils vous démontrent "en live" certains concepts. Ces applications doivent être lancées en cliquant sur l'image contenant le logo [![app](images/list-app.png)](https://wp.sciviews.org/shiny_app/){target="_parent"} et elles doivent être quittées avec le bouton `Quit` ou `Quit & Save` si l'enregistrement est activé. N'oubliez pas de soumettre votre réponse avec le bouton `Submit`. Si le serveur distant est trop lent ou indisponible, il est aussi possible de lancer ces applications Shiny directement dans RStudio (voir le message en italique qui apparaît en dessous de l'application),
+-   des [applications Shiny](https://shiny.rstudio.com/) qui sont de véritables petits programmes avec interface Web écrits en R. Ils vous démontrent "en live" certains concepts. Ces applications doivent être lancées en cliquant sur l'image contenant le logo [![app](images/list-app.png)](https://wp.sciviews.org/shiny_app/){target="_parent"} et elles doivent être quittées avec le bouton `Quit` ou `Quit & Save` si l'enregistrement est activé. N'oubliez pas de soumettre votre réponse avec le bouton `Submit`. Si le serveur distant est trop lent ou indisponible, il est aussi possible de lancer ces applications Shiny directement dans RStudio (voir le message en italique qui apparaît en dessous de l'application),
 
--   des [tutoriels interactifs learnr](https://rstudio.github.io/learnr/). Vous pourrez exécuter ces tutoriels directement sur votre ordinateur dans RStudio, et vous aurez alors accès à des pages Web réactives contenant des explications, des exercices et des quiz en ligne directement dans votre environnerment de travail habituel. Ces tutoriels sont repérables via l'icône suivante [![tuto](images/list-tuto.png)](https://wp.sciviews.org/tutorial/){target="_parent"},
+-   des [tutoriels interactifs learnr](https://rstudio.github.io/learnr/). Vous pourrez exécuter ces tutoriels directement sur votre ordinateur dans RStudio, et vous aurez alors accès à des pages Web réactives contenant des explications, des exercices et des quiz en ligne directement dans votre environnement de travail habituel. Ces tutoriels sont repérables via l'icône suivante [![tuto](images/list-tuto.png)](https://wp.sciviews.org/tutorial/){target="_parent"},
 
 -   des [dépôts GitHub Classroom](https://classroom.github.com/) dans la section [BioDataScience-Course](https://www.github.com/BioDataScience-Course) pour réaliser et documenter vos travaux personnels. Les liens vers ces dépôts sont repérables par l'icône GitHub [![assign](images/list-assign.png)](https://wp.sciviews.org/github_assignment/){target="_parent"},
 
@@ -105,9 +105,9 @@ fortunes::fortune("brain surgery")
 
 Version courte : **en pratiquant et en faisant des erreurs !**
 
-Version longue : aujourd'hui --et encore plus à l'avenir-- les données sont complexes et ne se manipulent plus simplement avec un tableur comme [Microsoft Excel](https://www.microsoft.com/fr-be/microsoft-365/excel). Vous apprendrez donc à maîtriser des outils professionnels très puissants mais aussi relativement complexes. La méthode d'apprentissage que nous vous proposons a pour objectif prioritaire de vous faciliter la tâche, quelles que soient vos aptitudes au départ. Envisagez votre voyage en science des données comme l'apprentissage d'une nouvelle langue. **C'est en pratiquant, et en pratiquant encore sur le long terme que vous allez progresser.** Pour vous aider dans cet apprentissage progressif et sur la durée, la formation s'étale sur quatre années, et est répartie en cinq cours de difficulté croissante.
+Version longue : aujourd'hui --et encore plus à l'avenir-- les données sont complexes et ne se manipulent plus simplement avec un tableur comme [Microsoft Excel](https://www.microsoft.com/fr-be/microsoft-365/excel). Vous apprendrez donc à maîtriser des outils professionnels très puissants, mais aussi relativement complexes. La méthode d'apprentissage que nous vous proposons a pour objectif prioritaire de vous faciliter la tâche, quelles que soient vos aptitudes au départ. Envisagez votre voyage en science des données comme l'apprentissage d'une nouvelle langue. **C'est en pratiquant, et en pratiquant encore sur le long terme que vous allez progresser.** Pour vous aider dans cet apprentissage progressif et sur la durée, la formation s'étale sur quatre années, et est répartie en cinq cours de difficulté croissante.
 
-N'hésitez pas à expérimenter, tester ou essayer des nouvelles idées (même au delà de ce qui vous sera demandé dans les exercices) et surtout, **n'ayez pas peur de faire des erreurs**. Vous en ferez, ... beaucoup ... *nous vous le souhaitons !* La meilleure manière d'apprendre, c'est en faisant des erreurs et en mettant ensuite tout en œuvre pour les comprendre et les corriger. Donc, si un message d'erreur apparaît, ne soyez pas intimidé. Prenez une bonne respiration, lisez-le attentivement, essayez de le comprendre, et au besoin faites-vous aider : la solution est sur Internet, 'Google[^index-1] est votre ami' ! L'idée ici n'est pas tellement éloignée de ce qui est présenté dans la vidéo suivante :
+N'hésitez pas à expérimenter, tester ou essayer de nouvelles idées (même au-delà de ce qui vous sera demandé dans les exercices) et surtout, **n'ayez pas peur de faire des erreurs**. Vous en ferez ... beaucoup ... *nous vous le souhaitons !* La meilleure manière d'apprendre, c'est en faisant des erreurs et en mettant ensuite tout en œuvre pour les comprendre et les corriger. Donc, si un message d'erreur apparaît, ne soyez pas intimidé. Prenez une bonne respiration, lisez-le attentivement, essayez de le comprendre, et au besoin faites-vous aider : la solution est sur Internet, 'Google[^index-1] est votre ami' ! L'idée ici n'est pas tellement éloignée de ce qui est présenté dans la vidéo suivante :
 
 [^index-1]: Il existe tout de même des outils plus pointus pour obtenir de l'aide sur le logiciel R comme [rseek.org](https://rseek.org), [rdocumentation.org](https://www.rdocumentation.org) ou [rdrr.io](https://rdrr.io). Rien ne sert de chercher 'R' dans Google.
 
@@ -117,38 +117,40 @@ vembedr::embed_youtube("9vJRopau0g0", width = 770, height = 433)
 
 ## Approche pédagogique {.unnumbered}
 
-Ce livre en ligne ainsi que tout le matériel pédagogique cité plus haut a été développé pour être employé en pédagogie active en classe inversée. On peut résumer cette approche en deux phases. Vous apprenez d'abord à la maison, nous appliquons *ensuite* en présentiel.
+Ce livre en ligne ainsi que tout le matériel pédagogique cité plus haut ont été développés pour être employés en pédagogie active en classe inversée. On peut résumer cette approche en deux phases. Vous apprenez d'abord à la maison, nous appliquons *ensuite* en présentiel.
 
 ### Classe inversée & pédagogie active {.unnumbered}
 
-Jusqu'à présent, la plus grande partie de vos cours vous ont été donné de manière classique. Vous avez donc suivi **passivement** un cours *ex cathedra* suivi par une séance d'exercice ou de travaux pratiques.
+Jusqu'à présent, la plus grande partie de vos cours vous ont été donnés de manière classique. Vous avez donc suivi **passivement** un cours *ex cathedra* suivi par une séance d'exercice ou de travaux pratiques.
 
 On peut schématiser ce mode d'apprentissage comme cela
 
 ![](images/sdd1_00/organisation1.png)
 
-A la fin, un examen est indispensable pour valider l'acquisition des concepts.
+À la fin, un examen est indispensable pour valider l'acquisition des concepts.
 
-Le cours de science des données I utilise une autre approche et se donne en classe inversée. Le schéma ci-dessous vous propose l'organisation d'un module du cours. Vous devrez donc préparer en distanciel chaque session de cours en présentiel. Lors de chaque heure de travail lié à ce cours vous serez donc **actif**.
+Le cours de science des données I utilise une autre approche et se donne en classe inversée. Le schéma ci-dessous vous propose l'organisation d'un module du cours. Vous devrez donc préparer en distanciel chaque session de cours en présentiel. Lors de chaque heure de travail lié à ce cours, vous serez donc **actif**.
 
 ![](images/sdd1_00/organisation2.png)
 
+Une présentation de l'approche pédagogique du cours vous est faite en première séance. La présentation est disponible au format PDF [ici](https://github.com/BioDataScience-Course/sdd_lessons/raw/2022-2023/A00/presentations/A00Pa_intro.pdf).
+
 ### Quatre niveaux d'exercices {.unnumbered}
 
-Quatre niveaux d'exercices de difficultés croissantes vous seront proposé.
+Quatre niveaux d'exercices de difficultés croissantes vous seront proposés.
 
 -   niveau I : découverte des notions dans des exercices rapides et ciblés intégrés au sein du cours en ligne.
 -   niveau II : appliquer les notions vues dans des exercices sous la forme de tutoriel très cadré
 -   niveau III : transférer les notions dans des projets individuels guidés sur des données biologiques
 -   niveau IV : Créer/réaliser des analyses sur des projets de groupe libre sur des données biologiques nouvelles grâce aux notions vues
 
-Chaque type d'exercice est associé à un outil présenté dans la matériel pédagogique.
+Chaque type d'exercice est associé à un outil présenté dans le matériel pédagogique.
 
 ![](images/sdd1_00/apprendre2.png)
 
-L'ensemble de vos réponses sont collectées et utilisée afin de construire la note finale. Il n'est donc plus nécessaire de passer une examen classique en session d'examen. Tous ces exercices prouvent que vous avez acquis ou non les acquis d'apprentissage de ce cours.
+L'ensemble de vos réponses sont collectées et utilisées afin de construire la note finale. Il n'est donc plus nécessaire de passer un examen classique en session d'examen. Tous ces exercices prouvent que vous avez acquis ou non les acquis d'apprentissage de ce cours.
 
-Votre progression au sein de exercices de chaque module est mis à votre disposition à la fin de chaque module ou bien depuis Moodle.
+Votre progression au sein des exercices de chaque module est mise à votre disposition à la fin de chaque module ou bien depuis Moodle.
 
 ```{block, type='warning'}
 Les notes des exercices plus faciles de niveau 1 et 2 sont comptabilisés séparément des exercices plus difficiles. Il faut obtenir au moins 50% des points dans les exercices de niveau 3 et 4 pour bénéficier également de la note des exercices faciles de niveau 1 et 2. **Votre objectif est donc de bien vous préparer et de réussir vos projets, challenges et interrogations en présentiel.** Les exercices faciles vous aident à bien vous préparer. **Faites les sérieusement, c'est dans votre intérêt.**
@@ -198,3 +200,8 @@ if (exists("assignment2"))
 Une fois que vous avez rejoint l'équipe **`r !"A{YY}"`**, il n'est plus nécessaire d'utiliser le lien GitHub Classroom vers ces issues. Vous pouvez retrouver directement les issues liées à ce dépôt via la bannière du site.
 
 ![](images/sdd1_00/issues.png)
+
+*Pour terminer, encore un petit exercice rapide pour vérifier si vous avez lu suffisamment attentivement le contenu ci-dessus...*
+
+`r h5p(134, height = 270, toc = "Adresse mail pour l'aide sur le cours")`
+

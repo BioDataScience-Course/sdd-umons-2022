@@ -8,7 +8,7 @@
 
 -   Maîtriser la terminologie particulière liée à Git (un système de gestion de versions de vos documents que nous utiliserons intensivement ensuite).
 
--   Réaliser son premier document écrit en Markdown, un système de formatage de texte.
+-   Réaliser son premier document écrit en Markdown, un système de formatage de texte et repérer les différentes sections d'un fichier R Markdown (entête YAML, zones Markdown et chunks de code).
 
 ##### Prérequis {.unnumbered}
 
@@ -28,29 +28,37 @@ Il n'est pas rare d'avoir un ordinateur qui soit utilisé par plusieurs personne
 
 -   Organisation des fichiers sur un ordinateur
 
-Votre ordinateur contient un ou plusieurs disques durs. Une [arborescence de dossiers](https://www.coursinfo.fr/decouverte/windows/quest-ce-quun-dossier-un-fichier-et-une-arborescence-de-dossiers/) va être mise en place afin de ranger les fichiers sur chaque disque dur. On peut se représenter chaque disque comme une armoire avec des tiroirs. Les principaux dossiers sont le dossier `bureau` (*desktop*), `documents` (*documents*) ou encore `téléchargements` (*downloads*). **Vous devez comprendre les base de l'organisation des dossiers et des fichiers dans votre ordinateur, ainsi que leur manipulation via l'explorateur de fichiers (Windows) ou le Finder (MacOS) avant d'aborder le module.**
+Votre ordinateur contient un ou plusieurs disques durs. Une [arborescence de dossiers](https://www.coursinfo.fr/decouverte/windows/quest-ce-quun-dossier-un-fichier-et-une-arborescence-de-dossiers/) va être mise en place afin de ranger les fichiers sur chaque disque dur. On peut se représenter chaque disque comme une armoire avec des tiroirs. Les principaux dossiers sont le dossier `bureau` (*desktop*), `documents` (*documents*) ou encore `téléchargements` (*downloads*). **Vous devez comprendre les bases de l'organisation des dossiers et des fichiers dans votre ordinateur, ainsi que leur manipulation via l'explorateur de fichiers (Windows) ou le Finder (MacOS) avant d'aborder le module.**
+
+-   Terminologie de base
+
+Lorsque vous travaillez sur un ordinateur, vous interagissez avec un certain nombre d'éléments dont il est important de connaitre le nom. Si vous n'êtes pas familier avec cette terminologie, voyez [les éléments qui composent un ordinateur](https://cours-informatique-gratuit.fr/cours/composition-de-base-ordinateur-unite-centrale/) et les pages suivantes qui sont proposées si nécessaire. Imprégnez-vous aussi du [vocabulaire de base](https://www.issco.unige.ch/en/research/tutoriel-informatique/FR/vocabulaire_de_base.html).
 
 -   Raccourcis clavier
 
-Les raccourcis clavier vous pemrettent d'optimiser votre productivité. Prenez un peu de temps pour vérifier que vous en connaissez les principaux via ces pages : [sous Windows](https://www.lecotentin.fr/raccourcis-clavier), [sous MacOS](https://www.journaldunet.com/solutions/dsi/1194040-raccourci-clavier-mac/) ou encore [sous Linux Ubuntu](https://www.clubic.com/tutoriels/article-862426-1-raccourcis-clavier-ubuntu-indispensables.html). **Les raccourcis clavier ne sont pas indispensables, mais ils vous feront gagner du temps lors des exercices, cela peut être très utile lorsque le temps est limité.**
+Les raccourcis clavier vous permettent d'optimiser votre productivité. Prenez un peu de temps pour vérifier que vous en connaissez les principaux via ces pages : [sous Windows](https://www.lecotentin.fr/raccourcis-clavier), [sous MacOS](https://www.journaldunet.com/solutions/dsi/1194040-raccourci-clavier-mac/) ou encore [sous Linux Ubuntu](https://www.clubic.com/tutoriels/article-862426-1-raccourcis-clavier-ubuntu-indispensables.html). **Les raccourcis clavier ne sont pas indispensables, mais ils vous feront gagner du temps lors des exercices, cela peut être très utile lorsque le temps est limité.**
 
 -   Captures d'écran
 
-Lorsque vous rencontrez un problème avec votre ordinateur ou un de ses logiciels, une capture d'écran bien réalisée permet souvent d'illustrer utilement votre question sur un forum et peut remplacer une longue explication textuelle. Vous pouvez retrouver des tutoriels pour réaliser une capture d'écran [sous Windows](https://www.commentcamarche.net/informatique/windows/149-faire-des-captures-d-ecran-avec-windows-10/) ou [sous Mac](https://www.commentcamarche.net/informatique/macos/737-faire-des-captures-d-ecran-sur-mac/). Le plus important est de cibler la zone à capturer. Il est donc bien souvent inutile de sélectionner tout le bureau de l'ordinateur, voire toute la fenêtre de l'application. **Durant les cours de science des données, vous serez amené à poser des questions et à illustrer vos propos à l'aide de copies d'écran. Vous êtes supposés capable de le faire. Les photos d'écran prises à l'aide d'un smartphone ne sont pas acceptables car elles sont toujours bien moins lisibles que la copie directe de l'écran avec les outils ad hoc.**
+Lorsque vous rencontrez un problème avec votre ordinateur ou un de ses logiciels, une capture d'écran bien réalisée permet souvent d'illustrer utilement votre question sur un forum et peut remplacer une longue explication textuelle. Vous pouvez retrouver des tutoriels pour réaliser une capture d'écran [sous Windows](https://www.commentcamarche.net/informatique/windows/149-faire-des-captures-d-ecran-avec-windows-10/) ou [sous Mac](https://www.commentcamarche.net/informatique/macos/737-faire-des-captures-d-ecran-sur-mac/). Le plus important est de cibler la zone à capturer. Il est donc bien souvent inutile de sélectionner tout le bureau de l'ordinateur, voire toute la fenêtre de l'application. **Durant les cours de science des données, vous serez amené à poser des questions et à illustrer vos propos à l'aide de copies d'écran. Vous êtes supposé capable de le faire. Les photos d'écran prises à l'aide d'un smartphone ne sont pas acceptables, car elles sont toujours bien moins lisibles que la copie directe de l'écran avec les outils ad hoc.**
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Note : lorsque vous voyez le petit logo "H5P" comme ci-dessous, cela signifie que vous avez maintenant un exercice interactif. Cet exercice peut prendre différentes formes (quiz, présentation ou vidéo contenant des questions, vrais ou faux, cliquer sur une image, ...).*
+*Rappel : lorsque vous voyez le petit logo "H5P" comme ci-dessous, cela signifie que vous avez maintenant un exercice interactif. Cet exercice peut prendre différentes formes (quiz, présentation ou vidéo contenant des questions, vrais ou faux, cliquer sur une image, ...).*
 
 `r h5p(140, height = 270, toc = NULL)`
 
 -   Navigateurs Web
 
-Un [navigateurs Web](https://www.1min30.com/dictionnaire-du-web/navigateur-web-browser) est un logiciel qui permet d'accéder au Web. Le Web n'est pas un synonyme d'internet comme vous pouvez le lire dans la formation [comprendre le Web](https://openclassrooms.com/fr/courses/1946386-comprendre-le-web/6874966-distinguez-le-web-et-internet) d'[Open Classroom](https://openclassrooms.com/fr/). Les navigateurs Web principaux sont Google Chrome, Microsoft Edge, Mozilla Firefox ou encore Safari sous MacOS. **Pour ce cours en ligne vous allez devoir naviguer sur le Web et utiliser divers outils comme Rstudio Server qui sont accessibles depuis une page Web. Par conséquent, vous devez être capable d'utiliser un navigateur Web pour afficher des pages, effectuer une recherche, créer une liste de "bookmarks", etc. Chaque navigateur Web a ses particularités et les pages que vous utiliserez ne fonctionnent pas forcément toutes avec ces différents navigateurs. Nous ne pouvons pas les tester avec toutes les options possibles (type de navigateur, version et système Windows, MacOS ou Linux, cela fait énormément de combinaisons possibles). Par conséquent, nous sommes obligés de restreindre la liste des navigateurs Web utilisables pour le cours à la version la plus récente de Google Chrome (tous systèmes) ou Edge (sous Windows), ou Safari (sous MacOS) ou Chromium (sous Linux). Les autres (Firefox, Opera, Brave, Vivaldi, Internet Explorer, etc.) ne sont pas autorisés car non testés, ou incompatibles. Firefox en particulier, ne fonctionne pas avec différentes pages du cours, de GitHub ou autres.**
+Un [navigateur Web](https://www.1min30.com/dictionnaire-du-web/navigateur-web-browser) est un logiciel qui permet d'accéder au Web. Le Web n'est pas un synonyme d'Internet comme vous pouvez le lire dans la formation [comprendre le Web](https://openclassrooms.com/fr/courses/1946386-comprendre-le-web/6874966-distinguez-le-web-et-internet) d'[Open Classroom](https://openclassrooms.com/fr/). Les navigateurs Web principaux sont Google Chrome, Microsoft Edge, Mozilla Firefox ou encore Safari sous MacOS. **Pour ce cours en ligne, vous allez devoir naviguer sur le Web et utiliser divers outils comme Rstudio Server qui sont accessibles depuis une page Web. Par conséquent, vous devez être capable d'utiliser un navigateur Web pour afficher des pages, effectuer une recherche, créer une liste de "bookmarks", etc. Chaque navigateur Web a ses particularités et les pages que vous utiliserez ne fonctionnent pas forcément toutes avec ces différents navigateurs. Nous ne pouvons pas les tester avec toutes les options possibles (type de navigateur, version et système Windows, MacOS ou Linux, cela fait énormément de combinaisons possibles). Par conséquent, nous sommes obligés de restreindre la liste des navigateurs Web utilisables pour le cours à la version la plus récente de Google Chrome (tous systèmes) ou Edge (sous Windows), ou Safari (sous MacOS) ou Chromium (sous Linux). Les autres (Firefox, Opera, Brave, Vivaldi, Internet Explorer, etc.) ne sont pas autorisés, car non testés, ou incompatibles. Firefox en particulier, ne fonctionne pas avec différentes pages du cours, de GitHub ou autres.**
 
-Le préambule de ce cours vous a également permis d'en apprendre davantage sur le matériel pédagogique, l'approche pédagogie ou encore la méthode d'évaluation. Vérifiez votre compréhension des notions vues avec l'exercice suivant.
+Le préambule de ce cours vous a également permis d'en apprendre davantage sur le matériel pédagogique, l'approche pédagogique ou encore la méthode d'évaluation. Vérifiez votre compréhension des notions vues avec l'exercice suivant.
 
-<!-- Ajouter un lien vers la présentation pour la pédagogie et rappeler l'aide-mémoire relatif à ce point -->
+*Note : les tutoriels learnrs vous permettent d'autoévaluer l'acquis de connaissances et de compétences. Dans le cours, ils sont marqués d'une icône en forme de toque verte. Ils s'exécutent directement dans RStudio à l'intérieur de la SciViews Box. Vous copier l'instruction `BioDataScience1::run("A00La_discovery")` et la collez dans l'onglet Console de RStudio. Ensuite, vous validez la commande en cliquant sur la touche \<entrée\> et le tutoriel doit se lancer. Vous pouvez ouvrir ensuite le tutoriel dans sa propre fenêtre plus spacieuse en cliquant sur le second bouton de la barre d'outils en forme de petite fenêtre avec une flèche blanche.*
+
+`r learnr("A00La_discovery", title = "Découverte de learnr", toc = "Découverte des tutoriels de type learnr")`
+
+Vous pouvez aussi voir (ou revoir) [les dias de la présentation](https://github.com/BioDataScience-Course/sdd_lessons/raw/2022-2023/A00/presentations/A00Pa_intro.pdf) qui vous est faite en première séance.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -60,14 +68,14 @@ Le préambule de ce cours vous a également permis d'en apprendre davantage sur 
 
 ![La bibliothèque était pratiquement le seul lieu de détention du savoir, de l'information --et des données, en général-- avant le 21^ème^siècle.](images/sdd1_01/library.jpg)
 
-Il y a 30 ans, pas d'internet (ou un embryon d'internet disponible uniquement pour quelques privilégiés dans les universités et l'armée américaine), pas de smartphone. Essayez d'imaginer ce que serait votre vie aujourd'hui si ces outils qui font partie de votre quotidien n'existaient pas. L'évolution technologique est en marche, à un rythme toujours plus rapide.
+Il y a 30 ans, pas d'Internet (ou un embryon d'Internet disponible uniquement pour quelques privilégiés dans les universités et l'armée américaine), pas de smartphone. Essayez d'imaginer ce que serait votre vie aujourd'hui si ces outils qui font partie de votre quotidien n'existaient pas. L'évolution technologique est en marche, à un rythme toujours plus rapide.
 
 -   Les révolutions industrielles :
 
     -   1770 (1756) révolution 1 : mécanisation
     -   1870 révolution 2 : maîtrise de l'énergie
     -   1970 (1979) révolution 3 : informatique
-    -   1990 révolution 4 : internet (1990 web, 1992 ISOC = Internet society, 1993 = premier navigateur web)
+    -   1990 révolution 4 : Internet (1990 Web, 1992 ISOC = Internet society, 1993 = premier navigateur Web)
     -   2000 révolution 5 : numérique. GAFA = Google - Apple - Facebook - Amazon + Microsoft = GAFAM aux USA et BATX en Chine = Baidu - Alibaba - Tencent - Xiaomi. Aussi NATU = Netflix - Airbnb - Tesla - Uber.
     -   2010 révolution 6 : NBIC = nanotechnologies - biotechnologies - informatique - sciences cognitives.
     -   2020  : l'ordinateur est toujours plus puissant, l'intelligence artificielle toujours plus présente. Les métiers changent parce que les machines remplacent l'homme pour différentes tâches ("ubérisation").
@@ -79,9 +87,9 @@ Il y a 30 ans, pas d'internet (ou un embryon d'internet disponible uniquement po
 
 -   Comparaison de puissance de traitement du cerveau humain *versus* un ordinateur : 89 milliards de neurones et travail en multitâche d'un côté, contre 2 milliards de transistors pour un travail essentiellement monotâche pour le petit carré de silicium. Il faut bien avouer que c'est difficile à comparer (combien de transistors équivalent à un neurone ?). Une étude a montré en 2017 que l'un des cinq ordinateurs les plus puissants du moment a été capable de simuler le fonctionnement d'environ 1% du cerveau humain en une seconde. Il lui a fallu 40 minutes de calcul pour y arriver. Intel (l'un des principaux constructeurs de processeurs) estimait il y a à peine quelques années que l'évolution permettra d'égaler le cerveau humain en terme de vitesse de traitement vers 2020... On a dépassé cette date, l'intelligence artificielle est partout autour de nous, mais ne nous remplace pas encore (heureusement !). De plus, la consommation électrique d'un supercalculateur se mesure en mégawatts, alors que le cerveau humain consomme 12-13W seulement, soit un ordre de grandeur d'un million de fois moins !
 
--   Aujourd'hui et encore plus à l'avenir, le cerveau humain et le (super)-ordinateur constitué par une constellation de machines mondialement interconnectées se complètement merveilleusement bien. La quantité d'information disponible est telle que sans l'ordinateur, nous ne pouvons pas la valoriser,... mais le cerveau humain est et reste le chef d'orchestre qui décide, qui dirige la façon dont ces données sont valorisées. Ce chef d'orchestre a un nom : le **scientifique des données**.
+-   Aujourd'hui et encore plus à l'avenir, le cerveau humain et le (super)-ordinateur constitué par une constellation de machines mondialement interconnectées se complètement merveilleusement bien. La quantité d'information disponible est telle que sans l'ordinateur, nous ne pouvons pas la valoriser... mais le cerveau humain est et reste le chef d'orchestre qui décide, qui dirige la façon dont ces données sont valorisées. Ce chef d'orchestre a un nom : le **scientifique des données**.
 
-Ce petit rappel historique et ces quelques informations concernant les données vous donnent d'une part un aperçu de **la vitesse à laquelle notre monde change**, et d'autre part ils vous montrent que le monde dans lequel nous vivons est **de plus en plus inondé d'information**. Vous pouvez maintenant imaginer l'importance d'avoir des outils performants afin d'appréhender les données dont le nombre croit de manière exponentielle. Nous consacrerons la majeure partie de ce premier module à découvrir les outils informatiques qui vont nous permettre d'analyser nos données biologiques.
+Ce petit rappel historique et ces quelques informations concernant les données vous donnent d'une part un aperçu de **la vitesse à laquelle notre monde change**, et d'autre part ils vous montrent que le monde dans lequel nous vivons est **de plus en plus inondé d'information**. Vous pouvez maintenant imaginer l'importance d'avoir des outils performants afin d'appréhender les données dont le nombre croît de manière exponentielle. Nous consacrerons la majeure partie de ce premier module à découvrir les outils informatiques qui vont nous permettre d'analyser nos données biologiques.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -97,61 +105,61 @@ La science des données requiert d'employer des outils performants que nous avon
 
 ### GitHub
 
-Pour bien débuter ce cours, vous avez été guidé pour créer un compte sur [GitHub](https://github.com). Il est temps de définir ce premier outil. GitHub est un réseau social permettant de sauvegarder vos projets sur le "cloud", les partager et collaborer avec d'autres personnes. Les utilisateurs peuvent se regrouper sous une organisation afin de faciliter la collaboration. Ce réseau social à la particularité d'être centré sur les projets et utilise un gestionnaire de version de projet nommé [Git](https://git-scm.com/) (nous aborderons git plus loin dans ce module). Ce nom provient de l'association "Git", la gestion de version et "Hub" relatif au réseau.
+Pour bien débuter ce cours, vous avez été guidé pour créer un compte sur [GitHub](https://github.com). Il est temps de définir ce premier outil. GitHub est un réseau social permettant de sauvegarder vos projets sur le "cloud", les partager et collaborer avec d'autres personnes. Les utilisateurs peuvent se regrouper sous une organisation afin de faciliter la collaboration. Ce réseau social a la particularité d'être centré sur les projets et utilise un gestionnaire de version de projet nommé [Git](https://git-scm.com/) (nous aborderons Git plus loin dans ce module). Ce nom provient de l'association "Git", le gestionnaire de version et "Hub" relatif au réseau.
 
 Découvrons un projet qui s'intéresse à la manipulation de tableau de données (filtrer des lignes spécifiques, calculer de nouvelles colonnes, trier le tableau en fonction d'une colonne spécifique...). Nous utiliserons ce projet dans ce cours. Le projet [dplyr](https://github.com/tidyverse/dplyr) est partagé par l'organisation [tidyverse](https://github.com/tidyverse). Ce projet va nous permettre d'explorer quelques éléments de GitHub. Nous nous attardons uniquement sur certains éléments clés.
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Cliquez sur les symboles + pour découvrir les éléments importants d'un projet sur GitHub*
+*Cliquez sur les symboles **+** pour découvrir les éléments importants d'un projet sur GitHub*
 
 `r h5p(141, height = 270, toc = "Le projet dplyr sur GitHub")`
 
-Ce projet comprend une multitude de fichiers que vous ne devez pas comprendre (pour le moment ;) ). Ce projet comprend 7112 commits. Pour le moment, retenez qu'un commit est un état de sauvegarde du projet. Ce projet traite de la manipulation de données et comprend un site web associé \<dplyr.tidyverse.org\>. Un grand nombre de contributeurs ont participé à ce projet (plus de 240). Un fichier README.md sert de page de présentation.
+Ce projet héberge une multitude de fichiers que vous ne devez pas comprendre pour le moment ;). 7112 "commits" y ont été réalisés (au moment où la capture d'écran a été faite : le projet a évolué depuis et les nombres cités ne sont certainement plus d'actualité par rapport au site aujourd'hui). Pour le moment, retenez qu'un "commit" est un état de sauvegarde du projet. Ce projet traite de la manipulation de données. Un site Web lui est associé \<dplyr.tidyverse.org\>. Un grand nombre de contributeurs ont participé à ce projet (plus de 240). Un fichier `README.md` sert de page de présentation.
 
-En haut de cette page, on peut voir une première barre d'outils comprenant les sections `Code`, `Issues`, `Pull requests`, `Actions`, `Security` et `Insights` (toutes les sections ne seront pas détaillées dans cet ouvrage).
+En haut de la page, on peut voir une première barre d'outils présentant les sections `Code`, `Issues`, `Pull requests`, `Actions`, `Security` et `Insights` (toutes les sections ne seront pas détaillées ici).
 
-![Dépot dplyr de l'organisation tidyversesur GitHub](images/sdd1_01/gh_dplyr2.png)
+![Dépôt dplyr de l'organisation tidyverse dans GitHub](images/sdd1_01/gh_dplyr2.png)
 
-Lors d'un travail en équipe, vous allez vous poser des questions et avoir envie d'échanger vos idées. GitHub met à votre disposition un espace dédié à la discussion et à la collaboration. Il s'agit des `Issues`. La section `Issues` permet de mettre en avant un problème ou une idée afin d'améliorer ce projet. Une issue est un espace de discussion et de collaboration centré autour d'une question. Par exemple, le projet dplyr comprend 70 issues ouvertes et 4281 issues fermées. On peut en déduire que 70 idées ou bugs sont en cours de correction ou de réflexion et que 4281 sont considérés comme terminés. Ce projet est assez dynamique. Cliquez sur l'une de ces issues et observez la structure de cet espace de réflexion.
+Lors d'un travail en équipe, vous allez vous poser des questions et avoir envie d'échanger vos idées. GitHub met à votre disposition un espace dédié à la discussion et à la collaboration. Il s'agit des `Issues`. La section `Issues` permet de mettre en avant un problème ou une idée afin d'améliorer ce projet. Une issue est un espace de discussion et de collaboration centré autour d'une question. Par exemple, le projet dplyr a 70 issues ouvertes et 4281 issues fermées. On peut en déduire que 70 idées ou bogues sont en cours de correction ou de réflexion et que 4281 sont considérés comme terminés. Ce projet est assez dynamique. Cliquez sur l'une de ces issues et observez comment la page se présente.
 
 **Quand vous aurez un problème ou une idée, utilisez donc les issues pour discuter avec vos encadrants ou vos collaborateurs.**
 
 ##### À vous de jouer ! {.unnumbered}
 
-Utilisez vos nouvelles connaissances afin de répondre à la question ci-dessous.
+Testez vos nouvelles connaissances en répondant à la question ci-dessous.
 
 `r h5p(137, height = 270, toc = "Exploration d'un dépôt GitHub")`
 
-GitHub n'est pas le seul réseau social centré sur git. D'autres réseaux équivalents existent comme [Gitlab](https://about.gitlab.com) ou [Bitbucket](https://bitbucket.org). Cependant, nous utiliserons GitHub ensemble, sachant que les notions apprises ici seront réutilisables ailleurs.
+GitHub n'est pas le seul réseau social centré sur Git. D'autres réseaux équivalents existent comme [Gitlab](https://about.gitlab.com) ou [Bitbucket](https://bitbucket.org). Cependant, nous utiliserons GitHub ensemble, sachant que les notions apprises ici seront réutilisables ailleurs.
 
 #### GitHub Classroom {#classroom}
 
-[**GitHub Classroom**](https://classroom.github.com) est une extension de GitHub qui facilite le travail avec GitHub dans le contexte d'exercices de niveau III ou de niveau IV à réaliser dans le cadre d'un cours. Vous serez amené à modifier des dépôts issus de GitHub Classroom pour réaliser vos exercices. **Ces dépôts seront privés**. Seuls vous-mêmes et vos enseignants aurez accès à ces dépôts, mais vous pourrez aussi les rendre publics, si vous voulez *valoriser votre travail* de manière plus large.
+[**GitHub Classroom**](https://classroom.github.com) est une extension de GitHub qui facilite le travail dans le contexte d'exercices de niveau III ou de niveau IV (les projets individuels et en groupes) à réaliser dans le cadre d'un cours. Vous serez amené à modifier des dépôts issus de GitHub Classroom pour réaliser vos exercices. **Ces dépôts seront privés**. Seuls vous-mêmes et vos enseignants aurez accès à ces dépôts, mais vous pourrez aussi les rendre publics, si vous voulez *valoriser votre travail* de manière plus large.
 
 ### Markdown
 
-Lorsque l'on rédige un document, on perd beaucoup de temps à décider de l'interligne, de choisir la taille et la police... On peut diviser en 2 grandes étapes la rédaction d'un document. Il y a le fond et la forme. Nous vous proposons un outil pour booster votre **productivité** (et donc de gagner du temps) avec le Markdown. Dans un premier temps, on va s'intéresser uniquement au fond. Ensuite, on va déterminer une fiche de style qui va s'attarder sur la forme de notre document.
+Lorsque l'on rédige un document, on perd beaucoup de temps à décider de l'interligne, de choisir la taille et la police... On peut diviser en deux grandes étapes la rédaction d'un document. Il y a le fond et la forme. Nous vous proposons un outil pour booster votre **productivité** (et donc pour gagner du temps) avec Markdown. Dans un premier temps, on va s'intéresser uniquement au fond. Ensuite, on va déterminer comment le document sera mis en forme.
 
-Le Markdown est relativement simple et intuitif à l'usage, même si un petit effort est nécessaire, naturellement, au début. Il permet de baliser le texte pour indiquer le sens des différentes parties (par exemple, pour indiquer les différents niveaux de titres) et de se concentrer sur l'écriture dans un premier temps en dissociant le fond de la mise en forme.
+Markdown est relativement simple et intuitif à l'usage, même si un petit effort est nécessaire, naturellement, au début. Il permet de *baliser* le texte pour indiquer le sens des différentes parties (par exemple, pour indiquer les différents niveaux de titres). L'apparence finale du titre sera, quant à elle, définie dans une feuille de style séparée.
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Utilise la flèche pour découvrir la forme de ce court paragraphe rédigé en Markdwon.*
+*Déplacez de droite à gauche le curseur sur l'image ci-dessous pour découvrir la forme finale que pourra prendre ce court paragraphe rédigé en Markdown (fond noir = vue dans l'éditeur, fond blanc et forme finale dans un navigateur Web).*
 
-`r h5p(142, height = 200, toc = "Le fond versus la forme.")`
+`r h5p(142, height = 200, toc = "Le fond versus la forme")`
 
-En partant du fond proposé ci-dessus, on peut également obtenir les formes suivantes.
+En partant du document Markdown ci-dessus, on peut également obtenir différentes présentations et différents formats finaux. Ci-dessous, deux feuilles de style différentes ont été appliquées sur ce même document. La présentation diffère (police de caractères, couleurs, taille du texte, ...)
 
 ![](images/sdd1_01/markdown.png)
 
-Ce langage est utilisé dans les issues sur GitHub, sur des forums comme Reddit ou encore pour la rédaction de document avec des éditeurs professionnels de projets.
+Le langage Markdown est utilisé dans les issues sur GitHub, sur des forums comme [Reddit](https://www.reddit.com) ou encore pour la rédaction de document avec divers éditeurs de textes, dont celui inclus dans RStudio que vous utiliserez durant ce cours.
 
-Consultez les liens [Mastering Markdown](https://guides.github.com/features/mastering-markdown/) et la première section de [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) afin d'apprendre la syntaxe du Markdown.
+Consultez les liens [Mastering Markdown](https://guides.github.com/features/mastering-markdown/) et la première section de [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) afin d'en apprendre plus sur la syntaxe de Markdown.
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Cet exercice H5P comprend plusieurs exercices. N'oubliez pas de faire l'ensemble des exercices.*
+*Cet exercice H5P comprend plusieurs questions. Assurez-vous de les passer toutes en revue l'une après l'autre.*
 
 `r h5p(145, height = 200, toc = "Premiers exercices relatifs à Markdown")`
 
@@ -173,34 +181,32 @@ Consultez les liens [Mastering Markdown](https://guides.github.com/features/mast
 
 Nous allons mettre en pratique les nombreuses nouvelles notions vues jusqu'à présent. Nous travaillerons tous ensemble dans un dépôt bac à sable afin de poser des questions via des Issues sur GitHub en utilisant les formatages de texte Markdown.
 
-*Note : les "projets GitHub Classroom" sont marqués du logo "Octocat" (mascotte mi-chat mi-poulpe de GitHub). Il s'agit généralement d'exercices de niveau 3 ou 4. L'accès a cette tâche, qui est ici un travail **de groupe**.*
+*Note : les "projets GitHub Classroom" sont marqués du logo "Octocat" (mascotte mi-chat mi-poulpe de GitHub). Il s'agit généralement d'exercices de niveau 3 ou 4. L'accès à cette tâche, qui est ici un travail **de groupe** se fait via un encadré bien identifiable.*
 
 ```{r assign_A01Ga_biology_challenge, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A01Ga_biology_challenge", part = NULL,
     url = "https://github.com/BioDataScience-Course/A01Ga_biology_challenge",
     course.ids = c(
-      'S-BIOG-006' = !"A01Ga_{YY}M_biology_challenge", 
-      'S-BIOG-921' = !"A01Ga_{YY}C_biology_challenge"),
+      'S-BIOG-006' = !"A01Ga_{YY}M_biology_challenge"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/g/PgUQBl4h", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/xhKU8A0b"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[2]+2} 10:00:00"),
+      'S-BIOG-006' = !"{W[3]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
+      'S-BIOG-006' = !"{W[3]+5} 13:00:00"),
     term = "Q1", level = 3, n = 100,
     toc = "Es-tu un as de la biologie ?",
     clone = FALSE)
 ```
 
-Si vous souhaitez plus d'information sur GitHub Classroom, vous pouvez vous référer à l'Appendice \@ref(github-classroom). Après avoir réalisé cet exercice, vous serez des experts dans l'utilisation des "issues" GitHub. À ce stade, vous pourrez rejoindre le dépôt dédié aux issues de ce cours présenté dans le préambule (voir [Issues](#issues)). C'est là que vous poserez vos "vraies" questions relatives à votre apprentissage de la science des données.
+Si vous souhaitez plus d'information sur GitHub Classroom, vous pouvez vous référer à l'Appendice \@ref(github-classroom). Après avoir réalisé cet exercice, vous serez plus aguerris dans l'utilisation des "issues" GitHub. À ce stade, vous pourrez rejoindre le dépôt dédié aux issues de ce cours présenté dans le préambule (voir [Issues](#issues)). C'est là que vous poserez vos "vraies" questions relatives à votre apprentissage de la science des données. **Attention ! Ne mélangez pas les deux dépôts. Celui de l'exercice n'est à utiliser que durant la première séance du module 1 et le dépôt A00Qa_22M_issues-a22 est celui où vous poserez vos "vraies" questions sur le cours tout au long de l'année (accessible via "Issues dans le bandeau supérieur des pages) !**
 
 ### Gestionnaire de version
 
-Nous avons jusqu'à présent utilisé la partie collaborative de GitHub. Nous allons maintenant nous intéresser à Git le gestionnaire de version de projet utilisé par GitHub.
+Nous avons jusqu'à présent utilisé la partie collaborative de GitHub. Nous allons maintenant nous intéresser à Git, le gestionnaire de version de projet utilisé par GitHub et par RStudio.
 
-Lors de la rédaction de projets ou de travaux un petit peu conséquents, comme un travail de fin d'études, une publication scientifique ou un rapport volumineux, on se retrouve rapidement avec plusieurs fichiers correspondants à des états d'avancements du travail :
+Lors de la rédaction d'un court document ou de travaux un petit peu conséquents, comme un travail de fin d'études, une publication scientifique ou un rapport volumineux, on se retrouve rapidement avec plusieurs fichiers correspondants à des états d'avancements du travail :
 
 -   TFE_final
 -   TFE_final1
@@ -209,11 +215,11 @@ Lors de la rédaction de projets ou de travaux un petit peu conséquents, comme 
 -   TFE_final...
 -   TFE_final99
 
-Lors de différents essais, on aura tendance à tout garder dans différents fichiers afin de ne rien supprimer d'important. Cette pratique, bien que très courante, comporte le gros désavantage de prendre énormément de place sur le disque de votre ordinateur et de n'être pas pratique. Les questions suivantes peuvent se poser :
+On aura tendance à tout garder dans différents fichiers afin de ne rien perdre d'important. Cette pratique, bien que très courante, comporte le gros désavantage de prendre énormément de place sur le disque de votre ordinateur et de n'être pas pratique. Les questions suivantes peuvent se poser :
 
--   Que se cache-t-il dans la version TFE_finalX ? Après un mois sans travailler sur le projet, seriez-vous encore capable de faire facilement la différence entre TFE_final2 et le TFE_final3 ?
+-   Que se cache-t-il dans la version TFE_finalX ? Après un mois sans travailler sur le fichier, seriez-vous encore capable de faire facilement la différence entre TFE_final2 et le TFE_final3 ?
 
--   Cela se complique encore plus lorsque plusieurs personnes collaborent sur un même projet. Ils vont, par exemple, s'échanger par email différentes versions du travail avec chacun qui y place ses commentaires et modifie différentes parties du texte. Cela peut donner quelque chose comme ceci :
+-   Cela se complique encore plus lorsque plusieurs personnes collaborent sur un même document. Ils vont, par exemple, s'échanger par email différentes versions du travail avec les modifications et commentaires de chacun. Cela peut donner quelque chose comme ceci :
 
 -   TFE_final
 
@@ -231,29 +237,27 @@ Lors de différents essais, on aura tendance à tout garder dans différents fic
 
 -   TFE_final99
 
-Dans quel fichier se trouve la dernière version de chaque personne ayant collaboré sur le projet ? Un petit peu dans différents fichiers, sans doute.
+Dans quel fichier se trouve la dernière version de chaque personne ayant collaboré sur le projet ? Un petit peu dans différents fichiers, sans doute. Plusieurs outils informatiques existent pour faciliter le travail collaboratif comme :
 
-Différents outils informatiques existent pour faciliter le travail collaboratif comme :
+-   Le partage de fichiers en ligne ([Dropbox](https://www.dropbox.com), [Google Drive](https://www.google.com/drive/), [OneDrive](https://onedrive.live.com/about/fr-be/)). Ces espaces de stockage sur le "cloud" ne règlent toujours pas le problème de collaboration sur le même document.
 
--   Le partage de fichiers en ligne ([Dropbox](https://www.dropbox.com), [Google Drive](https://www.google.com/drive/), [OneDrive](https://onedrive.live.com/about/fr-be/)). Ces espaces de stockage sur le "cloud" ne règlent toujours pas le problème de collaboration sur le même fichier.
+-   Les logiciels d'édition collaborative en temps réel ([Etherpad](http://etherpad.org/), [Google Drive - Docs](https://www.google.com/intl/fr_be/docs/about/), [Gobby](https://gobby.github.io/)). Il est possible de travailler en même temps sur un même fichier. Cette option ne règle pas le problème du retour vers une ancienne version. Lorsqu'une modification a été réalisée, l'ancienne version est tout simplement écrasée.
 
--   L'utilisation d'un programme d'édition collaboratif en temps réel ([Etherpad](http://etherpad.org/), [Google Drive - Docs](https://www.google.com/intl/fr_be/docs/about/), [Gobby](https://gobby.github.io/)). Il est possible de travailler en même temps sur un même fichier. Cette option ne règle pas le problème du retour vers une ancienne version. Lorsqu'une modification a été réalisée, l'ancienne version est tout simplement écrasée.
-
--   La meilleure combinaison pour **gérer ses versions et collaborer** : [Git](https://git-scm.com/) et [GitHub](https://github.com/). Ces outils sont plutôt considérés comme écrits par et pour des geeks. Cependant, ils permettent de gérer et collaborer de manière efficace sur un même projet contenant du code ou non, et des interfaces facilitant leur utilisation apparaissent comme [GitHub Desktop](https://desktop.github.com), ou même, les [outils Git intégrés dans RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN).
+-   La meilleure combinaison pour **gérer ses versions et collaborer** : [Git](https://git-scm.com/) et [GitHub](https://github.com/). Ces outils sont plutôt considérés comme écrits par et pour des geeks. Cependant, ils permettent de gérer et de collaborer de manière efficace sur un même projet contenant du code ou non, et des interfaces facilitant leur utilisation apparaissent comme [GitHub Desktop](https://desktop.github.com), ou même, les [outils Git intégrés dans RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN).
 
 #### Git
 
-La gestion de versions est gérée par **Git**. Cet outil remplacera les nombreuses copies d'un même fichier par une sorte d'arbre que l'on peut représenter schématiquement comme ci-dessous :
+La gestion des versions de vos documents est prise en charge par **Git**. Cet outil remplacera les nombreuses copies d'un même fichier par différents états de votre document ou dossier que l'on peut représenter schématiquement comme ci-dessous (chaque boule bleue représente une version enregistrée dans le système et les flèches indiquent d'où provient chaque version et où elle est utilisée ensuite) :
 
 ![Représentation de la gestion de fichiers via Git](images/sdd1_01/git1.png)
 
-Comme vous pouvez le voir ci-dessus, on peut suivre la progression de notre projet via un nombre d'étapes représentées sur le schéma par des boules bleues. Chaque étape capture l'état de notre projet au moment où nous avons décidé de l'enregistrer. Pour enregistrer une nouvelle version de votre projet, vous réalisez un **commit** qui sera accompagné d'un message spécifiant les modifications apportées. Git comprend de nombreux outils très intéressants pour la gestion de versions que vous utiliserez par la suite.
+Dans ce schéma simple, le flux est linéaire. Mais il est parfaitement possible de créer plusieurs **branches** différentes, et même de les fusionner plus tard comme on veut. Pour enregistrer une nouvelle version de votre document, vous réalisez un **commit** qui sera accompagné d'un message explicitant les modifications apportées. Git met de nombreux outils à disposition pour la gestion de ces différentes versions. Vous en utiliserez un certain nombre dans ce cours.
 
-Lorsque l'on travaille seul tout en utilisant GitHub, l'évolution de notre projet ressemblera à l'arbre ci-dessous :
+Ce gestionnaire Git peut être couplé à un hébergement sur le cloud, soit pour simplement faire un backup de nos projets, soit pour pouvoir échanger et collaborer. Nous utiliserons GitHub à cette fin dans le cours. Lorsque l'on travaille seul avec GitHub, l'évolution de notre projet ressemblera au schéma ci-dessous :
 
 ![Représentation des versions successives d'un projet avec GitHub.](images/sdd1_01/github.png)
 
-On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changements locaux avec la version sur le "cloud". Plusieurs **commits** peuvent être envoyés avec un seul **push** sur le réseau, et c'est d'ailleurs généralement comme cela que l'on procède. L'inverse (rapatrier localement les changements que d'autres collaborateurs ont envoyés sur la version réseau de notre projet) s'appelle faire un "**pull**".
+On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changements locaux avec la version sur le "cloud". Plusieurs **commits** peuvent être envoyés avec un seul **push** sur le réseau, et c'est d'ailleurs généralement comme cela que l'on procède. L'inverse (rapatrier localement les changements que d'autres collaborateurs ont envoyés sur la version réseau de notre projet) s'appelle faire un **pull**. Par conséquent, synchroniser complètement notre dépôt GitHub avec la version locale consiste à faite les trois actions dans l'ordre : d'abord un **commit** pour créer un nouveau point d'enregistrement de l'état du système et y inclure tous les fichiers qui ont été modifiés, ensuite faire un **pull** pour rapatrier localement les changements qui ont été réalisés par d'autres ou par GitHub lui-même, et enfin, faire un **push** pour envoyer nos propres modifications dans notre projet GitHub. Les autres utilisateurs feront aussi **commit-pull-push** de leur côté. Quelquefois, des **conflits** apparaissent lorsque deux utilisateurs différents ont modifié la même partie d'un fichier. Nous apprendrons à gérer une telle situation. C'est plus facile à faire si on pense bien à faire un **pull** *avant* notre **push**, donc, faites les opérations toujours dans le même ordre.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -261,7 +265,7 @@ On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changemen
 
 `r h5p(146, height = 270, toc = "GitHub : repérer les pushs")`
 
-L'avantage principal de **GitHub** ne réside pas vraiment dans la possibilité de réaliser une sauvegarde en ligne, mais plutôt dans la possibilité de collaborer avec d'autres personnes présentes sur ce réseau comme l'illustre la figure ci-dessous. Deux scientifiques (les versions représentées par des boules bleues et des boules vertes) collaborent sur un même projet que l'on appelle un **dépôt** (**repository** en anglais) lorsqu'il est en ligne. Le premier chercheur (boules bleues) initie le dépôt et réalise un "push" pour rendre son travail accessible sur le réseau (boules oranges). Son collaborateur (boules vertes) **clône** (**clone** en anglais) ensuite le dépôt sur son ordinateur afin de pouvoir y travailler en local sur son PC. Après avoir fait des changements, il réalise également un **push** sur le réseau. Le premier scientifique, avant de travailler à nouveau sur le projet, devra donc réaliser un **pull** afin d'obtenir en local l'ensemble des modifications fournies par son ou ses collaborateurs. Après des modifications en local il effectuera à nouveau un "push".
+L'avantage principal de **GitHub** ne réside pas vraiment dans la possibilité de réaliser une sauvegarde en ligne, mais plutôt dans la possibilité de collaborer avec d'autres personnes présentes sur ce réseau comme l'illustre la figure ci-dessous. Deux scientifiques (les versions locales sur leurs ordinateurs respectifs sont indiquées en bleu pour l'un et en vert pour l'autre) collaborent sur un même projet que l'on appelle un **dépôt** (**repository** en anglais) lorsqu'il est en ligne. Le premier chercheur (boules bleues) initie le dépôt et réalise un **push** pour rendre son travail accessible sur le réseau (les versions GitHub sont représentées par des boules orange). Son collaborateur (boules vertes) **clone** ensuite le dépôt sur son ordinateur afin de pouvoir y travailler. Après avoir fait des changements, il réalise également un **push** sur le réseau. Le premier scientifique, avant de travailler à nouveau sur le projet, devra donc réaliser un **pull** afin d'obtenir en local l'ensemble des modifications fournies par son ou ses collaborateurs. Après ses propres modifications, il devra ensuite effectuer à nouveau un **push**.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -271,21 +275,25 @@ L'avantage principal de **GitHub** ne réside pas vraiment dans la possibilité 
 
 ```{block, type='note'}
 
-Vous venez d'apprendre le B-A-BA de la terminologie nécessaire à la bonne compréhension de Git et GitHub\ :
+Vous venez d'apprendre le B-A-BA de la terminologie nécessaire à la bonne compréhension de Git et GitHub :
 
-- **repository**\ : espace de stockage sous gestion de version Git.
+- **dépôt** ou **repository** : espace de stockage sous gestion de version Git.
 
-- **commit**\ : enregistrer une version du projet.
+- **commit** : enregistrer une version du projet.
 
-- **clone**\ : créer un double local d'un dépôt GitHub.
+- **clone** : créer un double local d'un dépôt GitHub.
 
-- **push**\ : envoyer ses modifications locales vers le dépôt GitHub.
+- **push** : envoyer ses modifications locales vers le dépôt GitHub.
 
-- **pull**\ : rapatrier les modifications que les autres utilisateurs ont appliqué dans le dépôt GitHub vers sa propre version locale.
+- **pull** : rapatrier les modifications que les autres utilisateurs ont réalisé dans le dépôt GitHub vers sa propre version locale.
 
 ```
 
-Ceci n'est qu'une explication très succincte. Vous trouverez plus de détails dans les liens ci-dessous et dans les Appendices. Il est, par exemple, possible de travailler sur une version en parallèle d'un dépôt original pour lequel vous n'avez pas de droits en écriture. Dans ce cas, il faudra faire une copie dans notre propre compte GitHub du dépôt. Cela s'appelle faire un **fork**. Il n'est pas possible de faire un **push** vers le dépôt d'origine puisque vous ne possédez pas les droits en écriture. Dans ce cas, vous ferez un **pull request**, suggérant ainsi à l'auteur d'origine que vous avez fait des modifications qui pourraient l'intéresser. Si c'est effectivement le cas, il pourra accepter votre "pull request" et intégrer vos suggestions dans le dépôt d'origine. Vous serez amenés à "forker" des dépôts GitHub lors de vos exercices, et vous effectuerez également un "pull request" lorsque vous serez suffisamment aguerris avec les autres techniques de gestion de vos projets sous Git et GitHub.
+Ceci n'est qu'une explication très succincte. Vous trouverez plus de détails dans les liens ci-dessous et dans les Appendices. Il est, par exemple, possible de travailler sur une version en parallèle d'un dépôt original pour lequel vous n'avez pas de droits en écriture. Dans ce cas, il faudra faire une copie dans notre propre compte GitHub du dépôt. Cela s'appelle faire un **fork**. Il n'est pas possible de faire un **push** vers le dépôt d'origine puisque vous ne possédez pas les droits en écriture. Dans ce cas, vous ferez un **pull request**, suggérant ainsi à l'auteur d'origine que vous avez fait des modifications qui pourraient l'intéresser. Si c'est effectivement le cas, il pourra accepter votre **pull request** et intégrer vos suggestions dans le dépôt d'origine. Vous serez amenés à **forker** des dépôts GitHub lors de vos exercices, et vous effectuerez également un **pull request** lorsque vous serez suffisamment aguerris avec les autres techniques de gestion de vos projets sous Git et GitHub.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r learnr("A01Lb_git", title = "Gestion de versions avec Git", toc = "Autoévaluation sur Git")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -297,92 +305,61 @@ Ceci n'est qu'une explication très succincte. Vous trouverez plus de détails d
 
 -   [Happy Git and GitHub for the useR](http://happygitwithr.com). Complet, mais un peu technique et en anglais.
 
--   Installation et première utilisation de [Git et GitHub](http://r-pkgs.had.co.nz/git.html) dans R. En anglais.
+-   [Git](https://git-scm.com/). Site en anglais rassemblant toute la documentation de Git.
 
--   [Git](https://git-scm.com/). Site en anglais comprenant toute la documentation de Git.
+-   [GitHub pour les nuls : pas de panique, lancez-vous !](https://www.christopheducamp.com/2013/12/15/github-pour-nuls-partie-1/). En français.
 
--   [GitHub pour les nuls : pas de panique, lancez-vous !](https://www.christopheducamp.com/2013/12/15/github-pour-nuls-partie-1/).
+### SciViews Box
 
-### Renku
+Dans ce cours, nous utilisons différents logiciels qui nécessitent une installation et une configuration en plusieurs étapes. Afin de vous économiser ces étapes fastidieuses, nous employons un système complètement préconfiguré : la **SciViews Box** pour laquelle une nouvelle version est préparée avant chaque nouvelle année académique. Il s'agit d'une **machine virtuelle**, un ordinateur complet, mais dématérialisé en quelque sorte. Nous utilisons l'une de ces deux formes :
 
-Dans ce cours, nous utiliserons différents logiciels qui nécessitent une installation et un configuration en plusieurs étapes. Afin de vous économiser ces étapes fastidieuses, nous utiliserons un système complètement pré-configuré. Il s'agit d'une **machine virtuelle**, un ordinateur complet mais dématérialisé en quelque sorte. Nous utiliserons l'une de ces deux formes :
+-   un système fonctionnant sur le cloud et nommé [**SaturnCloud**](https://saturncloud.io),
 
--   un système fonctionnant sur un serveur distant et appelé **Renku**,
+-   un système local installé sur votre ordinateur et utilisant [**Docker**](https://www.docker.com) ou [**Pacman**](https://archlinux.org/pacman/).
 
--   un système local installé sur votre ordinateur et appelé **SciViews Box**
-
-Renku ne nécessite pas un ordinateur puissant pour fonctionner, mais il faut une bonne connexion Internet. Il faut aussi que le serveur distant soit disponible et offre les ressources suffisantes pour travailler. *Cette année, nous l'utiliserons pour la première fois... c'est un peu expérimental, en somme.* Par contre, nous utilisons (et développons) la **SciViews Box** depuis 2015, et pourrons donc passer à cette seconde solution en fonction des besoins. Si Renku ne fonctionne pas bien et/ou si votre ordinateur permet un travail plus rapide avec la SciViews Box, vous pourrez choisir cette seconde option plus tard. Pour le moment, nous allons donc créer notre instance Renku. Suivez le guide...
-
-```{r, echo=FALSE}
-vembedr::embed_youtube("tntEsq339wQ", width = 770, height = 433)
-```
-
-1.  Assurez-vous d'être bien reconnu•e dans le site du cours <https://wp.sciviews.org>. Pour cela, vous avez suivi les instructions et vous avez cliqué sur le bouton bleu pour lier votre compte GitHub ou cours. Ensuite (et dans cet ordre !) vous avez cliqué dans la bannière supérieure sur l"item "Moodle", et de là, vous vous êtes connecté avec votre compte GitHub étudiant, vous avez sélectionné votre cours **Science des Données I : visualisation**, et enfin, vous avez cliqué sur le lien vers le **cours** depuis cet espace Moodle. Ainsi, le site a reçu maintenant toute l'information nécessaire sur votre identité UMONS. Vous pouvez vérifier cela en allant lire l'encadré d'identification dans le préambule de **Science des données Biologiques I**. Normalement, ces opérations doivent être familières si vous avez bien suivi la première séance (sinon, demandez de l'aide).
-
-2.  Cliquez sur le bouton bleu **RStudio** dans la bannière supérieure. Le browser web ne trouve pas la machine virtuelle. C'est normal puisque vous ne l'avez pas installée. Vous êtes redirigé•e vers une page qui explique comment installer Renku ou SciViews Box.
-
-3.  Suivez les instructions concernant Renku. Vous devez ouvrir une page pour créer un nouveau projet après vous être enregistré•e via GitHub. **Attention : les trois derniers champs doivent être remplis avec des informations précises. Suivez les instructions.** Tout ceci est à faire une seule fois. Une fois votre projet créé, nommé par défaut "mybox", vous pourrez repartir de l'étape (4) ou (5) plus tard.
-
-4.  Une fois le projet créé, vous allez dans l'onglet **Environments**. Vous en créez un nouveau (bouton **New**) s'il n'y en a pas. Sinon, passez à l'étape (5)
-
-5.  Si un environnement existe et qu'il est disponible, une icône verte apparaît en début de ligne, et un bouton **Connect** est disponible à droite... Sinon, attendez que votre machine virtuelle soit prête : cela peut prendre plusieurs minutes. Cliquez sur ce bouton **Connect** pour ouvrir une fenêtre pour travailler dans votre machine virtuelle via le logiciel RStudio (voir ci-dessous).
-
-Renku "tue" les environnements inutilisés pendant plus de 24h. Pensez donc à toujours bien sauvegarder vos fichiers, et faites bien vos commits et pull/push en fin de session au minimum. Lorsque Renku tue une machine, il fait un backup de certains fichiers et il vous prévient de cela lorsque vous recréerez à nouveau un environnement (étape 4), mais ne vous fiez pas à 100% à ce mécanisme !
-
-```{block, type='note'}
-Pour sauvegarder durablement la configuration de sa machine Renku, vous pouvez entrer dans l'onglet **console** l'instruction suivante\ : `renku_save()`, suivie de la touche `<entrée>` pour valider la commande.
-
-![](images/sdd1_01/renku_save.png)
-
-```
-
-Si vous avez une machine virtuelle Renku opérationnelle, vous pouvez passer à la section suivante et vous familiariser avec RStudio. Si pas, pas de panique : nous installerons la SciViews Box qui offrira des services similaires à partir d'une installation locale sur votre PC. Suivez les instructions de vos enseignants dans ce cas.
-
-Contrairement à la SciViews Box, la machine dans le projet Renku est figée. si une mise à jour est nécessaire, il faut créer un nouveau projet comme ci-dessus. Pour éviter de conserver des vieux projets inutilisés, vous pouvez les éliminer, ... mais ce n'est pas évident à faire. Voyez la vidéo ci-dessous...
-
-```{r, echo=FALSE}
-vembedr::embed_youtube("VxPpmf-OahU", width = 770, height = 433)
-```
+SaturnCloud ne nécessite pas un ordinateur puissant pour fonctionner, mais il faut une bonne connexion Internet. Il faut aussi que le serveur distant soit disponible et offre les ressources suffisantes pour travailler. *Cette année, nous l'utiliserons pour la première fois... c'est un peu expérimental, en somme.* La version locale avec Docker ou Pacman ne sera utilisée que si nous rencontrons des problèmes avec SaturnCloud. Elle nécessite, en effet, un ordinateur plus puissant et beaucoup plus de place sur le disque pour l'installer.
 
 ### RStudio
 
-Il nous manque encore un outil afin de pouvoir réaliser la rédaction de nos rapports et pouvoir y intégrer des graphiques, des tableaux ou encore des analyses statistiques. Des éditeurs classiques comme [Google Docs](https://www.google.com/intl/fr_be/docs/about/) ou Microsoft Word ne permettent pas d'ajouter facilement des graphiques ou des analyses. Nous vous proposons d'utiliser un environnement complet et optimisé pour réaliser vos analyses, vos graphiques et vos rapports : [R](http://www.r-project.org). Nous complétons cet environnement par un éditeur de documents appelé [RStudio](https://www.rstudio.com/). Ce logiciel travaille main dans la main avec R. Il est lié à git et GitHub. Il permet également des connexions simplifiées à des bases de données. RStudio propose quatre sous-fenêtres que vous pouvez découvrir ci-dessous.
+Il nous manque encore un outil afin de pouvoir réaliser la rédaction de nos rapports dans les meilleures conditions et pouvoir y intégrer des graphiques, des tableaux ou encore des analyses statistiques. Des éditeurs de texte classiques comme [Google Docs](https://www.google.com/intl/fr_be/docs/about/) ou [Microsoft Word](https://www.microsoft.com/fr-fr/microsoft-365/word) ne sont pas orientés vers la production de documents techniques ou scientifiques. Nous utiliserons donc un logiciel complet et optimisé pour produire de tels documents : [RStudio](https://www.rstudio.com/). Celui-ci s'appuie lui-même sur [R](http://www.r-project.org) qui est un langage taillé pour traiter des données, produire des graphiques et des tableaux et réaliser des analyses statistiques.
+
+L'interface de RStudio se présente en quatre sous-fenêtres (on dit aussi des "panneaux" ou *panes* en anglais) que vous pouvez découvrir ci-dessous.
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Cliquez sur les symboles + pour découvrir le rôle de chaque fenêtre de RStudio.*
+*Cliquez sur les symboles + pour découvrir le rôle de chaque sous-fenêtre de RStudio.*
 
 `r h5p(148, height = 270, toc = "L'environnement de RStudio")`
 
-Des explications détaillées se trouvent dans l'annexe \@ref(rs) qui présente les bases de l'utilisation de RStudio. Vous avez également à votre disposition un aide-mémoire afin d'appréhender cette interface [RStudio IDE Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf).
+Des explications détaillées se trouvent dans l'annexe \@ref(rs) qui présente les bases de l'utilisation de RStudio. Vous avez également à votre disposition un aide-mémoire afin d'appréhender cette interface [RStudio IDE Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf).
 
 ##### Pour en savoir plus {.unnumbered}
 
--   [RStudio](https://www.rstudio.com/). Site web de RStudio comprenant un ensemble de ressources en anglais
+-   [RStudio](https://www.rstudio.com/). Site Web de RStudio qui rassemble un ensemble de ressources en anglais
 
 -   [RStudio, un environnement de développement pour R](https://quanti.hypotheses.org/488/). Brève explication de RStudio en français.
 
--   [RStudio : sa vie, son oeuvre, ses ressources](https://elementr.hypotheses.org/237). Un autre site web consacré à RStudio en français.
+-   [RStudio : sa vie, son œuvre, ses ressources](https://elementr.hypotheses.org/237). Une autre courte page en français qui présente RStudio.
 
 #### Projet RStudio
 
-RStudio permet de gérer des projets efficacement. Un projet va regrouper l'ensemble des jeux de données, des rapports, des présentations, des scripts d'une analyse généralement en relation avec une ou plusieurs expériences ou observations réalisées sur le terrain ou en laboratoire.
+RStudio permet de gérer des projets efficacement. Un projet va regrouper l'ensemble des jeux de données, des bloc-notes, des rapports, des présentations, des scripts d'une analyse généralement en relation avec une ou plusieurs expériences ou observations réalisées sur le terrain ou en laboratoire.
 
 ##### À vous de jouer ! {.unnumbered}
 
-Observez les deux images et tentez de repérer chaque différence entre les deux interfaces. Tentez de trouver les *4 différences* avant de lire la section suivante.
+Observez les deux images et tentez de repérer chaque différence entre les deux interfaces, l'une hors projet, et l'autre dans un projet nommé `mon_projet`. Tentez de trouver les *quatre différences* avant de lire la section suivante.
 
-*Cliquez sur les symboles + pour découvrir le rôle de chaque fenêtre de RStudio.*
+*Cliquez sur les symboles (+) pour découvrir le rôle de chaque panneau de RStudio.*
 
 `r h5p(143, height = 270, toc = "Les projets dans RStudio")`
 
-1.  Dans la barre d'outils supérieure, on passe de `Project (None)` vers `mon_projet`. On peut donc facilement repérer si l'on est dans un projet ou non.
-2.  Le chemin d'accès spécifié dans la fenêtre `Console` change et spécifie le chemin d'accès du projet. Le dossier du projet devient le dossier racine.
-3.  La fenêtre `Environment` change et un nouvel onglet nommé `Git` vient s'ajouter. Lorsque l'on est dans un projet, il est possible de réaliser des commits, des pull ou encore des push depuis RStudio via cet onglet.
-4.  La fenêtre contenant l'onglet `Files` change de dossier pour afficher le dossier lié à `mon_projet`. Deux fichiers sont ajoutés par défaut au projet.
+1.  Dans la barre d'outils supérieure, on passe de `Project (None)` vers `mon_projet`. On peut donc facilement repérer si l'on est dans un projet ou non, et si oui, quel est son nom.
+2.  Le chemin d'accès spécifié dans la fenêtre `Console` change et correspond au départ au chemin d'accès vers le projet. Le dossier de base du projet devient le répertoire actif de R à l'ouverture (mais cela peut bien sûr être changé plus tard).
+3.  Le panneau en haut à droite change et un nouvel onglet nommé `Git` vient s'ajouter, mais uniquement si les versions du projet sont gérées par Git. Lorsque l'on est dans un tel projet, il est alors possible de réaliser des commits, des pull ou encore des push depuis RStudio.
+4.  Le panneau en bas à droite contenant l'onglet `Files` change de dossier pour afficher le dossier de base du projet. Dans ce dossier, nous retrouvons obligatoirement un fichier à l'extension `.Rproj` ainsi qu'éventuellement un second, `.gitignore`.
 
--   `.gitignore` : Ce fichier permet de spécifier les fichiers que l'on souhaite exclure de gestionnaire de version. Ce fichier est très utile pour exclure de gros fichiers ou bien les versions compilées des R Markdown par exemple.
--   `mon_projet.Rproj` : À la base d'un projet RStudio, on retrouve un `mon_projet.Rproj`. Ce fichier est placé automatiquement par RStudio. Il s'agit du nom du projet avec l'extension `.Rproj`. Ce fichier contient les paramètres de configuration de votre projet. Il ne faut pas le modifier. Il est utile pour s'assurer que l'on se trouve dans un projet.
+-   `mon_projet.Rproj` : À la base d'un projet RStudio, on retrouve un fichier à l'extension `.Rproj`. Ce fichier est placé automatiquement par RStudio. Ce fichier contient les paramètres de configuration de votre projet. Il ne faut pas le modifier soi-même. Il est utile aussi pour repérer tout de suite que l'on se trouve dans un dossier de base d'un projet RStudio.
+-   `.gitignore` : Ce fichier permet de spécifier les fichiers que l'on souhaite exclure du gestionnaire de version, par exemple, les gros fichiers de jeux de données ou bien les versions compilées des documents R Markdown.
 
 Nous avons donc la structure suivante :
 
@@ -394,65 +371,43 @@ On retrouve trois dossiers principaux dans un projet en science des données. Il
 
     /mon_projet          # Le répertoire de base du projet
       .gitignore         # Fichier relatif à la gestion de version
-      data               # Le dossier qui comprend toutes les données
-      docs               # Le dossier qui comprend toutes les analyses (rapport, présentation,...)
+      data               # Le dossier qui contient les données
+      docs               # Le dossier avec les documents de type rapport, présentation, ...
       mon_projet.Rproj   # Fichier de configuration du projet créé par RStudio
-      R                  # Le dossier qui comprend tous les scripts d'analyse
+      R                  # Le dossier où sont rassemblés les scripts R
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(144, height = 270, toc = "Organisation d'un projet RStudio")`
 
-Des explications détaillées se trouvent dans l'annexe \@ref(rs) qui présente les bases de l'utilisation de RStudio et des projets.
+Des explications plus détaillées sur les projets dans RStudio et la façon de les créer et de les gérer se trouvent dans l'annexe \@ref(rs-projet). Il est temps de passer maintenant à un **tutoriel learnr** pour autoévaluer plus en profondeur votre compréhension de la matière.
 
-Il est temps d'auto-évaluer votre apprentissage via un **tutoriel learnr** dans RStudio.
-
-*Note : les tutoriels learnrs vous permettent d'auto-évaluation votre progression dans la matière et sont marqués d'une icône en forme de toque verte. Ils s'exécutent directement dans RStudio à l'intérieur de la SciViews Box*
-
-`r learnr("A01La_outils", title = "Les différents outils", toc = "Auto-évaluation sur les outils")`
+`r learnr("A01La_tools", title = "Vos outils logiciels", toc = "Autoévaluation sur les outils logiciels")`
 
 ## Premier projet {#premier-projet}
 
-Avec tous les outils présentés dans ce module, vous avez toutes les clés afin de réaliser un projet en science des données.
-
-On commence par lancer le Easy launcher de la SciViews Box et on sélectionne le logo du cours. Cette étape va lancer la machine virtuelle et ouvrir le cours en ligne de Science des données.
-
-![](images/sdd1_01/svbox_launcher.png)
-
-Si vous ne disposez pas la machine virtuelle, rendez vous directement sur le cours en ligne <https://wp.sciviews.org>. Lancez ensuite RStudio. Vous pouvez aussi bien utilisé Renku que la SciViews Box.
-
-![](images/sdd1_01/rstudio_launch.png)
-
-```{block, type='note'}
-Si ce n'est pas encore réalisé, les utilisateurs de la Sciviews Box vont devoir lier RStudio de la machine virtuelle avec GitHub à l'aide d'un *Personal Acces Token*. Cette étape ne doit être réalisé qu'une seule fois. Chaque étape se trouve dans l'annexe \@ref(github-pat).
-```
-
-RStudio permet de cloner directement un projet disponible sur GitHub en quelques étapes comme vous pouvez le voir ci-dessous.
+Il est temps de passer à la pratique. Démarrez votre SciViews box et affichez la fenêtre de RStudio maintenant (si vous ne l'avez pas encore installée, cliquez sur le bouton bleu **RStudio** en haut à droite de cette page pour voir les explications d'installation). RStudio permet de cloner directement un projet disponible sur GitHub en quelques étapes comme vous pouvez le voir ci-dessous.
 
 `r img("sdd1_01/clone.gif")`
 
-Des explications détaillées se trouvent dans l'annexe \@ref(github-clone) qui présente 2 méthodes afin de cloner un projet.
-
-Vous allez terminer ce premier module en réalisant votre premier projet individuel en science des données.
+Des explications détaillées se trouvent dans l'annexe \@ref(github-clone) qui présente deux méthodes différentes pour cloner votre projet GitHub dans RStudio. Vous allez terminer ce premier module en réalisant votre premier projet individuel en science des données.
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Note : créez votre premier projet GitHub Classroom **individuel*** \@ref(github-classroom)*. Lorsque votre projet est créé, faites un clone local de votre dépôt GitHub qui contient ce projet. Lisez le fichier 'README.md' afin de prendre connaissance des consignes pour ce projet.*
+*Note : créez votre premier projet GitHub Classroom **individuel**. Lorsque votre projet est créé, faites un clone local de votre dépôt GitHub qui contient ce projet. Lisez le fichier 'README.md' afin de prendre connaissance des consignes relatives à ce projet.*
 
 ```{r assign_A01Ia_21M_covid19, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A01Ia_21M_covid19", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A01Ia_21M_covid19",
+  assignment("A01Ia_covid19", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A01Ia_covid19",
     course.ids = c(
-      'S-BIOG-006' = !"A01Ia_{YY}M_covid19", 
-      'S-BIOG-921' = !"A01Ia_{YY}C_covid19"),
+      'S-BIOG-006' = !"A01Ia_{YY}M_covid19"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/uyNDOTzd", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/vx1LJoz1"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[2]+5} 08:00:00"),
+      'S-BIOG-006' = !"{W[3]+5} 08:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
+      'S-BIOG-006' = !"{W[3]+5} 13:00:00"),
     term = "Q1", level = 3,
     toc = "Premier projet en science des données")
 ```
@@ -461,7 +416,7 @@ Si vous souhaitez plus d'information sur Github Classroom, vous pouvez vous réf
 
 ## Récapitulatif des exercices
 
-Bravo ! Vous arrivez au bout de votre premier module. Cette dernière section vous permet de vérifier que vous avez bien réalisé tous les exercices de ce module et compris les éléments clés du module. Ce module est consacré aux outils informatiques que nous utiliserons dans la suite du cours, vous aviez à réaliser les exercices suivants :
+Bravo ! Vous arrivez au bout de votre premier module. Cette dernière section vous permet de vérifier que vous avez bien réalisé tous les exercices et de contrôler votre progression telle qu'enregistrée dans notre base de données (étudiants UMONS uniquement). Vous aviez à réaliser les exercices suivants :
 
 `r show_ex_toc()`
 
