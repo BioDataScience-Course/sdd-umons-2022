@@ -35,9 +35,9 @@ small_dataset <- as_dtx(tribble(
 small_dataset
 ```
 
-Dans la plupart des cas, vous utiliserez ou collecterez des données stockées dans des formats divers : feuilles Excel, fichiers CSV ("comma-separated-values", un format standard d'encodage d'un tableau de données sous forme textuelle), formats spécifiques à divers logiciels statistiques comme SAS, Stata ou Systat, ... Ces données peuvent être sur un disque local ou disponibles depuis un lien URL sur le net[^05-importation-transformation-1]. De nombreuses fonctions existent dans R pour importer toutes ces données. La fonction `read()` du package {data.io} est l'une des plus simples et conviviales d'entre-elles. Vous l'avez déjà utilisée, mais reprenons un exemple pour en discuter les détails.
+Dans la plupart des cas, vous utiliserez ou collecterez des données stockées dans des formats divers : feuilles Excel, fichiers CSV ("comma-separated-values", un format standard d'encodage d'un tableau de données sous forme textuelle), formats spécifiques à divers logiciels statistiques comme SAS, Stata ou Systat, ... Ces données peuvent être sur un disque local ou disponible depuis un lien URL sur le net[^05-importation-transformation-1]. De nombreuses fonctions existent dans R pour importer toutes ces données. La fonction `read()` du package {data.io} est l'une des plus simples et conviviales d'entre-elles. Vous l'avez déjà utilisée, mais reprenons un exemple pour en discuter les détails.
 
-[^05-importation-transformation-1]: R permet également d'interroger des bases de données spécialisées, mais nous n'aborderons ce sujet spécifique qu'au cours de Science des Données Biologique 5 en Master 2.
+[^05-importation-transformation-1]: R permet également d'interroger des bases de données spécialisées, mais nous n'aborderons ce sujet spécifique qu'au cours de Science des Données Biologiques 4 en Master 2.
 
 ```{r}
 (biometry <- read("biometry", package = "BioDataScience", lang = "fr"))
@@ -61,7 +61,7 @@ Avant d'importer vos données dans R, vous devez vous poser les deux questions s
 
 Vous venez d'importer des données depuis un package R. Vous pouvez également les lire depuis un fichier sur le disque ou via une URL depuis le Web. Tous ces cas sont gérés par `read()` qui unifie donc de manière simple vos accès aux données.
 
--   Quels est le format de vos données ?
+-   Quel est le format de vos données ?
 
 Souvent ce format est renseigné par l'**extension** du fichier. Par exemple **.xlsx** pour un Microsoft Excel ou **.csv** pour du "comma-separated-value". Attention ! L'extension du fichier est cachée sous Windows, et parfois sous MacOS. Visualisez vos fichiers dans l'onglet **Files** dans RStudio pour voir leurs noms complets, avec les extensions. Pour l'instant, `read()` supporte 32 formats de fichiers différents, mais cette liste est amenée à s'agrandir à l'avenir. Pour découvrir les formats supportés, et les fonctions d'importation spécifiques appelées à chaque fois, utilisez :
 
@@ -93,7 +93,7 @@ Les explications détaillées concernant l'organisation de vos projets dans RStu
 
 -   Si l'extension est incorrecte, vous pouvez forcer un format de fichier particulier à l'importation en l'indiquant dans l'appel à `read()` comme `read$<ext>()`. Par exemple, pour forcer l'importation d'un fichier de type "comma-separated-values" pour un fichier qui se nommerait `my_data.txt`, vous écrirez `read$csv(my_data.txt)`.
 
--   Si les données ne sont pas importées correctement, cela signifie que les arguments d'importation par défaut ne sont pas adaptés. Les arguments à spécifier sont différents d'un format à l'autre. Voyez d'abord la fonction appelée en interne par `read()`dans le tableau obtenu via `getOption("read_write")`. Par exemple, pour un fichier `xlsx`, il s'agit de la fonction `readxl::read_excel()` qui est utilisée. Ensuite, voyez l'aide de cette dernière fonction pour en découvrir les différents arguments (`?readxl::read_excel`). Là, vous pourrez découvrir les arguments `sheet =`qui indiquent la feuille à importer depuis le fichier (première feuille par défaut), ou `range =` qui indique la plage de données dans le feuille à utiliser (par défaut, depuis la cellule A1 en haut à gauche jusqu'à la fin du tableau). Donc, si votre fichier `my_data.xlsx` contient les feuilles `sheet1`, `sheet2` et `sheet3`, et que les données qui vous intéressent sont dans la plage `C5:E34` de `sheet2`, vous pourrez écrire: `read("my_data.xlsx", sheet = "sheet2", range = "C5:E34")`.
+-   Si les données ne sont pas importées correctement, cela signifie que les arguments d'importation par défaut ne sont pas adaptés. Les arguments à spécifier sont différents d'un format à l'autre. Voyez d'abord la fonction appelée en interne par `read()`dans le tableau obtenu via `getOption("read_write")`. Par exemple, pour un fichier `xlsx`, il s'agit de la fonction `readxl::read_excel()` qui est utilisée. Ensuite, voyez l'aide de cette dernière fonction pour en découvrir les différents arguments (`?readxl::read_excel`). Là, vous pourrez découvrir les arguments `sheet =`qui indiquent la feuille à importer depuis le fichier (première feuille par défaut), ou `range =` qui indiquent la plage de données dans la feuille à utiliser (par défaut, depuis la cellule A1 en haut à gauche jusqu'à la fin du tableau). Donc, si votre fichier `my_data.xlsx` contient les feuilles `sheet1`, `sheet2` et `sheet3`, et que les données qui vous intéressent sont dans la plage `C5:E34` de `sheet2`, vous pourrez écrire: `read("my_data.xlsx", sheet = "sheet2", range = "C5:E34")`.
 
 ### Données depuis Internet
 
@@ -121,7 +121,7 @@ Vous n'aurez alors plus qu'à lire les données depuis cette URL. N'oubliez pas 
 (coral <- read$csv(coral_url))
 ```
 
-Lorsque vous travaillez sur des données issues d'une source externe, et donc susceptibles d'être modifiées ou même pire, de disparaître. Il est préférable d'enregistrer une **copie locale** de ces données dans votre projet (dans le sous-dossier `data` de préférence). Si vous travaillez exclusivement avec R, l'un des meilleurs formats est RDS, un format natif qui conservera toutes les caractéristiques de votre objet, y compris sa classe, et d'éventuels attributs[^05-importation-transformation-2]. Par défaut, les données seront stockées non compressées, mais vous pourrez aussi décider de compresser avec les algorithmes `"gz"` (plus rapide et répandu), `"bz2"` (intermédiaire), ou `"xz"` (le plus efficace en taux de compression mais aussi le plus lent et gourmand en ressources CPU). Par exemple, pour enregistrer les données avec compression `"gz"`, dans le sous-dossier `data` de votre projet vous écrirez (le dossier `data` doit être préexistant) :
+Lorsque vous travaillez sur des données issues d'une source externe, et donc susceptibles d'être modifiées ou même pire, de disparaître. Il est préférable d'enregistrer une **copie locale** de ces données dans votre projet (dans le sous-dossier `data` de préférence). Si vous travaillez exclusivement avec R, l'un des meilleurs formats est RDS, un format natif qui conservera toutes les caractéristiques de votre objet, y compris sa classe, et d'éventuels attributs[^05-importation-transformation-2]. Par défaut, les données seront stockées non compressées, mais vous pourrez aussi décider de compresser avec les algorithmes `"gz"` (plus rapide et répandu), `"bz2"` (intermédiaire), ou `"xz"` (le plus efficace en taux de compression, mais aussi le plus lent et gourmand en ressources CPU). Par exemple, pour enregistrer les données avec compression `"gz"`, dans le sous-dossier `data` de votre projet, vous écrirez (le dossier `data` doit être préexistant) :
 
 [^05-importation-transformation-2]: Si vous devez aussi accéder à vos données à partir d'autres langages comme Python, Java ou C++, utilisez un format commun reconnu par les différents logiciels. Le CSV fonctionne généralement bien, mais des formats binaires plus performants sont également disponibles. Parmi ces formats "inter-langages", gardez un œil sur [Apache Arrow](https://arrow.apache.org) très prometteur et avec une version pour R qui sera disponible prochainement.
 
@@ -150,7 +150,7 @@ coral <- read("../data/coral.rds")
     #source("../R/data-import.R")
     ```
 
-    Si le travail de préparation des données est lourd (et donc, prend beaucoup de temps) il peut être avantageux d'enregistrer localement la version **nettoyée** de vos données plutôt que la version originale. Mais alors indiquez-le explicitement.
+    Si le travail de préparation des données est lourd (et donc, prends beaucoup de temps) il peut être avantageux d'enregistrer localement la version **nettoyée** de vos données plutôt que la version originale. Mais alors, indiquez-le explicitement.
 
 ```{block, type = 'warning'}
 Faites toujours la distinction entre **données brutes** et **données nettoyées**. Ne les mélangez jamais et documentez toujours de manière reproductible le processus qui mène des unes aux autres ! C'est tout aussi important que de garder un lien vers la source originale des données dans votre code et d'utiliser toujours des chemins relatifs vers vos fichiers pour une analyse portable et reproductible.
@@ -245,7 +245,7 @@ urchin_FR %>.%
   head(.)
 ```
 
-Le code a dû être modifier dans l'instruction `filter()` lors du passage à `urchin_FR` (`Farm` -\> `Pêcherie`). Bien évidemment, pour un rapport *plus formel* en français, **tout** doit être traduit en français et l'option `lang = "FR"` accompagnée d'une vérification et une adaptation éventuelle du code est à préférer dans ce cas précis.
+Le code a dû être modifié dans l'instruction `filter()` lors du passage à `urchin_FR` (`Farm` -\> `Pêcherie`). Bien évidemment, pour un rapport *plus formel* en français, **tout** doit être traduit en français et l'option `lang = "FR"` accompagnée d'une vérification et une adaptation éventuelle du code est à préférer dans ce cas précis.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -253,7 +253,7 @@ Le code a dû être modifier dans l'instruction `filter()` lors du passage à `u
 
 ## Types de variables
 
-Lors de la réalisation de graphiques dans les modules précédents vous avez compris que toutes les variables ne sont pas équivalentes. Certains graphiques sont plutôt destinés à des variables **qualitatives** (par exemple, graphique en barres), alors que d'autres représentent des données **quantitatives** comme le nuage de points.
+Lors de la réalisation de graphiques dans les modules précédents, vous avez compris que toutes les variables ne sont pas équivalentes. Certains graphiques sont plutôt destinés à des variables **qualitatives** (par exemple, graphique en barres), alors que d'autres représentent des données **quantitatives** comme le nuage de points.
 
 ```{r}
 (biometry <- read("biometry", package = "BioDataScience", lang = "fr"))
@@ -695,7 +695,7 @@ knitr::kable(tooth_summary2, digits = 2,
 
 ##### Pièges et astuces {.unnumbered}
 
--   Tout comme lors de réalisation d'une boite de dispersion, vous devez être particulièrement vigilant au nombre d'observation par sous-groupe. Pensez toujours à ajoutez à chaque tableau de résumé des données, le nombre d'observation par sous-groupe grâce à la fonction `n()`. Cependant, cette fonction n'est **pas** disponible avec `fgroup_by()` et `fsummarise()`. Vous *devez* donc absolument utiliser `group_by()` et `summarise()` icic, sinon, vous aurez une erreur !
+-   Tout comme lors de réalisation d'une boite de dispersion, vous devez être particulièrement vigilant au nombre d'observation par sous-groupe. Pensez toujours à ajoutez à chaque tableau de résumé des données, le nombre d'observations par sous-groupe grâce à la fonction `n()`. Cependant, cette fonction n'est **pas** disponible avec `fgroup_by()` et `fsummarise()`. Vous *devez* donc absolument utiliser `group_by()` et `summarise()` icic, sinon, vous aurez une erreur !
 
 ```{r}
 tooth %>.% 
@@ -864,7 +864,7 @@ Réalisez dans le projet sur le zooplankton les exercices suivants\ :
   
   <https://github.com/BioDataScience-Course/sdd_lesson/blob/2019-2020/sdd1_05/exercises/sdd1_05_zooplankton.md>
   
-Consignez vos résultats dans une document R Markdown avec une explication de vos différents remaniements.
+Consignez vos résultats dans un document R Markdown avec une explication de vos différents remaniements.
 ```
 
 ---->

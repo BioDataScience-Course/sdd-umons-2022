@@ -24,7 +24,7 @@ Ce module est élaboré sur les notions vues au module \@ref(proba) concernant l
 
 ## Une histoire de bière...
 
-Les belges, c'est connu, apprécient la bière. Mais ils ne sont pas les seuls, et c'est très heureux ! Car c'est en effet grâce à un certain William Sealy Gosset, brasseur et statisticien (et oui, ça ne s'invente pas) que l'un des tests d'hypothèses des plus utilisés en biologie a vu le jour : le test de "Student" qui permet de comparer des moyennes.
+Les Belges, c'est connu, apprécient la bière. Mais ils ne sont pas les seuls, et c'est très heureux ! Car c'est en effet grâce à un certain William Sealy Gosset, brasseur et statisticien (et oui, ça ne s'invente pas) que l'un des tests d'hypothèses des plus utilisés en biologie a vu le jour : le test de "Student" qui permet de comparer des moyennes.
 
 Pour la petite histoire, Gosset a travaillé pour une certaine brasserie irlandaise du nom de Guiness au début du 20^e^ siècle. C'est en étudiant la variabilité de sa bière d'un cru à l'autre que Gosset a découvert la façon dont la moyenne d'un échantillon se distribue. Il a pu dériver une formulation mathématique de cette distribution, la **distribution *t* de Student**, et à partir de là, nous verrons que de nombreuses applications en découlent. Nous pourrons, par exemple, dire si deux moyennes diffèrent **significativement** l'une de l'autre ou pas.
 
@@ -36,7 +36,7 @@ Mais au fait, pourquoi, cette distribution porte-t-elle le nom de "Student" ? V
 vembedr::embed_youtube("GFzCIA9kppM", width = 770, height = 433)
 ```
 
-Le contrat que Gosset a signé avec son employeur l'empêchait de publier des résultats scientifiques sous son vrai nom. Ainsi, il décida de publier sa trouvaille qui occupe aujourd'hui une place très importante en statistiques sous le pseudonyme de "Student" (l'étudiant). Ce n'est qu'à sa mort, en 1937, que l'on pu révéler le nom de l'auteur qui est derrière cette fantastique trouvaille. Mais au fait, de quoi s'agit-il exactement ? Nous allons le découvrir dans la section suivante.
+Le contrat que Gosset a signé avec son employeur l'empêchait de publier des résultats scientifiques sous son vrai nom. Ainsi, il décida de publier sa trouvaille qui occupe aujourd'hui une place très importante en statistiques sous le pseudonyme de "Student" (l'étudiant). Ce n'est qu'à sa mort, en 1937, que l'on put révéler le nom de l'auteur qui est derrière cette fantastique trouvaille. Mais au fait, de quoi s'agit-il exactement ? Nous allons le découvrir dans la section suivante.
 
 ## Distribution d'échantillonnage
 
@@ -60,11 +60,11 @@ Nous utiliserons également l'écart type, noté $\sigma_x$ pour la population e
 ```
 A noter que $s^2$ est également appelée la **variance**[^09-moyenne-2].
 
-[^09-moyenne-2]: L'équation proposée est, en fait, valable pour un échantillon, et est calculé comme tel par R à l'aide des fonctions `sd()` pour l'écart type ou `var()` pour la variance. Pour la population ou pour un échantillon de taille très grande, voire infinie, nous pourrions plutôt diviser par $n$ au lieu de $n - 1$, ... mais puisque $n$ est très grand, cela ne change pas grand chose au final.
+[^09-moyenne-2]: L'équation proposée est, en fait, valable pour un échantillon, et est calculé comme tel par R à l'aide des fonctions `sd()` pour l'écart type ou `var()` pour la variance. Pour la population ou pour un échantillon de taille très grande, voire infinie, nous pourrions plutôt diviser par $n$ au lieu de $n - 1$, ... mais puisque $n$ est très grand, cela ne change pas grand-chose au final.
 
 En fait, ce qui nous intéresse, ce n'est pas vraiment la moyenne de l'échantillon, mais celle de la population que l'on notera $\mu$[^09-moyenne-3].
 
-[^09-moyenne-3]: Notez que les lettres latines sont utilisées pour se référer aux variables et aux descripteurs statistiques telle que la moyenne pour l'échantillon, alors que les paramètres équivalents de la population, qui sont inconnus, sont représentés par des lettres grecques en statistiques.
+[^09-moyenne-3]: Notez que les lettres latines sont utilisées pour se référer aux variables et aux descripteurs statistiques telles que la moyenne pour l'échantillon, alors que les paramètres équivalents de la population, qui sont inconnus, sont représentés par des lettres grecques en statistiques.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -85,9 +85,9 @@ Dans ce cas-ci, nous obtenons une moyenne de 7,8. Ce n'est pas égal à 8. Le ha
 mean(rnorm(9, mean = 8, sd = 2))
 ```
 
-Cette fois-ci, nous obtenons une moyenne de 8,7. Nous savons que la moyenne $\mu$ qui nous intéresse est très probablement différente de la moyenne de notre échantillon, **mais de combien ?** Pour le déterminer, nous devons définir comment la moyenne de l'échantillon varie d'un échantillon à l'autre, c'est ce qu'on appelle la **distribution d'échantillonnage**. Nous pouvons le déterminer expérimentalement en échantillonnant un grand nombre de fois. On appelle cela une **méta-expérience.** En pratique, c'est difficile à faire, mais avec notre ordinateur et le générateur de nombres pseudo-aléatoires de R, pas de problèmes. Donc, comment se distribue la moyenne entre, ... disons dix mille échantillons différents de neufs individus tirés de la même population[^09-moyenne-4] ?
+Cette fois-ci, nous obtenons une moyenne de 8,7. Nous savons que la moyenne $\mu$ qui nous intéresse est très probablement différente de la moyenne de notre échantillon, **mais de combien ?** Pour le déterminer, nous devons définir comment la moyenne de l'échantillon varie d'un échantillon à l'autre, c'est ce qu'on appelle la **distribution d'échantillonnage**. Nous pouvons le déterminer expérimentalement en échantillonnant un grand nombre de fois. On appelle cela une **métaexpérience.** En pratique, c'est difficile à faire, mais avec notre ordinateur et le générateur de nombres pseudo-aléatoires de R, pas de problèmes. Donc, comment se distribue la moyenne entre ... disons dix mille échantillons différents de neuf individus tirés de la même population[^09-moyenne-4] ?
 
-[^09-moyenne-4]: Nous utilisons pour se faire une boucle `for` dans R qui réitère un calcul sur chaque élément d'un vecteur, ici, une séquence 1, 2, 3, ..., 10000 obtenue à l'aide de l'instruction `1:10000`.
+[^09-moyenne-4]: Nous utilisons pour ce faire une boucle `for` dans R qui réitère un calcul sur chaque élément d'un vecteur, ici, une séquence 1, 2, 3, ..., 10000 obtenue à l'aide de l'instruction `1:10000`.
 
 ```{r}
 means_n9 <- numeric(10000) # Vecteur de 10000 valeurs
@@ -114,7 +114,7 @@ La moyenne de la distribution d'échantillonnage est donc égale à la moyenne d
 
 `r h5p(87, height = 400, toc = "Méta-expérience")`
 
-Détaillons la méta-expérience toujours à partir de la même population, mais avec des échantillons plus petits, par exemple, avec $n = 4$ :
+Détaillons la métaexpérience toujours à partir de la même population, mais avec des échantillons plus petits, par exemple, avec $n = 4$ :
 
 ```{r}
 means_n4 <- numeric(10000) # Vecteur de 10000 valeurs
@@ -148,7 +148,7 @@ sd(means_n100)
 
 On obtient toujours 8 comme moyenne, mais cette fois-ci, l'écart type est de 0,2, soit 2/10.
 
-*Pouvez-vous deviner comment l'écart type de la distribution t de Student varie sur base de ces trois méta-expériences ? Réfléchissez un petit peu avant de lire la suite.*
+*Pouvez-vous deviner comment l'écart type de la distribution t de Student varie sur base de ces trois métaexpériences ? Réfléchissez un petit peu avant de lire la suite.*
 
 La première bonne nouvelle, c'est que la moyenne des moyennes des échantillons vaut $\mu_x = \mu$, la moyenne de la population que nous recherchons.
 
@@ -160,11 +160,11 @@ On dira :
 
 $$\mu_x \sim t(\mu, \frac{\sigma}{\sqrt{n}}, n-1)$$
 
-La moyenne de l'échantillon suit une distribution *t* de Student avec pour moyenne, la moyenne de la population, pour écart type, l'écart type de la population divisé par la racine carrée de *n*, et comme degrés de liberté *n* moins un. La distribution *t* de Student dans R est représentée par `<x>t()`. Donc, `qt()` calcule un quantile à partir d'une probabilité, `pt()` une probabilité à partir d'un quantile, `rt()` renvoie un ou plusieurs nombres pseudo-aléatoires selon une distribution *t*, et `dt()` renvoie la densité de probabilité de la distribution. Dans la SciViews Box, vous y accédez également via les "snippets" à partie de `.it` pour `(d)istribution: t (Student)` :
+La moyenne de l'échantillon suit une distribution *t* de Student avec pour moyenne, la moyenne de la population, pour écart type, l'écart type de la population divisé par la racine carrée de *n*, et comme degrés de liberté *n* moins un. La distribution *t* de Student dans R est représentée par `<x>t()`. Donc, `qt()` calcule un quantile à partir d'une probabilité, `pt()` une probabilité à partir d'un quantile, `rt()` renvoie un ou plusieurs nombres pseudo-aléatoires selon une distribution *t*, et `dt()` renvoie la densité de probabilité de la distribution. Dans la SciViews Box, vous y accédez également via les "snippets" à partir de `.it` pour `(d)istribution: t (Student)` :
 
 ![](images/sdd1_09/t-distribution-snippets.png)
 
-Le calcul est un peu plus complexe car les fonctions `<x>t()` ne considèrent que les distributions *t* de Student *réduites* (donc avec moyenne valant zéro et écart type de un). Nous devons ruser pour transformer le résultat en fonction des valeurs désirées. Mais heureusement, les "snippets" nous aident en nous prémâchant la besogne. Considérons le cas $n = 9$ avec un moyenne de 8 et un écart type de 2/3. Voici quelques exemples de calculs réalisables :
+Le calcul est un peu plus complexe, car les fonctions `<x>t()` ne considèrent que les distributions *t* de Student *réduites* (donc avec moyenne valant zéro et écart type de un). Nous devons ruser pour transformer le résultat en fonction des valeurs désirées. Mais heureusement, les "snippets" nous aident en nous prémâchant la besogne. Considérons le cas $n = 9$ avec un moyenne de 8 et un écart type de 2/3. Voici quelques exemples de calculs réalisables :
 
 -   Quelle est la probabilité que la moyenne d'un échantillon soit égale ou supérieure à 8,5 ?
 
@@ -210,7 +210,7 @@ chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
   annotate("text", x = 6.5, y = 0.02, label = "5%", col = "red")
 ```
 
-Nous pouvons voir sur la Fig. \@ref(fig:tdistri1) que la distribution *t* de Student est plus resserrée en son centre, mais plus étalée aux extrémités que la distribution Normale de même moyenne et écart type. Néanmoins, elle est d'autant plus proche d'une Normale que les degrés de libertés sont grands. On dit qu'elle converge vers une normale lorsque $dll \longrightarrow \infty$. En pratique, pour des degrés de liberté égaux ou supérieurs à 30, nous pourrons considérer que les deux distributions sont pratiquement confondues.
+Nous pouvons voir sur la Fig. \@ref(fig:tdistri1) que la distribution *t* de Student est plus resserrée en son centre, mais plus étalée aux extrémités que la distribution Normale de même moyenne et écart type. Néanmoins, elle est d'autant plus proche d'une Normale que les degrés de liberté sont grands. On dit qu'elle converge vers une normale lorsque $dll \longrightarrow \infty$. En pratique, pour des degrés de liberté égaux ou supérieurs à 30, nous pourrons considérer que les deux distributions sont pratiquement confondues.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -218,7 +218,7 @@ Nous pouvons voir sur la Fig. \@ref(fig:tdistri1) que la distribution *t* de Stu
 
 Revenons à nos calculs de quantiles et probabilités. Les questions que l'on se posera seront plutôt :
 
--   Quelle est la probabilité que la moyenne d'un échantillon diffère de 0,5 unités de la vraie valeur ? Au lieu de considérer l'aire à gauche ou à droite, on considérera **une aire répartie symétriquement à moitié à gauche et à moitié à droite**. La réponse à la question est :
+-   Quelle est la probabilité que la moyenne d'un échantillon diffère de 0,5 unité de la vraie valeur ? Au lieu de considérer l'aire à gauche ou à droite, on considérera **une aire répartie symétriquement à moitié à gauche et à moitié à droite**. La réponse à la question est :
 
 ```{r}
 # Aire à gauche de 8 -0.5 :
@@ -356,7 +356,7 @@ chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
 
 ### Théorème central limite (encore)
 
-Jusqu'ici, nous avons considéré une population au départ qui a une distribution Normale, mais rien ne dit que ce soit le cas. Que se passe-t-il lorsque la distribution est différentes ? Ici encore, nous pouvons effectuer une méta-expérience. Considérons, par exemple, une distribution uniforme de même moyenne = 8 et écart type = 2. Sachant que l'écart type d'une distribution uniforme vaut $\frac{max - min}{\sqrt{12}}$, voir [ici](https://fr.wikiversity.org/wiki/Variables_aléatoires_continues/Loi_uniforme), l'intervalle est de : $2 \cdot \sqrt{12} = 6,928$. Nous avons donc :
+Jusqu'ici, nous avons considéré une population au départ qui a une distribution Normale, mais rien ne dit que ce soit le cas. Que se passe-t-il lorsque la distribution est différente ? Ici encore, nous pouvons effectuer une métaexpérience. Considérons, par exemple, une distribution uniforme de même moyenne = 8 et écart type = 2. Sachant que l'écart type d'une distribution uniforme vaut $\frac{max - min}{\sqrt{12}}$, voir [ici](https://fr.wikiversity.org/wiki/Variables_aléatoires_continues/Loi_uniforme), l'intervalle est de : $2 \cdot \sqrt{12} = 6,928$. Nous avons donc :
 
 ```{r}
 (xmin <- 8 - sqrt(12))
@@ -461,18 +461,18 @@ Sur le graphique, il semble que les femelles (`sex == "F"`) tendent à avoir une
 -   $H_0: \overline{rear_F} = \overline{rear_M}$
 -   $H_1: \overline{rear_F} \neq \overline{rear_M}$
 
-Ici, nous n'avons aucune idée *a priori* pour $H_1$ si les femelles sont sensées avoir une carapace plus large ou non que les mâles à l'arrière. Donc, nous considérons qu'elle peut être aussi bien plus grande que plus petite. On parle ici de **test bilatéral** car la différence peut apparaître des deux côtés. Pour ce test, nous pouvons partir de la notion d'intervalle de confiance et de notre idée de calculer les quantiles de part et d'autre de la distribution théorique à parts égales, comme dans la Fig. \@ref(fig:tdistri2).
+Ici, nous n'avons aucune idée *a priori* pour $H_1$ si les femelles sont sensées avoir une carapace plus large ou non que les mâles à l'arrière. Donc, nous considérons qu'elle peut être aussi bien plus grande que plus petite. On parle ici de **test bilatéral,** car la différence peut apparaître des deux côtés. Pour ce test, nous pouvons partir de la notion d'intervalle de confiance et de notre idée de calculer les quantiles de part et d'autre de la distribution théorique à parts égales, comme dans la Fig. \@ref(fig:tdistri2).
 
 Une idée serait de calculer $\overline{rear_F} - \overline{rear_M}$, la différence des moyennes entre mesures pour les femelles et pour les mâles. Les hypothèses deviennent alors :
 
 -   $H_0: \overline{rear_F} - \overline{rear_M} = 0$
 -   $H_1: \overline{rear_F} - \overline{rear_M} \neq 0$
 
-Appelons cette différence $\Delta rear$. Nous pouvons définir un intervalle de confiance pour $\Delta rear$ si nous pouvons calculer la valeur *t* ainsi que l'erreur standard $SE_{\Delta rear}$ associées à cette variables calculée. Après avoir interrogé des statisticiens chevronnés, ceux-ci nous proposent l'équation suivante pour $SE_{\Delta rear}$ (avec $n_F$ le nombre de femelles et $n_M$ le nombre de mâles) :
+Appelons cette différence $\Delta rear$. Nous pouvons définir un intervalle de confiance pour $\Delta rear$ si nous pouvons calculer la valeur *t* ainsi que l'erreur standard $SE_{\Delta rear}$ associés à cette variable calculée. Après avoir interrogé des statisticiens chevronnés, ceux-ci nous proposent l'équation suivante pour $SE_{\Delta rear}$ (avec $n_F$ le nombre de femelles et $n_M$ le nombre de mâles) :
 
 $$SE_{\Delta rear} = \sqrt{SE_{rear_F}^2 + SE_{rear_M}^2} = \sqrt{\frac{s_{rear_F}^2}{n_F} + \frac{s_{rear_M}^2}{n_M}}$$
 
-Il nous reste à déterminer les degrés de liberté associés à la distribution *t*. Les statisticiens nous disent qu'il s'agit de *n* moins deux degrés de libertés. Nous obtenons alors l'équation suivante pour l'intervalle de confiance :
+Il nous reste à déterminer les degrés de liberté associés à la distribution *t*. Les statisticiens nous disent qu'il s'agit de *n* moins deux degrés de liberté. Nous obtenons alors l'équation suivante pour l'intervalle de confiance :
 
 $$\mathrm{IC}(1 - \alpha)_{\Delta rear} \simeq \Delta rear \pm t_{\alpha/2}^{n-2} \cdot SE_{\Delta rear}$$
 
@@ -497,7 +497,7 @@ Un premier raisonnement consiste à dire que si la valeur attendue sous $H_0$ es
 
 Nous pouvons effectivement interpréter le test de cette façon, mais le test *t* de Student se définit de manière plus classique en comparant la valeur $t_{obs}$ à la distribution théorique, et en renvoyant une valeur *P* associée au test. Ainsi, le lecteur peut interpréter les résultats avec son propre seuil $\alpha$ éventuellement différent de celui choisi par l'auteur de l'analyse.
 
-Le raisonnement est le suivant. Sous $H_0$, la distribution de $\Delta rear$ est connue. Elle suit une distribution *t* de Student de moyenne égale à la vraie valeur de la différence des moyennes, d'écart type égal à l'erreur standard sur cette différence, et avec $n - 2$ degrés de liberté. En pratique, nous remplaçons les valeurs de la population pour la différence des moyennes et pour les erreurs standard par celles estimées par l'intermédiaire de l'échantillon. Comme dans le cas du test $\chi^2$, nous définissons les zones de rejet et de non rejet par rapport à cette distribution théorique. Dans le cas du test de Student bilatéral, l'aire $\alpha$ est répartie à moitié à gauche et à moitié à droite (Fig. \@ref(fig:ttest1)).
+Le raisonnement est le suivant. Sous $H_0$, la distribution de $\Delta rear$ est connue. Elle suit une distribution *t* de Student de moyenne égale à la vraie valeur de la différence des moyennes, d'écart type égal à l'erreur standard sur cette différence, et avec $n - 2$ degrés de liberté. En pratique, nous remplaçons les valeurs de la population pour la différence des moyennes et pour les erreurs standard par celles estimées par l'intermédiaire de l'échantillon. Comme dans le cas du test $\chi^2$, nous définissons les zones de rejet et de non-rejet par rapport à cette distribution théorique. Dans le cas du test de Student bilatéral, l'aire $\alpha$ est répartie à moitié à gauche et à moitié à droite (Fig. \@ref(fig:ttest1)).
 
 ```{r ttest1, echo=FALSE, fig.cap="Visualisation de la distribution de Student réduite sous l'hypothèse nulle du test bilatéral au seuil de 5%."}
 # Student's t distribution (density probability) with parameters:
@@ -534,7 +534,7 @@ chart(data = dtx(Quantiles = .x, Prob = .d(.x)),
     col = "red", fontface = "bold.italic")
 ```
 
-Nous pouvons calculer la valeur *P* nous-même comme ceci, sachant la valeur de $t_{obs} = \frac{\Delta rear}{SE_{\Delta rear}}$ parce que nous travaillons avec une distribution *t* réduite :
+Nous pouvons calculer la valeur *P* nous-mêmes comme ceci, sachant la valeur de $t_{obs} = \frac{\Delta rear}{SE_{\Delta rear}}$ parce que nous travaillons avec une distribution *t* réduite :
 
 ```{r}
 (t_obs <- delta_rear / se)
@@ -552,7 +552,7 @@ t.test(data = crabs, rear ~ sex,
   alternative = "two.sided", conf.level = 0.95, var.equal = TRUE)
 ```
 
-Nous retrouvons exactement toutes les valeurs que nous avons calculées à la main. Dans le cas présent, rappelez-vous la façon d'interpréter le test. Nous comparons la valeur *P* à $\alpha$. Si elle est plus petit, nous rejetons $H_0$, sinon, nous ne la rejetons pas. Ici, nous rejetons $H_0$ et pourrons dire que la largeur à l'arrière de la carapace de *L. variegatus* diffère de manière significative entre les mâles et les femelles au seuil $\alpha$ de 5% (test t bilatéral, *t* = 4,29, ddl = 198, valeur *P* \<\< 10^-3^).
+Nous retrouvons exactement toutes les valeurs que nous avons calculées à la main. Dans le cas présent, rappelez-vous la façon d'interpréter le test. Nous comparons la valeur *P* à $\alpha$. Si elle est plus petite, nous rejetons $H_0$, sinon, nous ne la rejetons pas. Ici, nous rejetons $H_0$ et pourrons dire que la largeur à l'arrière de la carapace de *L. variegatus* diffère de manière significative entre les mâles et les femelles au seuil $\alpha$ de 5% (test t bilatéral, *t* = 4,29, ddl = 198, valeur *P* \<\< 10^-3^).
 
 ##### Conditions d'application {.unnumbered}
 
@@ -651,7 +651,7 @@ Un autre exemple évident de test unilatéral : si nous mesurons la concentrati
 -   $H_0: \overline{[S]} = 0$
 -   $H_1: \overline{[S]} > 0$
 
-Ce test sera nécessairement unilatéral à droite car des concentrations négatives ne sont pas possibles.
+Ce test sera nécessairement unilatéral à droite, car des concentrations négatives ne sont pas possibles.
 
 ### Test *t* apparié
 
@@ -680,7 +680,7 @@ Nous calculons la moyenne de cette différence notée `delta_f_r`. Nous résumon
 -   l'erreur standard dans `se_f_r` (pour rappel, $SE = \frac{s_x}{\sqrt{n}}$),
 -   la valeur de `t_obs` reportée selon la distribution *t* réduite, donc, en divisant `mean_f_r` par `se_f_r`.
 
-Ici, comme nous utilisons des variables créées dans le `summarise()` à l'intérieur même de la fonction, nous ne pouvons pas le faire avec un **data.table**, ni avec `fsummarise()` car il nous faut aussi utiliser `n()`. La solution dans ce cas est de recourir au calcul par défaut du package {dplyr} (et non de {dtplyr} comme nous l'avons fait jusqu'ici). Pour ce faire, il suffit de convertir `crabs` en **data.frame** à l'aide de `as_dtf()`. Notez aussi que dans le cas de l'utilisation d'un **data.frame**, l'étape de collecte à la fin n'est pas non plus nécessaire.
+Ici, comme nous utilisons des variables créées dans le `summarise()` à l'intérieur même de la fonction, nous ne pouvons pas le faire avec un **data.table**, ni avec, `fsummarise()` car il nous faut aussi utiliser `n()`. La solution dans ce cas est de recourir au calcul par défaut du package {dplyr} (et non de {dtplyr} comme nous l'avons fait jusqu'ici). Pour ce faire, il suffit de convertir `crabs` en **data.frame** à l'aide de `as_dtf()`. Notez aussi que dans le cas de l'utilisation d'un **data.frame**, l'étape de collecte à la fin n'est pas non plus nécessaire.
 
 ```{r}
 as_dtf(crabs) %>.%
@@ -697,7 +697,7 @@ La distribution de référence sous $H_0$ à partir de ces calculs est une $t(0,
 pt(25.324, df = 199, lower.tail = FALSE) * 2
 ```
 
-Avant d'effectuer le test, pensez toujours à visualiser vos données avec la représentation la plus judicieuse. Ici, la boite de dispersion parallèle n'est pas très indiquée car elle ne prend pas en compte l'appariement des données. Un graphique en nuage de points avec la bissectrice (pente de un et ordonnée à l'origine de zéro) ajoutée comme référence convient bien mieux. Sous $H_0$, le nuage de points est sensé se concentrer sur cette bissectrice.
+Avant d'effectuer le test, pensez toujours à visualiser vos données avec la représentation la plus judicieuse. Ici, la boite de dispersion parallèle n'est pas très indiquée, car elle ne prend pas en compte l'appariement des données. Un graphique en nuage de points avec la bissectrice (pente de un et ordonnée à l'origine de zéro) ajoutée comme référence convient bien mieux. Sous $H_0$, le nuage de points est sensé se concentrer sur cette bissectrice.
 
 ```{r}
 chart(data = crabs, rear ~ front) +
@@ -714,7 +714,7 @@ t.test(crabs$front, crabs$rear,
   alternative = "two.sided", conf.level = 0.95, paired = TRUE)
 ```
 
-Nous rejetons $H_0$ car la valeur *P* est inférieure à $\alpha$. Nous en concluons que le crabe *L. variegatus* a une carapace significativement plus large à l'avant qu'à l'arrière (t test apparié = 25,3, ddl = 199, valeur *P* \<\< 10^-3^). Naturellement, les variantes unilatérales à gauche et à droite existent aussi pour ce test. Par contre, la question des variances égales ou non ne se pose pas dans ce cas[^09-moyenne-6]. Notez que le test se limite à indiquer que la valeur *P* \< 2,2 . 10^-16^. Effectivement, notre calcul donne 3.7 . 10^-64^.
+Nous rejetons $H_0$, car la valeur *P* est inférieure à $\alpha$. Nous en concluons que le crabe *L. variegatus* a une carapace significativement plus large à l'avant qu'à l'arrière (t test apparié = 25,3, ddl = 199, valeur *P* \<\< 10^-3^). Naturellement, les variantes unilatérales à gauche et à droite existent aussi pour ce test. Par contre, la question des variances égales ou non ne se pose pas dans ce cas[^09-moyenne-6]. Notez que le test se limite à indiquer que la valeur *P* \< 2,2 . 10^-16^. Effectivement, notre calcul donne 3.7 . 10^-64^.
 
 [^09-moyenne-6]: Pouvez-vous expliquer pourquoi ? Réfléchissez, c'est assez évident.
 
@@ -870,7 +870,7 @@ Nous obtenons un résultat similaire au test *t* de Student indépendant. Nous r
 
 `r h5p(92, height = 400, toc = "Choix du test d'hypothèse")`
 
-Quand choisir le test *t* de Student ou le test de Wilcoxon ? Nous serions tentés d'effectuer un test de Wilcoxon à chaque fois puisqu'ainsi nous sommes certains de ne pas commettre d'impair concernant la distribution des données. Mais en fait, le test *t* de Student est à préférer à chaque fois que c'est possible car il est plus **puissant**. Cela signifie qu'il sera capable de détecter un effet significatif plus tôt que le Wilcoxon. La bonne stratégie est donc d'utiliser le test *t* de Student autant que possible et de ne se rabattre sur le test de Wilcoxon que si on ne peut pas faire autrement, soit *n* petit et distribution non normale ou inconnue. A noter que quand *n* est vraiment petit, il est impossible d'étudier valablement la distribution des données sur cet échantillon. On doit alors se baser sur un échantillon plus grand prélevé sur des données similaires ou alors jouer la sécurité et effectuer un test de Wilcoxon.
+Quand choisir le test *t* de Student ou le test de Wilcoxon ? Nous serions tentés d'effectuer un test de Wilcoxon à chaque fois puisqu'ainsi nous sommes certains de ne pas commettre d'impair concernant la distribution des données. Mais en fait, le test *t* de Student est à préférer à chaque fois que c'est possible, car il est plus **puissant**. Cela signifie qu'il sera capable de détecter un effet significatif plus tôt que le Wilcoxon. La bonne stratégie est donc d'utiliser le test *t* de Student autant que possible et de ne se rabattre sur le test de Wilcoxon que si on ne peut pas faire autrement, soit *n* petit et distribution non normale ou inconnue. A noter que quand *n* est vraiment petit, il est impossible d'étudier valablement la distribution des données sur cet échantillon. On doit alors se baser sur un échantillon plus grand prélevé sur des données similaires ou alors jouer la sécurité et effectuer un test de Wilcoxon.
 
 Cette analyse est valable pour toute paire de test paramétrique *versus* non paramétrique. Le tableau suivant résume cela.
 
@@ -925,7 +925,7 @@ b <- chart(data = crabs, rear ~ sex) +
 combine_charts(list(a,b))
 ```
 
-La graphique en barre et le nuage de point représentent identiquement la information. Ils représentent la moyenne avec des barres erreurs qui représentent l'intervalle de confiance à 0.95. Le graphe en dynamite avec des barres d'erreurs ne donne aucune information sur le nombre d'observation. Nous avons déjà abordé rapidement cette problématique dans la section \@ref(barres-mean). Il n'est donc pas le graphique optimal pour présenter un test *t* de Student.
+Le graphique en barres et le nuage de point représentent identiquement la information. Ils représentent la moyenne avec des barres d’erreurs qui représentent l'intervalle de confiance à 0.95. Le graphe en dynamite avec des barres d'erreurs ne donne aucune information sur le nombre d'observations. Nous avons déjà abordé rapidement cette problématique dans la section \@ref(barres-mean). Il n'est donc pas le graphique optimal pour présenter un test *t* de Student.
 
 Malgré le fait que le test *t* de Student est un test paramétrique, on retrouve dans la littérature scientifique la boite de dispersion qui est pourtant un graphique associé à des valeurs non paramétriques. Pour le test de Wilcoxon, la boite de dispersion est l'outil graphique recommandé.
 
@@ -1046,7 +1046,7 @@ if (exists("assignment2"))
     toc = "Biométrie humaine, part II")
 ```
 
-**Note : Le projet suivant est la continuité d'un exercice débuté au premier quadrimestre et approfondis au module précédent.**
+**Note : Le projet suivant est la continuité d'un exercice débuté au premier quadrimestre et approfondi au module précédent.**
 
 ```{r assign_A09Ga_urchin_III, echo=FALSE, results='asis'}
 if (exists("assignment2"))
@@ -1068,7 +1068,7 @@ if (exists("assignment2"))
 
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 9. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière la moyenne qui peut nous sembler si simple. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 9. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière la moyenne qui peut nous sembler si simple. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

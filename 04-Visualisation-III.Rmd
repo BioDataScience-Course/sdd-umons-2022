@@ -8,7 +8,7 @@ SciViews::R
 
 -   Être capable de réaliser différents graphiques pour représenter des variables facteurs comme le graphique en barres, ou le graphique en camembert dans R avec la fonction `chart()`
 
--   Comprendre et utiliser la boîte de dispersion pour *synthétiser* la distribution de données numériques
+-   Comprendre et utiliser la boite de dispersion pour *synthétiser* la distribution de données numériques
 
 -   Arranger différents graphiques dans une figure unique
 
@@ -16,7 +16,7 @@ SciViews::R
 
 ##### Prérequis {.unnumbered}
 
-Assurez-vous de bien maîtriser les bases relatives à la représentation graphiques vues dans le module \@ref(visu1) et d'être à l'aise dans l'utilisation des outils logiciels (SciViews Box, RStudio, R Markdown, Git & GitHub).
+Assurez-vous de bien maîtriser les bases relatives à la représentation graphique abordées dans le module \@ref(visu1) et d'être à l'aise dans l'utilisation des outils logiciels (SciViews Box, RStudio, R Markdown, Git & GitHub).
 
 ## Graphique en barres
 
@@ -97,7 +97,7 @@ Les variables facteurs sont encodées dans R comme des entiers 1, 2, 3, ... pour
 tail(biometry)$year_measure
 ```
 
-Nous utilisons `head()` et `tail()` pour extraire les quelques lignes de début ou de fin d'un tableau. C'est utile pour en réduire la taille à l'impression. Faites très attention : lorsque vous imprimez le contenu d'une variable facteur, R *substitue* automatiquement les niveaux 1, 2, 3, ... par le contenu textuel tel qu'indiqué dans la dernière ligne `Levels: ...`, et **l'imprime sans mettre le texte entre guillemets**. Cela peut renforcer la fausse impression que c'est bien des valeurs numériques.
+Nous utilisons `head()` et `tail()` pour extraire les quelques lignes de début ou de fin d'un tableau. C'est utile pour en réduire la taille à l'impression. Faites très attention : lorsque vous imprimez le contenu d'une variable facteur, R *substitue* automatiquement les niveaux 1, 2, 3 ... par le contenu textuel comme indiqué dans la dernière ligne `Levels: ...`, et **l'imprime sans mettre le texte entre guillemets**. Cela peut renforcer la fausse impression que c'est bien des valeurs numériques.
 
 Vous commencez à comprendre que si vous effectuez maintenant la comparaison `year_measure < 2017` lorsque cette variable est encodée comme facteur, ça ne fonctionnera pas comme vous le souhaitez ! Si on est chanceux, un message d'erreur ou d'avis ("warning") est imprimé. C'est le cas de `filter()` que nous avons déjà utilisé.
 
@@ -105,11 +105,11 @@ Vous commencez à comprendre que si vous effectuez maintenant la comparaison `ye
 biometry2 <- fsubset(biometry, year_measure < 2017) 
 ```
 
-Notez au passage que `filter()` n'utilise pas la notation `biometry$year_measure`, mais prend un premier argument qui est le jeu de données `biometry`, et la suite se réfère aux variables de ce jeu de données telle que `year_measure` en priorité aux autres variables disponibles dans l'environnement utilisateur de R. C'est donc une approche bien plus puissante que la notation traditionnelle. Aussi `filter()` renvoie tout le tableau remanié. Donc, nous devons l'affecté simplement à une variable qui contient ce tableau (`biometry2` ici).
+Notez au passage que `filter()` n'utilise pas la notation `biometry$year_measure`, mais prend un premier argument qui est le jeu de données `biometry`, et la suite se réfère aux variables de ce jeu de données telles que `year_measure` en priorité aux autres variables disponibles dans l'environnement utilisateur de R. C'est donc une approche bien plus puissante que la notation traditionnelle. Aussi `filter()` renvoie tout le tableau remanié. Donc, nous devons l'affecter simplement à une variable qui contient ce tableau (`biometry2` ici).
 
-Notez aussi que nous utilisons l'opératezur d'assignation alternatif `%<-%` qui permet d'obtenir un tableau comme résultat de `filter()` (sinon un objet est créé qui contient les informations pour effectuer le traitement, mais pas le *résultat* du traitement lui-même).
+Notez aussi que nous utilisons l'opérateur d'assignation alternatif `%<-%` qui permet d'obtenir un tableau comme résultat de `filter()` (sinon un objet est créé qui contient les informations pour effectuer le traitement, mais pas le *résultat* du traitement lui-même).
 
-Dans d'autres cas, le résultat peut être dramatique car le calcul est appliqué à l'encodage des niveaux de la variable facteur. Or, avec quatre niveaux, les encodages sont 1, 2, 3 et 4, ... et ils sont bien évidemment tous inférieurs à 2017 (pour rappel, "2013", "2014", "2016" et "2017" sont les libellés textuels des niveaux de la variable facteur) !
+Dans d'autres cas, le résultat peut être dramatique, car le calcul est appliqué à l'encodage des niveaux de la variable facteur. Or, avec quatre niveaux, les encodages sont 1, 2, 3 et 4, ... et ils sont bien évidemment tous inférieurs à 2017 (pour rappel, "2013", "2014", "2016" et "2017" sont les libellés textuels des niveaux de la variable facteur) !
 
 ```{block, type='warning'}
 De manière générale, n'effectuez **jamais** de calcul sur des variables facteurs. Tranformez-les toujours avant. Si les libellés contiennent des valeurs numériques sur lesquelles vous voulez faire des calculs, utilisez `as.numeric(as.character(VARFACT))`, et une fois le calcul réalisé, retransformez en facteur avec `as.factor()`.
@@ -128,7 +128,7 @@ biometry2$year_measure <- as.factor(biometry2$year_measure)
 tail(biometry2)$year_measure
 ```
 
-Naturellement ici, la bonne stratégie est d'effectuer le calcul sur le tableau de départ **avant** de transformer en facteur, mais nous sommes partis de la variable facteur à titre d'illustration d'un cas qui peut se rencontrer en pratique. A présent que nous avons notre jeu de données sans les individus de 2017, et les variables correctement encodées, nous pouvons aborder différentes représentations pour observer des dénombrements tenant compte de plusieurs variables facteurs. Par défaut, l'argument `position =` a pour valeur `stack` (donc, lorsque cet argument n'est pas précisé dans `geom_bar()`, les barres sont empilées par rapport à la seconde variable facteur).
+Naturellement ici, la bonne stratégie est d'effectuer le calcul sur le tableau de départ **avant** de transformer en facteur, mais nous sommes partis de la variable facteur à titre d'illustration d'un cas qui peut se rencontrer en pratique. À présent que nous avons notre jeu de données sans les individus de 2017, et les variables correctement encodées, nous pouvons aborder différentes représentations pour observer des dénombrements tenant compte de plusieurs variables facteurs. Par défaut, l'argument `position =` a pour valeur `stack` (donc, lorsque cet argument n'est pas précisé dans `geom_bar()`, les barres sont empilées par rapport à la seconde variable facteur).
 
 ```{r barres-2facteurs, echo=TRUE, fig.cap="Dénombrement des hommes (H) et des femmes (F) dans l'étude sur l'obésité en Hainaut, (A) graphique utilisant un seul facteur. (B) graphique prenant en compte les années de mesure."}
 a <- chart(data = biometry2, ~ gender) +
@@ -166,7 +166,7 @@ combine_charts(list(a, b, c), common.legend = TRUE)
 
 Soyez vigilant à la différence entre l'argument `position = stack` et `position = fill` qui malgré un rendu semblable ont l'axe des ordonnées qui diffèrent (dans le cas de `fill`, il s'agit de la **fraction** par rapport au total qui est représentée, et non pas des **effectifs** absolus dénombrés).
 
-##### Pièges et Astuces {.unnumbered}
+##### Pièges et astuces {.unnumbered}
 
 ###### Réordonner la variable facteur par fréquence {.unnumbered}
 
@@ -178,7 +178,7 @@ chart(data = copepoda, ~ fct_infreq(class)) +
   labs(x = "Classe", y = "Effectifs")
 ```
 
-###### Rotation des axes du graphique en barre {.unnumbered}
+###### Rotation des axes du graphique en barres {.unnumbered}
 
 Lorsque les niveaux dans la variable étudiée sont trop nombreux, les légendes en abscisse risquent de se chevaucher, comme dans la Fig. \@ref(fig:barchart1)
 
@@ -219,7 +219,7 @@ Avec `coord_flip()`, pensez toujours que vos axes *finaux* X et Y sont inversés
 
 ### Valeurs moyennes {#barres-mean}
 
-Le graphique en barres peut être aussi employé pour résumer des données numériques via la moyenne. Il ne s'agit plus de dénombrer les effectifs d'une variable facteur mais de résumer des données numériques en fonction d'une variable facteur. On peut exprimer cette relation dans R sous la forme de :
+Le graphique en barres peut être aussi employé pour résumer des données numériques via la moyenne. Il ne s'agit plus de dénombrer les effectifs d'une variable facteur, mais de résumer des données numériques en fonction d'une variable facteur. On peut exprimer cette relation dans R sous la forme de :
 
 $$y \sim x$$
 
@@ -343,7 +343,7 @@ x <- c(1, 71, 55, 68, 78, 60, 83, 120, 82, 53, 26)
 sort(x)
 ```
 
-Le premier descripteur des cinq nombres est la **médiane** qui est la valeur se situant à la moitié des observations, donc, avec autant d'observations plus petites et d'observations plus grande qu'elle. La médiane sépare l'échantillon en deux.
+Le premier descripteur des cinq nombres est la **médiane** qui est la valeur se situant à la moitié des observations, donc, avec autant d'observations plus petites et d'observations plus grandes qu'elle. La médiane sépare l'échantillon en deux.
 
 ```{r}
 median(x)
@@ -357,7 +357,7 @@ En effet, nous voyons sur le vecteur ordonné que cinq valeurs sont plus petites
 Les **cinq nombres** sont : la **valeur minimale**, le **premier quartile**, la **médiane** (ou deuxième quartile), le **troisième quartile** et la **valeur maximale**.
 ```
 
-Voici comment on les calcules facilement dans R :
+Voici comment on les calcule facilement dans R :
 
 ```{r}
 fivenum(x)
@@ -540,14 +540,14 @@ b <- ggplot_box_legend()
 combine_charts(list(a, b))
 ```
 
-Un des gros avantages de la boite de dispersion est de mettre en évidence de manière synthétique la distribution des données sur l'axe. La **boite de dispersion parallèle** places *plusieurs* boites de dispersion côte à côte en face d'un même axe. C'est un excellent moyen de *comparer* la dispersion de données numériques en fonction des niveau d'une variable **factor**. Les instructions dans R pour produire un graphique en boites de dispersion parallèles sont :
+Un des gros avantages de la boite de dispersion est de mettre en évidence de manière synthétique la distribution des données sur l'axe. La **boite de dispersion parallèle** place *plusieurs* boites de dispersion côte à côte en face d'un même axe. C'est un excellent moyen de *comparer* la dispersion de données numériques en fonction des niveaux d'une variable **factor**. Les instructions dans R pour produire un graphique en boites de dispersion parallèles sont :
 
 ```{r boxplot, fig.cap="Distribution des tailles par groupes taxonomiques pour le zooplancton."}
 chart(data = copepoda, size ~ class) +
   geom_boxplot()
 ```
 
-La formule à employer est `YNUM (size) ~ XFACTOR (class)`. Ensuite, pour réaliser une boite de dispersion vous devez ajouter la fonction `geom_boxplot()`.
+La formule à employer est `YNUM (size) ~ XFACTOR (class)`. Ensuite, pour réaliser une boite de dispersion, vous devez ajouter la fonction `geom_boxplot()`.
 
 ### Taille de l'échantillon
 
@@ -565,7 +565,7 @@ chart(data = df, Valeur ~ Facteur) +
 
 La boite de dispersion pour le niveau **`A`** est calculée à partir de seulement quatre observations. C'est trop peu. Comme les points représentant les observations ne sont habituellement pas superposés à la boite, cela peut passer inaperçu et tromper le lecteur ! Une bonne pratique consiste à ajouter *n*, le nombre d'observations au-dessus de chaque boite. Cela peut se faire facilement avec les fonctions `give_n()` et `stat_summary()` ci-dessous[^04-visualisation-iii-3].
 
-[^04-visualisation-iii-3]: La fonction `give_n()` est une **fonction personnalisée** que nous avons écrite nous-même. Elle positionne du texte `y=` 10% plus haut que le `max(x)`, et ce texte est `length(x)`, la longueur du vecteur qui correspond au nombre d'observations pour `x` (`x`étant utilisé en interne par le moteur graphique). Il est possible, et même assez facile, dans R d'écrire ses *propres* fonctions. Néanmoins cela dépasse du cadre du cours pour l'instant. Pour utiliser `give_n()` dans vos documents R Markdown, copiez simplement sa définition dans un chunk avant de l'utiliser comme c'est fait ici. Elle est aussi réutilisable plus loin dans le même R Markdown, une fois qu'elle est définie.
+[^04-visualisation-iii-3]: La fonction `give_n()` est une **fonction personnalisée** que nous avons écrite nous-mêmes. Elle positionne du texte `y=` 10% plus haut que le `max(x)`, et ce texte est `length(x)`, la longueur du vecteur qui correspond au nombre d'observations pour `x` (`x`étant utilisé en interne par le moteur graphique). Il est possible, et même assez facile, dans R d'écrire ses *propres* fonctions. Néanmoins cela dépasse du cadre du cours pour l'instant. Pour utiliser `give_n()` dans vos documents R Markdown, copiez simplement sa définition dans un chunk avant de l'utiliser comme c'est fait ici. Elle est aussi réutilisable plus loin dans le même R Markdown, une fois qu'elle est définie.
 
 ```{r boxplot2, fig.cap="Taille de copépodes pour différents groupes taxonomiques (le nombre d'observations est indiqué au dessus de chaque boite)."}
 give_n <- function(x)
@@ -655,7 +655,7 @@ chart(data = chick_weight, weight ~ Time %col=% Diet) +
   labs(x = "Age [j]", y = "Masse [g]")
 ```
 
-Le graphique à la Fig. \@ref(fig:chick1) est mal adapté pour montrer les différences entre les quatre aliments : tous les points sont entremêlés. Il peut typiquement être simplifié en utilisant des facettes pour représenter les résultats relatifs aux différents régimes alimentaires sur des graphiques séparés. L'information est la même mais la lecture est beaucoup plus aisée.
+Le graphique à la Fig. \@ref(fig:chick1) est mal adapté pour montrer les différences entre les quatre aliments : tous les points sont entremêlés. Il peut typiquement être simplifié en utilisant des facettes pour représenter les résultats relatifs aux différents régimes alimentaires sur des graphiques séparés. L'information est la même, mais la lecture est beaucoup plus aisée.
 
 ```{r chick-facette, fig.cap= "Croissance de poulets en utilisant quatre aliments différents (1-4)."}
 chart(data = chick_weight, weight ~ Time | Diet) +
@@ -721,11 +721,11 @@ if (exists("assignment"))
 
 <center>![Prolifération des standards d\'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
 
-Depuis le début, l'ensemble des graphiques que nous vous avons proposés utilise la fonction `chart()` du package {chart}. Cependant, il ne s'agit pas de la seule fonction permettant de réaliser des graphiques dans R, loin de là. En fait, {chart} est tout récent et a été développé pour homogénéiser autant que possible les graphiques issus de trois moteurs graphiques différents : {ggplot2}, {lattice} et les graphiques de base. La fonction `chart()` a d'autres avantages également :
+Depuis le début, l'ensemble des graphiques que nous vous avons proposés utilise la fonction `chart()` du package {chart}. Cependant, il ne s'agit pas de la seule fonction permettant de réaliser des graphiques dans R, loin de là. En fait {chart} est tout récent et a été développé pour homogénéiser autant que possible les graphiques issus de trois moteurs graphiques différents : {ggplot2}, {lattice} et les graphiques de base. La fonction `chart()` a d'autres avantages également :
 
 -   Un thème par défaut qui est le plus proche possible d'un rendu typique d'une publication scientifique.
 -   La possibilité d'utiliser l'interface formule avec {ggplot2}.
--   La cohérence des objets graphiques obtenus qui peuvent tous êtres combinés en une figure composée, même si ils sont produits avec des moteurs graphiques différents.
+-   La cohérence des objets graphiques obtenus qui peuvent tous être combinés en une figure composée, même si ils sont produits avec des moteurs graphiques différents.
 -   Un libellé automatique des axes et autres éléments du graphique en fonction des attributs `label` et `units` des variables (pour l'instant, seulement les graphiques de type {ggplot2}).
 
 ```{r chart-example, fig.cap= "Graphique typique obtenu avec `chart()` : rendu par défaut publiable tel quel, et libellé automatique des axes avec les unités."}
@@ -738,7 +738,7 @@ chart(data = urchin, height ~ weight %col=% origin) +
 
 ### {ggplot2}
 
-Le moteur graphique {[ggplot2](https://ggplot2.tidyverse.org)} est écrit pas Hadley Wickham, un personnage emblématique de la "révolution [tidyverse](https://www.tidyverse.org)" qui propose une surcouche moderne au dessus de R. {ggplot2} implémente une "grammaire graphique" particulièrement puissante et flexible, proposée et popularisée par le statisticien Leland Wilkinson. Par défaut, `chart()` crée en réalité un graphique {ggplot2} adapté. Voici la version {ggplot2} standard du même graphique représenté à la Fig. \@ref(fig:chart-example) :
+Le moteur graphique {[ggplot2](https://ggplot2.tidyverse.org)} est écrit pas Hadley Wickham, un personnage emblématique de la "révolution [tidyverse](https://www.tidyverse.org)" qui propose une surcouche moderne au-dessus de R. {ggplot2} implémente une "grammaire graphique" particulièrement puissante et flexible, proposée et popularisée par le statisticien Leland Wilkinson. Par défaut, `chart()` crée en réalité un graphique {ggplot2} adapté. Voici la version {ggplot2} standard du même graphique représenté à la Fig. \@ref(fig:chart-example) :
 
 ```{r ggplot2-example, fig.cap= "Graphique typique obtenu avec `ggplot()` (moteur graphique {ggplot2})."}
 ggplot(data = urchin, mapping = aes(x = weight, y = height, col = origin)) + 
@@ -751,7 +751,7 @@ En comparant les Figs. \@ref(fig:chart-example) et \@ref(fig:ggplot2-example) (e
 
 -   La taille des caractères est légèrement plus grande dans la Fig. \@ref(fig:chart-example) réalisée avec `chart()` (surtout pour les nombres sur les axes). Le manque de lisibilité des parties textuelles dans un graphique est un défaut fréquent, dépendant de la résolution et de la taille de reproduction du graphique dans le document final. Le choix de `chart()` recule un peu ce risque.
 
--   `chart()` est capable d'aller lire les métadonnées (libellés en français et unités des variables) et les utilisent automatiquement pour proposer des libellés corrects et complets des axes par défaut. `ggplot()` ne peut pas le faire, et il faut utiliser la fonction `labs()` pour l'indiquer manuellement.
+-   `chart()` est capable d'aller lire les métadonnées (libellés en français et unités des variables) et les utilise automatiquement pour proposer des libellés corrects et complets des axes par défaut. `ggplot()` ne peut pas le faire, et il faut utiliser la fonction `labs()` pour l'indiquer manuellement.
 
 [^04-visualisation-iii-4]: Notez que plusieurs thèmes existent dans **ggplot2**. Il est facile d'en changer et de les personnaliser... mais c'est toujours appréciable d'avoir un rendu impeccable dès le premier essai.
 
@@ -771,7 +771,7 @@ Quelques règles simples vous permettent de passer des **instructions** `ggplot(
 
 4.  Partout où `aes()` est utilisé pour les instructions {ggplot2}, on peut utiliser à la place `f_aes()` et y spécifier plutôt une formule de type `chart()`.
 
-5.  Avec `ggplot()` les facettes doivent être spécifiées à l'aide de `facet_XXX()`. A condition d'utiliser `chart()`, il est possible d'inclure les spécifications des facettes les plus utilisées directement dans la formule en utilisant l'opérateur `|`. Cette façon de procéder est, encore une fois, identique à ce qui se fait dans {lattice} (voir plus loin).
+5.  Avec `ggplot()` les facettes doivent être spécifiées à l'aide de `facet_XXX()`. À condition d'utiliser `chart()`, il est possible d'inclure les spécifications des facettes les plus utilisées directement dans la formule en utilisant l'opérateur `|`. Cette façon de procéder est, encore une fois, identique à ce qui se fait dans {lattice} (voir plus loin).
 
 Le point (5) mérite une petite démonstration pour comparaison :
 
@@ -804,7 +804,7 @@ Afin de vous exercer à réaliser des graphiques `chart()`/`ggplot()`, proposez 
 
 -   Site rassemblant des [extensions pour ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)
 
-**La suite de cette section est facultative : elle est importante pour comprendre les différents types de graphiques que vous allez rencontrer avec R. Cependant, si vous vous cantonnez aux graphiques `chart()`/`ggplot()` vous pouvez déjà réaliser énormément de visualisations différentes sans forcément connaitre les autres moteurs graphiques existant dans R.**
+**La suite de cette section est facultative : elle est importante pour comprendre les différents types de graphiques que vous allez rencontrer avec R. Cependant, si vous vous cantonnez aux graphiques `chart()`/`ggplot()` vous pouvez déjà réaliser énormément de visualisations différentes sans forcément connaitre les autres moteurs graphiques existants dans R.**
 
 ### {lattice}
 
@@ -829,7 +829,7 @@ b <- chart(data = urchin, height ~ weight %col=% origin) +
 combine_charts(list(a, b))
 ```
 
-La quantité d'instructions nécessaires pour rendre la version {lattice} proche de la version {ggplot2} devrait disparaître dans les prochaines versions de `chart()`. Un autre objectif est aussi de gommer le plus possible les différences entre les rendus des différents moteurs de graphiques R, et en particuliers entre {ggplot2} et {lattice}. Comparez la Fig. \@ref(fig:chart-lattice-example)A avec la Fig. \@ref(fig:lattice-example) pour apprécier le gain déjà obtenu en matière d'homogénéisation.
+La quantité d'instructions nécessaires pour rendre la version {lattice} proche de la version {ggplot2} devrait disparaître dans les prochaines versions de `chart()`. Un autre objectif est aussi de gommer le plus possible les différences entre les rendus des différents moteurs de graphiques R, et en particulier entre {ggplot2} et {lattice}. Comparez la Fig. \@ref(fig:chart-lattice-example)A avec la Fig. \@ref(fig:lattice-example) pour apprécier le gain déjà obtenu en matière d'homogénéisation.
 
 ```{block, type='info'}
 Par rapport à {ggplot2}, les graphiques {lattice} sont moins flexibles du fait qu'ils doivent être spécifiés en une seule instruction. Cependant, ils sont beaucoup plus rapides à générer (appréciable quand il y a beaucoup de points à tracer)\ ! {lattice} offre également quelques types de graphiques non supportés par {ggplot2} comme les graphiques en 3D à facettes, par exemple.
@@ -843,7 +843,7 @@ chart$xyplot(data = urchin, height ~ weight | origin,
   xlab = "Masse totale [g]", ylab = "Hauteur du test [mm]")
 ```
 
-Mise à part les instructions additionnelles encore nécessaires dans cette version de `chart()`, l'appel et le rendu sont très similaires par rapport à la version {ggplot2} du même graphique avec `chart()` :
+Mis à part les instructions additionnelles encore nécessaires dans cette version de `chart()`, l'appel et le rendu sont très similaires par rapport à la version {ggplot2} du même graphique avec `chart()` :
 
 ```{r ggplot2-facets2, fig.cap= "Graphique à facettes, avec `chart()` version {lattice}."}
 chart$xyplot(data = urchin, height ~ weight | origin,
@@ -851,11 +851,11 @@ chart$xyplot(data = urchin, height ~ weight | origin,
   ylab = "Hauteur du test [mm]", xlab = "Masse totale [g]")
 ```
 
-Vous noterez que pour réaliser un graphique {lattice} à l'aide de `chart()`, vous devez rajouter `$nom_de_function_lattice` après chart. Aussi, le thème spécifique SciViews et les labels et unités automatiques ne sont pas encore supportés. Les graphiques {lattice} ne supportant pas l'opérateur `+` pour ajouter des couches comme pour {ggplot2}, vous devez spécifier l'ensemble des options comme arguments de la fonction `chart$fun()`. Cela peut devenir pénible s'il y en a beaucoup. Toutefois, {lattice} peut rendre d'énormes services pour des graphiques très compliqués, grâce à sa vitesse nettement supérieure à {ggplot2}.
+Vous noterez que pour réaliser un graphique {lattice} à l'aide de `chart()`, vous devez rajouter `$nom_de_function_lattice` après chart. Aussi, le thème spécifique SciViews et les labels et unités automatiques ne sont pas encore supportés. Les graphiques {lattice} ne supportant pas l'opérateur `+` pour ajouter des couches comme pour {ggplot2}, vous devez spécifier l'ensemble des options comme arguments de la fonction `chart$fun()`. Cela peut devenir pénible s'il y en a beaucoup. Toutefois {lattice} peut rendre d'énormes services pour des graphiques très compliqués, grâce à sa vitesse nettement supérieure à {ggplot2}.
 
 ### Graphiques de base
 
-Comme son nom le suggère, le moteur graphique de base est celui qui est implémenté de manière natif dans R. Il est donc utilisé un peu partout. Il est vieillissant et est plus difficile à manipuler que {ggplot2} certainement, et même que {lattice}. Néanmoins, il est très flexible et rapide, et encore beaucoup utilisé,... mais son rendu par défaut n'est plus vraiment au goût du jour. Voici notre graphique d'exemple rendu avec le moteur graphique R de base :
+Comme son nom le suggère, le moteur graphique de base est celui qui est implémenté de manière native dans R. Il est donc utilisé un peu partout. Il est vieillissant et est plus difficile à manipuler que {ggplot2} certainement, et même que {lattice}. Néanmoins, il est très flexible et rapide, et encore très utilisé... mais son rendu par défaut n'est plus vraiment au goût du jour. Voici notre graphique d'exemple rendu avec le moteur graphique R de base :
 
 ```{r base-example, fig.cap="Graphique exemple réalisé avec le moteur graphique R de base."}
 plot(urchin$weight, urchin$height,
@@ -864,7 +864,7 @@ legend(x = 80, y = 10, legend = c("Culture", "Pêcherie"),
   col = c("red", "darkgreen"), pch = 1)
 ```
 
-Vous rencontrerez très fréquemment la fonction `plot()`. C'est une fonction dite **générique** dont le comportement change en fonction de l'objet fourni en premier argument. Ainsi, elle réalise le graphique le plus pertinent à chaque fois en fonction du contexte. Notez tout de suite les instructions un peu confuses nécessaires pour spécifier la couleur souhaitée en fonction de l'origine des oursins. Le moteur graphique de base ne gère **pas** automatiquement des aspects plus complexes du graphique, telle que le positionnement d'une légende. Donc, à moins d'avoir prévu la place suffisante *avant* de tracer le graphique, nous ne pouvons que l'inclure à l'intérieur du cadre du graphique dans un second temps à l'aide de la fonction `legend()`. Comme cette dernière ne comprend rien à ce qui a été réalisé jusqu'ici, il faut lui respécifier les couleurs, formes et tailles de points utilisés ! C'est un des aspects pénibles du moteur graphique R de base.
+Vous rencontrerez très fréquemment la fonction `plot()`. C'est une fonction dite **générique** dont le comportement change en fonction de l'objet fourni en premier argument. Ainsi, elle réalise le graphique le plus pertinent à chaque fois en fonction du contexte. Notez tout de suite les instructions un peu confuses nécessaires pour spécifier la couleur souhaitée en fonction de l'origine des oursins. Le moteur graphique de base ne gère **pas** automatiquement des aspects plus complexes du graphique, tels que le positionnement d'une légende. Donc, à moins d'avoir prévu la place suffisante *avant* de tracer le graphique, nous ne pouvons que l'inclure à l'intérieur du cadre du graphique dans un second temps à l'aide de la fonction `legend()`. Comme cette dernière ne comprend rien à ce qui a été réalisé jusqu'ici, il faut lui respécifier les couleurs, formes et tailles de points utilisés ! C'est un des aspects pénibles du moteur graphique R de base.
 
 Voici maintenant une version `chart()` de ce graphique de base :
 
@@ -883,13 +883,13 @@ chart$base({
 Vous ne le voyez pas dans le bookdown, mais vous le réaliserez si vous utilisez ce genre de code dans vos propres documents R Markdown\ : le graphique est en réalité généré deux fois\ : une première fois dans un format propre aux graphiques R de base, et ensuite, il est traduit en une forme compatible avec les autres graphiques {ggplot2} et {lattice} (et au passage, il gagne la grille en traits grisés). Dans le chunck, nous devons spécifier `fig.keep = 2` si nous voulons éviter d'imprimer la première version dans le rapport lorsqu'on utilise `chart$base()`.
 ```
 
-Pour l'instant, le seul avantage de `chart()` avec les graphiques de base est qu'il les convertit en une forme combinable avec les autres graphiques dans une figure composite (sinon, ce n'est pas possible). A part cela, il faut fournir à `chart$base()` tout le code nécessaire pour tracer et personnaliser le graphique. Comme on peut le voir sur cet exemple, cela demande une quantité considérable de code. C'est aussi un autre aspect pénible de ce moteur graphique : il est très flexible, mais l'interface n'est pas optimale. Pour finir, les graphiques de base ont plus de mal avec les facettes, mais il peuvent quand même générer les versions les plus simples, par exemple à l'aide de la fonction `coplot()` qui accepte une formule très similaire à ce que nous avons employé jusqu'ici, mais avec un rendu différent :
+Pour l'instant, le seul avantage de `chart()` avec les graphiques de base est qu'il les convertit en une forme combinable avec les autres graphiques dans une figure composite (sinon, ce n'est pas possible). À part cela, il faut fournir à `chart$base()` tout le code nécessaire pour tracer et personnaliser le graphique. Comme on peut le voir sur cet exemple, cela demande une quantité considérable de code. C'est aussi un autre aspect pénible de ce moteur graphique : il est très flexible, mais l'interface n'est pas optimale. Pour finir, les graphiques de base ont plus de mal avec les facettes, mais ils peuvent quand même générer les versions les plus simples, par exemple à l'aide de la fonction `coplot()` qui accepte une formule très similaire à ce que nous avons employé jusqu'ici, mais avec un rendu différent :
 
 ```{r coplot-example, fig.cap="Graphique à facettes avec le moteur graphique de base."}
 coplot(data = urchin, height ~ weight | origin)
 ```
 
-A l'issue de cette comparaison, vous pourrez décider du moteur graphique que vous préférerez utiliser. Dans le cadre de ce cours, nous n'utiliserons en tous cas que quasi-exclusivement des graphiques {ggplot2} créés à l'aide la fonction `chart()`.
+À l'issue de cette comparaison, vous pourrez décider du moteur graphique que vous préférerez utiliser. Dans le cadre de ce cours, nous n'utiliserons en tous cas que quasi exclusivement des graphiques {ggplot2} créés à l'aide la fonction `chart()`.
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -907,7 +907,7 @@ A l'issue de cette comparaison, vous pourrez décider du moteur graphique que vo
 
 ## Challenge
 
-Tout au long des quatre premiers modules, vous avez appris à utiliser R et RStudio, à écrire des documents en R Markdown, à utiliser git et GitHub, ... Vous avez également appris à réaliser des graphiques clairs qui présentent visuellement l'information contenue dans des jeux de données. Il est maintenant temps de faire un bilan de tout cela sous une forme ludique : un **challenge de rapidité pour la réalisation de graphiques.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus de graphiques possibles.
+Tout au long des quatre premiers modules, vous avez appris à utiliser R et RStudio, à écrire des documents en R Markdown, à utiliser git et GitHub, ... Vous avez également appris à réaliser des graphiques clairs qui présentent visuellement l'information contenue dans des jeux de données. Il est maintenant temps de faire un bilan de tout cela sous une forme ludique : un **challenge de rapidité pour la réalisation de graphiques.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus de graphiques possible.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -938,7 +938,7 @@ Vous pouvez soumettre vos résultats pendant une période de temps précise via 
 
 ## Récapitulatif des exercices
 
-Ce module 4 vous a permis de réaliser et de découvrir de nouveau graphiques. Vous savez maintenant réaliser des graphiques en barres, des graphiques en camembert et des boites de dispersion. Vous êtes aussi capable de réaliser des graphiques composés. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
+Ce module 4 vous a permis de réaliser et de découvrir de nouveaux graphiques. Vous savez maintenant réaliser des graphiques en barres, des graphiques en camembert et des boites de dispersion. Vous êtes aussi capable de réaliser des graphiques composés. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

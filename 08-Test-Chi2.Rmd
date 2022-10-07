@@ -4,7 +4,7 @@
 SciViews::R
 ```
 
-Dans ce module, nous entrons dans le monde de l'inférence statistique et des tests d'hypothèses qui nous permettront de répondre à des questions biologiques sur base de données empiriques malgré une incertitude inévitables (hasard de l'échantillonnage, variabilité individuelle, erreurs de mesure, ...).
+Dans ce module, nous entrons dans le monde de l'inférence statistique et des tests d'hypothèses qui nous permettront de répondre à des questions biologiques sur base de données empiriques malgré une incertitude inévitable (hasard de l'échantillonnage, variabilité individuelle, erreurs de mesure ...).
 
 ##### Objectifs {.unnumbered}
 
@@ -30,7 +30,7 @@ Nous avons déjà abordé cette question dans le chapitre 6. Si nous pouvions me
 
 Nous n'avons pas forcément accès à tous les individus d'une population. Dans ce cas, nous devons la limiter à un sous-ensemble raisonnable. Par exemple, il est impossible de mesurer *toutes* les souris. Par contre, nous pouvons décider d'étudier la ou les souches de souris disponibles dans l'animalerie, ou chez nos fournisseurs.
 
-Quoi qu'il en soit, l'échantillon n'est qu'un petit sous-ensemble sélectionné par un mécanisme faisant intervenir le hasard. Donc, deux échantillons de la même population ont un très forte probabilité d'être différents l'un de l'autre. Il en va également des statistiques calculées sur ces échantillons, comme les effectifs observés pour chaque niveau de variables qualitatives ou les valeurs moyennes pour les variables quantitatives, par exemple. **Cette variabilité d'un échantillon à l'autre ne nous intéresse pas car elle n'apporte pas d'information sur la population elle-même.** Ce qui nous intéresse, c'est d'estimer au mieux les valeurs (effectifs, moyennes, etc.) dans la population.
+Quoi qu'il en soit, l'échantillon n'est qu'un petit sous-ensemble sélectionné par un mécanisme faisant intervenir le hasard. Donc, deux échantillons de la même population ont une très forte probabilité d'être différents l'un de l'autre. Il en va également des statistiques calculées sur ces échantillons, comme les effectifs observés pour chaque niveau de variables qualitatives ou les valeurs moyennes pour les variables quantitatives, par exemple. **Cette variabilité d'un échantillon à l'autre ne nous intéresse pas, car elle n'apporte pas d'information sur la population elle-même.** Ce qui nous intéresse, c'est d'estimer au mieux les valeurs (effectifs, moyennes, etc.) dans la population.
 
 ```{block, type='note'}
 L'estimation de paramètres d'une population par le biais de calculs sur un échantillon représentatif issu de cette population s'appelle l'**inférence statistique**. Rappelez-vous le schéma qui relie population et échantillon via l'échantillonnage d'une part, et l'inférence d'autre part.
@@ -49,7 +49,7 @@ Avant de vous lancer dans l'inférence statistique, assurez-vous d'avoir effectu
 
 1.  Vous comprenez bien la question posée, en termes biologiques. Vous connaissez ou vous êtes documenté sur l'état de l'art en la matière (bibliographie). Que sait-on déjà du phénomène étudié ? Quels sont les aspects encore inconnus ou à l'état de simples hypothèses ?
 
-2.  Vous avez vérifié que la façon dont les mesures ont été prises permettra effectivement de répondre à la question posée. *En particulier, vous avez vérifié que l'échantillonnage a été réalisé dans les règles pour qu'il soit représentatif de la population étudiée.* En outre, vous cernez clairement quelle est la population effectivement étudiée. C'est important pour éviter plus tard de sur-généraliser les résultats obtenus (les attribuer à une population plus large que celle effectivement étudiée).
+2.  Vous avez vérifié que la façon dont les mesures ont été prises permettra effectivement de répondre à la question posée. *En particulier, vous avez vérifié que l'échantillonnage a été réalisé dans les règles pour qu'il soit représentatif de la population étudiée.* En outre, vous cernez clairement quelle est la population effectivement étudiée. C'est important pour éviter plus tard de surgénéraliser les résultats obtenus (les attribuer à une population plus large que celle effectivement étudiée).
 
 3.  Vous avez effectué une analyse exploratoire des données. Vous avez représenté les données à l'aide de graphiques appropriés et vous avez interprété ces graphiques afin de comprendre ce que le jeu de données contient. Vous avez également résumé les données sous forme de tableaux synthétiques et vous avez, si nécessaire, remanié et nettoyé vos données.
 
@@ -60,7 +60,7 @@ Le test d'hypothèse ou test statistique est l'outil le plus simple pour répond
 -   L'**hypothèse nulle**, notée $H_0$ est l'affirmation de base ou de référence que l'on cherchera à réfuter,
 -   L'**hypothèse alternative**, notée $H_1$ ou $H_a$ représente une autre affirmation qui doit nécessairement être vraie si $H_0$ est fausse.
 
-Les deux hypothèses ne sont pas symétriques. Notre intention est de **rejeter** $H_0$. Dans ce cas, nous pourrons considérer que $H_1$ est vraie, avec un certain degré de certitude que nous pourrons également quantifier. Si nous n'y arrivons pas, nous dirons que nous ne pouvons pas rejeter $H_0$, mais nous ne pourrons jamais dire que que nous l'**acceptons** car dans ce cas, deux explications resteront possibles : (1) $H_0$ est effectivement vraie, ou (2) $H_0$ est fausse mais nous n'avons pas *assez* de données à disposition pour le démontrer avec le niveau de certitude recherché.
+Les deux hypothèses ne sont pas symétriques. Notre intention est de **rejeter** $H_0$. Dans ce cas, nous pourrons considérer que $H_1$ est vraie, avec un certain degré de certitude que nous pourrons également quantifier. Si nous n'y arrivons pas, nous dirons que nous ne pouvons pas rejeter $H_0$, mais nous ne pourrons jamais dire que nous l'**acceptons,** car dans ce cas, deux explications resteront possibles : (1) $H_0$ est effectivement vraie, ou (2) $H_0$ est fausse mais nous n'avons pas *assez* de données à disposition pour le démontrer avec le niveau de certitude recherché.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -174,7 +174,7 @@ Calculons $\chi^2_\mathrm{obs}$ dans notre cas[^08-test-chi2-1] :
 (chi2_obs <- sum((crossbill_tab - alpha_i)^2 / alpha_i))
 ```
 
-Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de libertés** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $n$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^08-test-chi2-2]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
+Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de liberté** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $n$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^08-test-chi2-2]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
 
 [^08-test-chi2-2]: Les fonctions qui permettent les calculs relatifs à la distribution $\chi^2$ dans R sont `<x>chisq()`, et les snippets correspondants dans la SciViews Box sont disponibles à partir de `.ic`. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
 
@@ -199,7 +199,7 @@ chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
 
 ### Seuil α du test
 
-Le raisonnement du test d'hypothèse pour répondre à notre question est le suivant. Connaissant la densité de probabilité théorique sous $H_0$, nous savons que, plus le $\chi^2_\mathrm{obs}$ est grand, moins il est plausible car la densité de probabilité diminue. Nous devons décider d'une limite à partir de laquelle nous considérerons que la valeur observée est suffisamment grande pour que $H_0$ devienne trop peu plausible et nous pourrons alors la rejeter. Cette limite se définit sous la forme d'une **probabilité** correspondant à une zone ou aire de rejet définie dans la distribution théorique de référence sous $H_0$. Cette limite s'appelle le **seuil** $\alpha$ du test.
+Le raisonnement du test d'hypothèse pour répondre à notre question est le suivant. Connaissant la densité de probabilité théorique sous $H_0$, nous savons que, plus le $\chi^2_\mathrm{obs}$ est grand, moins il est plausible, car la densité de probabilité diminue. Nous devons décider d'une limite à partir de laquelle nous considérerons que la valeur observée est suffisamment grande pour que $H_0$ devienne trop peu plausible et nous pourrons alors la rejeter. Cette limite se définit sous la forme d'une **probabilité** correspondant à une zone ou aire de rejet définie dans la distribution théorique de référence sous $H_0$. Cette limite s'appelle le **seuil** $\alpha$ du test.
 
 ```{block, type='note'}
 **Choix du seuil $\alpha$ d'un test d'hypothèse.** Le seuil $\alpha$ est choisi *avant* de réaliser le test. Il est un savant compromis entre le risque de se tromper qui diminue plus $\alpha$ est petit, et la possibilité d'obtenir le rejet de $H_0$ lorsqu'elle est fausse qui augmentera avec $\alpha$. Si on veut être absolument certain du résultat, on prend $\alpha = 0$, mais dans ce cas on ne rejette jamais $H_0$ et on ne tire donc jamais aucune conclusion utile. Donc, nous devons assouplir les règles et accepter un petit risque de se tromper. **Généralement, les statisticiens choisissent $\alpha$ = 5% dans les cas courants**, et prennent 1%, ou même 0,1% dans les cas où il faut être plus strict (par exemple, si des vies dépendent du résultat). Nous pouvons nous baser sur ces références, même si nous verrons plus loin que cette pratique est de plus en plus remise en cause dans la littérature scientifique.
@@ -271,7 +271,7 @@ Dans notre exemple, nous pouvons donc rejeter $H_0$ et nous dirons que **la prob
 ```
 ### Effet de l'effectif étudié
 
-En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pourrez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^08-test-chi2-3]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré disons 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs croisés à gauche et à droite ?
+En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pourrez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^08-test-chi2-3]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs-croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré disons 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs-croisés à gauche et à droite ?
 
 [^08-test-chi2-3]: Attention ! Vous devez fixer la taille de l'échantillon dès le départ *a priori*. Vous ne pouvez pas accumuler des données jusqu'à obtenir un rejet de $H_0$, sans quoi votre analyse sera biaisée.
 
@@ -281,7 +281,7 @@ En inférence, la qualité des données (échantillons *représentatifs*) est im
 chisq.test(crossbill_tab2, p = c(left = 1/2, right = 1/2), rescale.p = FALSE)
 ```
 
-Nous constatons que la valeur du $\chi^2_{obs}$ dépend de l'effectif. Sa valeur est plus petite ici. Par conséquent, la valeur *P* a également changé et elle vaut à présent 43%. Cette valeur est *supérieure* maintenant à notre seuil $\alpha$ de 5%. Donc, nous ne pouvons pas rejeter $H_0$. Dans un pareil cas, nous conclurons que les becs croisés à gauche ne sont **pas significativement** plus nombreux que ceux à droite au seuil $\alpha$ de 5% (test $\chi^2$ = 0,62, ddl = 1, valeur *P* = 0,43). Notez, c'est important, que nous n'avons pas écrit "ne sont **pas**", mais nous avons précisé "ne sont **pas significativement**" plus nombreux. C'est un détail très important. En effet, cela veut dire que l'on ne peut pas conclure qu'il y ait des différences sur base de l'échantillon utilisé, mais il se peut aussi que l'échantillon ne soit pas suffisamment grand pour mettre en évidence une différence. Or, nous avons analysé en réalité un plus grand échantillon (`crossbill`), et nous savons bien que c'est effectivement le cas. Est-ce que vous saisissez bien ce que le mot **significativement** veut dire, et la subtilité qui apparaît lorsqu'un test d'hypothèse ne rejette **pas** $H_0$ ? Les conclusions tirées avec `crossbill` et `crossbill2` et le même test d'hypothèse sont diamétralement opposées car l'une rejette et l'autre ne rejette pas $H_0$. Pourtant ces deux analyses ne se contredisent pas ! Les deux interprétations sont *simultanément* correctes. C'est l'interprétation asymétrique du test qui permet cela, et l'adverbe **significativement** est indispensable pour introduire cette nuance dans le texte !
+Nous constatons que la valeur du $\chi^2_{obs}$ dépend de l'effectif. Sa valeur est plus petite ici. Par conséquent, la valeur *P* a également changé et elle vaut à présent 43%. Cette valeur est *supérieure* maintenant à notre seuil $\alpha$ de 5%. Donc, nous ne pouvons pas rejeter $H_0$. Dans un pareil cas, nous conclurons que les becs croisés à gauche ne sont **pas significativement** plus nombreux que ceux à droite au seuil $\alpha$ de 5% (test $\chi^2$ = 0,62, ddl = 1, valeur *P* = 0,43). Notez, c'est important, que nous n'avons pas écrit "ne sont **pas**", mais nous avons précisé "ne sont **pas significativement**" plus nombreux. C'est un détail très important. En effet, cela veut dire que l'on ne peut pas conclure qu'il y ait des différences sur base de l'échantillon utilisé, mais il se peut aussi que l'échantillon ne soit pas suffisamment grand pour mettre en évidence une différence. Or, nous avons analysé en réalité un plus grand échantillon (`crossbill`), et nous savons bien que c'est effectivement le cas. Est-ce que vous saisissez bien ce que le mot **significativement** veut dire, et la subtilité qui apparaît lorsqu'un test d'hypothèse ne rejette **pas** $H_0$ ? Les conclusions tirées avec `crossbill` et `crossbill2` et le même test d'hypothèse sont diamétralement opposées, car l'une rejette et l'autre ne rejette pas $H_0$. Pourtant ces deux analyses ne se contredisent pas ! Les deux interprétations sont *simultanément* correctes. C'est l'interprétation asymétrique du test qui permet cela, et l'adverbe **significativement** est indispensable pour introduire cette nuance dans le texte !
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -311,16 +311,16 @@ Dans le cas d'un tableau de contingence à **double entrée**, qui croise les ni
 
 ##### Conditions d'application {.unnumbered}
 
-Comme toujours, le test $\chi^2$ d'indépendance est assorti de conditions d'application que nous devons vérifier *avant* de considérer d'utiliser ce test :
+Comme toujours, le test $\chi^2$ d'indépendance est assortis de conditions d'application que nous devons vérifier *avant* de considérer d'utiliser ce test :
 
 -   échantillon représentatif (échantillonnage aléatoire et individus indépendants les uns des autres),
 -   attribution des traitements aux individus de manière aléatoire,
 -   aucun effectif théorique nul,
 -   Si possible, aucun effectif observé inférieur à 5 (pas règle stricte, mais voir à utiliser un test exact de Fisher ci-dessous dans la section "pour en savoir plus" en base de page dans ce cas).
 
-##### Example et résolution dans R {.unnumbered}
+##### Exemple et résolution dans R {.unnumbered}
 
-Prenons le jeu de données concernant le test d'une molécule potentiellement anti-cancéreuse, le timolol :
+Prenons le jeu de données concernant le test d'une molécule potentiellement anticancéreuse, le timolol :
 
 ```{r}
 (timolol <- dtx(
@@ -360,12 +360,12 @@ timo_tab %>.%
 
 Nous avons ici un tableau de contingence à double entrée qui répertorie le nombre de cas attribués aléatoirement au traitement avec placebo (somme de la première ligne, soit 128 + 19 = 147 patients) et le nombre de cas qui ont reçu du timolol sur la seconde ligne (116 + 44 = 160), tout autre traitement étant par ailleurs équivalent. Nous avons donc un total général de 307 patients étudiés. Les conditions d'application du test sont rencontrées ici.
 
-La répartition dans le tableau selon les colonnes est, elle, tributaire des effets respectifs des deux traitements ? La clé ici est de **considérer comme** $H_0$ un partitionnement des cas équivalent entre les deux traitements. Ceci revient au même que de dire que l'effet d'une variable (le traitement administré) est *indépendant* de l'effet de l'autre variable (le fait d'être guéri ou non). C'est pour cette raison qu'on parle de **test** $\chi^2$ d'indépendance. Les hypothèses sont :
+La répartition dans le tableau selon les colonnes est, elle, tributaire des effets respectifs des deux traitements ? La clé ici est de **considérer comme** $H_0$ un partitionnement des cas équivalents entre les deux traitements. Ceci revient au même que de dire que l'effet d'une variable (le traitement administré) est *indépendant* de l'effet de l'autre variable (le fait d'être guéri ou non). C'est pour cette raison qu'on parle de **test** $\chi^2$ d'indépendance. Les hypothèses sont :
 
 -   $H_0:$ indépendance entre les deux variables
 -   $H_1:$ dépendance entre les deux variables
 
-Toute la difficulté est de déterminer les $\alpha_i$, les effectifs qui devraient être observés sous $H_0$. Si le partitionnement était identique selon tous les niveaux des deux variables, nous aurions autant de cas dans chaque cellule du tableau, soit 307/4 = 76,75. Mais n'oublions pas que nous avons attribués plus de patients au traitement timolol qu'au traitement placebo. De même, nous ne contrôlons pas le taux de guérison de la maladie qui n'est d'ailleurs généralement pas d'un patient sur 2. Il faut donc *pondérer* les effectifs dans les lignes et les colonnes par rapport aux totaux dans les différents niveaux des variables (en ligne pour la variable `traitement`, en colonne pour la variable `patient`). Donc, si nous indiçons les lignes avec $i = 1 ..m$ et les colonnes avec $j = 1..n$, nos effectifs théoriques $\alpha_{i,j}$ sous hypothèse d'indépendance entre les deux variables sont :
+Toute la difficulté est de déterminer les $\alpha_i$, les effectifs qui devraient être observés sous $H_0$. Si le partitionnement était identique selon tous les niveaux des deux variables, nous aurions autant de cas dans chaque cellule du tableau, soit 307/4 = 76,75. Mais n'oublions pas que nous avons attribué plus de patients au traitement timolol qu'au traitement placebo. De même, nous ne contrôlons pas le taux de guérison de la maladie qui n'est d'ailleurs généralement pas d'un patient sur 2. Il faut donc *pondérer* les effectifs dans les lignes et les colonnes par rapport aux totaux dans les différents niveaux des variables (en ligne pour la variable `traitement`, en colonne pour la variable `patient`). Donc, si nous indiçons les lignes avec $i = 1 ..m$ et les colonnes avec $j = 1..n$, nos effectifs théoriques $\alpha_{i,j}$ sous hypothèse d'indépendance entre les deux variables sont :
 
 $$\alpha_{i, j} =\frac{total\ ligne_i \times total\ colonne_j}{total\ général}$$
 
@@ -393,7 +393,7 @@ alpha_ij <- chi2.[["expected"]]
 sum((timolol_table - alpha_ij)^2 / alpha_ij)
 ```
 
-Cela donne 9,98. Or notre test renvoie la valeur de 9,10. A quoi est due cette différence ? Lisez bien l'intitulé du test réalisé. Il s'agit de "Pearson's Chi-squared test **with Yates' continuity correction**". Il s'agit d'une correction introduite par R dans le cas d'un tableau 2 par 2 uniquement et qui tient compte de ce que la distribution sous $H_0$ est estimée à partir des mêmes données que celle utilisées pour le test, ce qui introduit un biais ainsi corrigé. Il est donc déconseillé de désactiver cette correction, même si nous pouvons le faire en indiquant `correct = FALSE` (ci-dessous, juste pour vérifier notre calcul du $\chi^2_{obs}$ qui est maintenant identique, 9,98).
+Cela donne 9,98. Or notre test renvoie la valeur de 9,10. A quoi est due cette différence ? Lisez bien l'intitulé du test réalisé. Il s'agit de "Pearson's Chi-squared test **with Yates' continuity correction**". Il s'agit d'une correction introduite par R dans le cas d'un tableau 2 par 2 uniquement et qui tient compte de ce que la distribution sous $H_0$ est estimée à partir des mêmes données que celles utilisées pour le test, ce qui introduit un biais ainsi corrigé. Il est donc déconseillé de désactiver cette correction, même si nous pouvons le faire en indiquant `correct = FALSE` (ci-dessous, juste pour vérifier notre calcul du $\chi^2_{obs}$ qui est maintenant identique, 9,98).
 
 ```{r}
 # Test d'indépendance sans correction de Yates
@@ -426,7 +426,7 @@ Gardez toujours à l'esprit que, quelle que soit la qualité d'un test d'ajustem
 
 En matière de gestion des données, nous avons vu jusqu'ici comment *encoder* ses données dans un tableau cas par variables, comment *importer* des données dans R, et comment remanier les tableaux de données et les variables (numériques, transformation en variable `factor`, encodage et gestion des valeurs manquantes, etc.) Toutes les variables présentes dans le tableau de départ à l'importation sont dites **variables brutes**... mais les possibilités ne sont pas seulement limitées à ces variables de départ.
 
-En science des données, les variables brutes ne sont pas toujours les plus utiles par rapport aux questions que nous nous posons. Au delà de la simple transformation des données (logarithme, puissance, racine, inverse, ...) pour linéariser un nuage de points, nous sommes amenés à élaborer des **variables calculées** ou **métriques** qui vont caractériser ou quantifier un aspect particulier présent dans les données.
+En science des données, les variables brutes ne sont pas toujours les plus utiles par rapport aux questions que nous nous posons. Au-delà de la simple transformation des données (logarithme, puissance, racine, inverse ...) pour linéariser un nuage de points, nous sommes amenés à élaborer des **variables calculées** ou **métriques** qui vont caractériser ou quantifier un aspect particulier présent dans les données.
 
 ### Morphométrie de crabes
 
@@ -502,9 +502,9 @@ chart(data = crabs, width ~ species %fill=% sex) +
   geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
 ```
 
-Des tendances générales peuvent être notées. Par exemple, le lobe frontal tend à être légèrement plus grand pour la variété orange, ou la largeur à l'arrière tend à être plus grande pour les femelles, surtout chez la variété orange. Cependant, aucun de ces critères ne peut être retenu pour différencier les variétés ou les espèces *pour un individu en particulier* car les distributions se chevauchent toutes très largement.
+Des tendances générales peuvent être notées. Par exemple, le lobe frontal tend à être légèrement plus grand pour la variété orange, ou la largeur à l'arrière tend à être plus grande pour les femelles, surtout chez la variété orange. Cependant, aucun de ces critères ne peut être retenu pour différencier les variétés ou les espèces *pour un individu en particulier,* car les distributions se chevauchent toutes très largement.
 
-Nous pouvons aussi représenter des nuages de points afin de visualiser la variation d'une variable par rapport à une autre. Parmi tous les graphiques réalisables (toutes les combinaisons deux à deux des cinq variables morphologiques), examinons plus en détails les représentations suivantes :
+Nous pouvons aussi représenter des nuages de points afin de visualiser la variation d'une variable par rapport à une autre. Parmi tous les graphiques réalisables (toutes les combinaisons deux à deux des cinq variables morphologiques), examinons plus en détail les représentations suivantes :
 
 ```{r}
 chart(data = crabs, rear ~ length %shape=% species %col=% sex) +
@@ -520,7 +520,7 @@ chart(data = crabs, front ~ width %shape=% species %col=% sex) +
 
 Ce graphique, en revanche, sépare les deux variétés, quel que soit leur sexe (la variété bleue en bas, et la variété orange en haut). Cela signifie donc que les données morphométriques contiennent une information permettant de discerner les sexes et les variétés, mais cette information n'est pas visible lorsqu'une seule variable quantitative est représentée en fonction des sous-populations comme dans les graphiques en violons.
 
-En réalité, les différences de *forme* sont masquées sur les mesures individuelles par une variation encore plus grande liée à la *taille* des animaux. Comment pouvons-nous mettre en évidence un facteur de forme en faisant abstraction de la taille ? Pour expliquer cela simplement, considérons un cas facile. Imaginons que nous voulons classer un ensemble de quadrilatères à angles droits. Nous savons tous que ce sont des *rectangles*. Un cas particulier est le *carré* avec ses côtés égaux. Tant que nous représentons la longueur ou la largeur de nos quatrilatères à angles droits de toutes tailles, nous ne pouvons pas distinguer les carrés des rectangles. Par contre, si nous calculons le **ratio** longueur/largeur, nous faisons abstraction de la *taille* pour quantifier la *forme* (allongée ou pas). Tous les quadrilatères à angles droits dont le ratio longueur/largeur vaut un est un carré !
+En réalité, les différences de *forme* sont masquées sur les mesures individuelles par une variation encore plus grande liée à la *taille* des animaux. Comment pouvons-nous mettre en évidence un facteur de forme en faisant abstraction de la taille ? Pour expliquer cela simplement, considérons un cas facile. Imaginons que nous voulons classer un ensemble de quadrilatères à angles droits. Nous savons tous que ce sont des *rectangles*. Un cas particulier est le *carré* avec ses côtés égaux. Tant que nous représentons la longueur ou la largeur de nos quadrilatères à angles droits de toutes tailles, nous ne pouvons pas distinguer les carrés des rectangles. Par contre, si nous calculons le **ratio** longueur/largeur, nous faisons abstraction de la *taille* pour quantifier la *forme* (allongée ou pas). Tous les quadrilatères à angles droits dont le ratio longueur/largeur vaut un est un carré !
 
 C'est exactement le même raisonnement que nous pouvons appliquer à nos données `crabs` : nous pouvons calculer des variables qui feront abstraction de la taille pour quantifier des facteurs de forme particuliers. Les femelles ayant une carapace plus large à l'arrière *proportionnellement à leur taille*, le ratio `rear`/`length` calculé et nommé `rear_length` donne ceci :
 
@@ -678,7 +678,7 @@ Avant d'être rendus publics, les travaux scientifiques font l'objet d'un ou plu
 ##### À vous de jouer ! {-}
 
 ```{block, type='bdd'}
-Vous allez vous initier au travail d'arbitrage ("referee" scientifique) sur base du rapport sur la biométrie de l'oursin violet. Vous partagerez votre dépôt Github avec un de vos collègue. Vous recevrez également un accès au dépôt de quelqu'un d'autre. Votre travail consistera à lire avec un œil critique et constructif le travail que vous recevrez.
+Vous allez vous initier au travail d'arbitrage ("referee" scientifique) sur base du rapport sur la biométrie de l'oursin violet. Vous partagerez votre dépôt Github avec un de vos collègues. Vous recevrez également un accès au dépôt de quelqu'un d'autre. Votre travail consistera à lire avec un œil critique et constructif le travail que vous recevrez.
 
 Vous ajouterez un fichier `review.md` à la racine du projet où vous consignerez vos remarques générales. Pour les remarques particulières directement dans le rapport, utilisez la balise de citation de Markdown (commencez le paragraphe par `> `), par exemple\ :
 
@@ -697,7 +697,7 @@ Les instructions sont détaillées ici\ :
 
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 8. Ce module vous a permis d'apprendre à réaliser vos premiers tests d'hypothèses. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 8. Ce module vous a permis d'apprendre à réaliser vos premiers tests d'hypothèses. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

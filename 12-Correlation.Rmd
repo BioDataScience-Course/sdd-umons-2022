@@ -24,7 +24,7 @@ Ce module présente des descripteurs statistiques de l'association de deux varia
 
 ## Association de deux variables
 
-Nous pouvons décrire l'étendue d'une variable numérique à l'aide de la **variance** qui, pour rappel est la somme des écarts à la moyenne divisée par le nombre de degrés de liberté (*n* dans le cas d'une population et *n* - 1 dans le cas d'un échantillon).
+Nous pouvons décrire l'étendue d'une variable numérique à l'aide de la **variance** qui, pour rappel, est la somme des écarts à la moyenne divisée par le nombre de degrés de liberté (*n* dans le cas d'une population et *n* - 1 dans le cas d'un échantillon).
 
 $$var_X = S^2_X = \frac{\sum_{i = 1}^n (x_i - \bar{X})^2}{n-1}$$ L'écart type, noté $\sigma$ dans le cas d'une population et $S$ dans le cas d'un échantillon est la racine carrée de la variance. C'est une autre mesure de la dispersion d'une variable numérique. Donc :
 
@@ -47,9 +47,9 @@ pl <- list(
 combine_charts(pl, ncol = 3L)
 ```
 
-Nous pouvons observer que la **forme du nuage de points** diffère entre ces trois situations. Le graphique **A** est allongé le long d'une oblique proche de la première bissectrice. Cela signifie que, lorsque des valeurs de *X* sont faibles, les valeurs de *Y1* sont faibles aussi. Lorsque les valeurs de *X* sont élevées, celles de *Y1* tendent à l'être également. Nous avons plutôt une **proportionnalité** entre les valeurs observées pour *X* et pour *Y1*. Dans le graphique **C** de droite, c'est l'inverse. Nous avons une **proportionnalité inverse** entre *X* et *Y3*. Dans le graphique **B** du centre, le nuage de point ne s'étire pas dans une direction oblique particulière. Nous dirons ici qu'il n'y a pas d'association entre *X* et *Y2*. Ce type d'association entre deux variables numérique est un élément important dans notre analyse car un nuage de points qui s'allonge le long d'une direction oblique sur le graphique est signe d'un mécanisme sous-jacent responsable de cette association (mais attention à ne pas conclure directement à un mécanisme de cause à effet direct, voir plus loin). Il serait donc souhaitable de pouvoir quantifier le degré d'une telle association.
+Nous pouvons observer que la **forme du nuage de points** diffère entre ces trois situations. Le graphique **A** est allongé le long d'une oblique proche de la première bissectrice. Cela signifie que, lorsque des valeurs de *X* sont faibles, les valeurs de *Y1* sont faibles aussi. Lorsque les valeurs de *X* sont élevées, celles de *Y1* tendent à l'être également. Nous avons plutôt une **proportionnalité** entre les valeurs observées pour *X* et pour *Y1*. Dans le graphique **C** de droite, c'est l'inverse. Nous avons une **proportionnalité inverse** entre *X* et *Y3*. Dans le graphique **B** du centre, le nuage de point ne s'étire pas dans une direction oblique particulière. Nous dirons ici qu'il n'y a pas d'association entre *X* et *Y2*. Ce type d'association entre deux variables numérique est un élément important dans notre analyse, car un nuage de points qui s'allonge le long d'une direction oblique sur le graphique est signe d'un mécanisme sous-jacent responsable de cette association (mais attention à ne pas conclure directement à un mécanisme de cause à effet direct, voir plus loin). Il serait donc souhaitable de pouvoir quantifier le degré d'une telle association.
 
-Nous pouvons définir la **covariance** comme étant une mesure de la variance dans le même sens pour toutes les paires de valeurs observées entre nos deux variables numériques. Elle se définit de manière très similaire à la variance mais fait naturellement intervenir simultanément les observations de *X* et *Y*, ainsi que leurs moyennes respectives :
+Nous pouvons définir la **covariance** comme étant une mesure de la variance dans le même sens pour toutes les paires de valeurs observées entre nos deux variables numériques. Elle se définit de manière très similaire à la variance, mais fait naturellement intervenir simultanément les observations de *X* et *Y*, ainsi que leurs moyennes respectives :
 
 $$cov_{X,Y} = \frac{\sum_{i = 1}^n (x_i - \bar{X}) \cdot (y_i - \bar{Y})}{n-1}$$
 
@@ -101,9 +101,9 @@ Faites attention à deux points importants.
 
 1.  Le coefficient de corrélation de Pearson mesure une association *linéaire* entre deux variables numériques. La figure suivante montre quelques nuages de points et les valeurs de *r* associées.
 
-![Exemples de nuages de points et leur coefficients de corrélation de Pearson associés, issu de <https://commons.wikimedia.org/w/index.php?curid=15165296>.](images/sdd1_12/correlation-examples.png)
+![Exemples de nuages de points et leurs coefficients de corrélation de Pearson associés, issu de <https://commons.wikimedia.org/w/index.php?curid=15165296>.](images/sdd1_12/correlation-examples.png)
 
-2.  L'existence d'une corrélation n'implique pas forcément que la variation d'une des deux variables est le résultat de la variation de l'autre (cause à effet). Il se peut, par exemple qu'il y ait une troisième variable non prise en compte qui soit à l'origine de la variation, directement ou indirectement des deux autres. Une variable particulièrement pernicieuse de ce point de vue est le temps. A peu près tout ce qu'on étudie en biologie est variable dans le temps. Et donc, bien souvent, il existe des corrélations entre des variables qui n'ont rien à voir l'une avec l'autre lorsqu'elles sont toutes deux mesurées à différents moments, ce qu'on appelle des séries temporelles ou chronologiques. La vidéo suivante apporte d'autres éclaircissements sur ce sujet, sur base d'un exemple tiré de la littérature scientifique.
+2.  L'existence d'une corrélation n'implique pas forcément que la variation d'une des deux variables est le résultat de la variation de l'autre (cause à effet). Il se peut, par exemple, qu'il y ait une troisième variable non prise en compte qui soit à l'origine de la variation, directement ou indirectement des deux autres. Une variable particulièrement pernicieuse de ce point de vue est le temps. À peu près tout ce qu'on étudie en biologie est variable dans le temps. Et donc, bien souvent, il existe des corrélations entre des variables qui n'ont rien à voir l'une avec l'autre lorsqu'elles sont toutes deux mesurées à différents moments, ce qu'on appelle des séries temporelles ou chronologiques. La vidéo suivante apporte d'autres éclaircissements sur ce sujet, sur base d'un exemple tiré de la littérature scientifique.
 
 ```{r, echo=FALSE}
 vembedr::embed_youtube("4EWKAoKGAyg", width = 770, height = 433)
@@ -123,7 +123,7 @@ L'association entre deux variables numériques peut ainsi s'envisager selon troi
 
 ### Matrice de corrélation
 
-Dans un cas multivarié (plus de deux variables), nous pouvons toujours étudier les associations entre variables numériques à l'aide de *r* (ou à l'aide de la covariance) à conditions de calculer ces descripteurs statistiques pour tous les couples de variables considérées deux à deux. Pour *N* variables, nous rassemblerons tous ces calculs dans une matrice carrée *N* par *N* qui croise tous les cas deux à deux possibles dans un même tableau.
+Dans un cas multivarié (plus de deux variables), nous pouvons toujours étudier les associations entre variables numériques à l'aide de *r* (ou à l'aide de la covariance) à condition de calculer ces descripteurs statistiques pour tous les couples de variables considérées deux à deux. Pour *N* variables, nous rassemblerons tous ces calculs dans une matrice carrée *N* par *N* qui croise tous les cas deux à deux possibles dans un même tableau.
 
 Prenons un exemple à trois variables. Le jeu de données `trees` rassemble la mesure du diamètre, de la hauteur et du volume de bois de cerisiers noirs. La matrice de corrélation peut se calculer à l'aide de `cor()` dans R, ou mieux, à l'aide de `correlation()` dans `SciViews::R`. Dans ce dernier cas, la fonction `summary()` peut être appliquée dessus pour obtenir une vision synthétique de la matrice de corrélation.
 
@@ -142,7 +142,7 @@ $$r_{X,X} = 1$$ - Le triangle inférieur et le triangle supérieur (de part et d
 
 $$r_{X,Y} = r_{Y,X}$$
 
-Pour ces raisons seul le triangle inférieur (ou supérieur) est informatif. Le reste (diagonale et autre triangle) sont triviaux et répétitifs. Vous trouverez parfois une représentation de la matrice de confusion sous la forme uniquement du triangle inférieur. La fonction `summary()` effectue une telle représentation, et simplifie encore la représentation pour aider à trouver les corrélations importantes dans un gros tableau.
+Pour ces raisons seul le triangle inférieur (ou supérieur) est informatif. Le reste (diagonale et autre triangle) est trivial et répétitif. Vous trouverez parfois une représentation de la matrice de confusion sous la forme uniquement du triangle inférieur. La fonction `summary()` effectue une telle représentation, et simplifie encore la représentation pour aider à trouver les corrélations importantes dans un gros tableau.
 
 ```{r}
 summary(trees_cor)
@@ -152,13 +152,13 @@ Voyez la page d'aide de la fonction `correlation()` pour plus d'information via 
 
 ### Corrélogramme
 
-Il existe aussi des représentation graphiques spécialisées, appelées **corrélogrammes** pour visualiser les coefficients de corrélations dans un cas multivarié. La fonction `plot()` appliquée à notre objet `Correlation` en offre une version simple.
+Il existe aussi des représentations graphiques spécialisées, appelées **corrélogrammes** pour visualiser les coefficients de corrélations dans un cas multivarié. La fonction `plot()` appliquée à notre objet `Correlation` en offre une version simple.
 
 ```{r}
 plot(trees_cor)
 ```
 
-La matrice est représentée par des ellipses de plus en plus allongées au fur et à mesure que *r* se rapproche de 1. Une couleur bleue est utilisée pour les corrélations positives et une couleur rouge pour les corrélations négatives (mais vous pouvez aussi choisir d'autres couleurs). Ici, toutes les corrélations sot positives. Sur le jeu de données zooplancton, nous pouvons réaliser un corrélogramme plus intéressant qui illustre mieux la diversité de cette représentation graphique. Considérons, à titre d'exemple, les variables contiguës `size` jusqu'à `density` (que l'on peu indiquer par `size:density` dans la fonction `select()`) :
+La matrice est représentée par des ellipses de plus en plus allongées au fur et à mesure que *r* se rapproche de 1. Une couleur bleue est utilisée pour les corrélations positives et une couleur rouge pour les corrélations négatives (mais vous pouvez aussi choisir d'autres couleurs). Ici, toutes les corrélations sont positives. Sur le jeu de données zooplancton, nous pouvons réaliser un corrélogramme plus intéressant qui illustre mieux la diversité de cette représentation graphique. Considérons, à titre d'exemple, les variables contiguës `size` jusqu'à `density` (que l'on peut indiquer par `size:density` dans la fonction `select()`) :
 
 ```{r}
 zoo <- read("zooplankton", package = "data.io")
@@ -241,7 +241,7 @@ ans_y %>.%
   knitr::kable(., col.names = c("Moyenne", "Variance", "Ecart-type", "Variable"))
 ```
 
-A nouveau, c'est les mêmes valeurs pour les 4 séries. Que donnent les coefficients de corrélation[^12-correlation-1] ?
+À nouveau, c'est les mêmes valeurs pour les 4 séries. Que donnent les coefficients de corrélation[^12-correlation-1] ?
 
 [^12-correlation-1]: Ici, nous croisons les X et les Y, et extrayons la diagonale de ce tableau qui correspond aux coefficients entre *X1* et *Y1*, entre *X2* et *Y2*, entre *X3* et *Y3* et entre *X4* et *Y4*, respectivement.
 
@@ -271,7 +271,7 @@ La matrice de nuages de points part du même principe que la matrice de corréla
 GGally::ggscatmat(as.data.frame(trees), 1:3)
 ```
 
-Comme dans le cas de la matrice de corrélation, les graphiques en nuage de points sur la diagonale ne seraient pas très utiles puisqu'ils représenteraient une variable par rapport à elle-même. Ils sont donc remplacés par des graphes de densité montrant la répartition des données pour chaque variable considérée individuellement. Sur le triangle supérieur, ce sont les coefficients de corrélation de Pearson qui sont indiqués, et sur le triangle inférieur, les différentes possibilités de nuages de points deux à deux. La variable sur l'axe des abscisses se lit dans la colonne au dessus et la variable représentée sur l'axe des ordonnées se lit dans la ligne à droite. Par exemple, le graphique en bas à gauche correspond au diamètre en X et au volume en Y. Cette représentation graphique est donc complémentaire au corrélogramme.
+Comme dans le cas de la matrice de corrélation, les graphiques en nuage de points sur la diagonale ne seraient pas très utiles puisqu'ils représenteraient une variable par rapport à elle-même. Ils sont donc remplacés par des graphes de densité montrant la répartition des données pour chaque variable considérée individuellement. Sur le triangle supérieur, ce sont les coefficients de corrélation de Pearson qui sont indiqués, et sur le triangle inférieur, les différentes possibilités de nuages de points deux à deux. La variable sur l'axe des abscisses se lit dans la colonne au-dessus et la variable représentée sur l'axe des ordonnées se lit dans la ligne à droite. Par exemple, le graphique en bas à gauche correspond au diamètre en X et au volume en Y. Cette représentation graphique est donc complémentaire au corrélogramme.
 
 ### Matrice de variances-covariances
 
@@ -289,7 +289,7 @@ Comme ces descripteurs statistiques ne sont pas normés, ils sont plus difficile
 
 ### Corrélations de Spearman et Kendall
 
-Le coefficient de corrélation de Pearson représente une corrélation **linéaire**. Cependant, il se peut que vous soyez intéressé par un corrélation **non linéaire**, un nuage de points qui s'allonge le long d'une courbe. Dans ce cas, vous pouvez utiliser soit le coefficient $\rho$ de Spearman, soit le $\tau$ de Kendall.
+Le coefficient de corrélation de Pearson représente une corrélation **linéaire**. Cependant, il se peut que vous soyez intéressé par une corrélation **non linéaire**, un nuage de points qui s'allonge le long d'une courbe. Dans ce cas, vous pouvez utiliser soit le coefficient $\rho$ de Spearman, soit le $\tau$ de Kendall.
 
 -   Le $\rho$ de Spearman est le même calcul que le coefficient de Pearson, mais appliqué sur les données préalablement transformées en rangs. Sa valeur vaudra +1 ou -1 lorsque les points s'alignent parfaitement le long de n'importe quelle fonction monotone croissante ou décroissante.
 
@@ -313,7 +313,7 @@ correlation(trees, method = "kendall")
 correlation(trees) # Équivalent à method = "pearson"
 ```
 
-Les valeurs obtenues diffèrent, mais les tendances restent similaires ici. Les différences sont d'autant plus importantes que le nuage de points est curvilinéaire. A vous de bien choisir votre coefficient en fonction de ce que vous recherchez, une association linéaire (Pearson) ou pas (Spearman, le plus utilisé, ou Kendall éventuellement).
+Les valeurs obtenues diffèrent, mais les tendances restent similaires ici. Les différences sont d'autant plus importantes que le nuage de points est curvilinéaire. À vous de bien choisir votre coefficient en fonction de ce que vous recherchez, une association linéaire (Pearson) ou pas (Spearman, le plus utilisé, ou Kendall éventuellement).
 
 ### Test de corrélation
 
@@ -330,7 +330,7 @@ Prenons l'exemple de *r* pour les deux variables les plus corrélées dans `tree
 cor.test(data = trees, ~ diameter + volume, alternative = "greater")
 ```
 
-Comme la valeur *P* est inférieure à $\alpha$, nous pouvons rejeter $H_0$ et conclure que le coefficient de corrélation entre le diamètre et le volume est significativement positive au seuil $\alpha$ de 5% (*r* = 0.967, ddl = 29, valeur *P* \< 0.001). On s'en doutait avec un coefficient aussi proche de 1. Mais qu'en est-il pour l'association entre le diamètre et la hauteur ?
+Comme la valeur *P* est inférieure à $\alpha$, nous pouvons rejeter $H_0$ et conclure que le coefficient de corrélation entre le diamètre et le volume est significativement positif au seuil $\alpha$ de 5% (*r* = 0.967, ddl = 29, valeur *P* \< 0.001). On s'en doutait avec un coefficient aussi proche de 1. Mais qu'en est-il pour l'association entre le diamètre et la hauteur ?
 
 ```{r}
 cor.test(data = trees, ~ diameter + height, alternative = "greater")
@@ -343,14 +343,14 @@ cor.test(data = trees, ~ diameter + height,
   alternative = "greater", method = "spearman")
 ```
 
-Le test nous averti qu'en présence d'ex æquos, le calcul n'est qu'approchant. Ici aussi nous rejetons $H_0$. Enfin, pour comparaison (en pratique, on ne fait pas systématiquement tous les tests, mais on choisi celui qui est le plus adéquat), que donnerait un test de Kendall ?
+Le test nous avertit qu'en présence d'ex aequo, le calcul n'est qu'approchant. Ici aussi, nous rejetons $H_0$. Enfin, pour comparaison (en pratique, on ne fait pas systématiquement tous les tests, mais on choisit celui qui est le plus adéquat), que donnerait un test de Kendall ?
 
 ```{r}
 cor.test(data = trees, ~ diameter + height,
   alternative = "greater", method = "kendall")
 ```
 
-Même remarque concernant les ex æquos et valeur *P* très similaire ici à celle du test de Spearman.
+Même remarque concernant les ex aequo et valeur *P* très similaire ici à celle du test de Spearman.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -376,7 +376,7 @@ if (exists("assignment"))
     toc = "Association entre des variables")
 ```
 
-**Finalisez maintenant votre gros projet trans-module sur `urchin` en y ajoutant un test de corrélation et en terminant le rapport.**
+**Finalisez maintenant votre gros projet transmodule sur `urchin` en y ajoutant un test de corrélation et en terminant le rapport.**
 
 ```{r assign_A10Ga_urchin_VI, echo=FALSE, results='asis'}
 if (exists("assignment2"))
@@ -398,11 +398,11 @@ if (exists("assignment2"))
 
 ## Communication
 
-Savoir communiquer ses résultats est vital en science des données. Ce n'est pas si facile car il faut pouvoir simplifier les analyses et utiliser au mieux les visuels (c'est-à-dire, les graphiques) pour raconter une histoire qui soit à la fois captivante et compréhensible. **Communiquer le fruit de ses recherches de la meilleure façon qui soit pour que les non-initiés puissent le comprendre fait partie du bagage indispensable du scientifique des données**.
+Savoir communiquer ses résultats est vital en science des données. Ce n'est pas si facile, car il faut pouvoir simplifier les analyses et utiliser au mieux les visuels (c'est-à-dire, les graphiques) pour raconter une histoire qui soit à la fois captivante et compréhensible. **Communiquer le fruit de ses recherches de la meilleure façon qui soit pour que les non-initiés puissent le comprendre fait partie du bagage indispensable du scientifique des données**.
 
 ![](images/sdd1_12/data-scientist-useful.jpg)
 
-Hans Rosling est sans nuls doute très doué pour communiquer des résultats statistiques. La vidéo suivante est un peu longue (20min) et en anglais, mais elle en vaut vraiment la peine[^12-correlation-2]. De plus, il explique à quel point il est important de partager et de rassembler les données dans des grandes bases de données, et ensuite d'en tirer des études *utiles* pour l'humanité. C'est l'avenir des sciences des données, y compris en biologie, qu'il est en train de prédire là.
+Hans Rosling est sans nul doute très doué pour communiquer des résultats statistiques. La vidéo suivante est un peu longue (20min) et en anglais, mais elle en vaut vraiment la peine[^12-correlation-2]. De plus, il explique à quel point il est important de partager et de rassembler les données dans de grandes bases de données, et ensuite d'en tirer des études *utiles* pour l'humanité. C'est l'avenir des sciences des données, y compris en biologie, qu'il est en train de prédire là.
 
 [^12-correlation-2]: Vous pouvez activer les sous-titres en anglais via la barre de boutons en bas de la vidéo.
 
@@ -497,7 +497,7 @@ Dans la littérature scientifique et tout autour de nous, nous pouvons trouver d
 Voici quelques conseils qui vous aideront à développer votre esprit critique statistique.
 
 -   La formulation statistique est-elle en adéquation avec la question biologique posée ?
--   Y-a-t-il des biais dans les techniques d'échantillonnage et/ou de mesure ?
+-   Y a-t-il des biais dans les techniques d'échantillonnage et/ou de mesure ?
 -   Les graphiques sont-ils adéquats par rapport à ce qui doit être montré ?
 -   Les axes sont-ils placés correctement, et sont-ils bien libellés ?
 -   Le graphique respecte-t-il les conventions ?
@@ -506,15 +506,15 @@ Voici quelques conseils qui vous aideront à développer votre esprit critique s
 -   Les variables sont-elles du type correct pour l'analyse (qualitative ordonnée ou non, ou alors, quantitative discrète ou continue) ?
 -   Les conditions d'application des tests statistiques sont-elles respectées ?
 -   La taille de l'échantillon est-elle suffisante ?
--   N'y a-t-il pas pseudo-réplication (plusieurs mesures issues d'un même individu considérées comme des observations indépendantes) ?
--   Les grandeurs observées sont-elles plausibles ? Vous pouvez vous rapporter à des éléments connus et comparer. Par exemple, si l'on vous dit qu'une souris adulte pèse 1g, est-ce plausible ou non ? Faite une recherche sur le Web, ou un raisonnement du genre : une souris est constituée principalement d'eau. Un gramme d'eau occupe un volume de 1 cm^3^. Le volume de la souris adulte est-il supérieur, égal ou inférieur à un cube de 1 cm de côté ?
--   Les mêmes données ne peuvent être utilisées deux fois. Si elles sont utilisés pour découvrir un effet, et en même temps pour le vérifier, c'est incorrect.
+-   N'y a-t-il pas pseudoréplication (plusieurs mesures issues d'un même individu considérées comme des observations indépendantes) ?
+-   Les grandeurs observées sont-elles plausibles ? Vous pouvez vous rapporter à des éléments connus et comparer. Par exemple, si l'on vous dit qu'une souris adulte pèse 1g, est-ce plausible ou non ? Faites une recherche sur le Web, ou un raisonnement du genre : une souris est constituée principalement d'eau. Un gramme d'eau occupe un volume de 1 cm^3^. Le volume de la souris adulte est-il supérieur, égal ou inférieur à un cube de 1 cm de côté ?
+-   Les mêmes données ne peuvent être utilisées deux fois. Si elles sont utilisées pour découvrir un effet, et en même temps pour le vérifier, c'est incorrect.
 -   Une corrélation ou un effet fortuit n'est-il retiré d'une grande quantité de tests non significatifs ? Soyez attentifs aux tests multiples réalisés sans ajustement du seuil $\alpha$.
 -   Les conclusions sont-elles en adéquation avec ce qui est observé dans les données ? Les conclusions répondent-elles à la ou les questions posées initialement ?
 
 `r img("sdd1_12/wrong-graph.gif")`
 
-Pour terminer ce module, nous vous proposons quelques situations (soit des problèmes, soit des graphiques) qui ont toutes en commun d'être erronées. A vous de trouver ce qui ne va pas. Pour ne pas fausser la donne, les réponses ne **sont pas** fournies dans ce documents, mais seront discutées en classes tous ensembles.
+Pour terminer ce module, nous vous proposons quelques situations (soit des problèmes, soit des graphiques) qui ont toutes en commun d'être erronées. À vous de trouver ce qui ne va pas. Pour ne pas fausser la donne, les réponses ne **sont pas** fournies dans ce document, mais seront discutées en classes tous ensembles.
 
 ------------------------------------------------------------------------
 
@@ -580,7 +580,7 @@ Un chercheur compile les statistiques de longévité de diverses professions. Po
 
 ##### Chauve-souris {.unnumbered}
 
-Un biologiste étudie une chauve-souris insectivore naine. Il trouve dans la littérature que la biomasse totale de cette chauve-souris varie de 0,23 à 1,95 kg/ha dans les forêts recensées. Afin de calculer l'abondance de ces populations de chauve-souris, il détermine le poids moyen d'un individu comme étant (moyenne ± écart type) 55 ± 13 mg (n = 45). Il utilise ces données pour comparer les populations de chauve-souris aux autre animaux présents dans cette forêt. Il en conclu que la population de chauve-souris dans ces forêts est très nettement supérieure à celle des oiseaux et équivalente à celle des insectes. Ce résultat est inattendu et permet de considérer cette chauve-souris comme espèce clé dans la chaîne trophique, alors que son effet a toujours été négligé auparavant, tant elle est discrète et passe inaperçu la plupart du temps.
+Un biologiste étudie une chauve-souris insectivore naine. Il trouve dans la littérature que la biomasse totale de cette chauve-souris varie de 0,23 à 1,95 kg/ha dans les forêts recensées. Afin de calculer l'abondance de ces populations de chauve-souris, il détermine le poids moyen d'un individu comme étant (moyenne ± écart type) 55 ± 13 mg (n = 45). Il utilise ces données pour comparer les populations de chauve-souris aux autres animaux présents dans cette forêt. Il en conclut que la population de chauve-souris dans ces forêts est très nettement supérieure à celle des oiseaux et équivalente à celle des insectes. Ce résultat est inattendu et permet de considérer cette chauve-souris comme espèce clé dans la chaîne trophique, alors que son effet a toujours été négligé auparavant, tant elle est discrète et passe inaperçu la plupart du temps.
 
 ***Vous travaillez aussi sur les chaînes trophiques de ces mêmes forêts. Comment réagissez-vous à la lecture de ce rapport ? Que faites-vous ensuite ?***
 
@@ -610,9 +610,9 @@ Aidez-vous du schéma suivant pour expliquer ce qui ne va pas...
 
 ##### Homme moyen {.unnumbered}
 
-Le magazine "Men's Health" a publié des statistiques qui décrivent l'"homme moyen". Celui-ci a 34,4 ans, pèse 79,4kg, mesure 177,8cm, dors 6,9 heures chaque nuit, bois 3,3 tasses de café par jour et consomme 1,2 boisson alcoolique quotidiennement.
+Le magazine "Men's Health" a publié des statistiques qui décrivent l'"homme moyen". Celui-ci a 34,4 ans, pèse 79,4kg, mesure 177,8cm, dort 6,9 heures chaque nuit, boit 3,3 tasses de café par jour et consomme 1,2 boisson alcoolique quotidiennement.
 
-***Sachant que toutes les distributions sont unimodales, donc que les valeurs moyennes correspondent toutes à des observations effectivement mesurées en grand nombres (identiques ou très proches) sur des hommes réels, ce portrait robot de l'"homme moyen" décrit-il effectivement un grand nombre d'individus réellement existants ? Justifiez. Qu'en serait-il de l'"homme médian" ?***
+***Sachant que toutes les distributions sont unimodales, donc que les valeurs moyennes correspondent toutes à des observations effectivement mesurées en grands nombres (identiques ou très proches) sur des hommes réels, ce portrait-robot de l'"homme moyen" décrit-il effectivement un grand nombre d'individus réellement existants ? Justifiez. Qu'en serait-il de l'"homme médian" ?***
 
 ------------------------------------------------------------------------
 
@@ -620,7 +620,7 @@ Le magazine "Men's Health" a publié des statistiques qui décrivent l'"homme mo
 
 ![](images/sdd1_12/bad-graph-backward-time-and-3D-bars.gif)
 
-***Observez bien le grahique ci-dessus... Ensuite, regardez celui ci-dessous qui est réalisé à l'aide des mêmes données. Commentez...***
+***Observez bien le graphique ci-dessus... Ensuite, regardez celui ci-dessous qui est réalisé à l'aide des mêmes données. Commentez...***
 
 ![](images/sdd1_12/bad-graph-backward-time-and-3D-bars-revised.gif)
 
@@ -650,7 +650,7 @@ L'espérance de vie est une donnée statistique qui permet de connaître la dur�
 
 ##### Femmes au travail {.unnumbered}
 
-***Considérez les deux graphiques suivants qui sont sensés représenter la même information (les mêmes données sont utilisées). Comparez-les de manière critique.***
+***Considérez les deux graphiques suivants qui sont censés représenter la même information (les mêmes données sont utilisées). Comparez-les de manière critique.***
 
 ![](images/sdd1_12/bad-graph-3D-and-iportant-thing-is-arrow.gif)
 
@@ -660,7 +660,7 @@ L'espérance de vie est une donnée statistique qui permet de connaître la dur�
 
 ##### Moules {.unnumbered}
 
-Un scientifique mesure la stabilité de la membrane lysosomale (indice de stress des cellules utilisé en écotoxicologie : on sait que les polluants étudiés tendent à déstabiliser la membrane des lysosomes) chez la moule *Mytilus edulis* en Mer du Nord. Deux régions sont comparées : la pleine mer (A), et l'embouchure de l'Escault dans sa partie considérée comme la plus polluée (B). Cinq moules sont prélevées aléatoirement sur les deux sites, et dix mesures sont réalisées sur chaque individu. Le scientifique conclu à une stabilité lysosomale significative plus faible au seuil alpha de 5% dans le site B (test *t* de Student non apparié et unilatéral à gauche, t = -6,5, ddl = 49, valeur *P* \< 0.001).
+Un scientifique mesure la stabilité de la membrane lysosomale (indice de stress des cellules utilisé en écotoxicologie : on sait que les polluants étudiés tendent à déstabiliser la membrane des lysosomes) chez la moule *Mytilus edulis* en Mer du Nord. Deux régions sont comparées : la pleine mer (A), et l'embouchure de l'Escault dans sa partie considérée comme la plus polluée (B). Cinq moules sont prélevées aléatoirement sur les deux sites, et dix mesures sont réalisées sur chaque individu. Le scientifique conclut à une stabilité lysosomale significative plus faible au seuil alpha de 5% dans le site B (test *t* de Student non apparié et unilatéral à gauche, t = -6,5, ddl = 49, valeur *P* \< 0.001).
 
 ***Que pensez-vous de cette étude ?***
 
@@ -676,9 +676,9 @@ Un scientifique mesure la stabilité de la membrane lysosomale (indice de stress
 
 ##### Euro manquant {.unnumbered}
 
-Trois clients dans un restaurant payent leur repas : 30€ (10€ par personne). Le serveur se rend compte qu'en fait leur repas n'a coûté que 25€ en tout. Comme il ne pourra diviser les 5€ à rendre en trois facilement, il décide de garder 2€ dans sa poche et rend 1€ à chaque client. Donc, chaque client a payé 10 -- 1 = 9€, soit un total de 27€. Avec les 2€ que le serveur a gardé dans sa poche, cela fait 29€. Alors, où est passé l'euro manquant par rapport aux 30€ payés initialement ?
+Trois clients dans un restaurant payent leur repas : 30€ (10€ par personne). Le serveur se rend compte qu'en fait leur repas n'a coûté que 25€ en tout. Comme il ne pourra diviser les 5€ à rendre en trois facilement, il décide de garder 2€ dans sa poche et rend 1€ à chaque client. Donc, chaque client a payé 10 -- 1 = 9€, soit un total de 27€. Avec les 2€ que le serveur a gardés dans sa poche, cela fait 29€. Alors, où est passé l'euro manquant par rapport aux 30€ payés initialement ?
 
-***Réfléchissez et dénoncer l'erreur de raisonnement dans le récit précédent.***
+***Réfléchissez et dénoncez l'erreur de raisonnement dans le récit précédent.***
 
 ------------------------------------------------------------------------
 
@@ -688,7 +688,7 @@ Trois clients dans un restaurant payent leur repas : 30€ (10€ par personne)
 
 ![](images/sdd1_12/bad-graph-cliparted-bars2.png)
 
-***Que pensez-vous de ces graphiques ? Vous pouvez vous aidez des schémas suivants pour étayer votre réponse.***
+***Que pensez-vous de ces graphiques ? Vous pouvez vous aider des schémas suivants pour étayer votre réponse.***
 
 ![](images/sdd1_12/bad-graph-improper-scaling1.png) ![](images/sdd1_12/bad-graph-improper-scaling2.png)
 
@@ -698,9 +698,9 @@ Trois clients dans un restaurant payent leur repas : 30€ (10€ par personne)
 
 ##### Insecticides {.unnumbered}
 
-Un chercheur dans une industrie chimique s'intéresse à l'effet d'un nouvel insecticide à effet progressif. Il teste son produit sur des drosophiles et observe une mortalité de 10% par jour, et ce, quel que soit le moment où il effectue les mesures après avoir mis les mouches en contact avec l'insecticide. Il en conclu qu'il faut 10 jours pour tuer toutes les mouches. Ce résultat est meilleur que le produit du concurrent, car ce dernier tue 80% des mouches sur la même durée de 10 jours.
+Un chercheur dans une industrie chimique s'intéresse à l'effet d'un nouvel insecticide à effet progressif. Il teste son produit sur des drosophiles et observe une mortalité de 10% par jour, et ce, quel que soit le moment où il effectue les mesures après avoir mis les mouches en contact avec l'insecticide. Il en conclut qu'il faut 10 jours pour tuer toutes les mouches. Ce résultat est meilleur que le produit du concurrent, car ce dernier tue 80% des mouches sur la même durée de 10 jours.
 
-***Que pensez-vous de la façon dont cette expérience a été menée et de ses conclusion ?***
+***Que pensez-vous de la façon dont cette expérience a été menée et de ses conclusions ?***
 
 ------------------------------------------------------------------------
 
@@ -714,7 +714,7 @@ Un chercheur dans une industrie chimique s'intéresse à l'effet d'un nouvel ins
 
 ##### Lotto {.unnumbered}
 
-Par le plus grand des hasards, le numéro 8 est sorti 6 fois en 7 tirages successifs du lotto. Sachant qu'une vérification de ce que ce numéro n'a pas plus de chances que les autres d'être tiré au sort, vous ne manquerez pas de constater en bon statisticien(ne) que le numéro 8 est très nettement sur-représenté dans les tirages.
+Par le plus grand des hasards, le numéro 8 est sorti 6 fois en 7 tirages successifs du lotto. Sachant qu'une vérification de ce que ce numéro n'a pas plus de chances que les autres d'être tiré au sort, vous ne manquerez pas de constater en bon statisticien(ne) que le numéro 8 est très nettement surreprésenté dans les tirages.
 
 ***La prochaine fois que vous remplirez votre grille de lotto, jouerez-vous le numéro 8 ? Pourquoi ?***
 
@@ -744,7 +744,7 @@ if (exists("assignment"))
 
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 12. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'association de variables. Il vous a également permit de vous initier à la critique statistique Bravo ! Vous êtes arrivé à fin du premier cours de Science des données 1.
+Vous venez de terminer le module 12. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'association de variables. Il vous a également permis de vous initier à la critique statistique Bravo ! Vous êtes arrivé à la fin du premier cours de Science des données 1.
 
 ![](images/sdd1_12/rstudio_joke.jpg)
 

@@ -56,7 +56,7 @@ Le préambule de ce cours vous a également permis d'en apprendre davantage sur 
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Note : les tutoriels learnrs vous permettent d'autoévaluer l'acquis de connaissances et de compétences. Dans le cours, ils sont marqués d'une icône en forme de toque verte. Ils s'exécutent directement dans RStudio à l'intérieur de la SciViews Box. Vous copier l'instruction `BioDataScience1::run("A00La_discovery")` et la collez dans l'onglet Console de RStudio. Ensuite, vous validez la commande en cliquant sur la touche \<entrée\> et le tutoriel doit se lancer. Vous pouvez ouvrir ensuite le tutoriel dans sa propre fenêtre plus spacieuse en cliquant sur le second bouton de la barre d'outils en forme de petite fenêtre avec une flèche blanche.*
+*Note : les tutoriels learnrs vous permettent d'autoévaluer l'acquis de connaissances et de compétences. Dans le cours, ils sont marqués d'une icône en forme de toque verte. Ils s'exécutent directement dans RStudio à l'intérieur de la SciViews Box. Vous copiez l'instruction `BioDataScience1::run("A00La_discovery")` et la collez dans l'onglet Console de RStudio. Ensuite, vous validez la commande en cliquant sur la touche \<entrée\> et le tutoriel doit se lancer. Vous pouvez ouvrir ensuite le tutoriel dans sa propre fenêtre plus spacieuse en cliquant sur le second bouton de la barre d'outils en forme de petite fenêtre avec une flèche blanche.*
 
 `r learnr("A00La_discovery", title = "Découverte de learnr", toc = "Découverte des tutoriels de type learnr")`
 
@@ -87,7 +87,7 @@ Il y a 30 ans, pas d'Internet (ou un embryon d'Internet disponible uniquement po
 
 -   En 2020, quantité d'information ajoutée sur Internet : 1000 milliards de milliards par semaine (écrivez ce nombre en chiffres également).
 
--   Comparaison de puissance de traitement du cerveau humain *versus* un ordinateur : 89 milliards de neurones et travail en multitâche d'un côté, contre 2 milliards de transistors pour un travail essentiellement monotâche pour le petit carré de silicium. Il faut bien avouer que c'est difficile à comparer (combien de transistors équivalent à un neurone ?). Une étude a montré en 2017 que l'un des cinq ordinateurs les plus puissants du moment a été capable de simuler le fonctionnement d'environ 1% du cerveau humain en une seconde. Il lui a fallu 40 minutes de calcul pour y arriver. Intel (l'un des principaux constructeurs de processeurs) estimait il y a à peine quelques années que l'évolution permettra d'égaler le cerveau humain en terme de vitesse de traitement vers 2020... On a dépassé cette date, l'intelligence artificielle est partout autour de nous, mais ne nous remplace pas encore (heureusement !). De plus, la consommation électrique d'un supercalculateur se mesure en mégawatts, alors que le cerveau humain consomme 12-13W seulement, soit un ordre de grandeur d'un million de fois moins !
+-   Comparaison de puissance de traitement du cerveau humain *versus* un ordinateur : 89 milliards de neurones et travail en multitâche d'un côté, contre 2 milliards de transistors pour un travail essentiellement monotâche pour le petit carré de silicium. Il faut bien avouer que c'est difficile à comparer (combien de transistors équivalent à un neurone ?). Une étude a montré en 2017 que l'un des cinq ordinateurs les plus puissants du moment a été capable de simuler le fonctionnement d'environ 1% du cerveau humain en une seconde. Il lui a fallu 40 minutes de calcul pour y arriver. Intel (l'un des principaux constructeurs de processeurs) estimait il y a à peine quelques années que l'évolution permettrait d'égaler le cerveau humain en termes de vitesse de traitement vers 2020... On a dépassé cette date, l'intelligence artificielle est partout autour de nous, mais ne nous remplace pas encore (heureusement !). De plus, la consommation électrique d'un supercalculateur se mesure en mégawatts, alors que le cerveau humain consomme 12-13W seulement, soit un ordre de grandeur d'un million de fois moins !
 
 -   Aujourd'hui et encore plus à l'avenir, le cerveau humain et le (super)-ordinateur constitué par une constellation de machines mondialement interconnectées se complètement merveilleusement bien. La quantité d'information disponible est telle que sans l'ordinateur, nous ne pouvons pas la valoriser... mais le cerveau humain est et reste le chef d'orchestre qui décide, qui dirige la façon dont ces données sont valorisées. Ce chef d'orchestre a un nom : le **scientifique des données**.
 
@@ -151,7 +151,7 @@ Markdown est relativement simple et intuitif à l'usage, même si un petit effor
 
 `r h5p(142, height = 200, toc = "Le fond versus la forme")`
 
-En partant du document Markdown ci-dessus, on peut également obtenir différentes présentations et différents formats finaux. Ci-dessous, deux feuilles de style différentes ont été appliquées sur ce même document. La présentation diffère (police de caractères, couleurs, taille du texte, ...)
+En partant du document Markdown ci-dessus, on peut également obtenir différentes présentations et différents formats finaux. Ci-dessous, deux feuilles de style différentes ont été appliquées sur ce même document. La présentation diffère (police de caractères, couleurs, taille du texte ...)
 
 ![](images/sdd1_01/markdown.png)
 
@@ -345,7 +345,7 @@ Des explications détaillées se trouvent dans l'annexe \@ref(rs) qui présente 
 
 #### Projet RStudio
 
-RStudio permet de gérer des projets efficacement. Un projet va regrouper l'ensemble des jeux de données, des bloc-notes, des rapports, des présentations, des scripts d'une analyse généralement en relation avec une ou plusieurs expériences ou observations réalisées sur le terrain ou en laboratoire.
+RStudio permet de gérer des projets efficacement. Un projet va regrouper l'ensemble des jeux de données, des blocs-notes, des rapports, des présentations, des scripts d'une analyse généralement en relation avec une ou plusieurs expériences ou observations réalisées sur le terrain ou en laboratoire.
 
 ##### À vous de jouer ! {.unnumbered}
 

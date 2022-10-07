@@ -6,15 +6,13 @@ SciViews::R
 
 ##### Objectifs {.unnumbered}
 
--   Découvrir --et vous émerveiller de-- ce que l'on peut faire avec le [logiciel R](https://www.r-project.org) [@R-base]
+-   Découvrir ce que l'on peut faire avec le [logiciel R](https://www.r-project.org) [@R-base]
 
 -   Être capable de réaliser différentes variantes d'un graphique en nuage de points dans R avec la fonction `chart()`
 
 -   Découvrir le format R Markdown [@R-rmarkdown] et la recherche reproductible
 
 -   Intégrer ensuite des graphiques dans un rapport et y décrire ce que vous observez
-
--   Comparer de manière critique un flux de travail "classique" en biologie utilisant Microsoft Excel et Word avec une approche utilisant R et R Markdown ; prendre conscience de l'énorme potentiel de R
 
 ##### Prérequis {.unnumbered}
 
@@ -24,29 +22,27 @@ Le premier module de ce cours vous a permis de découvrir de nouveaux outils com
 
 `r h5p(139, height = 270, toc = NULL)`
 
-Ce second module va s'intéresser à la réalisation de nuages de points. Il est important de maîtriser les [éléments de base de la géométrie](https://mathix.org/cours_interactif/index.php?l=fr&n=3e&c=Rep%C3%A9rage) : origine, abscisse, ordonnée, coordonnées d'un point sur un plan,...
+Ce second module va s'intéresser à la réalisation de graphiques en nuage de points. Il est important de maîtriser les [éléments de base de la géométrie](https://mathix.org/cours_interactif/index.php?l=fr&n=3e&c=Rep%C3%A9rage) : origine, abscisse, ordonnée, coordonnées d'un point sur un plan...
 
 ##### À vous de jouer ! {.unnumbered}
 
-Le graphique ci-dessous présente la variation de la hauteur du test en fonction de la masse d'oursins. (Nous vous avions prévenu, ce cours parle de biologie. N'hésitez à faire des petites recherches par vous-même, si vous ne connaissez pas le test d'un oursin.)
+Le graphique ci-dessous présente la variation de la hauteur du test en fonction de la masse d'oursins (n'hésitez à faire des petites recherches par vous-même, si vous ne connaissez pas ce qu'est le test d'un oursin).
 
 `r h5p(154, height = 270, toc = NULL)`
 
-Ce second module va également s'intéresser à des fonctions mathématiques. Vous devez maîtriser les éléments suivants : [les puissances](https://fr.khanacademy.org/math/algebra-basics/alg-basics-expressions-with-exponents), [les logarithmes, dont le logarithme népérien et les exponentielles](https://fr.khanacademy.org/math/algebra2/exponential-and-logarithmic-functions).
+Ce second module va également vous faire utiliser des fonctions mathématiques. Vous devez maîtriser les éléments suivants : [les puissances](https://fr.khanacademy.org/math/algebra-basics/alg-basics-expressions-with-exponents), [les logarithmes, dont le logarithme népérien et les exponentielles](https://fr.khanacademy.org/math/algebra2/exponential-and-logarithmic-functions).
 
 ## R, les éléments de base
 
-Dans le module précédent, vous avez pu découvrir que le logiciel `R` allait être un logiciel central dans cette formation en science des données. Par exemple, vous avez édité votre premier document Rmarkdown qui est la combinaison du R et du Markdown. Nous avons volontairement laissé ce logiciel pour le second module.
+Dans le module précédent, vous avez pu découvrir que le logiciel **R** allait être un outil central dans cette formation en science des données. Par exemple, vous avez édité votre premier document R Markdown qui est la combinaison du R et du Markdown. Nous avons volontairement laissé ce logiciel pour ce second module.
 
 ![](images/sdd1_02/Rlogo.png)
 
-[R](https://www.r-project.org/about.html) est un logiciel **open source** axé sur l'analyse de données. Le langage de programmation R qu'il implémente est mature et développé depuis 1993. Il prend ses sources dans le langage S (spécialement conçu pour les statistiques dans les années 1970). R permet entre autres la manipulation, la visualisation et l'application de calculs statistiques sur des données. C'est l'un des environnements les plus utilisés et les plus puissants pour l'analyse des données. Donc, étudier R sera un **investissement clé** pour votre future carrière de biologiste, car des données, vous en aurez tous à analyser dans votre travail !
+[R](https://www.r-project.org/about.html) est un logiciel **open source** spécialisé dans l'analyse de données. Le langage de programmation R qu'il implémente est mature et développé depuis 1993. Il prend ses sources dans le langage S (spécialement conçu pour les statistiques dans les années 1970). R permet, entre autres, la manipulation et la visualisation de données, ainsi que l'application de calculs statistiques. C'est l'un des systèmes les plus utilisés et les plus puissants pour l'analyse des données. Donc, étudier R sera un **investissement clé** pour votre future carrière de biologiste, car des données, vous en aurez tous à analyser plus tard dans votre travail !
 
 ##### À vous de jouer ! {.unnumbered}
 
-Vous allez maintenant découvrir les premiers rudiments de R afin de pouvoir réaliser par la suite vos premiers graphiques. Lors du premier module, vous avez réalisé un premier tutoriel qui comprenait uniquement des questions à choix multiples. Dans ces tutoriels, on peut également s'entraîner à écrire des instructions en R. Avant de vous lancer dans ces exercices, consultez l'Appendice \@ref(learnr) pour apprendre à utiliser correctement ces tutoriels.
-
-Lancez-vous dans votre exploration des bases de R.
+Dans le premier module, vous avez réalisé un premier tutoriel qui contenait uniquement des questions à choix multiples. Ces tutoriels servent aussi à vous entraîner à écrire des instructions en R. Avant de vous lancer dans ces exercices, consultez l'Appendice \@ref(learnr) pour apprendre à utiliser correctement les tutoriels "learnrs".
 
 `r learnr("A02La_base", title = "Les bases de R", toc = "Notions de base de R")`
 
@@ -54,13 +50,13 @@ Vous venez de découvrir les assignations, les fonctions, le chaînage d'instruc
 
 `r learnr("A02Lb_progression", title = "Progression R", toc = "Progression en R")`
 
-([BioDataScience1](https://github.com/BioDataScience-Course/BioDataScience1) est un package R spécialement développé pour ce cours et que vous avez dû installer lors de la configuration de votre SciViews Box, voir Appendice \@ref(install-tuto)).
+([BioDataScience1](https://github.com/BioDataScience-Course/BioDataScience1) est un package R spécialement développé pour ce cours et qui est préinstallé dans votre SciViews Box).
 
 `r h5p(156, height = 270, toc = "Sélection de la fonction adéquate")`
 
 ## Nuage de points
 
-Dès que vous vous sentez familiarisé avec les principes de base de R, vous allez pouvoir réaliser assez rapidement de beaux graphiques. Par exemple, si vous souhaitez représenter une variable numérique en fonction d'une autre variable numérique, vous pouvez exprimer cela sous la forme d'une **formule**[^02-visualisation-i-1]
+Dès que vous commencez à maîtriser les principes de base de R, vous allez pouvoir réaliser assez rapidement de beaux graphiques. Par exemple, si vous souhaitez représenter une variable numérique en fonction d'une autre variable numérique, vous pouvez exprimer cela sous la forme d'une **formule**[^02-visualisation-i-1]
 
 [^02-visualisation-i-1]: Dans R, une **formule** permet de spécifier les variables avec lesquelles on souhaite travailler, et leur rôle. Par exemple ici, la variable *x* sur l'axe des abscisses et la variable *y* sur l'axe des ordonnées.
 
@@ -96,10 +92,7 @@ SciViews::R
 # Importation du jeu de données
 urchin <- read("urchin_bio", package = "data.io", lang = "fr")
 # Visualisation interactive du tableau de données
-
-DT::datatable(urchin , filter = 'top', class = "cell-border compact", 
-  rownames = FALSE, options = list(pageLength = 5, scrollX = TRUE),
-  caption = "Jeu de données sur la biométrie des oursins")
+DT::datatable(urchin)
 ```
 
 ```{r, fig.cap="Taille (hauteur du test) d'oursins en fonction de leur masse."}
@@ -108,7 +101,7 @@ chart(data = urchin, height ~ weight) +
   geom_point()
 ```
 
-La fonction `chart()` n'est pas accessible dans R de base, mais l'extension chargée via l'instruction `SciViews::R` rend cette fonction disponible. Elle requiert comme argument le jeu de donnée (`data = urchin`, c'est un objet `dataframe` ou `tibble` dans le langage de R), ainsi que la formule à employer dans laquelle vous avez indiqué le nom des variables que vous voulez sur l'axe des ordonnées à gauche et des abscisses à droite de la formule, les deux membres étant séparés par un "tilde" (`~`). Vous voyez que le jeu de données contient beaucoup de variables (les titres des colonnes du tableau en sortie). Parmi toutes ces variables, nous avons choisi ici de représenter `height` en fonction de `weight`, la hauteur en fonction de la masse des oursins. Jusqu'ici, nous avons spécifié *ce que* nous voulons représenter, mais pas encore *comment* (sous quelle apparence), nous voulons les matérialiser sur le graphique. Pour un nuage de points, nous voulons les représenter sous forme de ... points ! Donc, nous devons ajouter la fonction `geom_point()` pour indiquer cela.
+La fonction `chart()` n'est pas accessible dans R de base, mais l'extension chargée via l'instruction `SciViews::R` rend cette fonction disponible. Elle requiert comme argument le jeu de donnée (`data = urchin`, c'est un objet qui s'appelle un **"data frame"** dans le langage de R), ainsi que la formule à employer dans laquelle vous avez indiqué le nom des variables que vous voulez sur l'axe des ordonnées à gauche et des abscisses à droite de la formule, les deux membres étant séparés par un "tilde" (`~`). Vous voyez que le jeu de données contient beaucoup de variables (les titres des colonnes du tableau en sortie). Parmi toutes ces variables, nous avons choisi ici de représenter `height` en fonction de `weight`, la hauteur en fonction de la masse des oursins. Jusqu'ici, nous avons spécifié *ce que* nous voulons représenter, mais pas encore *comment* (sous quelle apparence), nous voulons les matérialiser sur le graphique. Pour un nuage de points, nous voulons les représenter sous forme de ... points ! Donc, nous devons ajouter la fonction `geom_point()` pour indiquer cela.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -120,15 +113,15 @@ La fonction `chart()` n'est pas accessible dans R de base, mais l'extension char
 #vembedr::embed_youtube("-QzG3Xr202w", width = 770, height = 433)
 ```
 
-*Auto-évaluez maintenant vos acquis avec le tutoriel learnr suivant.*
+*Autoévaluer maintenant vos acquis avec le tutoriel learnr suivant.*
 
-`r learnr("A02Lc_nuage", title = "Nuage de points", toc = "Graphiques en nuages de points")`
+`r learnr("A02Lc_scatterplot", title = "Nuage de points", toc = "Graphiques en nuages de points")`
 
 `r h5p(155, height = 270, toc = "Les fonctions chart() et geom_point()")`
 
 ### Échelles de graphiques
 
-Vous devez être vigilant lors de la réalisation d'un nuage de point particulièrement sur l'étendue des valeurs présentées sur vos axes. Vous devez utiliser votre expertise de biologiste pour vous posez les deux questions suivantes :
+Vous devez être particulièrement vigilant lors de la réalisation d'un graphique en nuage de point sur l'étendue des valeurs présentées sur vos axes. Vous devez utiliser votre expertise de biologiste pour vous poser les deux questions suivantes :
 
 -   Est-ce que l'axe représente des valeurs plausibles de hauteurs et de masses de ces oursins appartenant à l'espèce *Paracentrotus lividus* ?
 
@@ -151,13 +144,13 @@ combine_charts(list(a, b, c, d))
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Note : l'exercice suivant est une **application Shiny**. Il s'agit d'un petit programme interactif écrit en R et qui vise à expérimenter librement avec un concept. Vous pouvez lancer cet exercice directement dans cette page. Vérifiez d'être bien enregistré (message à l'ouverture de l'app) et n'oubliez pas de cliquer sur le bouton `Submit` pour tester votre choix, mais également sur le bouton `Save & Quit` pour valider définitivement votre réponse pour la prendre en compte dans votre rapport de progression.*
+*Note : l'exercice suivant est une **application Shiny**. Il s'agit d'un petit programme écrit en R et qui vise à expérimenter un concept de manière interactive. Vous pouvez lancer cet exercice directement dans cette page. Vérifiez d'être bien enregistré (message à l'ouverture de l'app) et n'oubliez pas de cliquer sur le bouton `Submit` pour tester votre choix, mais également sur le bouton `Save & Quit` pour valider définitivement votre réponse pour la prendre en compte dans votre rapport de progression.*
 
 `r launch_shiny("https://sdd.umons.ac.be/A02Sa_limits/", height = 500, delay = 10, toc = "Étendue des axes d'un graphique")`
 
 ### Transformation des données
 
-Vous avez la possibilité d'appliquer une transformation de vos données (il est même conseillé de le faire) afin qu'elles soient plus facilement analysables. Par exemple, il est possible d'utiliser des fonctions de puissance, racines, logarithmes, exponentielles[^02-visualisation-i-2] pour modifier l'apparence du nuage de points dans le but de le rendre plus linéaire (car il est plus facile d'analyser statistiquement des données qui s'alignent le long d'une droite).
+Vous avez la possibilité d'appliquer une transformation à vos données (il est même conseillé de le faire) afin qu'elles soient plus facilement analysables. Par exemple, il est possible d'utiliser des fonctions de puissance, racines, logarithmes, exponentielles[^02-visualisation-i-2] pour modifier l'apparence du nuage de points dans le but de le rendre plus linéaire (car il est plus facile d'analyser statistiquement des données qui s'alignent le long d'une droite).
 
 [^02-visualisation-i-2]: Pour les proportions (`prop`) ou les pourcentages (`perc`) (valeurs bornées entre 0 et 1 ou 0 et 100%) la transformation arc-sinus est souvent utilisée : $prop′ = \arcsin \sqrt{prop}$ ou $perc′ = \arcsin \sqrt{perc / 100}$.
 
@@ -167,7 +160,7 @@ Vous avez la possibilité d'appliquer une transformation de vos données (il est
 
 ##### Pièges et astuces {.unnumbered}
 
-RStudio permet de récupérer rapidement des instructions à partir d'une banque de solutions toutes prêtes. Cela s'appelle des **snippets**. Vous avez une série de snippets disponibles dans la SciViews Box. Celui qui vous permet de réaliser un graphique en nuage de points s'appelle `.cbxy` (pour **c**hart -\> **b**ivariate -\> **xy**-plot). Entrez ce code et appuyez ensuite sur la tabulation dans un script R, et vous verrez le code remplacé par ceci dans la fenêtre d'édition :
+RStudio permet de récupérer rapidement des instructions à partir d'une banque de solutions toutes prêtes. Cela s'appelle des **snippets**. Vous avez une série de snippets disponibles dans la SciViews Box. Celui qui vous permet de réaliser un graphique en nuage de points s'appelle `.cbxy` (pour **c**hart -\> **b**ivariate -\> **xy**-plot). Entrez ce code et appuyez ensuite sur la tabulation dans un script R, et vous verrez le code remplacé par ceci dans la fenêtre d'édition :
 
     chart(data = DF, YNUM ~ XNUM) +
       geom_point()
@@ -176,27 +169,25 @@ Vous avez à votre disposition un ensemble de snippets que vous pouvez retrouver
 
 ##### À vous de jouer ! {.unnumbered}
 
-*Note : pour rappel, le travail ci-dessous est un **projet GitHub Classroom**. Créez le dépôt GitHub en cliquant sur le lien. Ensuite clonez-le dans `shared/projects` dans votre machine virtuelle et vous aurez un nouveau projet RStudio* \@ref(rs-projet) *dans lequel vous pourrez travailler. Les instructions sont indiquées dans le fichier `README.md` à la racine de ce projet.*
+*Note : pour rappel, le travail ci-dessous est un **projet GitHub Classroom**. Créez le dépôt GitHub en cliquant sur le lien. Ensuite, clonez-le dans votre machine virtuelle et vous aurez un nouveau projet RStudio* \@ref(rs-projet) *dans lequel vous pourrez travailler. Les instructions sont indiquées dans le fichier `README.md` à la racine de ce projet.*
 
-```{r assign_A02Ia_21_nuagepoints_I, echo=FALSE, results='asis'}
+```{r assign_A02Ia_scatterplot_I, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A02Ia_21_nuagepoints", part = "I",
-    url = "https://github.com/BioDataScience-Course/A02Ia_21_nuagepoints",
+  assignment("A02Ia_scatterplot", part = "I",
+    url = "https://github.com/BioDataScience-Course/A02Ia_scatterplot",
     course.ids = c(
-      'S-BIOG-006' = !"A02Ia_{YY}M_nuagepoints", 
-      'S-BIOG-921' = !"A02Ia_{YY}C_nuagepoints"),
+      'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/6oBAO9wR"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[4]+1} 13:00:00"),
+      'S-BIOG-006' = !"{W[5]+5} 10:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
+      'S-BIOG-006' = !"{W[5]+5} 13:00:00"),
     term = "Q1", level = 3,
-    toc = "Graphiques sur `urchin_bio`, partie I")
+    toc = "Graphiques avec `urchin_bio`, partie I")
 ```
 
-Prêtez une attention toute particulière à l'organisation d'un script R. En plus des instructions R, il contient aussi sous forme de commentaires, un titre , la date de la dernière mise à jour, le nom de l'auteur, et des sections qui organisent de façon claire le contenu du script. A ce sujet, vous trouverez des explications détaillées concernant l'utilisation des scripts R dans l'annexe \@ref(script).
+Prêtez une attention toute particulière à l'organisation d'un script R. En plus des instructions R, il contient aussi sous forme de commentaires, un titre, la date de la dernière mise à jour, le nom de l'auteur, et des sections qui organisent de façon claire le contenu du script. À ce sujet, vous trouverez des explications détaillées concernant l'utilisation des scripts R dans l'annexe \@ref(script).
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -234,10 +225,12 @@ Les balises spéciales R Markdown à retenir sont les suivantes :
 Vous devez bien entendu avoir autant de balises d'entrée que de balises de sortie. Des explications plus détaillées se trouvent dans l'annexe \@ref(Rmd) dédiée au R Markdown. De plus, l'écriture d'un rapport d'analyse scientifique doit respecter certaines conventions. Vous trouverez des explications à ce sujet dans l'annexe \@ref(redaction-scientifique).
 
 ```{block, type='note'}
-Vous ne devez bien évidemment pas commencer avec un script R. Vous pouvez commencer d'emblée avec un R Markdown/R Notebook et écrire vos instructions R directement dedans. Il vous est toujours possible d'exécuter ces instructions ligne après ligne dans la fenêtre **Console** pour les tester tout comme à partir d'un script R.
+Vous ne devez bien évidemment pas commencer avec un script R. Vous pouvez commencer d'emblée avec un R Markdown et écrire vos instructions R directement dedans. Il vous est toujours possible d'exécuter ces instructions ligne après ligne dans la fenêtre **Console** pour les tester tout comme à partir d'un script R.
 ```
 
 ##### Pour en savoir plus {.unnumbered}
+
+Au gré de vos recherches sur Internet, vous tomberez peut-être sur [Quarto](https://quarto.org). Il s'agit de la nouvelle génération de documents de type R Markdown, mais avec d'autres possibilités intéressantes (notamment d'être compatible avec [Jupyter(lab)](https://jupyter.org), un autre logiciel d'édition de documents scientifiques). En pratique, la syntaxe de Quarto est très proche de celle de R Markdown. Donc, si vous connaissez l'un, vous serez capable d'utiliser l'autre. Sinon, vous pouvez aussi consulter les liens suivants :
 
 -   [Communicating results with R Markdown](https://rviews.rstudio.com/2018/11/01/r-markdown-a-better-approach/) explique la même chose que dans la vidéo, avec plus de détails et des liens vers d'autres documents utiles (en anglais).
 
@@ -255,55 +248,31 @@ Vous ne devez bien évidemment pas commencer avec un script R. Vous pouvez comme
 
 -   [Le langage R Markdown](https://www.fun-mooc.fr/c4x/UPSUD/42001S02/asset/RMarkdown.pdf). Introduction en français concise, mais relativement complète.
 
--   [Reproducible reports](https://rworkshop.uni.lu/lectures/lecture04_rmarkdown.html#1) with R Markdown. Une explication en anglais de la raison d'être de R Markdown.
-
 -   [Why I love R Notebooks](https://rviews.rstudio.com/2017/03/15/why-i-love-r-notebooks/) explique (en anglais) pourquoi le format R Notebook est particulièrement bien adapté à la science des données.
 
 ##### À vous de jouer ! {.unnumbered}
 
 -   Vous allez maintenant manipuler un document **R Markdown** pour construire de manière interactive une analyse en même temps que le rapport associé.
 
-```{r assign_A02Ia_21_nuagepoints_II, echo=FALSE, results='asis'}
+```{r assign_A02Ia_scatterplot_II, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A02Ia_21_nuagepoints", part = "II",
-    url = "https://github.com/BioDataScience-Course/A02Ia_21_nuagepoints",
+  assignment("A02Ia_scatterplot", part = "II",
+    url = "https://github.com/BioDataScience-Course/A02Ia_scatterplot",
     course.ids = c(
-      'S-BIOG-006' = !"A02Ia_{YY}M_nuagepoints", 
-      'S-BIOG-921' = !"A02Ia_{YY}C_nuagepoints"),
+      'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/6oBAO9wR"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[4]+4} 10:00:00"),
+      'S-BIOG-006' = !"{W[5]+5} 10:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
+      'S-BIOG-006' = !"{W[5]+5} 13:00:00"),
     term = "Q1", level = 3,
-    toc = "Graphiques sur `urchin_bio`, partie II")
-```
-
--   Comparaison du flux de travail en biologie en binôme  : R et Microsoft Word *versus* R et R Markdown.
-
-```{r assign_A02Ga_21_workflow, echo=FALSE, results='asis'}
-if (exists("assignment2"))
-  assignment2("A02Ga_21_workflow", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A02Ga_21_workflow",
-    course.ids = c(
-      'S-BIOG-006' = !"A02Ga_{YY}M_workflow", 
-      'S-BIOG-921' = !"A02Ga_{YY}C_workflow"),
-    course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-006' = !"{W[4]+4} 10:00:00"),
-    course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
-    term = "Q1", level = 4, n = 2,
-    toc = "Comparaison de workflows R-Word *versus* R-R Markdown")
+    toc = "Graphiques avec `urchin_bio`, partie II")
 ```
 
 ## Récapitulatif des exercices
 
-Ce second module vous a permis de réaliser vos premiers graphiques pour visualiser des données et vous a introduit à R Markdown, un système qui allie la facilité de Markdown pour l'écriture de documents textuels et la puissance de calcul de R pour y inclure des analyses directement. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
+Ce second module vous a permis de réaliser vos premiers graphiques pour visualiser des données et vous a introduit à R Markdown, un système qui allie la facilité de Markdown pour l'écriture de documents textuels et la puissance de calcul de R pour y inclure des analyses directement. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

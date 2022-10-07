@@ -29,7 +29,7 @@ crabs2 <- fmutate(crabs, group  = labelise(
     "Groupe espèce - sexe", units = NA))
 ```
 
-La Fig. \@ref(fig:crabs-rear) montre la largeur à l'arrière de la carapace chez les quatre groupes ainsi individualisés. Une représentation graphique adéquate avant de réaliser notre analyse ici lorsque le nombre de répliquas est important est le graphique en violon sur lequel nous superposons au moins les moyennes, et de préférence, les points également. Si le nombre de répliquas est plus faible, mais toujours supérieur à 7-8, nous pourrions utiliser le même type de graphique mais avec des boites de dispersion plutôt (voir plus loin, Fig. \@ref(fig:anova2)). Avec encore moins de répliquas nous présenterons les points et les moyennes uniquement.
+La Fig. \@ref(fig:crabs-rear) montre la largeur à l'arrière de la carapace chez les quatre groupes ainsi individualisés. Une représentation graphique adéquate avant de réaliser notre analyse ici lorsque le nombre de répliquas est important est le graphique en violon sur lequel nous superposons au moins les moyennes, et de préférence, les points également. Si le nombre de répliquas est plus faible, mais toujours supérieur à 7-8, nous pourrions utiliser le même type de graphique, mais avec des boites de dispersion plutôt (voir plus loin, Fig. \@ref(fig:anova2)). Avec encore moins de réplicas nous présenterons les points et les moyennes uniquement.
 
 ```{r crabs-rear, fig.cap="Largeur arrière en fonction du groupe de crabes *L. variegatus*. Graphique adéquat pour comparer les moyennes et distributions dans le cas d'un nombre important de répliquats (moyennes en rouge + observations individuelles en noir semi-transparent superposées à des graphiques en violon)."}
 chart(data = crabs2, rear ~ group) +
@@ -41,7 +41,7 @@ chart(data = crabs2, rear ~ group) +
   
 ```
 
-Nous en profitons également pour essayer l'astuce proposée au module précédent. Au lieu de travailler sur la variable `rear` seule, nous allons étudier l'aspect ratio entre largeur à l'arrière (`rear`) et largeur maximale (`width`) de la carapace afin de nous débarrasser d'une source de variabilité triviale qui est qu'un grand crabe est grand partout, et de même un petit crabe est petit pour toutes ses mesures. Nous prenons soin également de libeller cette nouvelle variable correctement avec `labelise()`. Enfin, nous ne conservons que les variables `species`, `sex`, `group` et `aspect` avec `select()` (possible uassi avec `fmutate()` et `fselect()` bien sûr) :
+Nous en profitons également pour essayer l'astuce proposée au module précédent. Au lieu de travailler sur la variable `rear` seule, nous allons étudier l'aspect ratio entre largeur à l'arrière (`rear`) et largeur maximale (`width`) de la carapace afin de nous débarrasser d'une source de variabilité triviale qui est qu'un grand crabe est grand partout, et de même un petit crabe est petit pour toutes ses mesures. Nous prenons soin également de libeller cette nouvelle variable correctement avec `labelise()`. Enfin, nous ne conservons que les variables `species`, `sex`, `group` et `aspect` avec `select()` (possible aussi avec `fmutate()` et `fselect()` bien sûr) :
 
 ```{r}
 crabs2 %>.%
@@ -53,7 +53,7 @@ crabs2 %>.%
 skimr::skim(crabs2)
 ```
 
-Nous avons 50 individus dans chacun des quatre groupes. **Lorsqu'il y a le même nombre de répliquas dans tous les groupes, on appelle cela un plan balancé**. C'est une situation optimale. Nous devons toujours essayer de nous en rapprocher le plus possible car, si le nombre d'individus mesurés diffère fortement d'un groupe à l'autre, nous aurons forcément moins d'information disponible dans le ou les groupes moins nombreux, ce qui déforcera notre analyse.
+Nous avons 50 individus dans chacun des quatre groupes. **Lorsqu'il y a le même nombre de réplicas dans tous les groupes, on appelle cela un plan balancé**. C'est une situation optimale. Nous devons toujours essayer de nous en rapprocher le plus possible, car, si le nombre d'individus mesurés diffère fortement d'un groupe à l'autre, nous aurons forcément moins d'information disponible dans le ou les groupes moins nombreux, ce qui déforcera notre analyse.
 
 Nous voyons également que la variable `aspect` semble avoir une distribution bimodale d'après le petit histogramme représenté dans le résumé. La Fig. \@ref(fig:anova0) avec `aspect montre une différence plus qu'avec`rear\` seul, à la Fig. \@ref(fig:crabs-rear).
 

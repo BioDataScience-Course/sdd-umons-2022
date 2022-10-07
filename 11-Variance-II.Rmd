@@ -44,7 +44,7 @@ avec $\tau1_j$ correspondant à l'écart de la moyenne générale $µ$ à la moy
 
 $$y \sim fact1 + fact2$$
 
-Notez que, quel que soit le niveau considéré pour $\tau1$, un niveau donné de $\tau2$ est constant dans l'équation qui décrit ce modèle. Cela signifie que l'on considère que les écarts pour les moyennes de la variable `fact2` sont toujours les mêmes depuis les moyennes de `fact1`. Donc, si une sous-population de `fact2` tend à avoir une moyenne, disons, supérieure pour la première sous-population de `fact1`, elle sera considérée comme ayant les mêmes écarts pour toutes les autres sous-populations de `fact1`. Evidemment, cette condition n'est pas toujours rencontrée dans la pratique. Le **graphique des interactions** (Fig. \@ref(fig:interactions)) permet de visualiser les écarts des moyennes respectives des différentes sous-populations.
+Notez que, quel que soit le niveau considéré pour $\tau1$, un niveau donné de $\tau2$ est constant dans l'équation qui décrit ce modèle. Cela signifie que l'on considère que les écarts pour les moyennes de la variable `fact2` sont toujours les mêmes depuis les moyennes de `fact1`. Donc, si une sous-population de `fact2` tend à avoir une moyenne, disons, supérieure pour la première sous-population de `fact1`, elle sera considérée comme ayant les mêmes écarts pour toutes les autres sous-populations de `fact1`. Évidemment, cette condition n'est pas toujours rencontrée dans la pratique. Le **graphique des interactions** (Fig. \@ref(fig:interactions)) permets de visualiser les écarts des moyennes respectives des différentes sous-populations.
 
 ```{r interactions, fig.cap="Graphique des interactions entre les variables facteurs (espèce et sexe). Les traits (pratiquement) parallèles indiquent qu'il n'y a pas d'interactions, comme c'est le cas ici."}
 read("crabs", package = "MASS", lang = "fr") %>.%
@@ -82,14 +82,14 @@ crabs2 %>.%
     count = sum(!is.na(aspect5)))
 ```
 
-Pour la visualisation graphique, nous sommes tributaires du nombre d'observations. Avec moins d'une petite dizaine d'observations, nous représenterons des points pour chaque observation et superposerons les moyennes. Lorsque le nombre est plus grand nous pourrons utiliser soit les boites de dispersion, soit le graphique en violon si ce nombre est encore plus grand. Voyons cela sur notre exemple (les "snippets" dans le menu `chart: bivariate` peuvent être utilisés comme point de départ auquel nous ajoutons la seconde variable facteur pour les facettes multi-graphiques séparée par un `|`). La Fig. \@ref(fig:crabs2boxplot) montre ce que cela donne si l'on opte pour les boites de dispersion.
+Pour la visualisation graphique, nous sommes tributaires du nombre d'observations. Avec moins d'une petite dizaine d'observations, nous représenterons des points pour chaque observation et superposerons les moyennes. Lorsque le nombre est plus grand, nous pourrons utiliser soit les boites de dispersion, soit le graphique en violon si ce nombre est encore plus grand. Voyons cela sur notre exemple (les "snippets" dans le menu `chart: bivariate` peuvent être utilisés comme point de départ auquel nous ajoutons la seconde variable facteur pour les facettes multi-graphiques séparée par un `|`). La Fig. \@ref(fig:crabs2boxplot) montre ce que cela donne si l'on opte pour les boites de dispersion.
 
 ```{r crabs2boxplot, fig.cap="Taille relative de la carapace à l'arrière de crabes *L. variegatus* (deux variétés et deux sexes), version simple."}
 chart(data = crabs2, aspect5 ~ species | sex) +
   geom_boxplot()
 ```
 
-La Fig. \@ref(fig:crabs2boxplot2) est une version améliorée avec les observations et les moyennes pour chaque sous-groupe ajoutées au graphique selon la même technique que nous avions utilisé pour représenter les données pour l'ANOVA à un facteur.
+La Fig. \@ref(fig:crabs2boxplot2) est une version améliorée avec les observations et les moyennes pour chaque sous-groupe ajouté au graphique selon la même technique que nous avions utilisé pour représenter les données pour l'ANOVA à un facteur.
 
 ```{r crabs2boxplot2, fig.cap="Taille relative de la carapace à l'arrière de crabes *L. variegatus* (deux variétés et deux sexes), version annotée."}
 chart(data = crabs2, aspect5 ~ species | sex) +
@@ -116,7 +116,7 @@ Si vous comparez avec le test que nous avions fait dans le cas de l'ANOVA à un 
 anova(anova. <- lm(data = crabs2, aspect5 ~ species + sex))
 ```
 
-Comme la variance est décomposée en trois étapes (selon l'espèce, puis selon le sexe, puis les résidus), nous avons trois lignes dans le tableau de l'ANOVA. Nous effectuons deux tests. Le premier consiste à comparer les carrés moyens (`Mean Sq`) pour l'espèce par rapport aux résidus. Donc, la valeur `F` est le ratio de la somme des carrés `species` divisé par la somme des carrés des résidus, et cette valeur est reportée sur la loi de distribution théorique *F* pour obtenir une première valeur *P* (ici 5,12 . 10^-5^). De même, le second test qui s'intéresse au sexe calcule la valeur *F* via la ratio de la somme des carrés pour `sex` divisé par la somme des carrés des résidus, et la loi *F* nous permet de calculer une seconde valeur *P* (ici 2,2 . 10^-16^).
+Comme la variance est décomposée en trois étapes (selon l'espèce, puis selon le sexe, puis les résidus), nous avons trois lignes dans le tableau de l'ANOVA. Nous effectuons deux tests. Le premier consiste à comparer les carrés moyens (`Mean Sq`) pour l'espèce par rapport aux résidus. Donc, la valeur `F` est le ratio de la somme des carrés `species` divisé par la somme des carrés des résidus, et cette valeur est reportée sur la loi de distribution théorique *F* pour obtenir une première valeur *P* (ici 5,12 . 10^-5^). De même, le second test qui s'intéresse au sexe calcule la valeur *F* via le ratio de la somme des carrés pour `sex` divisé par la somme des carrés des résidus, et la loi *F* nous permet de calculer une seconde valeur *P* (ici 2,2 . 10^-16^).
 
 Nous interprétons chacun des deux tests séparément. Dans notre cas, nous pouvons dire avec un seuil $\alpha$ de 5% que nous rejetons $H_0$ dans les deux cas. Donc le rapport largeur arrière sur largeur max de la carapace est significativement différent au seuil $\alpha$ de 5% à la fois en fonction de l'espèce (F = 17,15, ddl = 197 et 1, valeur *P* \<\< 0,001) et du sexe (F = 436, ddl = 197 et 1, valeur *P* \<\< 0,001)[^11-variance-ii-1].
 
@@ -426,13 +426,13 @@ L'équation du modèle n'a pas changé, mais nous avons maintenant un terme alé
 -   $H_0: \sigma_{\tau2} = 0$
 -   $H_1: \sigma_{\tau2} > 0$
 
-Dans R, la fonction `lm()` utilisée jusqu'ici ne prend pas en compte les facteurs aléatoires. Il existe plusieurs implémentations différentes, par exemple avec `aov()`, `nlme::lme()` ou encore `lme4::lmer()`/`lmeTest::lmer()`. De plus, ces modèles sont rendus plus difficiles car les spécialistes considèrent que la valeur *p* n'est calculable que dans certains cas bien précis. C'est la raison pour laquelle `lme4::lmer()` calcule le modèle, mais ne renvoie aucune valeur *p*. De plus, chaque fonction utilise une formulation différente, et renvoie les résultats différemment. Il est important d'avoir cela en tête, car si vous rechercher de la documentation concernant les modèles à facteurs aléatoires dans R sur Internet, vous risquez de vous perdre dans les différentes implémentations et explications... si ce n'est à considérer que différents points de vue co-existent actuellement !
+Dans R, la fonction `lm()` utilisée jusqu'ici ne prend pas en compte les facteurs aléatoires. Il existe plusieurs implémentations différentes, par exemple avec `aov()`, `nlme::lme()` ou encore `lme4::lmer()`/`lmeTest::lmer()`. De plus, ces modèles sont rendus plus difficiles, car les spécialistes considèrent que la valeur *p* n'est calculable que dans certains cas bien précis. C'est la raison pour laquelle `lme4::lmer()` calcule le modèle, mais ne renvoie aucune valeur *p*. De plus, chaque fonction utilise une formulation différente, et renvoie les résultats différemment. Il est important d'avoir cela en tête, car si vous recherchez de la documentation concernant les modèles à facteurs aléatoires dans R sur Internet, vous risquez de vous perdre dans les différentes implémentations et explications... si ce n'est à considérer que différents points de vue co-existent actuellement !
 
 Dans la suite, nous verrons deux modèles aléatoires particuliers qui ont une configuration permettant un calcul correct des valeurs de *p* : le modèle en parcelles divisées (split-plot) et le modèle à mesures répétées.
 
 ### Modèle en parcelles divisées (split-plot)
 
-Un des modèles pour lequel les valeurs *p* sont calculables est le modèle dit en [parcelles divisées](https://stat.ethz.ch/education/semesters/as2015/anova/08_Split_Plots.pdf) (split-plot en anglais). Cette situation apparaît lorsque, parmi deux facteurs, l'un est plus difficile à diviser en sous-unités *indépendantes*. C'est le cas ici avec nos boites de Pétri qui forment chacune un petit microcosme unique. Il est possible de diviser la boite de Pétri en sous-régions. C'est ce qui a été fait ici pour tester les six lots, mais ces sous-régions ne **sont pas indépendantes** les unes des autres, elles continuent d'être liées entre elle au sein de la même boite de Pétri. Nous pouvons néanmoins considérer la boite de Pétri comme facteur aléatoire dans ce modèle split-plot. Dans ce cas, nous avons intérêt à utiliser `lmeTest::lmer()` qui calculera ces valeurs *p* là où elles sont pertinentes[^11-variance-ii-4]. Dans la formule, un facteur aléatoire simple s'écrit `(1 | facteur)`. Cela donne :
+Un des modèles pour lequel les valeurs *p* sont calculables est le modèle dit en [parcelles divisées](https://stat.ethz.ch/education/semesters/as2015/anova/08_Split_Plots.pdf) (split-plot en anglais). Cette situation apparaît lorsque, parmi deux facteurs, l'un est plus difficile à diviser en sous-unités *indépendantes*. C'est le cas ici avec nos boites de Pétri qui forment chacune un petit microcosme unique. Il est possible de diviser la boite de Pétri en sous-régions. C'est ce qui a été fait ici pour tester les six lots, mais ces sous-régions ne **sont pas indépendantes** les unes des autres, elles continuent d'être liées entre elles au sein de la même boite de pétri. Nous pouvons néanmoins considérer la boite de Pétri comme facteur aléatoire dans ce modèle split-plot. Dans ce cas, nous avons intérêt à utiliser `lmeTest::lmer()` qui calculera ces valeurs *p* là où elles sont pertinentes[^11-variance-ii-4]. Dans la formule, un facteur aléatoire simple s'écrit `(1 | facteur)`. Cela donne :
 
 [^11-variance-ii-4]: Notez toutefois qu'il est conseillé de manière générale de **ne pas** utiliser les valeurs *p* du tout, mais de privilégier d'autres approches comme le rapport de la log-vraissemblance entre modèles, voir [ici](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9450.2010.00852.x), mais cela sort du cadre de ce cours.
 
@@ -465,7 +465,7 @@ summary(anovaComp. <- confint(multcomp::glht(split_plot,
 
 Ici, tous les lots diffèrent, sauf A-C et E-D. Si la première modalité était une situation de référence, nous aurions aussi pu utiliser la comparaison multiple de Dunnet en remplaçant `"Tukey"` par `"Dunnet"` dans le code ci-dessus. Dans ce cas, toutes les comparaisons deux à deux ne seraient pas réalisées, seulement les comparaisons au témoin, donc à la modalité de référence.
 
-N'oublions par de réaliser une petite analyse des résidus de ce modèle pour vérifier qu'ils ont bien une distribution normale et que les variances sont homogènes (homoscédasticité).
+N'oublions pas de réaliser une petite analyse des résidus de ce modèle pour vérifier qu'ils ont bien une distribution normale et que les variances sont homogènes (homoscédasticité).
 
 ```{r}
 library(broom.mixed) # Required for mixed models

@@ -71,7 +71,7 @@ Une présentation correcte de ces données consiste à utiliser une colonne "tai
 Ce dernier tableau est moins compact et plus "verbeux" que le présenter (il faut répéter "hamster" ou "cobaye" plusieurs fois dans la première colonne). Pour cette raison, un novice ou un encodeur ignorant les règles élémentaires des sciences des données est souvent amené, de bonne fois, à adopter la présentation qui semble la plus compacte, **mais ce n'est pas toujours la plus pertinente\ !** Heureusement, dons R le outils existent pour passer d'une forme à l'autre facilement.
 ---->
 ```
-*Considérez maintenant ce troisième exemple fictif avec le résultat d'un test enregistré avant et après un traitement sensé améliorer le résultat du test :*
+*Considérez maintenant ce troisième exemple fictif avec le résultat d'un test enregistré avant et après un traitement censé améliorer le résultat du test :*
 
 `r h5p(49, height = 270, toc = "Tableau cas par variables 3")`
 
@@ -148,7 +148,7 @@ rep(c("a", "b", "c"), 5)
 rep(c("a", "b", "c"), each = 5)
 ```
 
-Pour de plus gros tableaux, il vaut mieux utiliser un tableur tel que Excel ou LibreOffice Calc pour l'encodage. Les tableurs en ligne comme Google Sheets ou Excel Online conviennent très bien également et facilitent un travail collaboratif ainsi que la mise à disposition sur Internet, comme nous avons vu au module \@ref(import).
+Pour de plus gros tableaux, il vaut mieux utiliser un tableur tel qu’Excel ou LibreOffice Calc pour l'encodage. Les tableurs en ligne comme Google Sheets ou Excel Online conviennent très bien également et facilitent un travail collaboratif ainsi que la mise à disposition sur Internet, comme nous avons vu au module \@ref(import).
 
 ### Tableau de contingence
 
@@ -181,7 +181,7 @@ anthirrhinum <- as.table(c(
 anthirrhinum
 ```
 
-Une troisième possibilité est d'utiliser un tableau indiquant les **fréquences d'occurence** dans une colonne (`freq` ci-dessus). Ce n'est **pas** un tableau cas par variables, mais une forme bien plus concise et pratique pour pré-encoder les données qui devront être ensuite transformées en tableau de contingence à l'aide de la fonction `xtabs()`. Voici un exemple pour un tableau de contingence à double entrée. Notez que le tableau cas par variable correspondant devrait contenir 44 + 116 + 19 + 128 = 307 lignes et serait plus fastidieux à construire et à manipuler (même en utilisant la fonction `rep()`).
+Une troisième possibilité est d'utiliser un tableau indiquant les **fréquences d'occurrences** dans une colonne (`freq` ci-dessus). Ce n'est **pas** un tableau cas par variables, mais une forme bien plus concise et pratique pour préencoder les données qui devront être ensuite transformées en tableau de contingence à l'aide de la fonction `xtabs()`. Voici un exemple pour un tableau de contingence à double entrée. Notez que le tableau cas par variable correspondant devrait contenir 44 + 116 + 19 + 128 = 307 lignes et serait plus fastidieux à construire et à manipuler (même en utilisant la fonction `rep()`).
 
 ```{r}
 timolol <- dtx(
@@ -237,7 +237,7 @@ Les données dans un tableau de données doivent **impérativement** être assoc
 
 $$Donn\acute{e}es \ de \ qualit\acute{e} \ = \ tableau \ de \ donn\acute{e}es + \ m\acute{e}tadonn\acute{e}es$$
 
-Les données correctement qualifiées et documentées sont les seules qui peuvent être utilisées par un collaborateur externe. C'est à dire qu'une personne externe à l'expérience ne peut interpréter le tableau de données que si les métadonnées sont complètes et explicites.
+Les données correctement qualifiées et documentées sont les seules qui peuvent être utilisées par un collaborateur externe. C'est-à-dire qu'une personne externe à l'expérience ne peut interpréter le tableau de données que si les métadonnées sont complètes et explicites.
 
 Exemple de métadonnées :
 
@@ -303,7 +303,7 @@ Le dictionnaire des données est un [élément important de la constitution d'un
 | diameter | Diamètre du test |   mm   | numeric |       NA        | Moyenne de deux diamètres perpendiculaires               |
 | origin   | Origine          |   \-   | factor  |     unknown     | "Fishery" = oursins sauvages, "Farm" = oursins d'élevage |
 
-Ce tableau peut-être encodé sous forme textuelle et placé dans le même dossier que le jeu de données lui-même. Il peut aussi être encodé comme feuille supplémentaire dans une fichier Excel.
+Ce tableau peut-être encodé sous forme textuelle et placé dans le même dossier que le jeu de données lui-même. Il peut aussi être encodé comme feuille supplémentaire dans un fichier Excel.
 
 ```{block, type='note'}
 Le dictionnaire des données est un outil important pour comprendre ce que contient le tableau de données, et donc, son interprétation. _Ne le négligez pas\ !_
@@ -315,7 +315,7 @@ Le dictionnaire des données est un outil important pour comprendre ce que conti
 
 ## Population et échantillonnage
 
-Nos analyses statistiques seraient bien évidemment beaucoup plus simple si nous pouvions toujours mesurer tous les individus concernés par nos études. En fait, c'est presque toujours impossible car les **populations** concernées sont souvent très larges, voire infinies. Nous devons donc mesurer un petit sous-ensemble de la population, ce que nous appelons un **échantillon** (*sample* en anglais) de taille finie déterminée (on parle de la **taille de l'échantillon** ou *sample size* en anglais). Le processus qui mène à la sélection des individus dans l'échantillon s'appelle l'**échantillonnage** (*sampling* en anglais). De cet échantillon, nous souhaitons malgré tout retirer un maximum d'information concernant la population d'origine. Cela s'appelle faire de l'**inférence** sur la population à partir de l'échantillon (*to infer* en anglais).
+Nos analyses statistiques seraient bien évidemment beaucoup plus simples si nous pouvions toujours mesurer tous les individus concernés par nos études. En fait, c'est presque toujours impossible, car les **populations** concernées sont souvent très larges, voire infinies. Nous devons donc mesurer un petit sous-ensemble de la population, ce que nous appelons un **échantillon** (*sample* en anglais) de taille finie déterminée (on parle de la **taille de l'échantillon** ou *sample size* en anglais). Le processus qui mène à la sélection des individus dans l'échantillon s'appelle l'**échantillonnage** (*sampling* en anglais). De cet échantillon, nous souhaitons malgré tout retirer un maximum d'information concernant la population d'origine. Cela s'appelle faire de l'**inférence** sur la population à partir de l'échantillon (*to infer* en anglais).
 
 ![Population et échantillon.](images/sdd1_06/pop_sample.png)
 
@@ -333,13 +333,13 @@ La **variabilité** tant au niveau de la population que de l'échantillon provie
 
 Ces deux facteurs se cumulent pour contribuer à disperser les valeurs d'un individu à l'autre. Nous n'avons que peu de prise sur la variabilité individuelle, mais nous pouvons parfois réduire les erreurs de mesure si cela s'avère souhaitable en utilisant un appareil de mesure plus précis, par exemple. Quoi qu'il en soit, plus la variabilité est importante, plus la taille de l'échantillon devra également être grande pour conserver une bonne "représentativité" de la population.
 
-Du point de vue de la notation mathématique, nous utiliserons une lettre latine majuscule en italique pour représenter une variable, par exemple, *X*. La taille de l'échantillon est souvent notée *n*. Les observations individuelles de la variable *x* pour les *n* individus de l'échantillon seront alors notés avec une lettre minuscule en italique assortie d'un indice compris entre 1 et *n*, donc, *x~i~* de manière générale avec l'indice *i* variant de 1 à *n*. Ainsi, *x*~5~ représente la cinquième observation pour la variable *X* dans notre échantillon, et *x~n~* est la dernière observation.
+Du point de vue de la notation mathématique, nous utiliserons une lettre latine majuscule en italique pour représenter une variable, par exemple, *X*. La taille de l'échantillon est souvent notée *n*. Les observations individuelles de la variable *x* pour les *n* individus de l'échantillon seront alors notées avec une lettre minuscule en italique assortie d'un indice compris entre 1 et *n*, donc, *x~i~* de manière générale avec l'indice *i* variant de 1 à *n*. Ainsi, *x*~5~ représente la cinquième observation pour la variable *X* dans notre échantillon, et *x~n~* est la dernière observation.
 
 ### Échantillonnage aléatoire
 
 La démarche du statisticien et du scientifique des données est de retirer un maximum d'information d'un échantillon afin de faire des inférences fiables sur la population tout entière (c'est-à-dire, tenter de tirer des conclusions les plus générales possibles à partir de l'étude d'un petit échantillon seulement). Ceci n'est possible que si l'échantillon "est conforme" à la population. En langage statistique on dit que l'**échantillon est représentatif**.
 
-Un échantillon représentatif n'est pas facile à obtenir et il faut respecter scrupuleusement certaines règles pour l'obtenir. *A contrario* un échantillon **non** représentatif s'obtient sans précautions particulières, mais ce dernier est quasi-toujours totalement inutile (on ne peut tirer de conclusions *que* sur cet échantillon particulier). Imaginez un soudage qui ne représente pas la population sondée... quel est son intérêt ? Il est nul !
+Un échantillon représentatif n'est pas facile à obtenir et il faut respecter scrupuleusement certaines règles pour l'obtenir. *A contrario* un échantillon **non** représentatif s'obtient sans précautions particulières, mais ce dernier est quasi toujours totalement inutile (on ne peut tirer de conclusions *que* sur cet échantillon particulier). Imaginez un soudage qui ne représente pas la population sondée... quel est son intérêt ? Il est nul !
 
 La meilleure façon d'obtenir un échantillon représentatif est de réaliser un **échantillonnage aléatoire**. Dans ce cas, chaque individu de la population doit avoir la même chance d'être sélectionné dans l'échantillon. Nous parlons aussi d'échantillonnage au hasard. Vous devez bien réfléchir au **processus** qui va mener à la sélection des individus dans l'échantillon. Celui-ci doit comporter une étape qui fait intervenir le hasard.
 
@@ -379,9 +379,9 @@ sample(1:10, size = 6)
 
 ### Échantillonnage stratifié
 
-L'échantillonnage aléatoire n'est pas la seule stratégie correcte. L'**échantillonnage stratifié** consiste à diviser la population en sous-populations identifiables facilement (par exemple, séparer la population en fonction du sexe, ou de l'âge, voire des deux simultanément). Ensuite, un échantillonnage aléatoire est réalisé à l'intérieur de chaque sous-population pour un nombre déterminé d'individus, souvent le même. Cette approche plus complexe est utile si les sous-population sont **très mal balancées** (une sous-population possède bien plus d'individus qu'une autre).
+L'échantillonnage aléatoire n'est pas la seule stratégie correcte. L'**échantillonnage stratifié** consiste à diviser la population en sous-populations identifiables facilement (par exemple, séparer la population en fonction du sexe, ou de l'âge, voire des deux simultanément). Ensuite, un échantillonnage aléatoire est réalisé à l'intérieur de chaque sous-population pour un nombre déterminé d'individus, souvent le même. Cette approche plus complexe est utile si les sous-populations sont **très mal balancées** (une sous-population possède bien plus d'individus qu'une autre).
 
-Par exemple, vous voulez comparer des prélèvements sanguins faits sur une population d'européens hospitalisés dans le but de déterminer les critères qui permettent de diagnostiquer une infection nosocomiale[^06-donnees-qualitatives-3] rare. Les individus sont suivis en hôpital par définition et nous admettrons que l'on sait *a priori* s'ils sont atteints de la maladie ou non grâce à d'autres tests plus lourds et coûteux. La maladie est rare heureusement. Sa prévalence n'est que de 1 cas sur 10.000.
+Par exemple, vous voulez comparer des prélèvements sanguins faits sur une population d'Européens hospitalisés dans le but de déterminer les critères qui permettent de diagnostiquer une infection nosocomiale[^06-donnees-qualitatives-3] rare. Les individus sont suivis en hôpital par définition et nous admettrons que l'on sait *a priori* s'ils sont atteints de la maladie ou non grâce à d'autres tests plus lourds et coûteux. La maladie est rare, heureusement. Sa prévalence n'est que de 1 cas sur 10.000.
 
 [^06-donnees-qualitatives-3]: Une infection nosocomiale est une infection contractée dans un hôpital.
 
@@ -389,14 +389,14 @@ Dans ce cas, si vous effectuez un échantillonnage aléatoire de 100 patients ou
 
 ## Acquisition de données
 
-Dans le module \@ref(import), vous avez pris connaissance des types de variable et venez d'apprendre comment encoder différents types de tableaux de données et de leurs associer les indispensables métadonnées. Cependant, la première étape avant d'acquérir des données est de planifier correctement son expérience. La Science des Données est intimement liée à la démarche scientifique et intervient dans toutes les étapes depuis la caractérisation de la question et le planning de l'expérience jusqu'à la diffusion des résultats. Plus en détails, cela correspond à :
+Dans le module \@ref(import), vous avez pris connaissance des types de variable et venez d'apprendre comment encoder différents types de tableaux de données et de leur associer les indispensables métadonnées. Cependant, la première étape avant d'acquérir des données est de planifier correctement son expérience. La Science des Données est intimement liée à la démarche scientifique et intervient dans toutes les étapes depuis la caractérisation de la question et le planning de l'expérience jusqu'à la diffusion des résultats. Plus en détail, cela correspond à :
 
 -   Définir une question (objectif)
 -   Réaliser une recherche bibliographique sur la thématique
 -   Définir le protocole de l'expérience à partir de l'objectif
     -   Définir la population étudiée et l'échantillonnage
     -   Définir les variables à mesurer
-        -   Définir les unité des mesures
+        -   Définir les unités des mesures
         -   Définir la précision des mesures
         -   Définir les instruments de mesure nécessaires
 -   Définir les conventions d'encodage
@@ -407,7 +407,7 @@ Dans le module \@ref(import), vous avez pris connaissance des types de variable 
     -   Importer des données
     -   Remanier des données
     -   Visualiser et décrire des données
-    -   Analyser les données (traitements statistiques, modélisation,...).
+    -   Analyser les données (traitements statistiques, modélisation...).
 -   Produire des supports de présentation répondant à la question de départ et diffuser l'information dans la communauté scientifique
 
 Nous traitons ici des premières étapes qui visent à acquérir les données.
@@ -437,7 +437,7 @@ De même, vous allez devoir attribuer un code **unique** à chaque individu mesu
 
 Lors d'expérience sur des personnes, le respect de la vie privée **doit** être pris en compte[^06-donnees-qualitatives-4]. Le nom et le prénom, ou toute autre information permettant de retrouver les individus étudiés (adresse mail, numéro de sécurité sociale, etc.) **ne peuvent pas apparaître** dans la base de données consolidée. En outre, il vous faudra un **accord explicite** des personnes que vous voulez mesurer, et il faudra leur expliquer ce que vous faites, et **comment** les données seront ensuite utilisées. Une question se pose : comment pouvoir revenir vers les enregistrements liés à un individu en particulier (en cas d'erreur d'encodage, par exemple) si les informations relatives directement à ces individus ne sont pas consignées dans le tableau final ? Réfléchissez à la façon dont vous vous y prendriez avant de lire la suite...
 
-[^06-donnees-qualitatives-4]: En Europe, les données numériques concernant les personnes sont soumises à des règles strictes édictées dans le [Règlement Général pour la Protection des Données](https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr_fr) ou **RGPD** en abrégé, en vigueur depuis le 25 mai 2018. Vous devez vous assurer de respecter ce règlement lors de la collecte et de l'utilisation de données relatives à des personnes. Pour les autres type de données, le droit d'auteur ou des copyrights peuvent aussi limiter votre champ d'action. Renseignez-vous !
+[^06-donnees-qualitatives-4]: En Europe, les données numériques concernant les personnes sont soumises à des règles strictes édictées dans le [Règlement Général pour la Protection des Données](https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr_fr) ou **RGPD** en abrégé, en vigueur depuis le 25 mai 2018. Vous devez vous assurer de respecter ce règlement lors de la collecte et de l'utilisation de données relatives à des personnes. Pour les autres types de données, le droit d'auteur ou des copyrights peuvent aussi limiter votre champ d'action. Renseignez-vous !
 
 Voici un petit tableau qui correspond à ce que vous ne pourrez **pas faire** (nom et prénom explicitement mentionnés dans le tableau) :
 
@@ -451,7 +451,7 @@ Voici un petit tableau qui correspond à ce que vous ne pourrez **pas faire** (n
 )))
 ```
 
-Vous devez fournir un code permettant de garder l'anonymat des sondés à l'ensemble des personnes étudiées vis à vis des analystes qui vont utiliser ces données. Cependant, le code doit permettre au chercheur ayant pris ces mesures de les retrouver dans son cahier de laboratoire, si besoin. Une façon de procéder consiste à attribuer un numéro au hasard par tirage dans une urne à chacune des personnes chargées des mesures. Ensuite, chaque expérimentateur attribue lui-même un second numéro aux différentes personnes qu'il mesure. Prenons par exemple le scientifique n°24 (seul lui sait qu'il porte ce numéro). Il attribue un code de 1 à *n* à chaque personne étudiée. En combinant le code secret de l'expérimentateur et le code individu, cela donne un identifiant unique de la forme `24_1`, `24_2`, etc. Il pourra alors encoder sa partie comme suit :
+Vous devez fournir un code permettant de garder l'anonymat des sondés à l'ensemble des personnes étudiées vis-à-vis des analystes qui vont utiliser ces données. Cependant, le code doit permettre au chercheur ayant pris ces mesures de les retrouver dans son cahier de laboratoire, si besoin. Une façon de procéder consiste à attribuer un numéro au hasard par tirage dans une urne à chacune des personnes chargées des mesures. Ensuite, chaque expérimentateur attribue lui-même un second numéro aux différentes personnes qu'il mesure. Prenons par exemple le scientifique n°24 (seul lui sait qu'il porte ce numéro). Il attribue un code de 1 à *n* à chaque personne étudiée. En combinant le code secret de l'expérimentateur et le code individu, cela donne un identifiant unique de la forme `24_1`, `24_2`, etc. Il pourra alors encoder sa partie comme suit :
 
 ```{r}
 (biometry_marvel1 <- as_dtx(tribble(
@@ -472,7 +472,7 @@ Il garde néanmoins les correspondances dans son carnet de laboratoire, au cas o
 ))
 ```
 
-A partir des données du tableau général consolidé, personne à part lui ne peut revenir sur ces données d'origine et mettre un nom sur les individus mesurés. Et lui-même n'a pas la possibilité de déterminer *qui* se cache derrière les autres identifiants tels `3_1`, `12_4`, `21_2`, etc.
+À partir des données du tableau général consolidé, personne à part lui ne peut revenir sur ces données d'origine et mettre un nom sur les individus mesurés. Et lui-même n'a pas la possibilité de déterminer *qui* se cache derrière les autres identifiants tels `3_1`, `12_4`, `21_2`, etc.
 
 ## Recombinaison de tableaux
 
@@ -541,7 +541,7 @@ shotgun_wide <- as_dtx(tibble(
 rmarkdown::paged_table(shotgun_wide)
 ```
 
-Ce tableau est clair et lisible... seulement, est-il correctement encodé en cas par variables d'après vous ? Quelle que soit la réponse à cette question, il est toujours possible de passer de ce format large à un format long dans R de la façon suivante (`pivot_longer()` étant une fonction tidy, des précautions de collection des résultats avec, par exempler, `%<-%` sont nécessaires) :
+Ce tableau est clair et lisible... seulement, est-il correctement encodé en cas par variables d'après vous ? Quelle que soit la réponse à cette question, il est toujours possible de passer de ce format large à un format long dans R de la façon suivante (`pivot_longer()` étant une fonction tidy, des précautions de collection des résultats avec, par exemple, `%<-%` sont nécessaires) :
 
 ```{r}
 shotgun_long %<-% pivot_longer(shotgun_wide, cols = c(c1, c4, c7, c10),
@@ -628,7 +628,7 @@ rmarkdown::paged_table(crabs)
 
 ## Traitements multi-tableaux
 
-Durant vos analyses, vous serez confronté à devoir gérer plusieurs tableaux que vous allez vouloir rassembler en un seul. Selon le travail à réaliser, il s'agit de coller les tableaux l'un au dessus de l'autre, l'un à côté de l'autre, ou d'effectuer un travail de fusion plus complexe. Nous allons maintenant voir ces différents cas successivement.
+Durant vos analyses, vous serez confronté à devoir gérer plusieurs tableaux que vous allez vouloir rassembler en un seul. Selon le travail à réaliser, il s'agit de coller les tableaux l'un au-dessus de l'autre, l'un à côté de l'autre, ou d'effectuer un travail de fusion plus complexe. Nous allons maintenant voir ces différents cas successivement.
 
 ```{block, type='info'}
 L'aide-mémoire [Data Transformation](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) vous rappelle les différentes fonctions à utiliser dans sa section **Combine Tables**. Leur utilisation est également décrite en détails dans [R for Data Science](https://r4ds.had.co.nz/relational-data.html). 
@@ -636,7 +636,7 @@ L'aide-mémoire [Data Transformation](https://github.com/rstudio/cheatsheets/blo
 
 ### Empilement vers le bas
 
-Pour empiler des tableaux l'un au dessus de l'autre, la fonction la plus simple est `bind_rows()`. Partons de données mesurées dans des mésoscosmes récifaux lors des travaux pratiques du cours d'océanographie générale. Les différentes variables mesurées sont les suivantes :
+Pour empiler des tableaux l'un au-dessus de l'autre, la fonction la plus simple est `bind_rows()`. Partons de données mesurées dans des mésoscosmes récifaux lors des travaux pratiques du cours d'océanographie générale. Les différentes variables mesurées sont les suivantes :
 
 -   les données **physico-chimiques** : la température, le pH, la salinité, l'oxygène dissous à l'aide, respectivement, d'un pHmètre, d'un conductimètre et d'un oxymètre
 -   la concentration en **nutriments** : orthophosphates (PO~4~^3-^) et nitrates (NO~3~^-^) dissous dans l'eau par analyse colorimétrique
@@ -692,14 +692,14 @@ nutrients <- as_dtx(tibble(
 rmarkdown::paged_table(nutrients)
 ```
 
-Vous devez être très vigilant lors de l'utilisation de `bind_cols()` car cette dernière combine vos tableaux sans s'assurer que vos lignes soient alignées convenablement !
+Vous devez être très vigilant lors de l'utilisation de, `bind_cols()` car cette dernière combine vos tableaux sans s'assurer que vos lignes soient alignées convenablement !
 
 ```{r}
 oceano %<-% bind_cols(nutrients, physico)
 rmarkdown::paged_table(oceano)
 ```
 
-Qu'observez vous ?
+Qu'observez-vous ?
 
 Effectivement nos deux tableaux de données n'ont pas les lignes dans le même ordre. Il faut être vigilant lors de ce genre de combinaison de tableaux. Il est préférable d'employer des fonctions tidy de fusion de tableaux plus complexes comme `full_joint()` (ci-dessous). Pour utiliser correctement `bind_cols()`, il faut vous assurer que les lignes des deux tableaux correspondent exactement, par exemple, en utilisant la fonction tidy `arrange()` :
 
@@ -719,7 +719,7 @@ Après vérification de l'adéquation des lignes, nous n'aurons plus besoin des 
 
 ### Fusion de tableaux
 
-La fusion fera intervenir une ou plusieurs colonnes communes des deux tableaux pour déterminer quelles lignes du premier correspondent aux lignes du second. Ainsi, la fusion des tableaux est assurée d'être réalisée correctement quel que soit l'ordre des lignes dans les deux tableaux d'origine. Utilisons la fonction tidy `full_join()` en joignant les lignes en fonction des valeurs de `student` et `sample` :
+La fusion fera intervenir une ou plusieurs colonnes communes des deux tableaux pour déterminer quelles lignes du premier correspondent aux lignes du second. Ainsi, la fusion des tableaux est assurée d'être réalisée correctement, quel que soit l'ordre des lignes dans les deux tableaux d'origine. Utilisons la fonction tidy `full_join()` en joignant les lignes en fonction des valeurs de `student` et `sample` :
 
 ```{r}
 oceano %<-% full_join(nutrients, physico, by = c("student", "sample"))
@@ -782,7 +782,7 @@ if (exists("assignment2"))
 
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 6 qui clôture la première partie du cours. Ce module vous a permis d'apprendre à recombiner, remodeler et fusionner des tableaux. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 6 qui clôture la première partie du cours. Ce module vous a permis d'apprendre à recombiner, remodeler et fusionner des tableaux. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
