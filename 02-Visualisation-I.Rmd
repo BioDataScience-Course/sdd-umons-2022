@@ -167,26 +167,6 @@ RStudio permet de récupérer rapidement des instructions à partir d'une banque
 
 Vous avez à votre disposition un ensemble de snippets que vous pouvez retrouver dans l'aide-mémoire consacré à [**SciViews**](https://github.com/BioDataScience-Course/sdd_cheatsheets/raw/master/SciViews/sciviews.pdf). Vous avez également à votre disposition l'aide-mémoire sur la visualisation des données ([**Data Visualization Cheat Sheet**](https://www.rstudio.com/resources/cheatsheets/)) qui utilise la fonction `ggplot()` plutôt que `chart()` et une interface légèrement différente pour spécifier les variables à utiliser pour réaliser le graphique (`aes(x = ..., y = ...)`).
 
-##### À vous de jouer ! {.unnumbered}
-
-*Note : pour rappel, le travail ci-dessous est un **projet GitHub Classroom**. Créez le dépôt GitHub en cliquant sur le lien. Ensuite, clonez-le dans votre machine virtuelle et vous aurez un nouveau projet RStudio* \@ref(rs-projet) *dans lequel vous pourrez travailler. Les instructions sont indiquées dans le fichier `README.md` à la racine de ce projet.*
-
-```{r assign_A02Ia_scatterplot_I, echo=FALSE, results='asis'}
-if (exists("assignment"))
-  assignment("A02Ia_scatterplot", part = "I",
-    url = "https://github.com/BioDataScience-Course/A02Ia_scatterplot",
-    course.ids = c(
-      'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
-    course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/6oBAO9wR"),
-    course.starts = c(
-      'S-BIOG-006' = !"{W[5]+5} 10:00:00"),
-    course.ends = c(
-      'S-BIOG-006' = !"{W[5]+5} 13:00:00"),
-    term = "Q1", level = 3,
-    toc = "Graphiques avec `urchin_bio`, partie I")
-```
-
 Prêtez une attention toute particulière à l'organisation d'un script R. En plus des instructions R, il contient aussi sous forme de commentaires, un titre, la date de la dernière mise à jour, le nom de l'auteur, et des sections qui organisent de façon claire le contenu du script. À ce sujet, vous trouverez des explications détaillées concernant l'utilisation des scripts R dans l'annexe \@ref(script).
 
 ##### Pour en savoir plus {.unnumbered}
@@ -228,6 +208,28 @@ Vous devez bien entendu avoir autant de balises d'entrée que de balises de sort
 Vous ne devez bien évidemment pas commencer avec un script R. Vous pouvez commencer d'emblée avec un R Markdown et écrire vos instructions R directement dedans. Il vous est toujours possible d'exécuter ces instructions ligne après ligne dans la fenêtre **Console** pour les tester tout comme à partir d'un script R.
 ```
 
+##### À vous de jouer ! {.unnumbered}
+
+*Note : le travail ci-dessous est un **projet GitHub Classroom** par groupe. Vos enseignants vont définir les groupes, ainsi que la personne responsable de la mise en place d'une équipe (team) GitHub Classroom. Ensuite, vous accepterez le projet en entrant dans l'équipe qui vous a été désignée, à l'exclusion de toute autre en cliquant sur le lien. Enfin, clonez le dépôt dans votre machine virtuelle et vous aurez un nouveau projet RStudio* \@ref(rs-projet) *dans lequel vous pourrez travailler. Les instructions sont indiquées dans le fichier `README.md` à la racine de ce projet.*
+
+Vous allez vous exercer à l'interprétation de graphiques en nuage de points sur base d'instructions pré-rédigées dans des chunks.
+
+```{r assign_A02Ga_describe_charts, echo=FALSE, results='asis'}
+if (exists("assignment2"))
+  assignment2("A02Ga_describe_charts", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A02Ga_describe_charts",
+    course.ids = c(
+      'S-BIOG-006' = !"A02Ga_{YY}M_describe_charts"),
+    course.urls = c(
+      'S-BIOG-006' = "https://classroom.github.com/a/adgqCg-c"),
+    course.starts = c(
+      'S-BIOG-006' = !"{W[5]+5} 08:00:00"),
+    course.ends = c(
+      'S-BIOG-006' = !"{W[5]+5} 10:00:00"),
+    term = "Q1", level = 3, n = 8,
+    toc = "Interprétation de graphiques en nuage de points")
+```
+
 ##### Pour en savoir plus {.unnumbered}
 
 Au gré de vos recherches sur Internet, vous tomberez peut-être sur [Quarto](https://quarto.org). Il s'agit de la nouvelle génération de documents de type R Markdown, mais avec d'autres possibilités intéressantes (notamment d'être compatible avec [Jupyter(lab)](https://jupyter.org), un autre logiciel d'édition de documents scientifiques). En pratique, la syntaxe de Quarto est très proche de celle de R Markdown. Donc, si vous connaissez l'un, vous serez capable d'utiliser l'autre. Sinon, vous pouvez aussi consulter les liens suivants :
@@ -252,11 +254,11 @@ Au gré de vos recherches sur Internet, vous tomberez peut-être sur [Quarto](ht
 
 ##### À vous de jouer ! {.unnumbered}
 
--   Vous allez maintenant manipuler un document **R Markdown** pour construire de manière interactive une analyse en même temps que le rapport associé.
+-   Vous allez maintenant manipuler un document **R Markdown** pour construire par vous-mêmes de manière interactive une analyse en même temps que le rapport associé.
 
-```{r assign_A02Ia_scatterplot_II, echo=FALSE, results='asis'}
+```{r assign_A02Ia_scatterplot, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A02Ia_scatterplot", part = "II",
+  assignment("A02Ia_scatterplot",
     url = "https://github.com/BioDataScience-Course/A02Ia_scatterplot",
     course.ids = c(
       'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
@@ -267,7 +269,7 @@ if (exists("assignment"))
     course.ends = c(
       'S-BIOG-006' = !"{W[5]+5} 13:00:00"),
     term = "Q1", level = 3,
-    toc = "Graphiques avec `urchin_bio`, partie II")
+    toc = "Graphiques avec `urchin_bio`")
 ```
 
 ## Récapitulatif des exercices
