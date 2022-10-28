@@ -14,9 +14,7 @@ SciViews::R
 
 ##### Prérequis {.unnumbered}
 
-Tout comme pour le module \@ref(visu1), il est indispensable de maitriser les outils comme encore RStudio, SciViews Box, Renku. Ils ont tous été enseignés dans le module \@ref(intro).
-
-Ce module va vous permettre de découvrir de nouveaux graphiques à réaliser avec R. Vous devez donc maitriser les instructions R qui permettent de réaliser un graphique.
+Tout comme pour le module \@ref(visu1), il est indispensable de maîtriser les outils comme R, RStudio, la SciViews Box (dans SaturnCloud), Git et GitHub. Ils ont tous été enseignés dans le module \@ref(intro). Ce module va vous permettre de découvrir de nouveaux graphiques à réaliser avec R. Vous devez donc maîtriser les instructions R qui permettent de réaliser un graphique.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -28,7 +26,7 @@ Ces graphiques vont être réalisés dans des scripts R et dans des documents R 
 
 `r h5p(179, height = 270, toc = NULL)`
 
-La fin de ce module va traiter de la gestion des conflits dans GitHub. Vous devez maitriser GitHub et Git.
+La fin de ce module va traiter de la gestion des conflits dans GitHub. Vous devez maîtriser GitHub et Git.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -40,7 +38,7 @@ Vous souhaitez visualiser l'étalement de vos données sur un axe (on parle de *
 
 [^03-visualisation-ii-1]: La **distribution** des données en statistique se réfère à la fréquence avec laquelle les différentes valeurs d'une variable s'observent.
 
-[^03-visualisation-ii-2]: Une variable numérique est **découpée en classes** en spécifiant différents intervalles, et ensuite en dénombrant le nombre de fois que les observations rentrent dans ces classes.
+[^03-visualisation-ii-2]: Une variable numérique est **découpée en classes** en spécifiant différents intervalles, et ensuite en dénombrant le nombre de fois que les observations rentrent dans ces intervalles.
 
 ```{r histo-dist, fig.cap="Exemple d'histogramme montrant la distribution de la taille dans un échantillon de zooplancton. Des couleurs sont utilisées pour mettre en évidence différentes parties du graphique (en pratique, les axes et leurs labels seront noirs).", echo=FALSE, message=FALSE, warning=FALSE}
 zooplankton <- read("zooplankton", package = "data.io", lang = "FR")
@@ -58,7 +56,7 @@ chart(data = zooplankton, ~ size) +
 Outre l'histogramme lui-même, représenté par des barres de hauteur équivalentes au nombre d'observations réalisées dans les différentes classes, les éléments suivants sont également indispensables à la compréhension du graphique (ici mis en évidence en couleur) :
 
 -   Les axes avec les graduations (en rouge). Sur l'axe des abscisses, les classes de taille, et sur l'axe des ordonnées, les effectifs
--   les labels des axes et l'unité (pour l'axe des abscisses uniquement ici) (en bleu)
+-   les labels des axes et les unités (pour l'axe des abscisses uniquement ici) (en bleu)
 
 Les instructions dans R afin de produire un histogramme à l'aide de la fonction `chart()` sont :
 
@@ -67,18 +65,17 @@ Les instructions dans R afin de produire un histogramme à l'aide de la fonction
 (zooplankton <- read("zooplankton", package = "data.io", lang = "FR"))
 # Réalisation du graphique
 chart(data = zooplankton, ~ size) +
-  geom_histogram(bins = 50) +
+  geom_histogram(bins = 50) + # bins= nombre de classes souhaitées
   ylab("Effectifs")
-# bins= permet de préciser le nombre de classes souhaitées
 ```
 
-La fonction `chart()` requiert comme argument le jeu de donnée (`data = zooplankton`), ainsi que la formule à employer dans laquelle vous avez indiqué le nom de la variable que vous voulez sur l'axe des abscisses à droite de la formule, après le tilde `~`. Parmi toutes les variables du jeu de données, nous avons choisi ici de représenter `size`. Jusqu'ici, nous avons spécifié *ce que* nous voulons représenter, mais pas encore *comment* (sous quelle apparence), nous voulons matérialiser cela sur le graphique. Avec les graphiques de type `ggplot()` que nous réalisons ici à l'aide de `chart()`, nous **ajoutons** des couches au graphique à l'aide de l'opérateur `+`. Pour un histogramme, nous devons ajouter une couche avec la fonction `geom_histogram()`, tout comme pour le nuage de point, nous utilisions `geom_point()`. L'argument `bins=` dans cette fonction permet de préciser le nombre de classes souhaitées. Le découpage en classe de la variable `size` se fait ici automatiquement.
+La fonction `chart()` requiert comme argument le jeu de donnée (`data = zooplankton`), ainsi que la formule à employer dans laquelle vous avez indiqué le nom de la variable que vous voulez sur l'axe des abscisses à droite de la formule, après le tilde `~`. Parmi toutes les variables du jeu de données, nous avons choisi ici de représenter `size`. Jusqu'ici, nous avons spécifié *ce que* nous voulons représenter, mais pas encore *comment* (sous quelle apparence), nous voulons matérialiser cela sur le graphique. Avec les graphiques de type `ggplot()` que nous réalisons ici à l'aide de `chart()`, nous **ajoutons** des couches au graphique à l'aide de l'opérateur `+`. Pour un histogramme, nous devons ajouter une couche avec la fonction `geom_histogram()`, tout comme pour le nuage de points, nous utilisions `geom_point()`. L'argument `bins=` dans cette fonction permet de préciser le nombre de classes souhaitées. Le découpage en classe de la variable `size` se fait ici automatiquement.
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(172, height = 270, toc = "Les fonctions chart() et geom_histogram()")`
 
-Vous pouvez décrypter votre histogramme sur base des **modes**[^03-visualisation-ii-3] et de la **symétrie**[^03-visualisation-ii-4] de ces derniers. Un histogramme peut être **unimodal** (un seul mode), **bimodal** (deux modes) ou **multimodal** (plus de deux modes). En général, s'il y a plus d'un mode, nous pouvons suspecter que des sous-populations distinctes existent dans les données (par exemple : des différences morphométriques entre mâles et femelles pour une espèce au dimorphisme sexuel marqué).
+Vous pouvez interpréter votre histogramme sur base des **modes**[^03-visualisation-ii-3] et de la **symétrie**[^03-visualisation-ii-4] de ces derniers. Un histogramme peut être **unimodal** (un seul mode), **bimodal** (deux modes) ou **multimodal** (plus de deux modes). En général, s'il y a plus d'un mode, nous pouvons suspecter que des sous-populations distinctes existent dans les données (par exemple : des différences morphométriques entre mâles et femelles pour une espèce au dimorphisme sexuel marqué).
 
 [^03-visualisation-ii-3]: Les **modes** d'un histogramme correspondent à des classes plus abondantes localement, c'est-à-dire que les classes à gauche et à droite du mode comptent moins d'occurrences que lui.
 
@@ -163,14 +160,16 @@ Vous avez à votre disposition un ensemble de snippets que vous pouvez retrouver
 Lors de l'analyse de jeux de données, vous serez amené à réaliser un histogramme par facteur (c'est-à-dire, en fonction de différents niveaux d'une variable qualitative qui divise le jeu de données en sous-groupes).
 
 ```{block, type='note'}
-Une **variable qualitative** ou **variable facteur** est une variable qui représente des *catégories*. Par exemple, une couleur, le genre, une classe taxonomique, ... Les différentes catégories possibles pour la variable sont appelées **niveaux** ou **modalités** (*levels* en anglais). Pour le genre, nous auront donc deux niveaux\ : "homme" ou "femme".
+Une **variable qualitative** ou **variable facteur** est une variable qui représente des *catégories*. Par exemple, une couleur, le genre, une classe taxonomique, ... Les différentes catégories possibles pour la variable sont appelées **niveaux** ou **modalités** (*levels* en anglais). Pour le genre, par exemple, nous auront deux niveaux (principaux) : "homme" ou "femme".
 
-Les variables facteurs peuvent aussi représenter un petit nombre de classes différentes^[Une variable sera considérée comme qualitative ou facteur, si elle possède moins d'une dizaine de niveaux pour fixer les idées, mais il n'existe pas de limite stricte entre une variable numérique quantitative et facteur qualitative, en réalité. C'est à votre appréciation, mais aussi en fonction du contexte.] réalisées par découpage d'une **variable numérique**. Par exemple, si au lieu de reprendre la taille d'un animal, nous nous contentons de considérer s'il est "petit", "moyen" ou "grand". Dans ce cas, il existe un ordre logique entre les niveaux\ : petit < moyen < grand. La variable sera alors dite "qualitative ordonnée" et sera représentée par un objet `ordered` dans R. Sinon, la variable sera **qualitative non ordonnée** et sera un objet `factor` dans R.
+Les variables facteurs peuvent aussi représenter un petit nombre de classes différentes^[Une variable sera considérée comme qualitative ou facteur si elle possède moins d'une dizaine de niveaux pour fixer les idées, mais il n'existe pas de limite stricte entre une variable numérique quantitative et facteur qualitative, en réalité. C'est à votre appréciation, mais aussi en fonction du contexte.] réalisées par découpage d'une **variable numérique**. Par exemple, si au lieu de reprendre la taille d'un animal, nous nous contentons de considérer s'il est "petit", "moyen" ou "grand". Dans ce cas, il existe un ordre logique entre les niveaux : petit < moyen < grand. La variable sera alors dite "qualitative ordonnée" et sera représentée par un objet `ordered` dans R. Sinon, la variable sera **qualitative non ordonnée** et sera un objet `factor` dans R.
 
-Les variables numériques sont représentées par des nombres, donc `numeric` ou `integer` (des entiers) dans R. Attention que les variables facteur peuvent très bien être importées comme chaînes de caractères (objet `character`), et il faudra peut-être les convertir à l'aide des fonctions `factor()` ou `ordered()` avant de les utiliser.
+Les variables numériques sont représentées par des nombres, donc `numeric` (des nombre décimaux à virgule flottante) ou `integer` (des entiers) dans R. Attention que les variables facteur peuvent très bien être importées comme chaînes de caractères (objet `character`), et il faudra peut-être les convertir à l'aide des fonctions `factor()` ou `ordered()` avant de les utiliser.
 
-Par exemple, dans un jeu de données sur des fleurs d'iris, la variable `species`^[Attention\ : le jeu de donnée `iris` est un grand classique dans R, mais lorsqu'il est chargé à l'aide de la fonction `read()` du package **data.io**, le nom de ses variables est modifié pour suivre la convention "snake-case" qui veut que seules des lettres minuscules soient utilisées et que les mots soient séparés par un trait souligné `_`. Ainsi, dans le jeu de données d'origine, les variables sont nommées `Petal.Length` ou `Species`. Ici, ces mêmes variables se nomment `petal_length` et `species`.] représente l'espèce d'iris étudiée (trois espèces différentes : *I. setosa*, *I. versicolor* et *I. virginica*).
+Par exemple, dans un jeu de données sur des fleurs d'iris, la variable `species`^[Attention : le jeu de donnée `iris` est un grand classique dans R, mais lorsqu'il est chargé à l'aide de la fonction `read()` du package {data.io}, le nom de ses variables est modifié pour suivre la convention "snake-case" qui veut que seules des lettres minuscules soient utilisées et que les mots soient séparés par un trait souligné `_`. Ainsi, dans le jeu de données d'origine, les variables sont nommées `Petal.Length` ou `Species`. Ici, ces mêmes variables se nomment `petal_length` et `species`.] représente l'espèce d'iris étudiée (trois espèces différentes : *I. setosa*, *I. versicolor* et *I. virginica*).
+```
 
+```{r}
 # Importation du jeu de données
 (iris <- read("iris", package = "datasets", lang = "fr"))
 # Réalisation de l'histogramme par facteur
@@ -199,7 +198,7 @@ L'histogramme est maintenant séparé en trois en fonction des niveaux de la var
 nbins <- 25
 chart(data = iris, ~ sepal_length %fill=% species | species) +
   # histogramme d'arrière-plan en gris ne tenant pas compte de la variable species
-  geom_histogram(data = fselect(iris, -species),
+  geom_histogram(data = sselect(iris, -species),
     fill = "grey", bins = nbins) + 
   geom_histogram(show.legend = FALSE, bins = nbins) +
   ylab("Effectifs") +
@@ -212,11 +211,11 @@ Vous découvrez sans doute que les graphiques réalisables avec R sont modulable
 
 `r learnr("A03La_univaries", title = "Graphiques univariés", toc = "Graphiques univariés")`
 
-**Note:** Ce tutoriel couvre l'ensemble de la matière de ce module. N'hésitez pas à le réaliser en parallèle de votre lecture.
+**Note :** Ce tutoriel couvre l'ensemble de la matière de ce module. N'hésitez pas à le réaliser en parallèle de votre lecture.
 
 ## Graphique de densité
 
-L'histogramme n'est pas le seul outil à votre disposition. Vous pouvez également employer le **graphique de densité** qui se présente un peu comme un histogramme lissé. Le passage d'un histogramme vers un graphe de densité se base sur une **estimation par noyau gaussien**[^03-visualisation-ii-6]
+L'histogramme n'est pas le seul outil à votre disposition. Vous pouvez également utiliser le **graphique de densité** qui se présente un peu comme un histogramme lissé. Le passage d'un histogramme vers un graphe de densité se base sur une **estimation par noyau gaussien**[^03-visualisation-ii-6]
 
 [^03-visualisation-ii-6]: L'opération effectuée pour passer d'un histogramme à une courbe de densité consiste effectivement à lisser les pics plus ou moins fortement dans l'histogramme de départ.
 
@@ -248,7 +247,7 @@ rm(a, b)
 Comme pour les autres graphiques, veillez à soigner les indications qui permettent d'interpréter le graphique. Outre la courbe de densité, il faut :
 
 -   Les axes avec les graduations (en rouge)
--   les labels des axes, et l'unité pour l'axe des abscisses (en bleu)
+-   les labels des axes, et les unités pour l'axe des abscisses (en bleu)
 
 Les instructions en R pour produire un graphique de densité avec la fonction `chart()` sont :
 
@@ -267,60 +266,54 @@ Ici, nous utilisons donc la fonction `geom_density()`.
 
 `r h5p(173, height = 270, toc = "La fonction chart() et geom_density()")`
 
-##### À vous de jouer ! {.unnumbered}
-
-**Note : ce projet GitHub Classroom individuel couvre l'ensemble de la matière de ce module. N'hésitez pas à la réaliser en parallèle de votre lecture.**
-
 ```{r assign_A03Ia_distributions, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A03Ia_distributions", part = NULL,
     url = "https://github.com/BioDataScience-Course/A03Ia_distributions",
     course.ids = c(
-      'S-BIOG-006' = !"A03Ia_{YY}M_distributions", 
-      'S-BIOG-921' = !"A03Ia_{YY}C_distributions"),
+      'S-BIOG-006' = !"A03Ia_{YY}M_distributions"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/p0skoF-c"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[7]+1} 13:00:00"),
+      'S-BIOG-006' = !"{W[8]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
+      'S-BIOG-006' = !"{W[8]+1} 16:00:00"),
     term = "Q1", level = 3,
-    toc = "Graphiques de distribution sur `zooplankton`")
+    toc = "Graphiques de distribution des données")
 ```
 
 ## Diagramme en violon
 
-Le graphique en violon est constitué de deux graphiques de densité en miroir. Le résultat fait penser un peu à un violon pour une distribution bimodale. Cette représentation est visuellement très convaincante lorsque la variable étudiée contient suffisamment d'observations pour permettre de déterminer précisément sa distribution (plusieurs dizaines ou centaines d'individus mesurés).
+Le graphique en violon ou diagramme en violon est constitué de deux graphiques de densité en miroir. Le résultat fait penser un peu à un violon pour une distribution bimodale. Cette représentation est visuellement très convaincante lorsque la variable étudiée contient suffisamment d'observations pour permettre de déterminer précisément sa distribution (plusieurs dizaines ou centaines d'individus mesurés).
 
 ```{r violin-plot, fig.cap="Graphe en violon de la distribution de la taille en fonction des groupes taxonomiques dans un échantillon de zooplancton. Les couleurs pour les axes servent à mettre des éléments en évidence. En pratique, les axes seront noirs.", echo=FALSE, message=FALSE, warning=FALSE}
 
 zooplankton %>.%
-  fsubset(., class %in% c("Annélide", "Calanoïde", "Cyclopoïde", "Décapode")) %>.%
+  sfilter(., class %in% c("Annélide", "Calanoïde", "Cyclopoïde", "Décapode")) %>.%
   chart(data = ., size ~ class %fill=% class) +
     geom_violin(show.legend = FALSE)  +
     theme(axis.text.x  = element_text(colour = "#a80039", size = 15), 
-        axis.title.x = element_text(colour = "#029687", size = 15), 
-        axis.text.y  = element_text(colour = "#a80039", size  = 15), 
-        axis.title.y = element_text(colour = "#029687", size = 15),
-        axis.line.x  = element_line(colour = "#a80039"),
-        axis.line.y  = element_line(colour = "#a80039"))
+          axis.title.x = element_text(colour = "#029687", size = 15), 
+          axis.text.y  = element_text(colour = "#a80039", size  = 15), 
+          axis.title.y = element_text(colour = "#029687", size = 15),
+          axis.line.x  = element_line(colour = "#a80039"),
+          axis.line.y  = element_line(colour = "#a80039"))
 ```
 
-Les instructions en R pour produire un diagramme en violon à l'aide de la fonction `chart()` sont présentées ci-dessous. Comme le jeu de données `zooplankton` contient 17 classes différentes, nous décidons ici d'en extraire un sous-tableau ne contenant que les quatre classes de crustacés copépodes à l'aide d'une fonction `filter()`. Pour l'instant, retenez simplement que ce genre de remaniement de tableau est possible. Nous étudierons ces fonctions plus en détail dans les modules 5 et 6. Notre tableau réduit à quatre classes se nomme `zooplankton_sub` et c'est à partir de lui que nous réalisons notre graphique.
+Les instructions en R pour produire un diagramme en violon à l'aide de la fonction `chart()` sont présentées ci-dessous. Comme le jeu de données `zooplankton` contient 17 classes différentes, nous décidons ici d'en extraire un sous-tableau ne contenant que les quatre classes de crustacés copépodes à l'aide d'une fonction `sfilter()`. Pour l'instant, retenez simplement que ce genre de remaniement de tableau est possible. Nous étudierons ces fonctions plus en détail dans les modules 5 et 6. Notre tableau réduit à quatre classes se nomme `zooplankton_sub` et c'est à partir de lui que nous réalisons notre graphique.
 
 ```{r violin-plot2, fig.cap="Distribution des tailles pour 4 groupes taxonomiques de zooplancton."}
 # Importation du jeu de données
 zooplankton <- read("zooplankton", package = "data.io", lang = "FR")
 # Réduction du jeu de données 
-zooplankton_sub <- fsubset(zooplankton,
+zooplankton_sub <- sfilter(zooplankton,
   class %in% c("Annélide", "Calanoïde", "Cyclopoïde", "Décapode"))
 # Réalisation du graphique
 chart(data = zooplankton_sub, size ~ class) +
   geom_violin()
 ```
 
-Ici, la formule fournie à `chart()` indique la variable numérique à représenter par un graphe de densité *dans le terme de gauche*, et la variable facteur qui découpe l'échantillon en classes *à droite* : `YNUM (size) ~ XFACT (class)`. Pour réaliser un graphique de densité, vous devez ensuite ajouter la fonction `geom_violin()`. Vous pouvez aussi utiliser `%fill=%` pour colorer vos différents graphes en fonction de la variable facteur également, comme dans la Fig. \@ref(fig:violin-plot).
+Ici, la formule fournie à `chart()` indique la variable numérique à représenter par un graphe de densité *dans le terme de gauche*, et la variable facteur qui découpe l'échantillon en classes *à droite* : `YNUM (size) ~ XFACT (class)`. Pour réaliser un graphique en violon, vous devez ensuite ajouter la fonction `geom_violin()`. Vous pouvez aussi utiliser `%fill=%` pour colorer vos différents graphes en fonction de la variable facteur également, comme dans la Fig. \@ref(fig:violin-plot).
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -350,7 +343,7 @@ chart(data = zooplankton, class ~ size) +
   geom_violin(orientation = "y")
 ```
 
-Le package [{ggridges}](https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html) propose une seconde solution basée sur le principe de graphique de densité avec la fonction `geom_density_ridges()` qui crée un graphique en lignes de crêtes. **Attention : remarquez que la notation est ici inverse du diagramme en violon vertical, soit `XFACT (class) ~ YNUM (size)` !**
+Le package [{ggridges}](https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html) offre une seconde solution basée sur le principe de graphique de densité avec la fonction `geom_density_ridges()` qui crée un graphique en lignes de crêtes. **Attention : remarquez que la notation est ici inverse du diagramme en violon vertical, soit `XFACT (class) ~ YNUM (size)` !**
 
 ```{r density-ridges, fig.cap="Distribution des tailles des 17 classes d'organismes planctoniques (sous forme de graphique en lignes de crêtes).", message=FALSE}
 chart(data = zooplankton, class ~ size) +
@@ -375,31 +368,31 @@ Si GitHub permet de travailler seul sur ses dépôts, il est prévu pour collabo
 
 ### Ajout d'un collaborateur
 
-Partons directement d'un cas pratique entre deux chercheurs. [Marie](https://github.com/MarieHuart93) prend contact avec [Guyliann](https://github.com/GuyliannEngels) afin de collaborer sur un projet lié à la [biométrie humaine](https://github.com/MarieHuart93/biometry). Guyliann accepte volontiers de l'aider. Cependant, Marie doit lui donner accès à son dépôt. Pour cela, elle se rend dans sur son dépôt, puis va dans `Settings` puis `Manage access` et enfin, ajoute un collaborateur en cliquant sur `Invite a collaborator`.
+Partons directement d'un cas pratique entre deux chercheurs. [Marie](https://github.com/MarieHuart93) prend contact avec [Guyliann](https://github.com/GuyliannEngels) afin de collaborer sur un projet lié à la [biométrie humaine](https://github.com/MarieHuart93/biometry). Guyliann accepte volontiers de l'aider. Cependant, Marie doit lui donner accès à son dépôt. Pour cela, elle se rend dans son dépôt, puis va dans `Settings` puis `Manage access` et enfin, ajoute un collaborateur en cliquant sur `Invite a collaborator`.
 
 `r img("sdd1_03/add_collaborators.gif")`
 
-Guyliann reçoit un mail afin d'accepter ou non de collaborer. S'il l'accepte, il obtient alors des droits en écriture sur le dépôt de Marie, ce qui lui permettra de réaliser des pushs. Il peut maintenant cloner le projet en local sur son ordinateur pour y travailler en parallèle avec Marie.
+Guyliann reçoit un mail afin d'accepter ou non de collaborer. S'il l'accepte, il obtient alors des droits en écriture sur le dépôt de Marie, ce qui lui permettra de réaliser des "pushes". Il peut maintenant cloner le projet en local sur son ordinateur pour y travailler en parallèle avec Marie.
 
 ```{block, type='warning'}
 Si, lors de votre premier push vous avez un message d'erreur indiquant que vous n'avez pas la permission en écriture sur ce dépôt, il y a des chances pour que vous ayez cloné un dépôt qui n'est pas le vôtre, ou pour lequel vous n'êtes pas collaborateur (par exemple, un template de BioDataScience-Course). Faites toujours attention avant de cloner un dépôt et vérifiez vos droits dessus. Sinon, vous pouvez toujours forker un dépôt public appartenant à quelqu'un d'autre, et cloner ensuite votre fork... mais cela est une autre histoire.
 ```
 
-Les deux collaborateurs vont pouvoir travailler sur le même document et progresser ensemble dans l'analyse du jeu de données sur la biométrie humaine. En cliquant tout simplement sur le dernier `commit` réalisé, on peut retrouver la succession des commits qui ont été faits jusqu'ici (historique).
+Les deux collaborateurs vont pouvoir travailler sur le même document et progresser ensemble dans l'analyse du jeu de données sur la biométrie humaine. En cliquant sur le dernier "commit" réalisé, on peut retrouver la succession des commits qui ont été faits jusqu'ici (historique).
 
 `r img("sdd1_03/github_collaboration.gif")`
 
-Jusqu'à présent, les deux scientifiques ont échangé par mail. Cependant, Il est possible d'être plus efficace et d'utiliser les `issues` pour cela. La création d'une issue peut se faire facilement comme le montre la procédure ci-dessous.
+Jusqu'à présent, les deux scientifiques ont échangé par mail. Cependant, Il est possible d'être plus efficace et d'utiliser les **"issues"** dans le dépôt même pour cela. Vous avez appris à utiliser les issues depuis le chapitre 1 du cours. Dans le dépôt d'exemple, cela se présentera comme ci-dessous.
 
 `r img("sdd1_03/github_issues.gif")`
 
-Une issue est une zone de discussion attachée à votre dépôt GitHub... **pour y discuter de questions techniques et scientifiques strictement en relation avec ce dépôt**. Il ne s'agit pas d'un système de chat comme Discord, messenger,... Vos "memes", et autres gifs animés pour y exprimer vos émotions n'y ont pas leur place. De même des échanges du genre : "tu es là?", "oui... tu travailles sur quoi?", "sur le premier graphique, mais sinon, je me cure les ongles, kiss kiss" N'ont pas du tout leur place dans les issues !
+**Petit rappel :** une issue est une zone de discussion attachée à votre dépôt GitHub... **pour y discuter de questions techniques et scientifiques strictement en relation avec ce dépôt**. Il ne s'agit pas d'un système de chat comme Discord, messenger,... Vos "memes", et autres gifs animés pour y exprimer vos émotions n'y ont pas leur place. De même des échanges du genre : "tu es là?", "oui... tu travailles sur quoi?", "sur le premier graphique, mais sinon, je me cure les ongles, kiss kiss" n'ont pas du tout leur place dans les issues !
 
 ![](images/sdd1_03/github_issues1.png)
 
-Une issue doit également être fermée lorsque le sujet de cette dernière a été débattu et le problème résolu. Ouvrez une issue différente pour *chaque* problème.
+Rappelez-vous aussi qu'une issue doit être **fermée** lorsque le sujet de cette dernière a été débattu et le problème résolu. Ouvrez une issue différente pour *chaque* problème.
 
-*GitHub comprend plusieurs outils pour améliorer l'efficacité d'un travail en équipe. Dans les issues vous pouvez ajouter des labels à vos questions par exemple. Il existe également dans la section Projects un outil de planification de projets.*
+*GitHub met à votre disposition plusieurs outils pour améliorer l'efficacité d'un travail en équipe. Dans les issues vous pouvez ajouter des labels à vos questions par exemple. Il existe également dans la section Projects un outil de planification de projets.*
 
 ### Gestion de conflit
 
@@ -409,28 +402,28 @@ Imaginons que nos deux collaborateurs réalisent une modification du document `b
 
 `r h5p(175, height = 270, toc = "Deux versions d'un même fichier")`
 
-Que va-t-il se passer selon vous ? Lequel des deux collaborateurs va-t-il avoir le droit d'écraser le contenu de l'autre ? GitHub n'est pas capable de décider quelle version est la meilleure. Il va donc demander au dernier collaborateur qui réalise son `push` de gérer ce conflit lui-même.
+Que va-t-il se passer selon vous ? Lequel des deux collaborateurs va-t-il avoir le droit d'écraser le contenu de l'autre ? GitHub n'est pas capable de décider quelle version est la meilleure. Il va donc demander au dernier collaborateur qui réalise son "push" de gérer ce conflit lui-même.
 
 `r img("sdd1_03/conflit1.gif")`
 
-On peut voir que lorsque le `push` est réalisé, une erreur apparaît. Il faut d'abord réaliser un `pull` afin de récupérer ce qui est sur GitHub.
+On peut voir que lorsque le push est réalisé, une erreur apparaît. Il faut d'abord réaliser un "pull" afin de récupérer la dernière version présente sur GitHub.
 
 `r h5p(176, height = 270, toc = "Résolution d'un conflit")`
 
-Vous pouvez ensuite vous rendre dans chaque fichier problématique pour retrouver la/les zone(s) de conflit (utiliser l'outil de recherche avec l'icône loupe dans l'éditeur RStudio et recherchez par exemple `>>>>>`).
+Vous pouvez ensuite vous rendre dans chaque fichier problématique pour retrouver la ou les zones de conflit (utiliser l'outil de recherche avec l'icône loupe dans l'éditeur RStudio et recherchez par exemple `<<<<<`).
 
 `r h5p(177, height = 270, toc = "Résolution d'un conflit (suite)")`
 
-La résolution est simple à faire. Vous devez choisir la partie qui vous semble la plus pertinente et effacer tout le reste, y compris les balises ajoutées par GitHub.
+La résolution du conflit se fait en éditant le fichier. Vous devez choisir la partie qui vous semble la plus pertinente et effacer tout le reste, y compris les balises ajoutées par GitHub.
 
 `r img("sdd1_03/conflit2.gif")`
 
-La gestion du conflit se termine par la réalisation d'un `commit` avec un message qui indique la résolution du ou des conflits, suivi par un `pull` pour vérifier qu'il n'y a plus de problèmes, et enfin un `push` qui synchronise votre version locale avec GitHub. Votre ou vos collaborateurs doivent ensuite faire un `pull` de leur côté pour se synchroniser à leur tour.
+La gestion du conflit se termine par la réalisation d'un "commit" avec un message qui indique la résolution du ou des conflits, suivi par un "pull" pour vérifier qu'il n'y a plus de problèmes, et enfin un "push" qui synchronise votre version locale avec GitHub. Votre ou vos collaborateurs doivent ensuite faire un "pull" de leur côté pour se synchroniser à leur tour.
 
 ```{block, type='note'}
-Lorsque vous vous lancez dans un projet ou revenez vers lui, il faut toujours faire un `pull` afin de vous assurer que vous travaillez bien avec la dernière version en ligne sur GitHub. 
+Lorsque vous vous lancez dans un projet ou revenez vers lui, il faut toujours faire un "pull" avant de commencer à travailler afin de vous assurer que vous éditez bien avec la dernière version en ligne sur GitHub. 
 
-Lorsque vous avez terminé de travailler sur un projet. Il est conseillé de faire toujours un `commit`, suivi d'un `pull` en vérifiant bien si des modifications sont réalisées qu'il n'y a pas de conflits (sinon, on les règle directement) et enfin un `push`. **Ne laissez jamais trainer un conflit\ ! C'est une situation transitoire normale de votre dépôt, mais qui nécessite une intervention rapide pour l'éliminer avant que d'autres `commits`ne viennent rendre la situation plus complexe.**
+Lorsque vous avez terminé de travailler sur un projet. Il est conseillé de faire toujours un "commit", suivi d'un "pull" en vérifiant bien si des modifications sont réalisées qu'il n'y a pas de conflits (sinon, on les règle directement comme expliqué plus haut) et enfin un "push". **Ne laissez jamais traîner un conflit ! C'est une situation transitoire normale de votre dépôt, mais qui nécessite une intervention rapide pour l'éliminer avant que d'autres "commits" ne viennent rendre la situation encore plus complexe.**
 ```
 
 ##### À vous de jouer ! {.unnumbered}
@@ -442,13 +435,11 @@ if (exists("assignment2"))
   assignment2("A03Ga_urchin", part = "I",
     url = "https://github.com/BioDataScience-Course/A03Ga_urchin",
     course.ids = c(
-      'S-BIOG-006' = !"A03Ga_{YY}M_urchin", 
-      'S-BIOG-921' = !"A03Ga_{YY}C_urchin"),
+      'S-BIOG-006' = !"A03Ga_{YY}M_urchin"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/ewTVBC8e"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[7]+1} 13:00:00"),
+      'S-BIOG-006' = !"{W[8]+5} 08:00:00"),
     course.ends = c(
       'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
     term = "Q1", level = 4, n = 2,
@@ -464,3 +455,4 @@ Ce module 3 vous a permis de réaliser différents graphiques uni- et bivariés 
 ##### Progression {.unnumbered}
 
 `r launch_report("03", height = 800)`
+
