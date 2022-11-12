@@ -209,7 +209,7 @@ Vous découvrez sans doute que les graphiques réalisables avec R sont modulable
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A03La_univaries", title = "Graphiques univariés", toc = "Graphiques univariés")`
+`r learnr("A03La_univariate", title = "Graphiques univariés", toc = "Graphiques univariés")`
 
 **Note :** Ce tutoriel couvre l'ensemble de la matière de ce module. N'hésitez pas à le réaliser en parallèle de votre lecture.
 
@@ -455,4 +455,3 @@ Ce module 3 vous a permis de réaliser différents graphiques uni- et bivariés 
 ##### Progression {.unnumbered}
 
 `r launch_report("03", height = 800)`
-

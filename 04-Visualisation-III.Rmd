@@ -32,7 +32,7 @@ $$\sim variable \ facteur$$
 
 ```{r barres-facteur, fig.cap= "Exemple d'un graphique en barres montrant le dénombrement des niveaux d'une variable facteur, avec les éléments importants du graphique mis en évidence en couleurs.", echo=FALSE, message=FALSE}
 zooplankton <- read("zooplankton", package = "data.io", lang = "FR")
-copepoda <- fsubset(zooplankton,
+copepoda <- sfilter(zooplankton,
   class %in% c("Calanoïde", "Cyclopoïde",  "Harpacticoïde", "Poecilostomatoïde"))
 
 chart(data = copepoda, ~ class) +
@@ -53,13 +53,13 @@ Outre les barres elles-mêmes, prêtez toujours attention aux éléments suivant
 -   les niveaux de la variable facteur (en rouge également)
 -   le label des axes (en bleu)
 
-Les instructions dans R pour produire un graphique en barres à l'aide de la fonction `chart()` sont les suivantes. Nous partons d'un jeu de données `zooplankton` que nous importons et dont nous extrayons un sous-ensemble à l'aide de la fonction `filter()`(vous étudierez en détail les fonctions de remaniement de tableaux dans les deux prochains modules) avant de réaliser notre graphique à l'aide de `chart()` :
+Les instructions dans R pour produire un graphique en barres à l'aide de la fonction `chart()` sont les suivantes. Nous partons d'un jeu de données `zooplankton` que nous importons et dont nous extrayons un sous-ensemble à l'aide de la fonction `sfilter()`(vous étudierez en détail les fonctions de remaniement de tableaux dans les deux prochains modules) avant de réaliser notre graphique à l'aide de `chart()` :
 
 ```{r barres-facteur2, fig.cap="Abondances de quatres types de copépodes dans un échantillon de zooplancton."}
 # Importation du jeu de données
 (zooplankton <- read("zooplankton", package = "data.io", lang = "FR"))
 # Réduction du jeu de données à quatre classes seulement
-(copepoda <- fsubset(zooplankton,
+(copepoda <- sfilter(zooplankton,
   class %in% c("Calanoïde", "Cyclopoïde",  "Harpacticoïde",  "Poecilostomatoïde")))
 # Réalisation du graphique
 chart(data = copepoda, ~ class) +
@@ -75,7 +75,7 @@ La fonction `geom_bar()` se charge d'ajouter les barres verticales dans le graph
 Reprenons maintenant le jeu de données `biometry`.
 
 ```{r}
-# Importation des données biometry
+# Importation des données `biometry`
 (biometry <- read("biometry", package = "BioDataScience", lang = "FR"))
 ```
 
@@ -99,17 +99,21 @@ tail(biometry)$year_measure
 
 Nous utilisons `head()` et `tail()` pour extraire les quelques lignes de début ou de fin d'un tableau. C'est utile pour en réduire la taille à l'impression. Faites très attention : lorsque vous imprimez le contenu d'une variable facteur, R *substitue* automatiquement les niveaux 1, 2, 3 ... par le contenu textuel comme indiqué dans la dernière ligne `Levels: ...`, et **l'imprime sans mettre le texte entre guillemets**. Cela peut renforcer la fausse impression que c'est bien des valeurs numériques.
 
-Vous commencez à comprendre que si vous effectuez maintenant la comparaison `year_measure < 2017` lorsque cette variable est encodée comme facteur, ça ne fonctionnera pas comme vous le souhaitez ! Si on est chanceux, un message d'erreur ou d'avis ("warning") est imprimé. C'est le cas de `filter()` que nous avons déjà utilisé.
+Vous commencez à comprendre que si vous effectuez maintenant la comparaison `year_measure < 2017` lorsque cette variable est encodée comme facteur, ça ne fonctionnera pas comme vous le souhaitez ! Si on est chanceux, un message d'erreur ou d'avis ("warning") est imprimé. C'est le cas de `sfilter()` que nous avons déjà utilisé.
 
 ```{r, error=TRUE}
-biometry2 <- fsubset(biometry, year_measure < 2017) 
+biometry2 <- sfilter(biometry, year_measure < 2017) 
 ```
 
-Notez au passage que `filter()` n'utilise pas la notation `biometry$year_measure`, mais prend un premier argument qui est le jeu de données `biometry`, et la suite se réfère aux variables de ce jeu de données telles que `year_measure` en priorité aux autres variables disponibles dans l'environnement utilisateur de R. C'est donc une approche bien plus puissante que la notation traditionnelle. Aussi `filter()` renvoie tout le tableau remanié. Donc, nous devons l'affecter simplement à une variable qui contient ce tableau (`biometry2` ici).
+Notez au passage que `sfilter()` n'utilise pas la notation `biometry$year_measure`, mais prend un premier argument qui est le jeu de données `biometry`, et la suite se réfère aux variables de ce jeu de données telles que `year_measure` en priorité aux autres variables disponibles dans l'environnement utilisateur de R. C'est donc une approche bien plus puissante que la notation traditionnelle. Aussi `sfilter()` renvoie tout le tableau remanié. Donc, nous devons l'affecter simplement à une variable qui contient ce tableau (`biometry2` ici).
 
-Notez aussi que nous utilisons l'opérateur d'assignation alternatif `%<-%` qui permet d'obtenir un tableau comme résultat de `filter()` (sinon un objet est créé qui contient les informations pour effectuer le traitement, mais pas le *résultat* du traitement lui-même).
+Vous pouvez aussi utiliser la fonction `filter()` qui s'emploie de manière similaire, mais attention : avec des tableaux tels que ceux utilisés dans `SciViews::R`, la fonction ne renvoie pas directement le résultat, mais crée un objet **list** qui contient les instructions à exécuter. Il faut **collecter** les résultats à l'aide de `collect_dtx()`, ou à l'aide de l'opérateur d'assignation alternative `%<-%` pour obtenir véritablement le résultat du calcul. Donc, nous obtiendrons le même résultat à l'aide de `filter()`, si nous pensons bien à utiliser `%<-%` à la place de `<-`. Donc, l'instruction suivante correspond à la précédente :
 
-Dans d'autres cas, le résultat peut être dramatique, car le calcul est appliqué à l'encodage des niveaux de la variable facteur. Or, avec quatre niveaux, les encodages sont 1, 2, 3 et 4, ... et ils sont bien évidemment tous inférieurs à 2017 (pour rappel, "2013", "2014", "2016" et "2017" sont les libellés textuels des niveaux de la variable facteur) !
+```{r, error=TRUE}
+biometry2 %<-% filter(biometry, year_measure < 2017) 
+```
+
+Mais revenons à notre variable facteur. Dans d'autres cas, le résultat peut être dramatique, car le calcul est appliqué à l'encodage des niveaux de la variable facteur. Or, avec quatre niveaux, les encodages sont 1, 2, 3 et 4, ... et ils sont bien évidemment tous inférieurs à 2017 (pour rappel, "2013", "2014", "2016" et "2017" sont les libellés textuels des niveaux de la variable facteur) !
 
 ```{block, type='warning'}
 De manière générale, n'effectuez **jamais** de calcul sur des variables facteurs. Tranformez-les toujours avant. Si les libellés contiennent des valeurs numériques sur lesquelles vous voulez faire des calculs, utilisez `as.numeric(as.character(VARFACT))`, et une fois le calcul réalisé, retransformez en facteur avec `as.factor()`.
@@ -121,14 +125,14 @@ Le calcul explicite et sûr est donc le suivant :
 # Transforme de manière sûre factor -> numeric (double)
 biometry$year_measure <- as.numeric(as.character(biometry$year_measure))
 # Filtre les données sur une copie du tableau
-biometry2 <- fsubset(biometry, year_measure < 2017)
+biometry2 <- sfilter(biometry, year_measure < 2017)
 # Retransforme en variable factor
 biometry2$year_measure <- as.factor(biometry2$year_measure)
 # Vérification
 tail(biometry2)$year_measure
 ```
 
-Naturellement ici, la bonne stratégie est d'effectuer le calcul sur le tableau de départ **avant** de transformer en facteur, mais nous sommes partis de la variable facteur à titre d'illustration d'un cas qui peut se rencontrer en pratique. À présent que nous avons notre jeu de données sans les individus de 2017, et les variables correctement encodées, nous pouvons aborder différentes représentations pour observer des dénombrements tenant compte de plusieurs variables facteurs. Par défaut, l'argument `position =` a pour valeur `stack` (donc, lorsque cet argument n'est pas précisé dans `geom_bar()`, les barres sont empilées par rapport à la seconde variable facteur).
+Naturellement ici, la bonne stratégie est d'effectuer le calcul sur le tableau de départ **avant** de transformer en facteur, mais nous sommes partis de la variable facteur à titre d'illustration d'un cas qui peut se rencontrer en pratique. À présent que nous avons notre jeu de données sans les individus de 2017, et les variables correctement encodées, nous pouvons aborder différentes représentations pour observer des dénombrements tenant compte de plusieurs variables facteurs. Par défaut, l'argument `position =` a pour valeur `"stack"` (donc, lorsque cet argument n'est pas précisé dans `geom_bar()`, les barres sont empilées par rapport à la seconde variable facteur).
 
 ```{r barres-2facteurs, echo=TRUE, fig.cap="Dénombrement des hommes (H) et des femmes (F) dans l'étude sur l'obésité en Hainaut, (A) graphique utilisant un seul facteur. (B) graphique prenant en compte les années de mesure."}
 a <- chart(data = biometry2, ~ gender) +
@@ -143,7 +147,7 @@ b <- chart(data = biometry2, ~ gender %fill=% year_measure) +
 combine_charts(list(a, b), common.legend = TRUE)
 ```
 
-Il existe d'autres options en utilisant les valeurs `dodge` ou `fill` pour l'argument `position =`.
+Il existe d'autres options en utilisant les valeurs `"dodge"` ou `"fill"` pour l'argument `position =`.
 
 ```{r barres-2facteurs2, fig.cap="Dénombrement des hommes (H) et des femmes (F) dans l'étude sur l'obésité en Hainaut en tenant compte des années de mesure (différentes présentations).", echo=TRUE}
 a <- chart(data = biometry2, ~ gender %fill=% year_measure) +
@@ -164,7 +168,7 @@ c <- chart(data = biometry2, ~ gender %fill=% year_measure) +
 combine_charts(list(a, b, c), common.legend = TRUE)
 ```
 
-Soyez vigilant à la différence entre l'argument `position = stack` et `position = fill` qui malgré un rendu semblable ont l'axe des ordonnées qui diffèrent (dans le cas de `fill`, il s'agit de la **fraction** par rapport au total qui est représentée, et non pas des **effectifs** absolus dénombrés).
+Soyez vigilant à la différence entre l'argument `position = "stack"` et `position = "fill"` qui malgré un rendu semblable ont l'axe des ordonnées qui diffèrent (dans le cas de `"fill"`, il s'agit de la **fraction** par rapport au total qui est représentée, et non pas des **effectifs** absolus dénombrés).
 
 ##### Pièges et astuces {.unnumbered}
 
@@ -172,7 +176,7 @@ Soyez vigilant à la différence entre l'argument `position = stack` et `positio
 
 Vous pouvez avoir le souhait d'ordonner votre variable facteur afin d'améliorer le rendu visuel de votre graphique. Pour cela, vous pouvez employer la fonction `fct_infreq()`.
 
-```{r barres-facteur-ordonné, fig.cap="Dénombrement des classes de copépodes du jeu de données zooplankton."}
+```{r barres-facteur-ordonne, fig.cap="Dénombrement des classes de copépodes du jeu de données zooplankton."}
 chart(data = copepoda, ~ fct_infreq(class)) +
   geom_bar() +
   labs(x = "Classe", y = "Effectifs")
@@ -188,7 +192,7 @@ chart(data = zooplankton, ~ class) +
   ylab("Effectifs")
 ```
 
-Dans ce cas, il est possible de réaliser un graphique en **barres horizontales** qui laisse plus de place pour le libellé sur l'axe. Il existe deux manières de le faire : préférentiellement en utilisant l'argument `orientation = "y"` de `geom_bar()` (mais alors il faut utiliser `aes(y = ...)` à la place de la formule), et ensuite, on peut garder tout le code identique, mais rajouter `coord_flip()` tout à la fin. Utilisons successivement ces deux approches.
+Dans ce cas, il est possible de réaliser un graphique en **barres horizontales** qui laisse plus de place pour le libellé sur l'axe. Il existe deux manières de le faire : préférentiellement en utilisant l'argument `orientation = "y"` de `geom_bar()` (mais alors il faut utiliser `aes(y = ...)` à la place de la formule). Une seconde option consiste à réaliser le graphique en barres verticales (tout le code reste identique), mais de rajouter `coord_flip()` tout à la fin. Utilisons successivement ces deux approches.
 
 ```{r barres-rotation, fig.cap="Dénombrement des classes du jeu de données zooplankton (version avec barres horizontales en utilisant `orientation = \"y\"`)."}
 chart(data = zooplankton, aes(y = class)) +
@@ -196,7 +200,7 @@ chart(data = zooplankton, aes(y = class)) +
   xlab("Effectifs")
 ```
 
-Pourquoi ne peut-on pas utiliser de formule dans ce cas ? En fait, il faudrait écrire `class ~`, ... seulement voilà, une formule ne *peut pas* avoir un membre de droite vide. Donc, on est dans une impasse et on doit utiliser la forme explicite `aes()` pour "aesthetics" en anglais qui indique quelle variable est utilisée pour quoi dans le graphique en indiquant `y=`.
+Pourquoi ne peut-on pas utiliser de formule dans ce cas ? En fait, il faudrait écrire `class ~`, ... seulement voilà, une formule ne *peut pas* avoir un membre de droite vide. Donc, on est dans une impasse et on doit utiliser la forme explicite `aes()` pour "aesthetics" en anglais qui indique quelle variable est utilisée pour quoi dans le graphique en indiquant `y =`.
 
 Avec la fonction `coord_flip()` ajoutée à votre graphique, vous pouvez effectuer une rotation des axes (l'axe X devient Y et inversement) pour obtenir un **graphique en barres horizontales**. De plus, l'œil humain perçoit plus distinctement les différences de longueurs horizontales que verticales. Donc, de ce point de vue, le graphe en barres horizontales est considéré comme meilleur que le graphe en barres verticales.
 
@@ -253,12 +257,8 @@ chart(data = copepoda, size ~ class) +
 Ici, nous faisons appel à une autre famille de fonctions : celles qui effectuent des calculs sur les données avant de les représenter graphiquement. Leurs noms commencent toujours par `stat_`.
 
 ```{block, type='warning'}
-Le graphe en barres pour représenter les moyennes est très répandu dans le domaine scientifique malgré le grand nombre d'arguments en sa défaveur et que vous pouvez lire dans la section **pour en savoir plus** ci-dessous. L'un des arguments le plus important est la faible information qu'il véhicule puisque l'ensemble des données n'est plus représenté que par une valeur (la moyenne) pour chaque niveau de la variable facteur. Pour un petit nombre d'observations, il vaut mieux toutes les représenter à l'aide d'un nuage de points. Si le nombre d'observations devient très grand (dizaines ou plus), le graphique en boites de dispersion est plus indiqué (voir plus loin dans ce module).
+Le graphe en barres pour représenter les moyennes est très répandu dans le domaine scientifique malgré le grand nombre d'arguments en sa défaveur et que vous pouvez lire dans la section **pour en savoir plus** ci-dessous. L'un des arguments le plus important est la faible information qu'il véhicule puisque l'ensemble des données n'est plus représenté que par une valeur (la moyenne) pour chaque niveau de la variable facteur. Pour un petit nombre d'observations, il vaut mieux toutes les représenter à l'aide d'un nuage de points. Si le nombre d'observations devient très grand (dizaines ou plus), le graphique en boites de dispersion est plus indiqué (voir plus loin dans ce module). Le graphique en violon (cf. module précédent) est également utilisable s'il y a encore plus de données.
 ```
-
-##### À vous de jouer ! {.unnumbered}
-
-`r learnr("A04La_barres", title = "Graphique en barres", toc = "Graphiques en barres")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -278,7 +278,7 @@ chart(data = copepoda, ~ factor(0) %fill=% class) +
   scale_fill_viridis_d()
 ```
 
-Ce graphique est plus difficile à réaliser à l'aide de `chart()` ou `ggplot()`. En fait, il faut ruser ici, et l'auteur du package {ggplot2} n'avait tout simplement pas l'intention d'ajouter ce type de graphique dans la panoplie proposée. En effet, il faut savoir que l'œil humain est nettement moins bon pour repérer des angles que pour comparer des longueurs. **Donc, le diagramme en barres est souvent meilleur pour comparer des effectifs par classes.** Mais d'une part, le graphique en camembert est (malheureusement) un graphique très répandu et il faut savoir l'interpréter, et d'autre part, il peut s'avérer quand même utile dans certaines situations. Notez l'utilisation des fonctions `coord_polar()` qui crée des coordonnées polaires et la fonction `theme_void()` qui crée un graphique sans axes. En fait, un graphique en camembert peut aussi se concevoir comme un graphique en barres représenté en coordonnées polaires.
+Ce graphique est plus difficile à réaliser à l'aide de `chart()` ou `ggplot()`. En fait, il faut ruser ici, et l'auteur du package {ggplot2} n'avait en fait pas l'intention d'ajouter ce type de graphique dans la panoplie proposée. En effet, il faut savoir que l'œil humain est nettement moins bon pour repérer des angles que pour comparer des longueurs. **Donc, le diagramme en barres est souvent meilleur pour comparer des effectifs par classes.** Mais d'une part, le graphique en camembert est (malheureusement) un graphique très répandu et il faut savoir l'interpréter, et d'autre part, il peut s'avérer quand même utile dans certaines situations. Notez l'utilisation des fonctions `coord_polar()` qui crée des coordonnées polaires et la fonction `theme_void()` qui crée un graphique sans axes. En fait, un graphique en camembert peut aussi se concevoir comme un graphique en barres représenté en coordonnées polaires.
 
 ##### Pièges et astuces {.unnumbered}
 
@@ -314,7 +314,7 @@ Dans ce dernier cas, c'est bien plus facile : il y a effectivement 24 observati
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A04Lb_camembert", title = "Graphique en camembert", toc = "Graphiques en camembert")`
+`r learnr("A04La_barplot", title = "Graphique en barres et camembert", toc = "Graphiques en barres et camembert")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -354,7 +354,7 @@ En effet, nous voyons sur le vecteur ordonné que cinq valeurs sont plus petites
 [^04-visualisation-iii-1]: Notez que, lorsque la coupure tombe entre deux observations, une valeur intermédiaire est utilisée. Ici par exemple, le premier quartile est entre 53 et 55, donc, il vaut 54. Le troisième quartile se situe entre 78 et 82. Il vaut donc 80.
 
 ```{block, type='note'}
-Les **cinq nombres** sont : la **valeur minimale**, le **premier quartile**, la **médiane** (ou deuxième quartile), le **troisième quartile** et la **valeur maximale**.
+Les **cinq nombres** sont : la **valeur minimale**, le **premier quartile**, la **médiane** (ou deuxième quartile), le **troisième quartile** et la **valeur maximale**.
 ```
 
 Voici comment on les calcule facilement dans R :
@@ -365,7 +365,7 @@ fivenum(x)
 
 La boite de dispersion est une représentation graphique codifiée de ces cinq nombres. La représentation de `x` sous forme de nuage de points n'est ni très esthétique, ni très lisible, surtout si nous avons affaire à des milliers ou des millions d'observations qui se chevauchent sur le graphique[^04-visualisation-iii-2].
 
-[^04-visualisation-iii-2]: Il est possible de modifier la transparence des points et/ou de les déplacer légèrement vers la gauche ou vers la droite de manière aléatoire pour résoudre le problème de chevauchement des points sur un graphique en nuage de points univarié.
+[^04-visualisation-iii-2]: Il est possible de modifier la transparence des points en utilisant l'argument `alpha =` et/ou de les déplacer légèrement vers la gauche ou vers la droite de manière aléatoire pour résoudre le problème de chevauchement des points sur un graphique en nuage de points univarié en replaçant `geom_point()` par `geom_jitter()`.
 
 ```{r nuage-de-points, fig.cap="Nuage de points univarié.", echo=FALSE}
 df <- dtx(x = x)
@@ -403,7 +403,7 @@ combine_charts(list(a, b))
 Vous observez à la Fig. \@ref(fig:boxplot-construct) que certaines valeurs minimales et maximales ne sont pas reliées à la boite de dispersion, il s'agit de **valeurs extrêmes**.
 
 ```{block, type='note'}
-**Règle pour déterminer s'il y a des valeurs extrêmes avec une boite de dispersion\ :** une valeur est considérée comme extrême si son écart par rapport à la boite est supérieur à une fois et demi la hauteur de la boite (encore appelée **espace inter-quartile** IQR correspondant à Q3 - Q1). Les tiges (ou "moustaches") qui prolongent la boite de dispersion s'arrêtent donc aux dernières valeurs les plus petites et plus grandes, mais qui rentrent encore dans une fois et demi l'IQR. Les valeurs extrêmes sont ensuite représentées individuellement par un point au dessus et en dessous.
+**Règle pour déterminer s'il y a des valeurs extrêmes avec une boite de dispersion :** une valeur est considérée comme extrême si son écart par rapport à la boite est supérieur à une fois et demi la hauteur de la boite (encore appelée **espace inter-quartile** IQR correspondant à Q3 - Q1). Les tiges (ou "moustaches") qui prolongent la boite de dispersion s'arrêtent donc aux dernières valeurs les plus petites et plus grandes, mais qui rentrent encore dans une fois et demi l'IQR. Les valeurs extrêmes sont ensuite représentées individuellement par un point au dessus et en dessous.
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -563,9 +563,9 @@ chart(data = df, Valeur ~ Facteur) +
   geom_point(color = "red") 
 ```
 
-La boite de dispersion pour le niveau **`A`** est calculée à partir de seulement quatre observations. C'est trop peu. Comme les points représentant les observations ne sont habituellement pas superposés à la boite, cela peut passer inaperçu et tromper le lecteur ! Une bonne pratique consiste à ajouter *n*, le nombre d'observations au-dessus de chaque boite. Cela peut se faire facilement avec les fonctions `give_n()` et `stat_summary()` ci-dessous[^04-visualisation-iii-3].
+La boite de dispersion pour le niveau `"A"` est calculée à partir de seulement quatre observations. C'est trop peu. Comme les points représentant les observations ne sont habituellement pas superposés à la boite, cela peut passer inaperçu et tromper le lecteur ! Une bonne pratique consiste à ajouter *n*, le nombre d'observations au-dessus de chaque boite. Cela peut se faire facilement avec les fonctions `give_n()` et `stat_summary()` ci-dessous[^04-visualisation-iii-3].
 
-[^04-visualisation-iii-3]: La fonction `give_n()` est une **fonction personnalisée** que nous avons écrite nous-mêmes. Elle positionne du texte `y=` 10% plus haut que le `max(x)`, et ce texte est `length(x)`, la longueur du vecteur qui correspond au nombre d'observations pour `x` (`x`étant utilisé en interne par le moteur graphique). Il est possible, et même assez facile, dans R d'écrire ses *propres* fonctions. Néanmoins cela dépasse du cadre du cours pour l'instant. Pour utiliser `give_n()` dans vos documents R Markdown, copiez simplement sa définition dans un chunk avant de l'utiliser comme c'est fait ici. Elle est aussi réutilisable plus loin dans le même R Markdown, une fois qu'elle est définie.
+[^04-visualisation-iii-3]: La fonction `give_n()` est une **fonction personnalisée** que nous avons écrite nous-mêmes. Elle positionne du texte `y =` 10% plus haut que le `max(x)`, et ce texte est `length(x)`, la longueur du vecteur qui correspond au nombre d'observations pour `x` (`x` étant utilisé en interne par le moteur graphique). Il est possible, et même assez facile, dans R d'écrire ses *propres* fonctions. Néanmoins cela dépasse du cadre du cours pour l'instant. Pour utiliser `give_n()` dans vos documents R Markdown, copiez simplement sa définition dans un chunk avant de l'utiliser comme c'est fait ici. Elle est aussi réutilisable plus loin dans le même R Markdown, une fois qu'elle est définie.
 
 ```{r boxplot2, fig.cap="Taille de copépodes pour différents groupes taxonomiques (le nombre d'observations est indiqué au dessus de chaque boite)."}
 give_n <- function(x)
@@ -603,9 +603,9 @@ tooth_growth <- labelise(tooth_growth, self = FALSE,
 
 Petits commentaires sur ce code :
 
--   La fonction `labelise()` appliquée au tableau tout entier et avec l'argument `self= FALSE` s'applique aux **colonnes** du tableau, c'est-à-dire aux variables. Ensuite, les arguments `label=` et `units=` reçoivent une `list()` nommée pour en modifier les attributs (`nom = "valeur"`). C'est une manière pratique et efficace de changer tous les labels et unités des variables en une seule étape (il n'est pas indispensable de reprendre *toutes* les variables, on peut indiquer seulement celles que l'on veut modifier).
+-   La fonction `labelise()` appliquée au tableau tout entier et avec l'argument `self = FALSE` s'applique aux **colonnes** du tableau, c'est-à-dire aux variables. Ensuite, les arguments `label =` et `units =` reçoivent une `list()` nommée pour en modifier les attributs (`nom = "valeur"`). C'est une manière pratique et efficace de changer tous les labels et unités des variables en une seule étape (il n'est pas indispensable de reprendre *toutes* les variables, on peut indiquer seulement celles que l'on veut modifier).
 
--   Nous avons utilisé `as.ordered()` à la place de `as.factor()`. Les objets "facteurs ordonnés" dans R (ou **ordered**) sont identiques aux facteurs à ceci près que l'ordre de niveaux a aussi un sens du plus petit au plus grand. Ainsi, des niveaux de `supp` : soit "VC" pour vitamine C ou "OJ" pour vitamine C dans du jus d'orange n'ont pas d'ordre précis. Nous utilisons un objet **factor**. Par contre, les doses de vitamines C `0.5 < 1 < 2` exprimées en mg/J ont un ordre. Dans ce cas, nous préférons les objets **ordered**, qui s'utilisent en pratique comme les objets **factor** dans R (mais notez bien l'indication de l'ordre des niveaux de la variable à l'aide de `<` dans `Levels:`, c'est ce qui distingue un objet **ordered** d'un objet **factor**).
+-   Nous avons utilisé `as.ordered()` à la place de `as.factor()`. Les objets "facteurs ordonnés" dans R (ou **ordered**) sont identiques aux facteurs à ceci près que l'ordre de niveaux a aussi un sens du plus petit au plus grand. Ainsi, des niveaux de `supp` : soit `"VC"` pour vitamine C ou `"OJ"` pour vitamine C dans du jus d'orange n'ont pas d'ordre précis. Nous utilisons un objet **factor**. Par contre, les doses de vitamines C `0.5 < 1 < 2` exprimées en mg/J ont un ordre. Dans ce cas, nous préférons les objets **ordered**, qui s'utilisent en pratique comme les objets **factor** dans R (mais notez bien l'indication de l'ordre des niveaux de la variable à l'aide de `<` dans `Levels:`, c'est ce qui distingue un objet **ordered** d'un objet **factor**).
 
 ```{r}
 head(tooth_growth)$dose
@@ -621,7 +621,7 @@ chart(data = tooth_growth, len ~ supp %fill=% dose) +
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A04Lc_boxplot", title = "Boite de dispersion", toc = "Boites de dispersion")`
+`r learnr("A04Lb_boxplot", title = "Boite de dispersion", toc = "Boites de dispersion")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -683,26 +683,24 @@ b <- chart(data = urchin, weight ~ solid_parts %col=% origin) +
 combine_charts(list(a, b), common.legend = TRUE)
 ```
 
-Il existe d'autres fonctions permettant de combiner plusieurs graphiques comme [`plot_grid()`](https://cran.r-project.org/web/packages/cowplot/vignettes/plot_grid.html) du package {cowplot}, mais avec `combine_charts()` vous pourrez déjà faire beaucoup. De plus, un libellé sous forme d'une lettre majuscule est automatiquement associé à chaque sous-région de la figure composée. Cela permet d'y faire plus facilement référence dans le texte et/ou dans la légende.
+Il existe d'autres fonctions permettant de combiner plusieurs graphiques comme [`cowplot::plot_grid()`](https://wilkelab.org/cowplot/articles/plot_grid.html), mais avec `combine_charts()` vous pourrez déjà faire beaucoup. De plus, un libellé sous forme d'une lettre majuscule est automatiquement associé à chaque sous-région de la figure composée. Cela permet d'y faire plus facilement référence dans le texte et/ou dans la légende.
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A04Ld_fig_composees", title = "Graphiques composés", toc = "Graphiques composés")`
+`r learnr("A04Lc_comp_fig", title = "Graphiques composés", toc = "Graphiques composés")`
 
 ```{r assign_A04Ia_graphe_avance, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A04Ia_graphe_avance", part = NULL,
     url = "https://github.com/BioDataScience-Course/A04Ia_graphe_avance",
     course.ids = c(
-      'S-BIOG-006' = !"A04Ia_{YY}M_graphe_avance", 
-      'S-BIOG-921' = !"A04Ia_{YY}C_graphe_avance"),
+      'S-BIOG-006' = !"A04Ia_{YY}M_graphe_avance"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/rC-B3-yK"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[9]+1} 10:00:00"),
+      'S-BIOG-006' = !"{W[10]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
+      'S-BIOG-006' = !"{W[10]+1} 16:00:00"),
     term = "Q1", level = 3,
     toc = "Graphiques avancés et libres")
 ```
@@ -711,11 +709,9 @@ if (exists("assignment"))
 
 -   [Partitionnement des graphiques en facettes](http://www.sthda.com/french/wiki/ggplot2-facet-diviser-un-graphique-en-plusieurs-panneaux-logiciel-r-et-visualisation-de-donnees). Différentes options sont présentées ici.
 
--   [Figures composées à l'aide de `grid.arrange()`](http://lightonphiri.org/blog/ggplot2-multiple-plots-in-one-graph-using-gridextra). Une autre option, mais moins flexible et moins riche que `combine_charts()`.
+-   [Figures composées à l'aide de `cowplot::plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html) avec les différentes options, aussi disponibles avec `combine_charts()`.
 
--   [Figures composées à l'aide de `plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html) avec les différentes options, aussi disponibles avec `combine_charts()`.
-
--   [Troisième possibilité pour des figures composées à l'aide de `ggarrange()`](http://www.sthda.com/english/rpkgs/ggpubr/reference/ggarrange.html). `combine_charts()` fait la même chose, mais avec des valeurs par défaut légèrement différentes (`labels = "auto"` par défaut pour ce dernier, mais `labels = NULL` pour `ggarrange()`).
+-   [Seconde possibilité pour des figures composées à l'aide de `ggpubr::ggarrange()`](http://www.sthda.com/english/rpkgs/ggpubr/reference/ggarrange.html). `combine_charts()` fait la même chose, mais avec des valeurs par défaut légèrement différentes (`labels = "auto"` par défaut pour ce dernier, mais `labels = NULL` pour `ggpubr::ggarrange()`).
 
 ## Différents moteurs graphiques
 
@@ -738,7 +734,7 @@ chart(data = urchin, height ~ weight %col=% origin) +
 
 ### {ggplot2}
 
-Le moteur graphique {[ggplot2](https://ggplot2.tidyverse.org)} est écrit pas Hadley Wickham, un personnage emblématique de la "révolution [tidyverse](https://www.tidyverse.org)" qui propose une surcouche moderne au-dessus de R. {ggplot2} implémente une "grammaire graphique" particulièrement puissante et flexible, proposée et popularisée par le statisticien Leland Wilkinson. Par défaut, `chart()` crée en réalité un graphique {ggplot2} adapté. Voici la version {ggplot2} standard du même graphique représenté à la Fig. \@ref(fig:chart-example) :
+Le moteur graphique {[ggplot2](https://ggplot2.tidyverse.org)} est écrit pas Hadley Wickham, un personnage emblématique de la "révolution [tidyverse](https://www.tidyverse.org)" (même si ggplot est antérieur et n'utilise pas la syntaxe commune aux packages tidyverse) qui propose une surcouche moderne au-dessus de R. {ggplot2} implémente une "grammaire graphique" particulièrement puissante et flexible, proposée et popularisée par le statisticien Leland Wilkinson. Par défaut, `chart()` crée en réalité un graphique {ggplot2} adapté. Voici la version {ggplot2} standard du même graphique représenté à la Fig. \@ref(fig:chart-example) :
 
 ```{r ggplot2-example, fig.cap= "Graphique typique obtenu avec `ggplot()` (moteur graphique {ggplot2})."}
 ggplot(data = urchin, mapping = aes(x = weight, y = height, col = origin)) + 
@@ -771,7 +767,7 @@ Quelques règles simples vous permettent de passer des **instructions** `ggplot(
 
 4.  Partout où `aes()` est utilisé pour les instructions {ggplot2}, on peut utiliser à la place `f_aes()` et y spécifier plutôt une formule de type `chart()`.
 
-5.  Avec `ggplot()` les facettes doivent être spécifiées à l'aide de `facet_XXX()`. À condition d'utiliser `chart()`, il est possible d'inclure les spécifications des facettes les plus utilisées directement dans la formule en utilisant l'opérateur `|`. Cette façon de procéder est, encore une fois, identique à ce qui se fait dans {lattice} (voir plus loin).
+5.  Avec `ggplot()` les facettes doivent être spécifiées à l'aide de `facet_XXX()`. À condition d'utiliser `chart()`, il est possible d'inclure les spécifications des facettes les plus utilisées directement dans la formule en utilisant l'opérateur `|`. Cette façon de procéder est identique à ce qui se fait dans {lattice} (voir plus loin).
 
 Le point (5) mérite une petite démonstration pour comparaison :
 
@@ -786,11 +782,20 @@ b <- ggplot(data = urchin, mapping = aes(x = weight, y = height)) +
 combine_charts(list(a, b))
 ```
 
+Enfin, pour ceux qui n'aiment pas la notation utilisant le `+` (car elle fait trop penser à une addition, ce qu'elle ne fait pas ici), vous pouvez aussi utiliser la fonction `gg()` du package {chart}. Cette fonction transforme toutes les commandes {ggplot2} / {chart} qui doivent être combinées à l'aide de `+` en commandes pouvant être combinées à l'aide de l'opérateur de pipe de R de base `|>`. Ce dernier opérateur est typiquement utilisé pour composer une instruction complexe à l'aide de plusieurs instructions simples (les blocs de construction). Il est donc plus logique ici. De l'aveu même de son auteur, {ggplot2} aurait utilisé `|>` à la place de `+` si cet opérateur existait à l'époque où ggplot a été conçu. Donc, `gg()` vient en quelque sorte corriger le tir. Pour utiliser `gg()`, vous remplacez le `+` par `|>`, et vous débutez le nom de votre fonction {ggplot2} par `gg$`. C'est tout. Don,c, vous écrirez :
+
+```{r chart-ggplot2-gg, fig.cap= "Graphique réalisé en utilisant `gg$`."}
+chart(data = urchin, height ~ weight) |>
+  gg$geom_point()
+```
+
+De plus, vous bénéficiez pleinement de l'aide via la complétion de RStudio avec `gg()`. En effet, lorsque vous avez entré `gg$` dans l'éditeur ou à la fenêtre console de RStudio, une liste apparaît avec toutes les options possibles.
+
 ##### Exercez-vous {.unnumbered}
 
 ```{block, type = "bdd"}
 
-Afin de vous exercer à réaliser des graphiques `chart()`/`ggplot()`, proposez trois graphiques inédits (qui n'ont pas été vu jusqu'ici) dans vos différents projets GitHub Classroom. Employez par exemple les liens suivants pour vous inspirer\ :
+Afin de vous exercer à réaliser des graphiques `chart()`/`ggplot()`, proposez trois graphiques inédits (qui n'ont pas été vu jusqu'ici) dans vos différents projets GitHub Classroom. Employez par exemple les liens suivants pour vous inspirer :
 
 - <https://www.r-graph-gallery.com>
 
@@ -814,7 +819,7 @@ Autant {ggplot2} est complètement modulable en ajoutant littéralement à l'aid
 xyplot(height ~ weight, data = urchin, groups = origin, auto.key = TRUE)
 ```
 
-Et voici la version `chart()` utilisant le moteur {lattice}. Notez la façon d'appeler la fonction `xyplot()` de {lattice} via `chart$xyplot()` :
+Et voici la version `chart()` utilisant le moteur {lattice}. Notez la façon d'appeler la fonction `xyplot()` de {lattice} via `chart$xyplot()` :
 
 ```{r chart-lattice-example, fig.cap= "Graphique exemple réalisé avec `chart()` A. avec le moteur **lattice**, B. avec le moteur **ggplot2**."}
 theme_sciviews_lattice(n = 2)
@@ -832,7 +837,7 @@ combine_charts(list(a, b))
 La quantité d'instructions nécessaires pour rendre la version {lattice} proche de la version {ggplot2} devrait disparaître dans les prochaines versions de `chart()`. Un autre objectif est aussi de gommer le plus possible les différences entre les rendus des différents moteurs de graphiques R, et en particulier entre {ggplot2} et {lattice}. Comparez la Fig. \@ref(fig:chart-lattice-example)A avec la Fig. \@ref(fig:lattice-example) pour apprécier le gain déjà obtenu en matière d'homogénéisation.
 
 ```{block, type='info'}
-Par rapport à {ggplot2}, les graphiques {lattice} sont moins flexibles du fait qu'ils doivent être spécifiés en une seule instruction. Cependant, ils sont beaucoup plus rapides à générer (appréciable quand il y a beaucoup de points à tracer)\ ! {lattice} offre également quelques types de graphiques non supportés par {ggplot2} comme les graphiques en 3D à facettes, par exemple.
+Par rapport à {ggplot2}, les graphiques {lattice} sont moins flexibles du fait qu'ils doivent être spécifiés en une seule instruction. Cependant, ils sont beaucoup plus rapides à générer (appréciable quand il y a beaucoup de points à tracer) ! {lattice} offre également quelques types de graphiques non supportés par {ggplot2} comme les graphiques en 3D à facettes, par exemple.
 ```
 
 Voici un graphique à facettes réalisé avec `chart()` et le moteur {lattice}. Notez que la formule utilisée est *identique* à celle employée pour la version {ggplot2} avec `chart()`.
@@ -851,7 +856,7 @@ chart$xyplot(data = urchin, height ~ weight | origin,
   ylab = "Hauteur du test [mm]", xlab = "Masse totale [g]")
 ```
 
-Vous noterez que pour réaliser un graphique {lattice} à l'aide de `chart()`, vous devez rajouter `$nom_de_function_lattice` après chart. Aussi, le thème spécifique SciViews et les labels et unités automatiques ne sont pas encore supportés. Les graphiques {lattice} ne supportant pas l'opérateur `+` pour ajouter des couches comme pour {ggplot2}, vous devez spécifier l'ensemble des options comme arguments de la fonction `chart$fun()`. Cela peut devenir pénible s'il y en a beaucoup. Toutefois {lattice} peut rendre d'énormes services pour des graphiques très compliqués, grâce à sa vitesse nettement supérieure à {ggplot2}.
+Vous noterez que pour réaliser un graphique {lattice} à l'aide de `chart()`, vous devez rajouter `$nom_de_function_lattice` après `chart$`. Aussi, le thème spécifique SciViews et les labels et unités automatiques ne sont pas encore supportés. Les graphiques {lattice} ne supportant pas l'opérateur `+` pour ajouter des couches comme pour {ggplot2}, vous devez spécifier l'ensemble des options comme arguments de la fonction `chart$fun()`. Cela peut devenir pénible s'il y en a beaucoup. Toutefois {lattice} peut rendre d'énormes services pour des graphiques très compliqués, grâce à sa vitesse nettement supérieure à {ggplot2}.
 
 ### Graphiques de base
 
@@ -880,7 +885,7 @@ chart$base({
 ```
 
 ```{block, type='note'}
-Vous ne le voyez pas dans le bookdown, mais vous le réaliserez si vous utilisez ce genre de code dans vos propres documents R Markdown\ : le graphique est en réalité généré deux fois\ : une première fois dans un format propre aux graphiques R de base, et ensuite, il est traduit en une forme compatible avec les autres graphiques {ggplot2} et {lattice} (et au passage, il gagne la grille en traits grisés). Dans le chunck, nous devons spécifier `fig.keep = 2` si nous voulons éviter d'imprimer la première version dans le rapport lorsqu'on utilise `chart$base()`.
+Vous ne le voyez pas dans le bookdown, mais vous le réaliserez si vous utilisez ce genre de code dans vos propres documents R Markdown : le graphique est en réalité généré deux fois : une première fois dans un format propre aux graphiques R de base, et ensuite, il est traduit en une forme compatible avec les autres graphiques {ggplot2} et {lattice} (et au passage, il gagne la grille en traits grisés). Dans le chunck, nous devons spécifier `fig.keep = 2` si nous voulons éviter d'imprimer la première version dans le rapport lorsqu'on utilise `chart$base()`.
 ```
 
 Pour l'instant, le seul avantage de `chart()` avec les graphiques de base est qu'il les convertit en une forme combinable avec les autres graphiques dans une figure composite (sinon, ce n'est pas possible). À part cela, il faut fournir à `chart$base()` tout le code nécessaire pour tracer et personnaliser le graphique. Comme on peut le voir sur cet exemple, cela demande une quantité considérable de code. C'est aussi un autre aspect pénible de ce moteur graphique : il est très flexible, mais l'interface n'est pas optimale. Pour finir, les graphiques de base ont plus de mal avec les facettes, mais ils peuvent quand même générer les versions les plus simples, par exemple à l'aide de la fonction `coplot()` qui accepte une formule très similaire à ce que nous avons employé jusqu'ici, mais avec un rendu différent :
@@ -920,9 +925,9 @@ if (exists("challenge"))
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
-      'S-BIOG-006' = !"{W[9]+5} 08:00:00"),
+      'S-BIOG-006' = !"{W[10]+5} 08:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[9]+5} 11:00:00"),
+      'S-BIOG-006' = !"{W[10]+5} 13:00:00"),
     toc = "Challenge graphiques")
 ```
 
