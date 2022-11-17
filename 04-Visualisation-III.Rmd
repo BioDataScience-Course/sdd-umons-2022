@@ -170,6 +170,11 @@ combine_charts(list(a, b, c), common.legend = TRUE)
 
 Soyez vigilant à la différence entre l'argument `position = "stack"` et `position = "fill"` qui malgré un rendu semblable ont l'axe des ordonnées qui diffèrent (dans le cas de `"fill"`, il s'agit de la **fraction** par rapport au total qui est représentée, et non pas des **effectifs** absolus dénombrés).
 
+```{=html}
+<!-- H5P en cours de validation
+`r h5p(211, height = 270, toc = NULL)`
+-->
+```
 ##### Pièges et astuces {.unnumbered}
 
 ###### Réordonner la variable facteur par fréquence {.unnumbered}
@@ -260,6 +265,11 @@ Ici, nous faisons appel à une autre famille de fonctions : celles qui effectue
 Le graphe en barres pour représenter les moyennes est très répandu dans le domaine scientifique malgré le grand nombre d'arguments en sa défaveur et que vous pouvez lire dans la section **pour en savoir plus** ci-dessous. L'un des arguments le plus important est la faible information qu'il véhicule puisque l'ensemble des données n'est plus représenté que par une valeur (la moyenne) pour chaque niveau de la variable facteur. Pour un petit nombre d'observations, il vaut mieux toutes les représenter à l'aide d'un nuage de points. Si le nombre d'observations devient très grand (dizaines ou plus), le graphique en boites de dispersion est plus indiqué (voir plus loin dans ce module). Le graphique en violon (cf. module précédent) est également utilisable s'il y a encore plus de données.
 ```
 
+```{=html}
+<!-- H5P en cours de validation
+`r h5p(210, height = 270, toc = NULL)`
+-->
+```
 ##### Pour en savoir plus {.unnumbered}
 
 -   [Beware of dynamite](http://users.stat.umn.edu/~rend0020/Teaching/STAT8801-2015Spring/handouts/24-dynamite.pdf). Démonstration de l'impact d'un graphe en barres pour représenter la moyenne (et l'écart type) = graphique en "dynamite".
@@ -353,6 +363,11 @@ En effet, nous voyons sur le vecteur ordonné que cinq valeurs sont plus petites
 
 [^04-visualisation-iii-1]: Notez que, lorsque la coupure tombe entre deux observations, une valeur intermédiaire est utilisée. Ici par exemple, le premier quartile est entre 53 et 55, donc, il vaut 54. Le troisième quartile se situe entre 78 et 82. Il vaut donc 80.
 
+```{=html}
+<!-- H5P en cours de validation
+`r h5p(209, height = 270, toc = NULL)`
+-->
+```
 ```{block, type='note'}
 Les **cinq nombres** sont : la **valeur minimale**, le **premier quartile**, la **médiane** (ou deuxième quartile), le **troisième quartile** et la **valeur maximale**.
 ```
@@ -540,6 +555,11 @@ b <- ggplot_box_legend()
 combine_charts(list(a, b))
 ```
 
+```{=html}
+<!-- H5P en cours de validation
+`r h5p(212, height = 270, toc = NULL)`
+-->
+```
 Un des gros avantages de la boite de dispersion est de mettre en évidence de manière synthétique la distribution des données sur l'axe. La **boite de dispersion parallèle** place *plusieurs* boites de dispersion côte à côte en face d'un même axe. C'est un excellent moyen de *comparer* la dispersion de données numériques en fonction des niveaux d'une variable **factor**. Les instructions dans R pour produire un graphique en boites de dispersion parallèles sont :
 
 ```{r boxplot, fig.cap="Distribution des tailles par groupes taxonomiques pour le zooplancton."}
@@ -685,6 +705,11 @@ combine_charts(list(a, b), common.legend = TRUE)
 
 Il existe d'autres fonctions permettant de combiner plusieurs graphiques comme [`cowplot::plot_grid()`](https://wilkelab.org/cowplot/articles/plot_grid.html), mais avec `combine_charts()` vous pourrez déjà faire beaucoup. De plus, un libellé sous forme d'une lettre majuscule est automatiquement associé à chaque sous-région de la figure composée. Cela permet d'y faire plus facilement référence dans le texte et/ou dans la légende.
 
+```{=html}
+<!-- H5P en cours de validation
+`r h5p(213, height = 270, toc = NULL)`
+-->
+```
 ##### À vous de jouer ! {.unnumbered}
 
 `r learnr("A04Lc_comp_fig", title = "Graphiques composés", toc = "Graphiques composés")`
@@ -950,3 +975,4 @@ Ce module 4 vous a permis de réaliser et de découvrir de nouveaux graphiques. 
 ##### Progression {.unnumbered}
 
 `r launch_report("04", height = 800)`
+
