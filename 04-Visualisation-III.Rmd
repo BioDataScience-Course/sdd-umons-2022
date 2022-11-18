@@ -738,9 +738,36 @@ if (exists("assignment"))
 
 -   [Seconde possibilité pour des figures composées à l'aide de `ggpubr::ggarrange()`](http://www.sthda.com/english/rpkgs/ggpubr/reference/ggarrange.html). `combine_charts()` fait la même chose, mais avec des valeurs par défaut légèrement différentes (`labels = "auto"` par défaut pour ce dernier, mais `labels = NULL` pour `ggpubr::ggarrange()`).
 
+## Choix du graphique
+
+Les différents graphiques que vous avez étudiés dans les trois modules ont tous des rôles différents. Il est très important de choisir le bon graphique en fonction de ce que vous voulez mettre en évidence dans les données. Nous vous proposons maintenant d'établir un **diagramme décisionnel** en fonction de :
+
+-   nombre de variables à représenter (1, 2, 3, ou 4)
+-   type de la ou des variables (qualitatif non ordonné **factor**, qualitatif ordonné **ordered**, quantitatif discret **integer** ou quantitatif continu **numeric**)
+-   quantité de données à représenter
+-   question que l'on se pose
+
+Vous utilisez le logiciel que vous voulez pour créer ce diagramme. Les logiciels de "mind mapping" tel que [Coggle](https://coggle.it) se prêtent très bien à cet exercice. Une fois votre document terminé, placez-le dans le dépôt GitHub suivant afin que vous puissiez rapidement le récupérer. **Nous vous conseillons de garder ce document à disposition plus tard lorsque vous aurez des graphiques à réaliser.**
+
+```{r assign_A04Ga_decision_tree, echo=FALSE, results='asis'}
+if (exists("assignment2"))
+  assignment2("A04Ga_decision_tree", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A04Ga_decision_tree",
+    course.ids = c(
+      'S-BIOG-006' = !"A04Ga_{YY}M_decision tree"),
+    course.urls = c(
+      'S-BIOG-006' = "https://classroom.github.com/a/7x6JxNFH "),
+    course.starts = c(
+      'S-BIOG-006' = !"{W[10]+5} 08:00:00"),
+    course.ends = c(
+      'S-BIOG-006' = !"{W[10]+5} 23:59:59"),
+    term = "Q1", level = 4, n = 5,
+    toc = "Diagramme décisionnel des graphiques")
+```
+
 ## Différents moteurs graphiques
 
-<center>![Prolifération des standards d'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
+<center>![Prolifération des standards d\'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
 
 Depuis le début, l'ensemble des graphiques que nous vous avons proposés utilise la fonction `chart()` du package {chart}. Cependant, il ne s'agit pas de la seule fonction permettant de réaliser des graphiques dans R, loin de là. En fait {chart} est tout récent et a été développé pour homogénéiser autant que possible les graphiques issus de trois moteurs graphiques différents : {ggplot2}, {lattice} et les graphiques de base. La fonction `chart()` a d'autres avantages également :
 
@@ -975,4 +1002,3 @@ Ce module 4 vous a permis de réaliser et de découvrir de nouveaux graphiques. 
 ##### Progression {.unnumbered}
 
 `r launch_report("04", height = 800)`
-
