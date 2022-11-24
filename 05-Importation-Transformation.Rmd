@@ -20,39 +20,39 @@ Le contenu du module \@ref(intro) doit être parfaitement maîtrisé. Il est ég
 
 ## Importation des données
 
-Il est possible d'encoder des très petits jeux de données dans R. La fonction `tribble()` permet de le faire facilement. Notez que les noms des colonnes du tableau sont à rentrer sous forme de **formules** (`~ var`), que chaque entrée est séparée par une virgule, et que les chaînes de caractères sont entourées de guillemets. Les espaces sont optionnels et peuvent être utilisés pour aligner les données afin que le tout soit plus lisible. Des commentaires peuvent être utilisés éventuellement en fin de ligne (un dièse `#` suivi du commentaire).
+Il est possible d'encoder des très petits jeux de données dans R. La fonction `dtx_rows()` permet de le faire facilement. Notez que les noms des colonnes du tableau sont à rentrer sous forme de **formules** (`~ var`), que chaque entrée est séparée par une virgule, et que les chaînes de caractères sont entourées de guillemets. Les espaces sont optionnels et peuvent être utilisés pour aligner les données afin que le tout soit plus lisible. Des commentaires peuvent être utilisés éventuellement en fin de ligne (un dièse `#` suivi du commentaire).
 
 ```{r}
-small_dataset <- as_dtx(tribble(
+small_dataset <- dtx_rows(
   ~treatment, ~dose, ~response,
    "control",   0.5,     18.35,
    "control",   1.0,     26.43, # This value needs to be double-checked
    "control",   2.0,     51.08,
     "test"  ,   0.5,     10.29,
     "test"  ,   1.0,     19.92,
-    "test"  ,   2.0,     41.06))
+    "test"  ,   2.0,     41.06)
 # Print the table
 small_dataset
 ```
 
 Dans la plupart des cas, vous utiliserez ou collecterez des données stockées dans des formats divers : feuilles Excel, fichiers CSV ("comma-separated-values", un format standard d'encodage d'un tableau de données sous forme textuelle), formats spécifiques à divers logiciels statistiques comme SAS, Stata ou Systat, ... Ces données peuvent être sur un disque local ou disponible depuis un lien URL sur le net[^05-importation-transformation-1]. De nombreuses fonctions existent dans R pour importer toutes ces données. La fonction `read()` du package {data.io} est l'une des plus simples et conviviales d'entre-elles. Vous l'avez déjà utilisée, mais reprenons un exemple pour en discuter les détails.
 
-[^05-importation-transformation-1]: R permet également d'interroger des bases de données spécialisées, mais nous n'aborderons ce sujet spécifique qu'au cours de Science des Données Biologiques 4 en Master 2.
+[^05-importation-transformation-1]: R permet également d'interroger des bases de données spécialisées, mais nous n'aborderons ce sujet spécifique qu'au cours de Science des Données Biologiques II en dernière année de Bachelier.
 
 ```{r}
 (biometry <- read("biometry", package = "BioDataScience", lang = "fr"))
 ```
 
-Le jeu de données `biometry` est disponible dans le package R {BioDataScience}. Dans ce cas, il ne faut pas spécifier de chemin d'accès au fichier : R sait où le trouver tout seul. Il est également spécifié ici que la langue souhaitée est le français avec l'argument `lang = "fr"`. Le résultat de l'importation est assigné à la variable `biometry`(mais elle pourrait tout aussi bien porter un autre nom). Pour finir, le tout est entouré, de manière optionnelle, de parenthèses afin de forcer l'impression du résultat.
+Le jeu de données `biometry` est disponible dans le package R {BioDataScience}. Dans ce cas, il ne faut pas spécifier de chemin d'accès au fichier : R sait où le trouver tout seul. Il est également spécifié ici que la langue souhaitée est le français avec l'argument `lang = "fr"`. Le résultat de l'importation est assigné à la variable `biometry`(mais elle pourrait tout aussi bien porter un autre nom). Pour finir, le tout est entouré, de manière optionnelle, de parenthèses afin de forcer l'impression du résultat.
 
 ```{block, type = 'note'}
 **Visualisez toujours votre tableau de données juste après l'importation.** Vérifiez que les différentes colonnes ont été importées au bon format. *En particulier*,
 
-- Les données numériques sont-elle bien comprises par R comme des nombres (`<dbl>` ou `<int>`) ?
+- Les données numériques sont-elle bien comprises par R comme des nombres (`<dbl>` ou `<int>`) ?
 
 - Les variables qualitatives ou semi-quantitatives sont importées comme chaines de caractères (`<chr>`) et doivent éventuellement être converties en variables de type **facteur** à l'aide de `as.factor()` ou **facteur ordonné** avec `as.ordered()`, voir plus loin.
 
-L'impression du tableau de données est une façon de voir cela, mais il y en a bien d'autres : essayez `View(biometry)`, `str(biometry)`, ou cliquez sur la petite icône bleue avec une flèche devant `biometry` dans l'onglet **Environment**.
+L'impression du tableau de données est une façon de voir cela, mais il y en a bien d'autres : essayez `View(biometry)`, `glimpse(biometry)`, `str(biometry)`, ou cliquez sur la petite icône bleue avec une flèche devant `biometry` dans l'onglet **Environment** de RStudio.
 ```
 
 Avant d'importer vos données dans R, vous devez vous poser les deux questions suivantes :
@@ -63,7 +63,7 @@ Vous venez d'importer des données depuis un package R. Vous pouvez également l
 
 -   Quel est le format de vos données ?
 
-Souvent ce format est renseigné par l'**extension** du fichier. Par exemple **.xlsx** pour un Microsoft Excel ou **.csv** pour du "comma-separated-value". Attention ! L'extension du fichier est cachée sous Windows, et parfois sous MacOS. Visualisez vos fichiers dans l'onglet **Files** dans RStudio pour voir leurs noms complets, avec les extensions. Pour l'instant, `read()` supporte 32 formats de fichiers différents, mais cette liste est amenée à s'agrandir à l'avenir. Pour découvrir les formats supportés, et les fonctions d'importation spécifiques appelées à chaque fois, utilisez :
+Souvent ce format est renseigné par l'**extension** du fichier. Par exemple **.xlsx** pour un Microsoft Excel ou **.csv** pour du "comma-separated-value". Attention ! L'extension du fichier est cachée sous Windows, et parfois sous MacOS. Visualisez vos fichiers dans l'onglet **Files** dans RStudio pour voir leurs noms complets, avec les extensions. Pour l'instant, `read()` supporte `r NROW(getOption("read_write"))` formats de fichiers différents, mais cette liste est amenée à s'agrandir à l'avenir. Pour découvrir les formats supportés, et les fonctions d'importation spécifiques appelées à chaque fois, utilisez :
 
 ```{r}
 getOption("read_write")
@@ -73,9 +73,9 @@ Par la suite, vous allez apprendre à importer vos données depuis différentes 
 
 ### Données sur le disque
 
-Lorsque l'extension du fichier reflète le format des données, il vous suffit juste d'indiquer le chemin d'accès au fichier à `read()`. La plupart du temps, cela suffira pour importer correctement les données.
+Lorsque l'extension du fichier reflète le format des données, il vous suffit juste d'indiquer le chemin d'accès au fichier dans `read()`, en utilisant préférentiellement un chemin relatif. La plupart du temps, cela suffira pour importer correctement les données.
 
-```{block, type = 'warning'}
+```{block, type='warning'}
 N'oubliez pas que le chemin d'accès à votre fichier peut s'écrire de manière absolue ou bien de manière relative. **Vous devez autant que possible employer des chemins relatifs** pour que votre projet soit **portable**. Si vous avez du mal à déterminer le chemin relatif par rapport à vos données, le snippet `filerelchoose` vous sera très utile :
 
 1. Assurez-vous que le chemin actif dans l'onglet **Console** est le même que le répertoire contenant le fichier édité. Pour cela, utilisez l'entrée de menu RStudio `Session -> Set Working Directory -> To Source File Location`.
@@ -102,7 +102,7 @@ Il existe différents logiciels qui permettent d'éditer des tableaux de donnée
 ```{block, type = 'info'}
 La science est de plus en plus ouverte, et les pratiques de **données ouvertes** (*Open Data*) de plus en plus fréquentes et même imposées par des programmes de recherche comme les [programmes européens](https://europa.eu/european-union/documents-publications/open-data_fr) ou le [FNRS](http://www.recherchescientifique.be/index.php?id=1628) en Belgique. Vous serez donc certainement amenés à accéder à des données depuis des dépôts spécialisés sur Internet.
 
-Concentrez-vous sur les outils spécifiques à la gestion de ce type de données. il s'agit, en effet, d'une compétence clé qu'un bon scientifique des données se doit de maîtriser parfaitement. En recherchant à chaque fois la meilleure façon d'accéder à des données sur Internet, vous développerez cette compétence progressivement par la pratique... et **vous pourrez faire valoir un atout encore rare mais apprécié lors d'un entretien d'embauche plus tard.** 
+Concentrez-vous sur les outils spécifiques à la gestion de ce type de données. il s'agit, en effet, d'une compétence clé qu'un bon scientifique des données se doit de maîtriser parfaitement. En recherchant à chaque fois la meilleure façon d'accéder à des données sur Internet, vous développerez cette compétence progressivement par la pratique... et **vous pourrez faire valoir un atout encore rare mais apprécié lors d'un entretien d'embauche plus tard.**
 ```
 
 Voici un exemple de feuille de données Google Sheets : <https://docs.google.com/spreadsheets/d/1iEuGrMk4IcCkq7gMNzy04DkSaPeWH35Psb0E56KEQMw>. Il est possible d'importer ce genre de données **directement** depuis R, mais il faut d'abord déterminer l'[URL à utiliser pour obtenir les données](https://www.labnol.org/internet/direct-links-for-google-drive/28356/) dans un format reconnu. Dans le cas de Google Sheets, il suffit d'indiquer à la fin de cette URL que l'on souhaite exporter les données au format CSV en rajoutant `/export?format=csv` à la fin de l'URL.
@@ -115,21 +115,29 @@ coral_id <- "1iEuGrMk4IcCkq7gMNzy04DkSaPeWH35Psb0E56KEQMw"
 (coral_url <- glue::glue(googlesheets_as_csv, id = coral_id))
 ```
 
-Vous n'aurez alors plus qu'à lire les données depuis cette URL. N'oubliez pas non plus de spécifier à `read()` que les données sont à lire au format CSV en utilisant `read$csv()` :
+Vous n'aurez alors plus qu'à lire les données depuis cette URL. N'oubliez pas non plus de spécifier à `read()` que les données sont à lire au format CSV en utilisant `read$csv()` :
 
 ```{r}
 (coral <- read$csv(coral_url))
 ```
 
-Lorsque vous travaillez sur des données issues d'une source externe, et donc susceptibles d'être modifiées ou même pire, de disparaître. Il est préférable d'enregistrer une **copie locale** de ces données dans votre projet (dans le sous-dossier `data` de préférence). Si vous travaillez exclusivement avec R, l'un des meilleurs formats est RDS, un format natif qui conservera toutes les caractéristiques de votre objet, y compris sa classe, et d'éventuels attributs[^05-importation-transformation-2]. Par défaut, les données seront stockées non compressées, mais vous pourrez aussi décider de compresser avec les algorithmes `"gz"` (plus rapide et répandu), `"bz2"` (intermédiaire), ou `"xz"` (le plus efficace en taux de compression, mais aussi le plus lent et gourmand en ressources CPU). Par exemple, pour enregistrer les données avec compression `"gz"`, dans le sous-dossier `data` de votre projet, vous écrirez (le dossier `data` doit être préexistant) :
+Lorsque vous travaillez sur des données issues d'une source externe, et donc susceptibles d'être modifiées ou même pire, de disparaître. Il est préférable d'enregistrer une **copie locale** de ces données dans votre projet (dans le sous-dossier `data` de préférence). Si vous voulez enregistrer une copie locale du fichier **non modifié** téléchargé depuis Internet, vous l'indiquez dans l'argument `cache_file =` de `read()` (pensez à utiliser autant que possible un chemin relatif). Ainsi, le code suivant ne téléchargera le fichier depuis Internet qu'une seule fois et en sauvera automatiquement une copie dans `data/coral.csv`. Ensuite, les exécutions suivantes du même code liront les données depuis le fichier sauvé en local.
 
-[^05-importation-transformation-2]: Si vous devez aussi accéder à vos données à partir d'autres langages comme Python, Java ou C++, utilisez un format commun reconnu par les différents logiciels. Le CSV fonctionne généralement bien, mais des formats binaires plus performants sont également disponibles. Parmi ces formats "inter-langages", gardez un œil sur [Apache Arrow](https://arrow.apache.org) très prometteur et avec une version pour R qui sera disponible prochainement.
+```{r, eval=FALSE}
+(coral <- read$csv(coral_url, cache_file = "data/coral.csv"))
+```
+
+Faites bien attention que le dossier dans lequel vous souhaitez stocker une copie de vos données doit être présent sur votre disque. Dans le cas contraire, un message d'erreur sera généré et vous ne pourrez pas importer les données.
+
+Vous pouvez aussi vous passer de cette fonctionnalité, mais importer vos données dans un script à part qui remanie aussi ces données à la suite. Vous pouvez alors terminer ce script en écrivant les données remaniées dans un dossier local. Si vous travaillez exclusivement avec R, l'un des meilleurs formats est RDS, un format natif qui conservera toutes les caractéristiques de votre objet, y compris sa classe, et d'éventuels attributs[^05-importation-transformation-2]. Par défaut, les données seront stockées non compressées, mais vous pourrez aussi décider de compresser avec les algorithmes `"gz"` (plus rapide et répandu), `"bz2"` (intermédiaire), ou `"xz"` (le plus efficace en taux de compression, mais aussi le plus lent et gourmand en ressources CPU). Par exemple, pour enregistrer les données avec compression `"gz"`, dans le sous-dossier `data` de votre projet, vous écrirez (le dossier `data` doit être préexistant) :
+
+[^05-importation-transformation-2]: Si vous devez aussi accéder à vos données à partir d'autres langages comme Python, Java ou C++, utilisez un format commun reconnu par les différents logiciels. Le CSV fonctionne généralement bien, mais des formats binaires plus performants sont également disponibles. Parmi ces formats "inter-langages", gardez un œil sur [Apache Arrow](https://arrow.apache.org) qui offre des possibiltiés très intéressantes d'inter-compatibilité de performance.
 
 ```{r, eval=FALSE}
 write$rds(coral, file = "data/coral.rds", compress = "gz")
 ```
 
-Cette instruction est valable si elle est exécutée depuis un script R dans la fenêtre **Console** où le répertoire actif est le dossier racine du projet. Pour une instruction dans un document R Markdown présent dans un sous-dossier du projet, vous écrirez `file = "../data/coral.rds"`. Dans les deux cas, vous pouvez aussi utiliser `file = here:here("data", "coral.rds")` qui fonctionnera dans tous les cas de figure (conseillé, donc). Ensuite, vous pourrez simplement charger ces données plus loin depuis la version locale dans votre R Markdown comme ceci (cas d'un document R Markdown dans un sous-dossier du projet, par exemple `docs`) :
+Cette instruction est valable si elle est exécutée depuis un script R dans la fenêtre **Console** où le répertoire actif est le dossier racine du projet. Pour une instruction dans un document R Markdown présent dans un sous-dossier du projet, vous écrirez `file = "../data/coral.rds"`. Dans les deux cas, vous pouvez aussi utiliser `file = here:here("data", "coral.rds")` qui fonctionnera dans tous les cas de figure (conseillé, donc). Cette forme est également utilisable pour `cache_file =` dans `read()`. Ensuite, vous pourrez simplement charger ces données plus loin depuis la version locale dans votre R Markdown comme ceci (cas d'un document R Markdown dans un sous-dossier du projet, par exemple `docs`) :
 
 ```{r, eval=FALSE}
 coral <- read("../data/coral.rds")
@@ -139,9 +147,9 @@ coral <- read("../data/coral.rds")
 
 ##### Pièges et astuces {.unnumbered}
 
--   Comme il s'agit seulement d'une *copie* des données originelles, vous pouvez choisir de ne pas inclure le fichier `.rds` dans le système de gestion de version de Git. C'est très simple : il suffit d'ajouter une entrée `.rds` dans le fichier `.gitignore` à la racine de votre dépôt, et tous les fichiers avec cette extension seront ignorés. Notez toutefois que, si vous partagez votre projet sur GitHub, **les données locales n'y apparaîtront pas non plus.** D'une part, cela décharge le système de gestion de version, et d'autre part, les gros fichiers de données n'ont pas vraiment leur place sur GitHub. Cependant, soyez conscient que quelqu'un qui réalise un clone ou un fork de votre dépôt devra *d'abord* réimporter lui aussi localement les données avant de pouvoir travailler, ce qui implique de bien comprendre le mécanisme que vous avez mis en place. Documentez-le correctement, avec une note explicite dans le fichier `README.md`, par exemple.
+-   Comme il s'agit seulement d'une *copie* des données originelles, vous pouvez choisir de ne pas inclure le fichier `.rds` dans le système de gestion de version de Git. Il suffit d'ajouter une entrée `.rds` dans le fichier `.gitignore` à la racine de votre dépôt, et tous les fichiers avec cette extension seront ignorés. Notez toutefois que, si vous partagez votre projet sur GitHub, **les données locales n'y apparaîtront pas non plus.** D'une part, cela décharge le système de gestion de version, et d'autre part, les gros fichiers de données n'ont pas vraiment leur place sur GitHub. Cependant, soyez conscient que quelqu'un qui réalise un clone ou un fork de votre dépôt devra *d'abord* réimporter lui aussi localement les données avant de pouvoir travailler, ce qui implique de bien comprendre le mécanisme que vous avez mis en place. Documentez-le correctement, avec une note explicite dans le fichier `README.md`, par exemple.
 
--   Les données originales ne sont peut-être pas présentées de la façon qui vous convient. Cela peut nécessiter un travail important de **préparation du tableau de données.** Au fur et à mesure que le ou les chunks d'importation/préparation des données augmentent en taille, ils deviennent de plus en plus gênants dans un document consacré à l'**analyse** de ces données. Si c'est le cas, vous avez deux options possibles :
+-   Les données originales ne sont peut-être pas présentées de la façon qui vous convient. Cela peut nécessiter un travail important de **préparation du tableau de données.** Au fur et à mesure que le ou les chunks d'importation/préparation des données augmentent en taille, ils deviennent de plus en plus gênants dans un document consacré à l'**analyse** de ces données. Si c'est le cas, vous avez deux options possibles :
 
     1.  Séparer votre R Markdown en deux. Un premier document dédié à l'importation/préparation des données et un second qui se concentre sur l'analyse. Une bonne pratique consiste à numéroter les fichiers en tête pour qu'ils apparaissent par ordre logique lorsqu'ils sont listés par ordre alphabétique (`01_import.Rmd`, `02_analysis.Rmd`).
     2.  Effectuer le travail d'importation/préparation du tableau de données dans un script R. Dans le R Markdown, vous pouvez ajouter l'instruction (commentée ou placée dans un chunk `eval=FALSE`) pour "sourcer" ce script R afin de réimporter/retraiter vos données :
@@ -153,7 +161,7 @@ coral <- read("../data/coral.rds")
     Si le travail de préparation des données est lourd (et donc, prends beaucoup de temps) il peut être avantageux d'enregistrer localement la version **nettoyée** de vos données plutôt que la version originale. Mais alors, indiquez-le explicitement.
 
 ```{block, type = 'warning'}
-Faites toujours la distinction entre **données brutes** et **données nettoyées**. Ne les mélangez jamais et documentez toujours de manière reproductible le processus qui mène des unes aux autres ! C'est tout aussi important que de garder un lien vers la source originale des données dans votre code et d'utiliser toujours des chemins relatifs vers vos fichiers pour une analyse portable et reproductible.
+Faites toujours la distinction entre **données brutes** et **données nettoyées**. Ne les mélangez jamais et documentez toujours de manière reproductible le processus qui mène des unes aux autres ! C'est tout aussi important que de garder un lien vers la source originale des données dans votre code et d'utiliser toujours des chemins relatifs vers vos fichiers pour une analyse portable et reproductible.
 ```
 
 ##### À vous de jouer ! {.unnumbered}
@@ -162,7 +170,7 @@ Faites toujours la distinction entre **données brutes** et **données nettoyée
 
 ### Données depuis un package
 
-Les packages R comme {data.io}, {chart} ou encore {flow}, fournissent une série de fonctions supplémentaires. Certains d'entre eux proposent également des jeux de données. Ici aussi, `read()` permet de les récupérer, même si c'est la fonction `data()` qui est souvent utilisée à cet effet dans R. Comparons `read()` et `data()` dans le cas des données issues de packages R. Avec `data()`, vous n'assignez pas le jeu de données à un nom. Ce nom vous est **imposé** comme le nom initial du jeu de données :
+Les packages R comme {data.io}, {chart} ou encore {svFlow}, fournissent une série de fonctions supplémentaires. Certains d'entre eux proposent également des jeux de données. Ici aussi, `read()` permet de les récupérer, même si c'est la fonction `data()` qui est souvent utilisée à cet effet dans R. Comparons `read()` et `data()` dans le cas des données issues de packages R. Avec `data()`, vous n'assignez pas le jeu de données à un nom. Ce nom vous est **imposé** comme le nom initial du jeu de données :
 
 ```{r}
 data("urchin_bio", package = "data.io")
@@ -198,7 +206,7 @@ chart(urchin_bio, height ~ weight %col=% origin) +
 Comparez ceci avec le même graphique, mais obtenu à partir de différentes versions du jeu de données `urchin_bio` importé à l'aide de `read()` avec des valeurs différentes pour l'argument `lang =`.
 
 ```{r}
-urchin    <- read("urchin_bio", package = "data.io")
+urchin    <- read("urchin_bio", package = "data.io") # langage par défaut défini dans SciViews::R()
 urchin_en <- read("urchin_bio", package = "data.io", lang = "en")
 urchin_fr <- read("urchin_bio", package = "data.io", lang = "fr")
 urchin_FR <- read("urchin_bio", package = "data.io", lang = "FR")
@@ -227,13 +235,13 @@ Il vous est conseillé d'employer l'argument `lang = "fr"` lors de vos différen
 
 ```{r}
 urchin_en %>.%
-  fsubset(., origin == "Farm") %>.%
+  sfilter(., origin == "Farm") %>.%
   head(.)
 ```
 
 ```{r}
 urchin_fr %>.%
-  fsubset(., origin == "Farm") %>.%
+  sfilter(., origin == "Farm") %>.%
   head(.)
 ```
 
@@ -241,11 +249,11 @@ Pas d'adaptation nécessaire du code pour passer de `urchin_en` à `urchin_fr`.
 
 ```{r}
 urchin_FR %>.%
-  fsubset(., origin == "Pêcherie") %>.%
+  sfilter(., origin == "Pêcherie") %>.%
   head(.)
 ```
 
-Le code a dû être modifié dans l'instruction `filter()` lors du passage à `urchin_FR` (`Farm` -\> `Pêcherie`). Bien évidemment, pour un rapport *plus formel* en français, **tout** doit être traduit en français et l'option `lang = "FR"` accompagnée d'une vérification et une adaptation éventuelle du code est à préférer dans ce cas précis.
+Le code a dû être modifié dans l'instruction `sfilter()` lors du passage à `urchin_FR` (`Farm` -\> `Pêcherie`). Bien évidemment, pour un rapport *plus formel* en français, **tout** doit être traduit en français et l'option `lang = "FR"` accompagnée d'une vérification et une adaptation éventuelle du code est à préférer dans ce cas précis.
 
 ##### À vous de jouer ! {.unnumbered}
 
