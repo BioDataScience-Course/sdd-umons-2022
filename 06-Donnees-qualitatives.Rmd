@@ -148,7 +148,7 @@ rep(c("a", "b", "c"), 5)
 rep(c("a", "b", "c"), each = 5)
 ```
 
-Pour de plus gros tableaux, il vaut mieux utiliser un tableur tel qu’Excel ou LibreOffice Calc pour l'encodage. Les tableurs en ligne comme Google Sheets ou Excel Online conviennent très bien également et facilitent un travail collaboratif ainsi que la mise à disposition sur Internet, comme nous avons vu au module \@ref(import).
+Pour de plus gros tableaux, il vaut mieux utiliser un tableur tel qu'Excel ou LibreOffice Calc pour l'encodage. Les tableurs en ligne comme Google Sheets ou Excel Online conviennent très bien également et facilitent un travail collaboratif ainsi que la mise à disposition sur Internet, comme nous avons vu au module \@ref(import).
 
 ### Tableau de contingence
 
@@ -624,7 +624,7 @@ rmarkdown::paged_table(crabs)
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A06La_recombinaison", title = "Recombinaison de tableaux", toc = "Remodelage de tableaux")`
+`r learnr("A06La_recombination", title = "Recombinaison de tableaux", toc = "Remodelage de tableaux")`
 
 ## Traitements multi-tableaux
 
@@ -752,7 +752,7 @@ Il existe, en fait, plusieurs versions pour la fusion de tableaux, représentée
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A06Lb_multi_tableau", title = "Traitements multi-tableaux", toc = "Traitements multi-tableaux")`
+`r learnr("A06Lb_multi_table", title = "Traitements multi-tableaux", toc = "Traitements multi-tableaux")`
 
 **Note : le projet GitHub Classroom ci-dessous est à réaliser par groupes de quatre étudiants. Il requiert d'avoir assimilé l'ensemble de la matière des six premiers modules du cours.**
 

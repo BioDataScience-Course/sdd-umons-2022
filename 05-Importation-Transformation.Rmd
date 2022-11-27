@@ -166,7 +166,7 @@ Faites toujours la distinction entre **données brutes** et **données nettoyée
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(39, height = 270, toc = "Utilité de .gitignore")`
+`r h5p(39, height = 270, toc = "Rôle de .gitignore")`
 
 ### Données depuis un package
 
@@ -257,7 +257,7 @@ Le code a dû être modifié dans l'instruction `sfilter()` lors du passage à `
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(40, height = 270, toc = "Importation de données provenant d'un package")`
+`r h5p(40, height = 270, toc = "Importation de données depuis un package")`
 
 ## Types de variables
 
@@ -495,7 +495,7 @@ Par exemple, si vous voulez utiliser `sselect` pour extraire du tableau `urchin`
 
 ```{r}
 urchin2 <- sselect(urchin, origin, height, skeleton)
-urchin2[1:6, ] # Rcupèrer les 6 premières lignes de urchin2 et l'imprime = head()
+urchin2[1:6, ] # Récupérer les 6 premières lignes de urchin2 et l'imprime = head()
 ```
 
 Vous voyez que vous obtenez ici un `data.table` qui ne contient plus que deux colonnes. Vous pouvez aussi le voir avec `class()` (cet objet est un **data.table** qui lui-même est également un **data.frame**, on dit qu'il **hérite** de la classe **data.frame**) :
@@ -688,7 +688,7 @@ La fonction tidy `transmute()` ou `stransmute()` effectue la même opération, m
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(43, height = 270, toc = "Calculer de nouvelles variable")`
+`r h5p(43, height = 270, toc = "Calculer une nouvelle variable")`
 
 ### `group_by()`/`sgroup_by()`
 
@@ -1000,22 +1000,20 @@ En `SciViews::R` nous utilisons `%>.%` pour relier les différentes étapes d'un
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A05La_traitement", title = "Traitement des données I", toc = "Traitement des données dans R")`
+`r learnr("A05La_wrangling", title = "Traitement des données", toc = "Traitement des données")`
 
 ```{r assign_A05Ia_transformation, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A05Ia_transformation", part = NULL,
     url = "https://github.com/BioDataScience-Course/A05Ia_transformation",
     course.ids = c(
-      'S-BIOG-006' = !"A05Ia_{YY}M_transformation", 
-      'S-BIOG-921' = !"A05Ia_{YY}C_transformation"),
+      'S-BIOG-006' = !"A05Ia_{YY}M_transformation"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/0dUDjPoN"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[11]+1} 13:00:00"),
+      'S-BIOG-006' = !"{W[12]+5} 08:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+5} 23:59:59"),
+      'S-BIOG-006' = !"{W[12]+5} 13:00:00"),
     term = "Q1", level = 3,
     toc = "Importation et transformation de données")
 ```
