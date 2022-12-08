@@ -518,7 +518,7 @@ Ces fonctions ont toutes un comportement commun et sont conçues pour travailler
 -   le **tibble** est un data.frame particulier implémenté dans le tidyverse, et
 -   le **data.table** est implémenté dans le package {data.table} et permet de réaliser des remaniement de tableaux plus rapidement que les deux précédents.
 
-Dans `SciViews::R`, l'objet **data.table** est utilisé par défaut. Les fonctions speedy sont écrites pour utiliser cet objet de manière native comme nous venons de le découvrir plus haut. Il existe une surcouche des fonctions tidy dans le package dtplyr} qui fonctionne aussi sur des objets de classe `data.table`. Cependant, à des fins d'optimisation des calculs, les fonctions tidy appliquées à des **data.table**s via {dtplyr} ne renvoient pas directement le résultat. En fait, elles créent un objet particulier qui contient la ou les suites d'opérations à effectuer. Par exemple, la sélection des colonnes `origin` et `weight` du tableau `urchin` à l'aide de `select()` donne ceci :
+Dans `SciViews::R`, l'objet **data.table** est utilisé par défaut. Les fonctions speedy sont écrites pour utiliser cet objet de manière native comme nous venons de le découvrir plus haut. Il existe une surcouche des fonctions tidy dans le package {dtplyr} qui fonctionne aussi sur des objets de classe `data.table`. Cependant, à des fins d'optimisation des calculs, les fonctions tidy appliquées à des **data.table**s via {dtplyr} ne renvoient pas directement le résultat. En fait, elles créent un objet particulier qui contient la ou les suites d'opérations à effectuer. Par exemple, la sélection des colonnes `origin` et `weight` du tableau `urchin` à l'aide de `select()` donne ceci :
 
 ```{r}
 urchin2 <- select(urchin, origin, height, skeleton)
@@ -547,7 +547,7 @@ urchin2 <- collect_dtx(select(urchin, origin, height, skeleton))
 class(urchin2)
 ```
 
-Notez que vous pouvez utilise l'assignation alternative à peu pr!ès n'importe quand, et même aussi avec les fonctions speedy.
+Notez que vous pouvez utiliser l'assignation alternative à peu près n'importe quand, et même aussi avec les fonctions speedy.
 
 Les fonctions `select()` et `sselect()` permettent aussi de sélectionner des colonnes par leur position dans le tableau :
 
@@ -889,7 +889,7 @@ Examinez les colonnes **median** qui est le temps median et **mem_alloc** qui es
 
 **Par rapport aux petits jeux de données que nous utilisons dans le cadre de ce cours, la différence n'est pas très visible. Mais si vous travaillez plus tard avec des bien plus gros jeux de données, pensez à utiliser les fonctions speedy, ou mieux les fonctions fstat directement si vous le pouvez.**
 
-À noter que, à la fois dans les constructions tidy et speedy, vous pouvez utiliser aussi les fonctions fstat. Ainsi, vous pouvez substituer `fmean()` à `mean()` dans `ssummarise()` (avec un gain de temps appréciable pour les calculs avec `sgroup_by()`). Par contre, **ne mélanger jamais les fonctions de R de base avec les fonctions fstat dans la même instruction `mutate()` ou `(s)summarise()`.** Sinon, le calcul qui est réalisé risque de ne pas être celui que vous espériez.
+À noter que, à la fois dans les constructions tidy et speedy, vous pouvez utiliser aussi les fonctions fstat. Ainsi, vous pouvez substituer `fmean()` à `mean()` dans `ssummarise()` (avec un gain de temps appréciable pour les calculs avec `sgroup_by()`). Par contre, **ne mélangez jamais les fonctions de R de base avec les fonctions fstat dans la même instruction `mutate()` ou `(s)summarise()`.** Sinon, le calcul qui est réalisé risque de ne pas être celui que vous espériez.
 
 ```{r}
 ssummarise(sgroup_by(iris, species),
