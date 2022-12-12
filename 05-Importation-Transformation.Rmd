@@ -1033,6 +1033,24 @@ Consignez vos résultats dans un document R Markdown avec une explication de vos
 ---->
 ````
 
+**Vous allez maintenant plannifer la récolte et collecter des données relatives à l'étude de l'obésité afin de préparer le travail du module 6.**
+
+```{r assign_A05Ga_biometry_I, echo=FALSE, results='asis'}
+if (exists("assignment2"))
+  assignment2("A05Ga_biometry", part = "I",
+    url = "https://github.com/BioDataScience-Course/A05Ga_biometry",
+    course.ids = c(
+      'S-BIOG-006' = !"A05Ga_{YY}M_biometry"),
+    course.urls = c(
+      'S-BIOG-006' = "https://classroom.github.com/a/W6qHZvA3"),
+    course.starts = c(
+      'S-BIOG-006' = !"{W[12]+5} 10:00:00"),
+    course.ends = c(
+      'S-BIOG-006' = !"{W[14]+5} 23:59:59"),
+    term = "Q1", level = 4, n = 4,
+    toc = "Collecte de données relative à l'obésité")
+```
+
 ##### Pour en savoir plus {.unnumbered}
 
 -   [Présentation en détail du "dot-pipe"](https://github.com/WinVector/wrapr/blob/master/extras/wrapr_pipe.pdf) assez proche fonctionnellement de `%>.%` du package {svFlow}.

@@ -453,15 +453,15 @@ Voici un petit tableau qui correspond à ce que vous ne pourrez **pas faire** (n
 ))
 ```
 
-Vous devez fournir un code permettant de garder l'anonymat des sondés à l'ensemble des personnes étudiées vis-à-vis des analystes qui vont utiliser ces données. Cependant, le code doit permettre au chercheur ayant pris ces mesures de les retrouver dans son cahier de laboratoire, si besoin. Une façon de procéder consiste à attribuer un numéro au hasard par tirage dans une urne à chacune des personnes chargées des mesures. Ensuite, chaque expérimentateur attribue lui-même un second numéro aux différentes personnes qu'il mesure. Prenons par exemple le scientifique n°24 (seul lui sait qu'il porte ce numéro). Il attribue un code de 1 à *n* sous forme d'une lettre de l'alphabet à chaque personne étudiée. En combinant le code secret de l'expérimentateur et le code individu, cela donne un identifiant unique de la forme `24A`, `24B`, etc. Il pourra alors encoder sa partie comme suit :
+Vous devez fournir un code permettant de garder l'anonymat des sondés à l'ensemble des personnes étudiées vis-à-vis des analystes qui vont utiliser ces données. Cependant, le code doit permettre au chercheur ayant pris ces mesures de les retrouver dans son cahier de laboratoire, si besoin. Une façon de procéder consiste à attribuer un numéro au hasard par tirage dans une urne à chacune des personnes chargées des mesures. Ensuite, chaque expérimentateur attribue lui-même un second numéro aux différentes personnes qu'il mesure. Prenons par exemple le scientifique n°24 (seul lui sait qu'il porte ce numéro). Il attribue un code de 1 à *n* sous forme d'une lettre de l'alphabet à chaque personne étudiée. En combinant le code secret de l'expérimentateur et le code individu, cela donne un identifiant unique de la forme `24_A`, `24_B`, etc. Il pourra alors encoder sa partie comme suit :
 
 ```{r}
 (biometry_marvel1 <- dtx_rows(
     ~id, ~gender, ~weight, ~height,
-  "24A",     "M",      95,    1.91,
-  "24B",     "M",      80,    1.79,
-  "24C",     "M",      82,    1.93,
-  "24D",     "F",      53,    1.70
+ "24_A",     "M",      95,    1.91,
+ "24_B",     "M",      80,    1.79,
+ "24_C",     "M",      82,    1.93,
+ "24_D",     "F",      53,    1.70
 ))
 ```
 
@@ -474,7 +474,25 @@ Il garde néanmoins les correspondances dans son carnet de laboratoire, au cas o
 ))
 ```
 
-À partir des données du tableau général consolidé, personne à part lui ne peut revenir sur ces données d'origine et mettre un nom sur les individus mesurés. Et lui-même n'a pas la possibilité de déterminer *qui* se cache derrière les autres identifiants tels `3A`, `12C`, `21B`, etc.
+À partir des données du tableau général consolidé, personne à part lui ne peut revenir sur ces données d'origine et mettre un nom sur les individus mesurés. Et lui-même n'a pas la possibilité de déterminer *qui* se cache derrière les autres identifiants tels `03_A`, `12_C`, `21_B`, etc.
+
+**Vous allez maintenant encoder et analyser vos données relatives à l'étude de l'obésité.**
+
+```{r assign_A05Ga_biometry_II, echo=FALSE, results='asis'}
+if (exists("assignment2"))
+  assignment2("A05Ga_biometry", part = "II",
+    url = "https://github.com/BioDataScience-Course/A05Ga_biometry",
+    course.ids = c(
+      'S-BIOG-006' = !"A05Ga_{YY}M_biometry"),
+    course.urls = c(
+      'S-BIOG-006' = "https://classroom.github.com/a/W6qHZvA3"),
+    course.starts = c(
+      'S-BIOG-006' = !"{W[12]+5} 10:00:00"),
+    course.ends = c(
+      'S-BIOG-006' = !"{W[14]+5} 23:59:59"),
+    term = "Q1", level = 4, n = 4,
+    toc = "Collecte de données relative à l'obésité")
+```
 
 ## Recombinaison de tableaux
 
@@ -757,21 +775,19 @@ Il existe, en fait, plusieurs versions pour la fusion de tableaux, représentée
 
 `r learnr("A06Lb_multi_table", title = "Traitements multi-tableaux", toc = "Traitements multi-tableaux")`
 
-**Note : le projet GitHub Classroom ci-dessous est à réaliser par groupes de quatre étudiants. Il requiert d'avoir assimilé l'ensemble de la matière des six premiers modules du cours.**
-
-```{r assign_A06Ga_belgium_demo, echo=FALSE, results='asis'}
-if (exists("assignment2"))
-  assignment2("A06Ga_belgium_demo", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A06Ga_belgium_demo",
+```{r assign_A06Ia_belgium_demo, echo=FALSE, results='asis'}
+if (exists("assignment"))
+  assignment("A06Ia_belgium_demo", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A06Ia_belgium_demo",
     course.ids = c(
-      'S-BIOG-006' = !"A06Ga_{YY}M_belgium_demo"),
+      'S-BIOG-006' = !"A06Ia_{YY}M_belgium_demo"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/QjzyWaBr"),
     course.starts = c(
       'S-BIOG-006' = !"{W[14]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[15]+1} 23:59:59"),
-    term = "Q1", level = 4, n = 4,
+      'S-BIOG-006' = !"{W[14]+1} 16:00:00"),
+    term = "Q1", level = 3,
     toc = "Démographie en Belgique")
 ```
 
