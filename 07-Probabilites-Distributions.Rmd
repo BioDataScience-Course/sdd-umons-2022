@@ -3,14 +3,15 @@
 # Probabilités & distributions {#proba}
 
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE, results='hide'}
-SciViews::R
+SciViews::R("infer")
+library(BioDataScience1)
 ```
 
 ##### Objectifs {.unnumbered}
 
 -   Comprendre et être capable de calculer des probabilités
 
--   Appréhender les principales lois de distributions et leurs utilisations pratiques
+-   Appréhender les principales lois de distributions statistiques et leurs utilisations pratiques
 
 ##### Prérequis {.unnumbered}
 
@@ -77,7 +78,7 @@ Nous pouvons maintenant déterminer la probabilité que le test soit positif dan
 Bon, il nous reste à combiner les probabilités que le test soit positif, que la personne soit saine ou malade. Mais comment faire ? Ici, nous n'avons pas affaire à des évènements successifs, mais à des évènements mutuellement exclusifs : des **évènements disjoints**. Pour déterminer si l'un parmi deux évènements disjoints se produit, il suffit d'**additionner leurs probabilités respectives**. Nous pouvons maintenant déterminer la probabilité que le test soit positif, quelle que soit la personne testée :
 
 ```{r}
-# La probabilité que le test soit positif 
+# Probabilité que le test soit positif 
 (p_positive <- p_sick_positive + p_healthy_positive)
 ```
 
@@ -100,9 +101,9 @@ Dans le cas de deux faits successifs qui ne peuvent chacun que résulter en deux
 
 - les **faux positifs** (test positif alors que la personne est saine), ici 0.92 * 0.10
 
-- **les vrais négatifs** (test négatif alors que la personne est saine), ici 0.92 * 0.90
+- les **vrais négatifs** (test négatif alors que la personne est saine), ici 0.92 * 0.90
 
-- **les faux négatifs** (test négatif alors que la personne est malade), ici 0.08 * 0.05
+- les **faux négatifs** (test négatif alors que la personne est malade), ici 0.08 * 0.05
 
 ```
 
@@ -132,9 +133,9 @@ Ouf ! Dans ce cas-ci le test positif est correct dans 97,4% des cas. Mais qu'en
 (0.008 * 0.95) / (0.992 * 0.10 + 0.008 * 0.95)
 ```
 
-Dans ce cas, un test positif n'aura effectivement détecté un malade que dans ... 7,1% des cas ! Les 92,9% d’autres cas positifs seront en fait des personnes saines.
+Dans ce cas, un test positif n'aura effectivement détecté un malade que dans ... 7,1% des cas ! Les 92,9% autres cas positifs seront en fait des personnes saines.
 
-Comme nous pouvons le constater ici, le calcul des probabilités est relativement simple. Mais en même temps, les résultats obtenus peuvent être complètement **contre-intuitifs**. D'où l'intérêt de faire ce genre de calcul justement.
+Comme nous pouvons le constater ici, le calcul des probabilités est relativement simple. Mais en même temps, les résultats obtenus peuvent être complètement **contre-intuitifs**. D'où l'intérêt de faire ce genre de calcul !
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -150,7 +151,7 @@ Du premier nœud nous avons deux branches menant aux deux évènements "malade" 
 
 L'étape suivante consiste à aller indiquer le long des branches les probabilités associées à chaque évènement : 0.08 pour "malade", 0.95 pour un dépistage "positif" si la personne est malade (notre fameuse probabilité conditionnelle $\mathrm{P}(positif|malade)$), etc. À ce stade, une petite vérification peut être faite. La somme des probabilités aux feuilles doit toujours valoir un, et il en est de même de la somme de toutes les branches issues d'un même nœud.
 
-Le calcul se fait ensuite comme suit. Nous repérons tous les cas qui nous intéressent. Ici, il s'agit de toutes les branches qui mènent à un test "positif."Le calcul des probabilités se fait en **multipliant les probabilités lorsque nous passons d'un nœud à l'autre le long d'une branche et en additionnant les probabilités ainsi calculées au niveau des feuilles terminales de l'arbre.** Donc, le cas patient "malade" -\> test "positif" correspond à 0.08 \* 0.95 = 0.076. Le cas patient "sain" -\> test "positif" correspond à 0.92 \* 0.10 = 0.092. Enfin, nous sommons les probabilités ainsi calculées pour les feuilles de l'arbre qui nous intéressent, soit 0.076 + 0.092 = 0.168. *Et voilà ! Nous avons résolu le problème. La probabilité d'avoir un résultat positif avec le test de dépistage dans une population dont 8% sont atteints de la maladie est de 16.8%.*
+Le calcul se fait ensuite comme suit. Nous repérons tous les cas qui nous intéressent. Ici, il s'agit de toutes les branches qui mènent à un test "positif". Le calcul des probabilités se fait en **multipliant les probabilités lorsque nous passons d'un nœud à l'autre le long d'une branche et en additionnant les probabilités ainsi calculées au niveau des feuilles terminales de l'arbre.** Donc, le cas patient "malade" -\> test "positif" correspond à 0.08 \* 0.95 = 0.076. Le cas patient "sain" -\> test "positif" correspond à 0.92 \* 0.10 = 0.092. Enfin, nous sommons les probabilités ainsi calculées pour les feuilles de l'arbre qui nous intéressent, soit 0.076 + 0.092 = 0.168. *Et voilà ! Nous avons résolu le problème. La probabilité d'avoir un résultat positif avec le test de dépistage dans une population dont 8% sont atteints de la maladie est de 16.8%.*
 
 ### Théorème de Bayes
 
@@ -175,7 +176,7 @@ $$\mathrm{P}(malade|positif) * \mathrm{P}(positif) = \mathrm{P}(positif|malade) 
 $$\mathrm{P}(malade|positif) = \frac{\mathrm{P}(positif|malade) * \mathrm{P}(malade)}{\mathrm{P}(positif)}$$
 
 ```{block, type='note'}
-De manière générale, le **théorème de Bayes** s'écrit\ :
+De manière générale, le **théorème de Bayes** s'écrit :
 
 $$\mathrm{P}(A|B) = \frac{\mathrm{P}(B|A) * \mathrm{P}(A)}{\mathrm{P}(B)}$$
 
@@ -184,17 +185,17 @@ $$\mathrm{P}(A|B) = \frac{\mathrm{P}(B|A) * \mathrm{P}(A)}{\mathrm{P}(B)}$$
 Cette équation nous donne une façon simple de déterminer $\mathrm{P}(malade|positif)$ à partir de $\mathrm{P}(positif|malade)$, $\mathrm{P}(malade)$, et $\mathrm{P}(positif)$, c'est-à-dire à partir des probabilités auxquelles nous avons facilement accès expérimentalement en pratique. Calculez comme exercice la probabilité qu'un patient soit malade s'il est positif au test *via* le théorème de Bayes, et comparez le résultat de votre calcul à ce que nous avions obtenu plus haut (45.2%).
 
 ```{block, type='note'}
-**A retenir**
+**À retenir**
 
-- Probabilité d'un évènement\ :
+- Probabilité d'un évènement :
 
 $$\mathrm{P}(E) = \frac{\mathrm{nbr\ occurences\ } E}{\mathrm{nbr\ total\ essais}}$$
 
-- Probabilité de deux évènements successifs (cas général)\ :
+- Probabilité de deux évènements successifs (cas général) :
 
 $$\mathrm{P(A\, \mathrm{et}\, B)} = \mathrm{P}(B|A) * \mathrm{P(A)}$$
 
-- Probabilité qu'un parmi deux évènements se produise (cas général)\ :
+- Probabilité qu'un parmi deux évènements se produise (cas général) :
 
 $$\mathrm{P(A\, \mathrm{ou}\, B)} = \mathrm{P}(A) + \mathrm{P(B)} - \mathrm{P}(A\, \mathrm{et}\, B)$$
 
@@ -215,12 +216,12 @@ $$\mathrm{P(A\, \mathrm{ou}\, B)} = \mathrm{P}(A) + \mathrm{P(B)} - \mathrm{P}(A
 Comme un tableau de contingence indique le nombre de fois que des évènements ont pu être observés, il peut servir de base à des calculs de probabilités. Partons du dénombrement de fumeur en fonction du revenu dans une population.
 
 ```{r}
-tabac <- dtx(
+tabac <- dtf(
   revenu_faible = c(634,  1846, 2480),
   revenu_moyen  = c(332,  1622, 1954),
   revenu_eleve  = c(247,  1868, 2115),
   total         = c(1213, 5336, 6549))
-rownames(tabac) <- c("fume", "ne fume pas",  "total")
+rownames(tabac) <- c("**fume**", "**ne fume pas**",  "**total**")
 knitr::kable(tabac)
 ```
 
@@ -230,13 +231,13 @@ knitr::kable(tabac)
 1213 / 6549
 ```
 
--   Quelle est la probabilité d'être fumeur si le revenu élevé $\mathrm{P}(fumeur|revenu\_eleve)$ ? Le nombre de fumeurs à revenus élevés se monte à 247. **Attention, ici l'échantillon de référence n'est plus la population totale, mais seulement ceux qui ont des revenus élevés**, donc 2115 personnes.
+-   Quelle est la probabilité d'être fumeur si le revenu est élevé $\mathrm{P}(fumeur|revenu\_eleve)$ ? Le nombre de fumeurs à revenus élevés se monte à 247. **Attention, ici l'échantillon de référence n'est plus la population totale, mais seulement ceux qui ont des revenus élevés**, donc 2115 personnes. La probabilité conditionnelle restreint le total à l'évènement qui impose la condition.
 
 ```{r}
 247 / 2115
 ```
 
--   Quelle est la probabilité d'avoir un revenu faible ou d'avoir un élevé ? Cette question peut s'écrire : $\mathrm{P}(revenu\-faible\, ou\, revenu\_eleve)$.
+-   Quelle est la probabilité d'avoir un revenu faible ou d'avoir un revenu élevé ? Cette question peut s'écrire : $\mathrm{P}(revenu\-faible\, ou\, revenu\_eleve)$.
 
 ```{r}
 2480 / 6549 + 2115 / 6549
@@ -256,7 +257,7 @@ $$\mathrm{P}(E1\, ou\, E2) = \mathrm{P}(E1) + \mathrm{P}(E2) - \mathrm{P}(E1\, e
 
 Nous devons soustraire le nombre de fois où les deux évènements se sont produits simultanément, car ils ont été comptabilisés deux fois dans l'addition : une fois pour $\mathrm{P}(E1)$ et une seconde fois pour $\mathrm{P}(E2)$.
 
-#### Populations de taille infinie
+#### Population de taille infinie
 
 Dans une très grande population, voici les proportions de différents groupes sanguins :
 
@@ -274,7 +275,7 @@ Dans une très grande population, voici les proportions de différents groupes s
 0.10 * 0.10 * 0.10
 ```
 
-#### Populations de taille finie
+#### Population de taille finie
 
 Dans une population de 100 personnes dont les proportions des différents groupes sanguins sont identiques au cas précédent :
 
@@ -298,15 +299,15 @@ Il s'agit d'évènements successifs **non indépendants**. En effet, le retrait 
 
 ## Lois de distributions
 
-Étant donné que les sciences des données reposent sur un nombre (si possible important) de répétitions d'une mesure -des réplicats-, il est possible de déterminer à quelle fréquence un évènement *E* se produit de manière expérimentale. La **probabilité observée** est quantifiable sur base d'un échantillon comme nous venons de le voir dans la section précédente. La **probabilité théorique** est connue si le mécanisme sous-jacent est parfaitement connu. Donc, en situation réelle, seule la probabilité observée est accessible, et ce n'est qu'une approximation de la "vraie" valeur, ou **valeur théorique**. Cependant, dans des situations particulières, les statisticiens ont calculé les probabilités théoriques. Ce sont des **lois de distribution**. Elles associent une probabilité théorique à chaque évènement possible.
+Étant donné que les sciences des données reposent sur un nombre (si possible important) de répétitions d'une mesure -des réplicats-, il est possible de déterminer à quelle fréquence un évènement *E* se produit de manière expérimentale. La **probabilité observée** est quantifiable sur base d'un échantillon comme nous venons de le voir dans la section précédente. La **probabilité théorique** est connue si le mécanisme sous-jacent est parfaitement connu. Donc, en situation réelle, seule la probabilité observée est accessible, et ce n'est qu'une approximation de la "vraie" valeur, ou **valeur théorique**. Cependant, dans des situations particulières, les statisticiens ont calculé les probabilités théoriques. Ce sont des **lois de distributions**. Elles associent une probabilité théorique à chaque évènement possible.
 
 ```{block, type='info'}
-La comparaison des probabilités théoriques et observées constitue l’un des piliers des statistiques. Le raisonnement est le suivant\ : si les probabilités observées sont suffisamment proches des probabilités théoriques, alors, nous pouvons considérer que les évènements sont générés selon un mécanisme identique ou proche de celui qui est à la base de la loi de distribution théorique correspondante.
+La comparaison des probabilités théoriques et observées constitue l’un des piliers des statistiques. Le raisonnement est le suivant : si les probabilités observées sont suffisamment proches des probabilités théoriques, alors, nous pouvons considérer que les évènements sont générés selon un mécanisme identique ou proche de celui qui est à la base de la loi de distribution théorique correspondante.
 ```
 
-<center>![Même dans la vie de tous les jours, les calculs de probabilités peuvent être utiles, enfin... d'après xkcd.](https://imgs.xkcd.com/comics/boyfriend.png)</center>
+<center>![Même dans la vie de tous les jours, les calculs de probabilités peuvent être utiles, enfin... d\'après xkcd.](https://imgs.xkcd.com/comics/boyfriend.png)</center>
 
-Avant d'explorer ces lois de distributions statistiques, nous devons d'abord introduire la distinction entre **probabilité discrète** et **probabilité continue**. Une probabilité discrète est associée à une variable qualitative ou à la rigueur, à une variable continue discrète qui peut prendre un nombre fini -et généralement relativement petit- de valeurs. À chaque valeur est associé un évènement. Chaque évènement a une certaine probabilité de se produire dans un contexte donné. *Jusqu'à présent, nous n'avons traité que ce cas-là.* Par contre, une variable quantitative continue peut prendre un nombre infini de valeurs matérialisées généralement par l'ensemble des nombres réels. Dans ce cas, l'association d'un évènement à une valeur de la variable, et d'une probabilité à chaque évènement reste vraie en théorie. Mais en pratique, ces probabilités dites continues ne sont pas calculables par les équations étudiées jusqu'ici. Par contre, les **lois de distributions continues** permettent des calculs, moyennant une petite astuce que nous dévoilerons plus loin dans ce chapitre.
+Avant d'explorer ces lois de distributions statistiques, nous devons d'abord introduire la distinction entre **probabilité discrète** et **probabilité continue**. Une probabilité discrète est associée à une variable qualitative ou à la rigueur, à une variable continue discrète qui peut prendre un nombre fini -et généralement relativement petit- de valeurs. À chaque valeur est associé un évènement. Chaque évènement a une certaine probabilité de se produire dans un contexte donné. *Jusqu'à présent, nous n'avons traité que ce cas-là.* Par contre, une variable quantitative continue peut prendre un nombre infini de valeurs représentées généralement par l'ensemble des nombres réels. Dans ce cas, l'association d'un évènement à une valeur de la variable, et d'une probabilité à chaque évènement reste vraie en théorie. Mais en pratique, ces probabilités dites continues ne sont pas calculables par les équations étudiées jusqu'ici. Par contre, les **lois de distributions continues** permettent des calculs, moyennant une petite astuce que nous dévoilerons plus loin dans ce chapitre.
 
 ## Distribution uniforme
 
@@ -322,13 +323,14 @@ La distribution uniforme est d'application pour les jeux de hasard (dés, boules
 
 ```{r unif1, echo=FALSE, fig.cap="Probabilité du nombre de petits dans une portée qui suivrait un distribution strictement uniforme entre 1 et 4."}
 dtx(Portée = 1:4, Probabilité = 1/4) %>.%
-  chart(., Probabilité ~ Portée) +
-  geom_bar(stat = "identity", width = 0.03)
+  chart(., aes()) +
+    geom_segment(aes(x = Portée, xend = Portée, y = 0, yend = Probabilité)) +
+  ylab("Probabilité")
 ```
 
 ### Distribution continue
 
-Nous avons déjà évoqué le fait que les probabilités issues de distributions continues ne se traitent pas comme celles de probabilités discrètes. Il est maintenant temps d'approfondir la question. Considérons une distribution uniforme considérée comme discrète, mais admettant un très grand nombre d'évènements équiprobables (avec ce nombre tendant vers l'infini). Donc, la probabilité de chaque évènement est un divisé par le nombre d'évènements possibles $n_E = \infty$ :
+Nous avons déjà évoqué le fait que les probabilités issues de distributions continues ne se traitent pas comme celles de probabilités discrètes. Il est maintenant temps d'approfondir la question. Considérons une distribution uniforme discrète, admettant donc un très grand nombre d'évènements équiprobables (avec ce nombre tendant vers l'infini). Donc, la probabilité de chaque évènement est un divisé par le nombre d'évènements possibles $n_E = \infty$ :
 
 $$\mathrm{P}(E) = \frac{1}{n_E} = \frac{1}{\infty} = 0$$
 
@@ -338,50 +340,61 @@ $$\mathrm{P}(E) = \frac{1}{n_E} = \frac{1}{\infty} = 0$$
 Dans le cas de probabilités continues, la probabilité d'un évènement en particulier est **toujours nulle**. Nous pouvons seulement calculer que l'un parmi plusieurs évènements se produise (compris dans un intervalle).
 ```
 
-La représentation graphique d'une loi de distribution continue est un outil utile pour la comprendre et vérifier ses calculs. La forme la plus courante consiste à montrer la **courbe de densité de probabilité** pour une distribution continue. Sur l'axe *X*, nous avons les **quantiles** (les valeurs observables), et sur l'axe *Y*, la densité de probabilité[^07-probabilites-distributions-1]. Par exemple, si nous constatons qu'un insecte butineur arrive sur une fleur en moyenne toutes les 4 minutes, la probabilité qu'un butineur arrive dans un intervalle de temps compris entre 0 et 4 min depuis le moment initial $t_0$ de nos observations suit une distribution uniforme continue (Fig. \@ref(fig:unif2)).
+La représentation graphique d'une loi de distribution continue est un outil utile pour la comprendre et vérifier ses calculs. La forme la plus courante consiste à montrer la **courbe de densité de probabilité** pour une distribution continue. Sur l'axe *X*, nous avons les **quantiles** (les valeurs observables), et sur l'axe *Y*, la densité de probabilité[^07-probabilites-distributions-1]. Par exemple, si nous constatons qu'un insecte butineur arrive sur une fleur en moyenne toutes les 4 minutes, la probabilité qu'un butineur arrive dans un intervalle de temps compris entre 0 et 4 min depuis le moment initial $t_0$ de nos observations suit une distribution uniforme continue (Fig. \@ref(fig:unif2)).
 
 [^07-probabilites-distributions-1]: Plus la densité de probabilité est élevée, plus les évènements dans cette région du graphique sont probables.
 
 ```{r unif2, echo=FALSE, fig.cap="Probabilité qu'un nouvel insecte butineur arrive dans un intervalle de 0 à 4 min si, en moyenne, un insecte arrive toutes les 4 min."}
 # Uniform distribution (density probability) with parameters:
-.min <- 0; .max <- 4 #  .min and .max range of possible events
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(.min - (.max - .min)/4, .max + (.max - .min)/4, l = 1000) # Quantiles
-.d <- function(x) dunif(x, min = .min, max = .max)         # Distribution function
-.q <- function(p) qunif(p, min = .min, max = .max)  # Quantile for lower-tail prob
-.label <- bquote(U(.(.min), .(.max)))
-#curve(.d(x), xlim = range(.x), xaxs = "i", n = 1000, col = .col,
-#  add = .add, xlab = "Quantiles", ylab = "Probability density") # Curve
-#abline(h = 0, col = "gray") # Baseline
-ch_unif <- chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
-  geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_line() +
+#.min <- 0; .max <- 4 #  .min and .max range of possible events
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(.min - (.max - .min)/4, .max + (.max - .min)/4, l = 1000) # Quantiles
+#.d <- function(x) dunif(x, min = .min, max = .max)         # Distribution function
+#.q <- function(p) qunif(p, min = .min, max = .max)  # Quantile for lower-tail prob
+#.label <- bquote(U(.(.min), .(.max)))
+##curve(.d(x), xlim = range(.x), xaxs = "i", n = 1000, col = .col,
+##  add = .add, xlab = "Quantiles", ylab = "Probability density") # Curve
+##abline(h = 0, col = "gray") # Baseline
+#ch_unif <- chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile (temps d'observation en min)") +
+#  ylab("Densité de probabilité")
+#
+#ch_unif
+SciViews::R("infer") # Pour accéder aux fonctions évoluées de distributions
+library(BioDataScience1) # Pour tracer une distribution avec chart()
+U1 <- dist_uniform(min = 0, max = 4)
+chart(U1) +
+  #geom_funfill(fun = dfun(U1), from = 0, to = 4) +
   xlab("Quantile (temps d'observation en min)") +
   ylab("Densité de probabilité")
-
-ch_unif
 ```
 
 Une autre représentation courante est la **densité de probabilité cumulée** qui représente la probabilité d'observer un quantile *ou moins*. Dans le cas présent, cela représente la probabilité qu'au moins un insecte butineur soit observé pour des durées d'observation croissantes (Fig. \@ref(fig:unif-cumul)).
 
 ```{r unif-cumul, echo=FALSE, fig.cap="Probabilité cumulée qu'un nouvel insecte butineur arrive dans un intervalle de 0 à 4 min si, en moyenne, un insecte arrive toutes les 4 min."}
-.dc <- function(x) punif(x, min = .min, max = .max)             # Density function
+#.dc <- function(x) punif(x, min = .min, max = .max)             # Density function
 
-chart(data = dtx(Quantiles = .x, Prob = .dc(.x)), Prob ~ Quantiles) +
-  geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .dc(.x)), fill = "gray", alpha = 0.2) +
-  geom_line() +
+#chart(data = dtx(Quantiles = .x, Prob = .dc(.x)), Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .dc(.x)), fill = "gray", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile (temps d'observation en min)") +
+#  ylab("Densité de probabilité cumulée")
+chart$cumulative(U1) +
+  #geom_funfill(fun = cdfun(U1), from = 0, to = 4) +
   xlab("Quantile (temps d'observation en min)") +
   ylab("Densité de probabilité cumulée")
 ```
 
 ```{block, type='note'}
-**Notation\ :** nous noterons qu'une variable suit une loi de distribution comme ceci (le tilde ~ se lit "suit une distribution", et *U* représente la distribution uniforme avec entre parenthèses, les *paramètres* de la distribution, ici, les bornes inférieure et supérieure de la distribution)\ :
+**Notation :** nous noterons qu'une variable suit une loi de distribution comme ceci (le tilde ~ se lit "suit une distribution", et *U* représente la distribution uniforme avec entre parenthèses, les *paramètres* de la distribution, ici, les bornes inférieure et supérieure de la distribution)\ :
 
 $$X \sim U(0, 4)$$
 
-Cela signifie\ : "la variable aléatoire *X* suit une distribution uniforme 0 à 4".
+Cela signifie : "la variable aléatoire *X* suit une distribution uniforme 0 à 4".
 ```
 
 La distribution $U(0, 1)$ est particulière et est appelée **distribution uniforme standard**. Elle a la propriété particulière que si $X \sim U(0, 1)$ alors $(1-X) \sim U(0, 1)$.
@@ -392,36 +405,42 @@ La distribution $U(0, 1)$ est particulière et est appelée **distribution unifo
 
 ### Quantiles vers probabilités
 
-L'**aire sous la courbe** représente une probabilité associée à l'intervalle considéré pour les quantiles qui bornent l'aire calculée. Concrètement, quelle est la probabilité que *X*, le temps d'attente pour observer un insecte butineur, soit compris entre 1 et 1.5 min ? Nous pouvons répondre en calculant l'aire sous la courbe entre les quantiles 1 et 1.5 (représentée par l'aire en rouge à la Fig. \@ref(fig:unif3)).
+L'**aire sous la courbe** représente une probabilité associée à l'intervalle considéré pour les quantiles qui bornent l'aire calculée. Concrètement, quelle est la probabilité que *X*, le temps d'attente pour observer un insecte butineur, soit compris entre 2 et 2.5 min ? Nous pouvons répondre en calculant l'aire sous la courbe entre les quantiles 2 et 2.5 (représentée par l'aire en rouge à la Fig. \@ref(fig:unif3)).
 
-```{r unif3, echo=FALSE, fig.cap="Probabilité qu'un insecte butineur arrive entre 1 et 1.5 min après le début d'une observation (aire P en rouge)."}
-.x2 <- .x
-.x2[.x2 < 1 | .x2 > 1.5] <- NA
-
-ch_unif +
-  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.5) +
-  annotate("text", x = c(1, 1.5), y = 0, label = c("1,0", "1,5"), col = "red") +
-  annotate("text", x = c(1.25), y = 0.12, label = "P?", col = "red")
+```{r unif3, echo=FALSE, fig.cap="Probabilité qu'un insecte butineur arrive entre 2 et 2.5 min après le début d'une observation (aire en rouge)."}
+#.x2 <- .x
+#.x2[.x2 < 2 | .x2 > 2.5] <- NA
+#
+#ch_unif +
+#  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.5) +
+#  annotate("text", x = c(2, 2.5), y = 0, label = c("2,0", "2,5"), col = "red") +
+#  annotate("text", x = c(2.25), y = 0.12, label = "P?", col = "red")
+chart(U1) +
+  geom_funfill(fun = dfun(U1), from = 2, to = 2.5) +
+  xlab("Quantile (temps d'observation en min)") +
+  ylab("Densité de probabilité") +
+  annotate("text", x = c(2, 2.5), y = 0, label = c("2,0", "2,5"), col = "red") +
+  annotate("text", x = c(2.25), y = 0.12, label = "P?", col = "red")
 ```
 
-Ici, le calcul est assez simple à faire à la main. Mais nous verrons d'autres lois de distribution plus complexes. Dans tous les cas, R offre des fonctions qui calculent les **aires à gauche ou à droite** d'un quantile donné. Le nom de la fonction est toujours `p<distri>()`, avec pour la distribution uniforme `punif()`. L'aire à gauche du quantile nécessite de spécifier l'argument `lower.tail = TRUE` ("queue en bas de la distribution" en anglais). Pour l'aire à droite, on indiquera évidemment `lower.tail = FALSE`. Donc, pour calculer la probabilité qu'un insecte arrive en moins de 1.5 minute, nous écrirons :
+Ici, le calcul est assez simple à faire à la main. Mais nous verrons d'autres lois de distribution plus complexes. Dans tous les cas, R offre des fonctions qui calculent les **aires à gauche ou à droite** d'un quantile donné. Le nom de la fonction est toujours `p<distri>()`, avec pour la distribution uniforme `punif()`. L'aire à gauche du quantile nécessite de spécifier l'argument `lower.tail = TRUE` ("queue en bas de la distribution" en anglais). Pour l'aire à droite, on indiquera évidemment `lower.tail = FALSE`. Donc, pour calculer la probabilité qu'un insecte arrive en moins de 2.5 minute, nous écrirons :
 
 ```{r}
-punif(1.5, min = 0, max = 4, lower.tail = TRUE)
+punif(2.5, min = 0, max = 4, lower.tail = TRUE)
 ```
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(72, height = 400, toc = "Complétez la fonction punif()")`
 
-Mais comme nous voulons déterminer la probabilité qu'un insecte arrive entre 1 et 1.5 minute, nous devons soustraire à cette valeur la probabilité qu'un insecte arrive en moins de 1 min (la zone hachurée en rouge dans la Fig \@ref(fig:unif3) est en effet l'aire à gauche depuis le quantile 1.5 *moins* l'aire à gauche depuis le quantile 1) :
+Mais comme nous voulons déterminer la probabilité qu'un insecte arrive entre 2 et 2.5 minutes, nous devons soustraire à cette valeur la probabilité qu'un insecte arrive en moins de 2 min (la zone en rouge dans la Fig \@ref(fig:unif3) est en effet l'aire à gauche depuis le quantile 2.5 *moins* l'aire à gauche depuis le quantile 2) :
 
 ```{r}
-punif(1.5, min = 0, max = 4, lower.tail = TRUE) -
-punif(1.0, min = 0, max = 4, lower.tail = TRUE)
+punif(2.5, min = 0, max = 4, lower.tail = TRUE) -
+punif(2.0, min = 0, max = 4, lower.tail = TRUE)
 ```
 
-La réponse est 0.125, soit une fois sur huit observations, en moyenne, le temps d'attente enregistré sera compris entre 1 et 1.5 minute.
+La réponse est 0.125, soit une fois sur huit observations, en moyenne, le temps d'attente enregistré sera compris entre 2 et 2.5 minutes.
 
 ```{block, type='note'}
 Le calcul de probabilités sur base de lois de distributions continues se fait via les aires à gauche ou à droite d'un quantile sur le graphique de densité de probabilité. Pour une aire centrale, nous soustrayons les aires à gauche des deux quantiles respectifs.
@@ -436,13 +455,20 @@ Le calcul inverse est parfois nécessaire. Par exemple pour répondre à la ques
 Ici, nous partons d'une probabilité (1/3) et voulons déterminer le quantile qui définit une aire à gauche de 1/3 sur le graphique (Fig. \@ref(fig:unif4)).
 
 ```{r unif4, echo=FALSE, fig.cap="Temps d'observation nécessaire (quantile Q) pour voir arriver un butineur une fois sur trois (aire P en rouge de 1/3 à gauche de Q)."}
-.q3 <- qunif(1/3, min = 0, max = 4, lower.tail = TRUE)
-.x3 <- .x
-.x3[.x3 > .q3] <- NA
-ch_unif +
-  geom_ribbon(aes(x = .x3, ymin = 0, ymax = .d(.x3)), fill = "red", alpha = 0.5) +
-  annotate("text", x = .q3, y = 0, label = "Q?", col = "red") +
-  annotate("text", x = .q3/2, y = 0.12, label = "P = 1/3", col = "red")
+#.q3 <- qunif(1/3, min = 0, max = 4, lower.tail = TRUE)
+#.x3 <- .x
+#.x3[.x3 > .q3] <- NA
+#ch_unif +
+#  geom_ribbon(aes(x = .x3, ymin = 0, ymax = .d(.x3)), fill = "red", alpha = 0.5) +
+#  annotate("text", x = .q3, y = 0, label = "Q?", col = "red") +
+#  annotate("text", x = .q3/2, y = 0.12, label = "P = 1/3", col = "red")
+q <- quantile(U1, 1/3)
+chart(U1) +
+  geom_funfill(fun = dfun(U1), from = 0, to = q) +
+  xlab("Quantile (temps d'observation en min)") +
+  ylab("Densité de probabilité") +
+  annotate("text", x = q, y = 0, label = "Q?", col = "red") +
+  annotate("text", x = q/2, y = 0.12, label = "P = 1/3", col = "red")
 ```
 
 Dans R, la fonction qui effectue ce calcul est `q<distri>()`. Donc ici, il s'agit de `qunif()`. Les arguments sont les mêmes que pour `punif()` sauf le premier qui est une ou plusieurs probabilités. Nous répondons à la question de la façon suivante :
@@ -457,7 +483,8 @@ Donc il faut observer pendant 1.33 min (1 min et 20 secs) pour avoir une chan
 
 `r h5p(73, height = 400, toc = "Complétez la fonction qunif()")`
 
-### Calcul avec les snippets
+```{=html}
+<!-- ### Calcul avec les snippets
 
 La SciViews Box propose différents snippets pour nous aider à effectuer nos calculs et graphiques relatifs à la distribution uniforme continue. Ils se retrouvent dans le menu `(d)istributions` accédé depuis `...`. Donc `..i` donne *directement* accès à ce menu, et puis `(d)istributions: uniform` accédé depuis `.iu` directement. Ensuite, il suffit de choisir le snippet dans le menu déroulant (voir ci-dessous).
 
@@ -473,20 +500,84 @@ La SciViews Box propose différents snippets pour nous aider à effectuer nos ca
 
 Le snippet `.iurandom` nécessite quelques explications supplémentaires. R est capable de *simuler* la génération de nombres aléatoires selon différentes lois de distribution (`r<distri>()`). `runif()` est la fonction qui le fait pour une distribution uniforme continue. Comme il ne s'agit pas réellement de nombres aléatoires, on parle de générateur de nombres **pseudo-aléatoires**. En fait, il s'agit d'une série de nombres qui a les mêmes propriétés que des nombres réellement aléatoires à peu de choses près. R se positionne au hasard dans cette série. Donc, à chaque fois que vous appelez la fonction `runif()`, vous obtenez logiquement des valeurs différentes. À des fins de reproductibilité, il est possible de *forcer* R à partir en un point précis de la série avec la fonction `set.seed()` avec un nombre comme argument qui donne la position. Par exemple `set.seed(281)`[^07-probabilites-distributions-2]. La génération de nombres pseudo-aléatoires dans les instructions qui suivent sera alors toujours la même. Voici un exemple de 10 nombres aléatoires générés depuis une distribution uniforme standard (compris entre 0 et 1). Chaque fois que vous exécuterez ces deux instructions exactement l'une après l'autre, vous obtiendrez toujours la même suite. Si vous réexécutez la seconde instruction sans la première, vous obtiendrez par contre une suite différente.
 
-[^07-probabilites-distributions-2]: Si vous utilisez `set.seed()` prenez soin de spécifier **toujours une valeur différente** prise au hasard comme argument de la fonction !
+[^07-probabilites-distributions-2]: Si vous utilisez `set.seed()` prenez soin de spécifier **toujours une valeur différente** prise au hasard comme argument de la fonction ! -->
+```
+### Calculs dans R
+
+Dans R de base, pour chaque distribution statistique, quatre fonctions sont proposées qui commencent par p/q/r/d, suivi d'un diminutif pour la loi de distribution. Pour la distribution uniforme, c'est `unif`. Nous avons donc :
+
+| fonction                                           | rôle                                                                                                   |
+|----------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `punif(q, min = 0, max = 1, lower.tail = TRUE, …)` | Calcule une ou plusieurs probabilités à partir de quantile(s)                                          |
+| `qunif(p, min = 0, max = 1, lower.tail = TRUE, …)` | Calcule un ou plusieurs quantiles à partir de probabilité(s)                                           |
+| `runif(n, min = 0, max = 1)`                       | Simule un échantillon de *n* nombres tirés au hasard de cette distribution (nombres pseudo-aléatoires) |
+| `dunif(x, min = 0, max = 1, …)`                    | Calcule la densité de probabilité pour divers quantiles *x*                                            |
+
+Avec `SciViews::R("infer")`, nous avons aussi une autre façon de manipuler les distributions statistiques qui consiste à définir un objet **distribution** qui contient l'information relative à votre distribution, et à ensuite utiliser des méthodes pour en extraire une information ou pour effectuer des calculs dessus. Les fonctions qui créent les distributions commencent toutes par `dist_`. Pour la distribution uniforme, il s'agit de `dist_uniform(min, max)`. Donc, nous créons la distribution uniforme pour nos insectes butineurs comme suit :
+
+```{r}
+U <- dist_uniform(min = 0, max = 4)
+U
+```
+
+À la place des variantes p/q/r/d, nous avons quatre méthodes que nous pouvons appliquer sur notre objet `U` :
+
+-   `cdf(U, q = ...)` pour "cumulative distribution function" qui calcule l'aire à gauche d'un ou plusieurs quantiles, donc, l'équivalent de `punif(q = ..., min = 0, max = 4, lower.tail = TRUE)`. Il n'y a pas de fonction pour calculer l'aire à droite, mais comme on sait que c'est le complément à un, on fera `1 - cdf(U, q = ...)`.
+
+-   `quantile(U, p = ...)`, équivalent de `qunif(p = ..., min = 0, max = 4, lower.tail = TRUE)`.
+
+-   `generate(U, times = ...)[[1]]` équivalent de `runif(n = ..., min = 0, max = 4)`.
+
+-   `density(U, x = ...)[[1]]` équivalent à `dunif(x = ..., min = 0, max = 4)`.
+
+```{r}
+# Fonctions donnant un résultat identique
+cdf(U, q = 3); punif(q = 3, min = 0, max = 4)
+quantile(U, p = 1/3); qunif(p = 1/3, min = 0, max = 4, lower.tail = TRUE)
+density(U, 1:3)[[1]]; dunif(1:3, min = 0, max = 4)
+set.seed(575); generate(U, 5)[[1]]
+set.seed(575); runif(5, min = 0, max = 4)
+```
+
+Notez l'utilisation de `set.seed()` ici. Cette fonction initialise le générateur de nombres **pseudo-aléatoires**. Il s'agit d'un code informatique qui génère une suite de nombres qui a des propriétés équivalentes à une série réellement aléatoire, mais sans l'être réellement. On initie le générateur à un endroit dans la suite de nombres à l'aide de `set.seed()` auquel on donne un nombre entier au hasard comme argument (naturellement, on doit donner à chaque fois un autre nombre, ... sauf si on veut générer exactement la même suite, comme c'est le cas ci-dessus pour comparer la sortie de `generate(U)` par rapport à `runif()`). L'utilisation de `set.seed()` rend votre code **reproductible**. N'hésitez donc pas à l'utiliser avant tout calcul faisant intervenir le générateur de nombres pseudo-aléatoires dans vos documents comme ceci :
 
 ```{r}
 set.seed(946)
-runif(10, min = 0, max = 1)
+runif(10, min = 0, max = 1) # Série de 10 nombres les mêmes à chaque exécution
 ```
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(74, height = 400, toc = "Fonction set.seed()")`
 
+Mais revenons à notre comparaison des fonctions p/q/r/d et des méthodes de l'objet **distribution**. Un premier avantage que vous aurez certainement remarqué, c'est que les paramètres de la distribution (ici `min =` et `max =`) ne sont introduits qu'une seule fois, à la construction de notre objet `U`. Si la distribution doit être utilisée plusieurs fois, c'est un avantage. Ensuite, nous pouvons aussi avoir d'autres informations relatives à cette distribution, par exemple (voyez l'aide en ligne de ces différentes fonctions plus plus de détails) :
+
+```{r}
+format(U)
+parameters(U)
+mean(U)
+variance(U)
+support(U)
+```
+
+Bien que nous ne l'utiliserons pas dans ce cours, les objets **distribution** peuvent contenir plusieurs distributions différentes, et même, une mixture de plusieurs distributions. Enfin, dernier avantage, à condition de charger le package `BioDataScience1` à l'aide de l'instruction `library(BioDataScience1)`, vous pouvez utiliser `chart()` pour créer le graphique de densité de probabilité ou `chart$cumulative()` pour tracer le graphique de densité de probabilité cumulée très facilement pour distribution. Ensuite, vous y ajouter une aire à l'aide de `geom_funfill()` en utilisant `dfun()` pour une aire de densité ou `cdfun()` pour une aire de densité cumulée. Pour annoter le graphique, vous utilisez `annotate("text")`. Voici ce que cela donne :
+
+```{r}
+chart(U) +
+  geom_funfill(fun = dfun(U), from = 1, to = 3) +
+  annotate("text", x = 2, y = 0.10, label = "P[1, 3]", col = "red")
+```
+
+... et pour le graphique de densité de probabilité cumulée :
+
+```{r}
+chart$cumulative(U) +
+  geom_funfill(fun = cdfun(U), from = 1, to = 3)
+```
+
 ## Distribution binomiale
 
-Partons d'un exemple pratique pour découvrir cette distribution. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus (voies respiratoires) anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que le deux allèles soient porteurs simultanément de la mutation pour que la maladie apparaisse. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
+Partons d'un exemple pratique pour découvrir la distribution binomiale. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus (voies respiratoires) anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que le deux allèles soient porteurs simultanément de la mutation pour que la maladie apparaisse. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
 
 ### Épreuve de Bernoulli
 
@@ -501,9 +592,9 @@ Les conditions particulières de cette situation sont appelées **épreuve de Be
 
 $$P(Y=j)= C^j_n \times p^j \times (1-p)^{n-j}$$
 
-Le **coefficient binomial** $C^j_n$ vaut[^07-probabilites-distributions-3] : $$C^j_n = \frac{n!}{j!(n-j)!}$$
+Le **coefficient binomial** $C^j_n$ vaut[^07-probabilites-distributions-2] : $$C^j_n = \frac{n!}{j!(n-j)!}$$
 
-[^07-probabilites-distributions-3]: Le factoriel d'un nombre $n$, noté $n!$ est $1 \times 2 \times 3 \times ... \times n$, avec $0! = 1$.
+[^07-probabilites-distributions-2]: Le factoriel d'un nombre $n$, noté $n!$ est $1 \times 2 \times 3 \times ... \times n$, avec $0! = 1$.
 
 $C^j_n$ représente le nombre de combinaisons possibles pour obtenir $j$ succès parmi $n$ essais réalisés dans un ordre quelconque. Nous pourrons aussi écrire :
 
@@ -513,46 +604,47 @@ Notre exemple rentre parfaitement dans le cadre de l'épreuve de Bernoulli avec 
 
 ### Calculs et graphiques
 
-Les calculs sur base d'une distribution binomiale sont assez similaires à ceux de la distribution uniforme dans R, en remplaçant `unif` par `binom` dans le nom des fonctions. Voici la liste des snippets à votre disposition dans la SciViews Box pour vous aider (menu `(d)istributions: binomial` à partir de `.ib`) :
-
-![](images/sdd1_07/snippets-binomial.png)
-
-Puisqu'il s'agit d'une distribution discrète, un petit nombre d'évènements possibles existent. Le snippet `.ibtable` retourne l'ensemble des valeurs possibles pour $j$ allant de 1 à $n$ en une seule étape. Les autres snippets devraient maintenant vous être familiers.
+Les calculs sur base d'une distribution binomiale sont assez similaires à ceux de la distribution uniforme dans R, en remplaçant `unif` par `binom` dans le nom des fonctions p/q/r/d. Sinon, la fonction `dist_binomial(size = 6, prob = 0.75)` la crée. Puisqu'il s'agit d'une distribution discrète, un petit nombre d'évènements possibles existent. Il est assez facile de créer une table qui reprend l'ensemble des probabilités possibles :
 
 ```{r}
-(.table <- dtx(success = 0:6,
+(binom_table <- dtx(success = 0:6,
   probability = dbinom(0:6, size = 6, prob = 0.75)))
 ```
 
 La représentation graphique donne la Fig. \@ref(fig:binom).
 
 ```{r binom, echo=FALSE, fig.cap="Probabilité d'avoir *j* enfants sains parmi 6 dans des familles dont les deux parents sont porteurs hétérozygotes du gène de la mucoviscidose."}
-dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
-  chart(., Probabilité ~ Quantile) +
-  geom_bar(stat = "identity", width = 0.05)
+#dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
+#  chart(., Probabilité ~ Quantile) +
+#  geom_bar(stat = "identity", width = 0.05)
+bi <- dist_binomial(size = 6, prob = 0.75)
+chart(bi) +
+  ylab("Densité de probabilité")
 ```
 
 La situation la plus probable est donc d'avoir cinq enfants sains sur six. Nous pouvons aussi observer que, lorsque $p$ s'éloigne de 0.5, les probabilités à l'extrême opposé tendent assez rapidement vers zéro (ici, la probabilité de n'avoir qu'un seul, ou aucun enfant sain). La distribution binomiale trouve de très nombreuses applications en biologie, en écologie, en génétique et dans d'autres disciplines. Elle permet même de représenter vos chances de réussite à l'examen de science des données biologiques ! Voici, pour finir, l'allure d'une distribution binomiale pour laquelle la probabilité du succès est égale à la probabilité d'échec (0.5). Cette distribution est symétrique.
 
 ```{r binom2, echo=FALSE, fig.cap="Probabilité d'avoir des garçons parmi une fratrie de 6 enfants (si le sexe ratio de 1:1)."}
-dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.5)) %>.%
-  chart(., Probabilité ~ Quantile) +
-  geom_bar(stat = "identity", width = 0.05)
+#dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.5)) %>.%
+#  chart(., Probabilité ~ Quantile) +
+#  geom_bar(stat = "identity", width = 0.05)
+chart(dist_binomial(size = 6, prob = 0.5)) +
+  ylab("Densité de probabilité")
 ```
 
-## Distribution de poisson
+## Distribution de Poisson
 
-Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique, quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^07-probabilites-distributions-4] :
+Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique, quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^07-probabilites-distributions-3] :
 
-[^07-probabilites-distributions-4]: Comme il y a la même proportion d'hommes et de femmes porteurs, nous avons 1/20 des hommes et 1/20 des femmes qui sont porteurs. Nous formons des couples au hasard en piochant un homme dans la population masculine et une femme dans la population féminine de manière indépendante. Dans ce cas, nous obtenons un couple double porteur à une fréquence de 1/20 \* 1/20 = 1/400.
+[^07-probabilites-distributions-3]: Comme il y a la même proportion d'hommes et de femmes porteurs, nous avons 1/20 des hommes et 1/20 des femmes qui sont porteurs. Nous formons des couples au hasard en piochant un homme dans la population masculine et une femme dans la population féminine de manière indépendante. Dans ce cas, nous obtenons un couple double porteur à une fréquence de 1/20 \* 1/20 = 1/400.
 
 ```{r}
 1/20 * 1/20
 ```
 
-... soit un couple sur 400. Donc, globalement, les probabilités d'avoir des enfants sains sont beaucoup plus grandes que 0.75 si nous incluons tous les couples belges de parents sains porteurs ou non. Cette probabilité est de[^07-probabilites-distributions-5] :
+... soit un couple sur 400. Donc, globalement, les probabilités d'avoir des enfants sains sont beaucoup plus grandes que 0.75 si nous incluons tous les couples belges de parents sains porteurs ou non. Cette probabilité est de[^07-probabilites-distributions-4] :
 
-[^07-probabilites-distributions-5]: Sur 400 couples, 399 ont une probabilité d'engendrer des enfants sains (porteurs hétérozygotes ou non porteurs confondus) de 100%. À cela il faut ajouter un couple sur 400 qui aura une probabilité de 75% de faire des enfants non atteints, car non homozygotes.
+[^07-probabilites-distributions-4]: Sur 400 couples, 399 ont une probabilité d'engendrer des enfants sains (porteurs hétérozygotes ou non porteurs confondus) de 100%. À cela il faut ajouter un couple sur 400 qui aura une probabilité de 75% de faire des enfants non atteints, car non homozygotes.
 
 ```{r}
 (399 * 1 + 1 * 0.75) / 400
@@ -589,16 +681,23 @@ $$P(Y=k) = P(Y=k-1) \times \frac{\lambda}{k}$$
 Le calcul se réalise de proche en proche en partant de la probabilité de ne jamais observer l'évènement. Comme l'évènement est rare, la probabilité tend très rapidement vers une valeur extrêmement faible. Seul le calcul des quelques premiers termes est donc nécessaire. À titre d'exercice, faites le calcul pour notre exemple d'un échantillon de la population belge, avec $\lambda = 1$ comme paramètre. La densité de probabilité pour cette distribution est représentée à la Fig. \@ref(fig:poisson).
 
 ```{r poisson, echo=FALSE, fig.cap="Probabilité d'occurence de mucoviscidose dans un échantillon aléatoire de 1600 belges."}
-dtx(Quantile = 0:8, Probabilité = dpois(0:8, lambda = 1)) %>.%
-  chart(., Probabilité ~ Quantile) +
-  geom_bar(stat = "identity", width = 0.05)
+#dtx(Quantile = 0:8, Probabilité = dpois(0:8, lambda = 1)) %>.%
+#  chart(., Probabilité ~ Quantile) +
+#  geom_bar(stat = "identity", width = 0.05)
+P <- dist_poisson(lambda = 1)
+chart(P, xlim = c(0, 8))
 ```
 
 ### Loi de Poisson dans R
 
-Les fonctions dans R relatives à la distribution de Poisson portent des noms `<x>pois()`, tel que `ppois()` pour calculer des probabilités, `qpois()` pour calculer des quantiles ou `rpois()` pour générer des nombres pseudo-aléatoires selon cette distribution. Voici la liste des snippets à votre disposition dans la SciViews Box pour vous aider (menu `(d)istributions: poisson` à partir de `.ip`) :
+Vous utilisez le suffixe `pois` pour les fonctions p/q/r/d relatives à la distribution de Poisson et `dist_poisson()` permet de la créer sous forme d'objet **distribution**. Il n'y a qu'un seul paramètre : `lambda =`.
 
-![](images/sdd1_07/snippets-poisson.png)
+```{r}
+P <- dist_poisson(lambda = 3)
+P
+quantile(P, p = 1/4)
+qpois(p = 1/4, lambda = 3)
+```
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -614,25 +713,28 @@ vembedr::embed_youtube("THk2GBxkg4o", width = 770, height = 433)
 
 ### Une "courbe en cloche"
 
-La distribution normale est la distribution la plus utilisée en statistique. Elle se rencontre très souvent en biologie comme dans bien d'autres domaines, à chaque fois qu'une variable continue définie sur tout le domaine des réels est issue d'un nombre important de composantes indépendantes dont les effets sont additifs. La forme de sa densité de probabilité est caractéristique et dite "en cloche" (Fig. \@ref(fig:normal)).
+La distribution Normale est la distribution la plus utilisée en statistique. Elle se rencontre très souvent en biologie comme dans bien d'autres domaines, à chaque fois qu'une variable continue définie sur tout le domaine des réels est issue d'un nombre important de composantes indépendantes dont les effets sont additifs. La forme de sa densité de probabilité est caractéristique et dite "en cloche" (Fig. \@ref(fig:normal)).
 
-```{r normal, echo=FALSE, fig.cap="Un exemple de distribution normale."}
+```{r normal, echo=FALSE, fig.cap="Un exemple de distribution Normale."}
 # Normal distribution (density probability) with parameters:
-.mu <- 175; .s <- 10 #  mu = .mu and sigma = .s
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(-3.5*.s + .mu, 3.5*.s + .mu, l = 1000)     # Quantiles
-.d <- function(x) dnorm(x, mean = .mu, sd = .s) # Distribution function
-.q <- function(p) qnorm(p, mean = .mu, sd = .s) # Quantile for lower-tail prob
-.label <- bquote(N(.(.mu), .(.s)))               # Curve parameters
-#curve(.d(x), xlim = range(.x), xaxs = "i", n = 1000, col = .col,
-#  add = .add, xlab = "Quantiles", ylab = "Probability density") # Curve
-#abline(h = 0, col = "gray") # Baseline
-
-chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
-  geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_line() +
-  xlab("Quantile") +
+#.mu <- 175; .s <- 10 #  mu = .mu and sigma = .s
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(-3.5*.s + .mu, 3.5*.s + .mu, l = 1000)     # Quantiles
+#.d <- function(x) dnorm(x, mean = .mu, sd = .s) # Distribution function
+#.q <- function(p) qnorm(p, mean = .mu, sd = .s) # Quantile for lower-tail prob
+#.label <- bquote(N(.(.mu), .(.s)))               # Curve parameters
+##curve(.d(x), xlim = range(.x), xaxs = "i", n = 1000, col = .col,
+##  add = .add, xlab = "Quantiles", ylab = "Probability density") # Curve
+##abline(h = 0, col = "gray") # Baseline
+#
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité")
+N <- dist_normal(mu = 175, sigma = 10)
+chart(N) +
   ylab("Densité de probabilité")
 ```
 
@@ -662,38 +764,51 @@ La probabilité qu'une observation soit dans un intervalle de $\pm 1 \sigma$ aut
 
 ```{r normal2, echo=FALSE, fig.cap="La distribution normale réduite avec les aires centrales autour de 1 et 2 écarts types mises en évidence."}
 # Normal distribution (density probability) with parameters:
-.mu <- 0; .s <- 1 #  mu = .mu and sigma = .s
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(-3.5*.s + .mu, 3.5*.s + .mu, l = 1000)     # Quantiles
-.x2 <- .x1 <- .x
-.x1[.x < -1 | .x > 1] <- NA
-.x2[.x < -2 | .x > 2] <- NA
-.d <- function(x) dnorm(x, mean = .mu, sd = .s) # Distribution function
-.q <- function(p) qnorm(p, mean = .mu, sd = .s) # Quantile for lower-tail prob
-.label <- bquote(N(.(.mu), .(.s)))               # Curve parameters
-
-chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
-  geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
-  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "orange", alpha = 0.2) +
-  geom_line() +
-  xlab("Quantile") +
+#.mu <- 0; .s <- 1 #  mu = .mu and sigma = .s
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(-3.5*.s + .mu, 3.5*.s + .mu, l = 1000)     # Quantiles
+#.x2 <- .x1 <- .x
+#.x1[.x < -1 | .x > 1] <- NA
+#.x2[.x < -2 | .x > 2] <- NA
+#.d <- function(x) dnorm(x, mean = .mu, sd = .s) # Distribution function
+#.q <- function(p) qnorm(p, mean = .mu, sd = .s) # Quantile for lower-tail prob
+#.label <- bquote(N(.(.mu), .(.s)))               # Curve parameters
+#
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "orange", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité") +
+#  geom_vline(xintercept = 0, color = "gray") +
+#  annotate("text", x = c(-2, -1, 1, 2), y = 0, label = c("-2s", "-1s", "1s", "2s"), col = "red") +
+#  annotate("text", x = c(-0.5, 1.5), y = 0.05, label = c("P = 68%", "P = 95%"), col = "red")
+N0 <- dist_normal()
+chart(N0) +
+  geom_funfill(fun = dfun(N0), from = -2, to = 2, fill = "red", alpha = 0.2) +
+  geom_funfill(fun = dfun(N0), from = -1, to = 1, fill = "orange", alpha = 0.2) +
   ylab("Densité de probabilité") +
   geom_vline(xintercept = 0, color = "gray") +
   annotate("text", x = c(-2, -1, 1, 2), y = 0, label = c("-2s", "-1s", "1s", "2s"), col = "red") +
   annotate("text", x = c(-0.5, 1.5), y = 0.05, label = c("P = 68%", "P = 95%"), col = "red")
 ```
 
-### Fonctions et snippets
+### Fonctions dans R pour la Normale
 
-Les fonctions relatives à la distribution normale dans R sont `<x>norm()`. Le calcul de probabilités se fait à l'aide de `pnorm()`, de quantiles à partir de `qnorm()`. Un échantillon pseudo-aléatoire s'obtient à partir de `rnorm()`. Une série de snippets est à votre disposition dans la SciViews Box pour vous aider (menu `(d)istributions: normal` à partir de `.in`) :
+Les fonctions p/q/r/d relatives à la distribution Normale dans R sont composées du suffixe `norm`. Le calcul de probabilités se fait à l'aide de `pnorm()`, de quantiles à partir de `qnorm()`. Un échantillon pseudo-aléatoire s'obtient à partir de `rnorm()`. L'objet **distribution** s'obtient avec `dist_normal(mu =..., sigma = ...)`. Faites bien attention que les arguments équivalents dans les fonctions p/q/r/d sont `mean =` et `sd =`. Dans les deux cas, il s'agit de la moyenne et de l'écart type de la distribution qui sont ses deux paramètres. De plus, le nom formaté de la distribution reprend la variance à la place de l'écart type (variance = écart type^2^). Cela donne donc :
 
-![](images/sdd1_07/snippets-normal.png)
+```{r}
+N1 <- dist_normal(mu = 12, sigma = 1.5) # Arguments mu =, sigma =
+N1 # Attention: N(mu, variance) 1.5^2 = 2.2
+quantile(N1, p = 0.95)
+qnorm(p = 0.95, mean = 12, sd = 1.5) # Notez le nom des arguments mean = et sd =
+```
 
 ### Théorème central limite
 
-Une des raisons pour lesquelles la distribution normale est très répandue est liée au fait que beaucoup d'autres distributions tendent vers elle de manière asymptotique. Par exemple, une distribution binomiale symétrique (avec $p = 0.5$) et pour un $n$ croissant ressemblera de plus en plus à une distribution normale. Le théorème central limite démontre cela, quelle que soit la distribution de départ. En pratique, la distribution normale est souvent une bonne approximation d'autres distributions pour des tailles d'échantillons déjà à partir de quelques dizaines d'individus.
+Une des raisons pour lesquelles la distribution Normale est très répandue est liée au fait que beaucoup d'autres distributions tendent vers elle de manière asymptotique. Par exemple, une distribution binomiale symétrique (avec $p = 0.5$) et pour un $n$ croissant ressemblera de plus en plus à une distribution normale. Le théorème central limite démontre cela, quelle que soit la distribution de départ. En pratique, la distribution Normale est souvent une bonne approximation d'autres distributions pour des tailles d'échantillons déjà à partir de quelques dizaines d'individus.
 
 ```{r, echo=FALSE}
 vembedr::embed_youtube("4dhm2QAA2x4", width = 770, height = 433)
@@ -717,26 +832,32 @@ Par facilité, on défini ses deux paramètres de manière relative à la moyenn
 
 ```{r lognormal, echo=FALSE, fig.cap="Un exemple de distribution log-Normale."}
 # Log-Normal distribution (density probability) with parameters:
-.mul <- 0; .sl <- 0.5 #  .mul and .sl(sigma) in log scale
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(0, qlnorm(0.999, meanlog = .mul, sdlog = .sl), l = 1000) # Quantiles
-.d <- function(x) dlnorm(x, meanlog = .mul, sdlog = .sl) # Density function
-.q <- function(p) qlnorm(p, meanlog = .mul, sdlog = .sl) # Quantile for lower-tail prob
-.label <- bquote(logN(.(.mul), .(.sl))) # Curve parameters
+#.mul <- 0; .sl <- 0.5 #  .mul and .sl(sigma) in log scale
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(0, qlnorm(0.999, meanlog = .mul, sdlog = .sl), l = 1000) # Quantiles
+#.d <- function(x) dlnorm(x, meanlog = .mul, sdlog = .sl) # Density function
+#.q <- function(p) qlnorm(p, meanlog = .mul, sdlog = .sl) # Quantile for lower-tail prob
+#.label <- bquote(logN(.(.mul), .(.sl))) # Curve parameters
 
-chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
-  geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_line() +
-  xlab("Quantile") +
-  ylab("Densité de probabilité")
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité")
+chart(dist_lognormal(mu = 0, sigma = 0.5), xlim = c(0, 4))
 ```
 
-### Snippets
+### Fonction dans R pour la log-Normale
 
-Les fonctions relatives à la distribution log-Normale dans R sont `<x>lnorm()`. Le calcul de probabilités se fait à l'aide de `plnorm()`, les quantiles se déterminent à partir de `qlnorm()` et un échantillon pseudo-aléatoire se calcule en utilisant `rlnorm()`. Les snippets relatifs à la loi log-normale dans la SciViews Box sont accessibles à partir du menu `(d)istributions: log-normal` à partir de `.il`) :
+Les fonctions p/q/r/d relatives à la distribution log-Normale dans R utilisent le suffixe `lnorm`. Le calcul de probabilités se fait à l'aide de `plnorm()`, les quantiles se déterminent à partir de `qlnorm()` et un échantillon pseudo-aléatoire se calcule en utilisant `rlnorm()`. Un objet **distribution** contenant une loi log_Normale se crée à l'aide de `dist_lognormal()`. Ses arguments sont toujours `mu =` et `sigma =`, mais pour les fonctions p/q/r/d, les arguments correspondants sont `meanlog =`, et `sdlog =`.
 
-![](images/sdd1_07/snippets-lognormal.png)
+```{r}
+lN1 <- dist_lognormal(mu = 1, sigma = 0.5) # Arguments mu =, sigma =
+lN1 # Attention: lN(mu, variance) 0.5^2 = 0.25
+quantile(lN1, p = 0.95)
+qlnorm(p = 0.95, meanlog = 1, sdlog = 0.5) # Nom des arguments meanlog= / sdlog=
+```
 
 ## Graphique quantile-quantile
 
@@ -750,9 +871,9 @@ Ce quantile dit **observé** est comparable au quantile dit **théorique** que n
 
 ```{r}
 read("zooplankton", package = "data.io") %>.%
-  filter(., class == "Egg_elongated") %>.%
-  mutate(., log_area = log10(area)) %>.%
-  select(., area, log_area) %->%
+  sfilter(., class == "Egg_elongated") %>.%
+  smutate(., log_area = log10(area)) %>.%
+  sselect(., area, log_area) %->%
   eggs
 summary(eggs)
 ```
@@ -788,7 +909,7 @@ chart(data = qq, q_obs ~ q_theo) +
   geom_point()
 ```
 
-Cet alignement n'est pas flagrant. Le graphique proposé par la fonction `car::qqPlot()` (Fig. \@ref(fig:qqplot2)) et accessible depuis le snippet `.cuqqnorm` est le même, mais il ajoute différents éléments qui aident à l'interprétation :
+Cet alignement n'est pas flagrant. Le graphique proposé par la fonction `car::qqPlot()` (Fig. \@ref(fig:qqplot2)) est le même, mais il ajoute différents éléments qui aident à l'interprétation :
 
 1.  Une droite (ligne continue bleue) selon laquelle les points devraient s'aligner en cas de concordance parfaite entre les deux distributions
 2.  Une **enveloppe de confiance** (lignes pointillées bleues) qui tient compte de la variabilité aléatoire d'un échantillon à l'autre pour inclure une enveloppe de tolérance avec une fiabilité de 95%. Cela signifie que 95% des points doivent, en principe, se trouver à l'intérieur de l'enveloppe.
