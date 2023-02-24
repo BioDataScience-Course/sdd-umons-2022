@@ -159,7 +159,7 @@ Vous noterez que l'arbre des probabilités représente, en réalité, des probab
 
 ![Arbre de probabilités avec probabilités conditionnelles en rouge.](images/sdd1_07/probtree2.png)
 
-Nous connaissons déjà la probabilité conditionnelle d'avoir un résultat positif au test si la personne est malade $\mathrm{P}(positif|malade)$. C'est une donnée du problème (0.95). Maintenant, la probabilité qu'une personne soit malade si elle est positive au test $\mathrm{P}(malade|positif)$ est une information capitale ici, mais nous ne la connaissons pas. Le lien entre les deux n'est pas facile à faire. C'est grâce aux travaux du révérend **Thomas Bayes** au 18^ème^ siècle que ce problème a été résolu. Les implications du **théorème de Bayes** sont énormes, car cela permet de déterminer des probabilités dites *a posteriori* (suite à l'occurrence des évènements) en fonction de connaissances *a priori* du problème.
+Nous connaissons déjà la probabilité conditionnelle d'avoir un résultat positif au test si la personne est malade $\mathrm{P}(positif|malade)$. C'est une donnée du problème (0.95). Maintenant, la probabilité qu'une personne soit malade si elle est positive au test $\mathrm{P}(malade|positif)$ est une information capitale ici, mais nous ne la connaissons pas. Le lien entre les deux n'est pas facile à faire. C'est grâce aux travaux du révérend **Thomas Bayes** au 18^e^ siècle que ce problème a été résolu. Les implications du **théorème de Bayes** sont énormes, car cela permet de déterminer des probabilités dites *a posteriori* (suite à l'occurrence des évènements) en fonction de connaissances *a priori* du problème.
 
 Si nous réanalysons le raisonnement qui est fait dans l'arbre de probabilités, nous pouvons remarquer que le premier calcul ("malade" -\> "positif") correspond en fait à la probabilité que le test soit positif si le patient est malade $\mathrm{P}(positif|malade)$ multipliée par la probabilité que le patient soit malade $\mathrm{P}(malade)$, et ceci est aussi égal à $\mathrm{P}(positif\, et\, malade)$. Donc,
 
@@ -423,7 +423,7 @@ chart(U1) +
   annotate("text", x = c(2.25), y = 0.12, label = "P?", col = "red")
 ```
 
-Ici, le calcul est assez simple à faire à la main. Mais nous verrons d'autres lois de distribution plus complexes. Dans tous les cas, R offre des fonctions qui calculent les **aires à gauche ou à droite** d'un quantile donné. Le nom de la fonction est toujours `p<distri>()`, avec pour la distribution uniforme `punif()`. L'aire à gauche du quantile nécessite de spécifier l'argument `lower.tail = TRUE` ("queue en bas de la distribution" en anglais). Pour l'aire à droite, on indiquera évidemment `lower.tail = FALSE`. Donc, pour calculer la probabilité qu'un insecte arrive en moins de 2.5 minute, nous écrirons :
+Ici, le calcul est assez simple à faire à la main. Mais nous verrons d'autres lois de distribution plus complexes. Dans tous les cas, R offre des fonctions qui calculent les **aires à gauche ou à droite** d'un quantile donné. Le nom de la fonction est toujours `p<distri>()`, avec pour la distribution uniforme `punif()`. L'aire à gauche du quantile nécessite de spécifier l'argument `lower.tail = TRUE` ("queue en bas de la distribution" en anglais). Pour l'aire à droite, on indiquera évidemment `lower.tail = FALSE`. Donc, pour calculer la probabilité qu'un insecte arrive en moins de 2.5 minutes, nous écrirons :
 
 ```{r}
 punif(2.5, min = 0, max = 4, lower.tail = TRUE)
@@ -550,7 +550,7 @@ runif(10, min = 0, max = 1) # Série de 10 nombres les mêmes à chaque exécuti
 
 `r h5p(74, height = 400, toc = "Fonction set.seed()")`
 
-Mais revenons à notre comparaison des fonctions p/q/r/d et des méthodes de l'objet **distribution**. Un premier avantage que vous aurez certainement remarqué, c'est que les paramètres de la distribution (ici `min =` et `max =`) ne sont introduits qu'une seule fois, à la construction de notre objet `U`. Si la distribution doit être utilisée plusieurs fois, c'est un avantage. Ensuite, nous pouvons aussi avoir d'autres informations relatives à cette distribution, par exemple (voyez l'aide en ligne de ces différentes fonctions plus plus de détails) :
+Mais revenons à notre comparaison des fonctions p/q/r/d et des méthodes de l'objet **distribution**. Un premier avantage que vous aurez certainement remarqué, c'est que les paramètres de la distribution (ici `min =` et `max =`) ne sont introduits qu'une seule fois, à la construction de notre objet `U`. Si la distribution doit être utilisée plusieurs fois, c'est un avantage. Ensuite, nous pouvons aussi avoir d'autres informations relatives à cette distribution, par exemple (voyez l'aide en ligne de ces différentes fonctions pour plus de détails) :
 
 ```{r}
 format(U)
@@ -577,7 +577,7 @@ chart$cumulative(U) +
 
 ## Distribution binomiale
 
-Partons d'un exemple pratique pour découvrir la distribution binomiale. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus (voies respiratoires) anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que le deux allèles soient porteurs simultanément de la mutation pour que la maladie apparaisse. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
+Partons d'un exemple pratique pour découvrir la distribution binomiale. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus (voies respiratoires) anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que les deux allèles soient porteurs simultanément de la mutation pour que la maladie apparaisse. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
 
 ### Épreuve de Bernoulli
 
