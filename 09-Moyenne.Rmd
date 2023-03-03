@@ -1,7 +1,8 @@
 # Moyenne {#moyenne}
 
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE, results='hide'}
-SciViews::R
+SciViews::R("infer")
+library(BioDataScience1)
 ```
 
 ##### Objectifs {.unnumbered}
@@ -174,10 +175,19 @@ Le calcul est un peu plus complexe, car les fonctions `<x>t()` ne considèrent q
 
 Elle est de 24% environ. Notez que nous avons renseigné la moyenne et l'écart type de la distribution *t* dans `.mu` et `.s`, respectivement. Ensuite, les degrés de liberté (9 - 1) sont indiqués dans l'argument `df =`. Enfin, nous avons précisé `lower.tail =  FALSE` pour obtenir l'aire à droite dans la distribution.
 
+Nous pouvons également employer les objet distribution afin de répondre à cette question (et les questions suivantes)
+
+```{r}
+stu <- dist_student_t(df = 8, mu = 8, sigma = 2/3)
+1 - cdf(stu, 8.5)
+```
+
+Dans ce cas, il n'est pas nécessaire de ruser car cet objet permet de traiter une distribution de Student non centrée sur 0. Rappelez vous cependant que les fonctions `cdf()` et `quantile()` ne permettent pas de spécifier que l'on souhaite l'aire à droite.
+
 -   Considérant une aire à gauche de 5%, quelle est la moyenne de l'échantillon qui la délimite ?
 
 ```{r}
-.mu <- 8; .s <- 2/3; .mu + .s * qt(0.05, df = 8, lower.tail = TRUE)
+quantile(stu, p=0.05)
 ```
 
 Il s'agit du quantile 6,76. Le graphique correspondant est le suivant :
@@ -222,10 +232,9 @@ Revenons à nos calculs de quantiles et probabilités. Les questions que l'on se
 
 ```{r}
 # Aire à gauche de 8 -0.5 :
-.mu <- 8; .s <- 2/3
-(left_area <- pt((7.5 - .mu)/.s, df = 8, lower.tail = TRUE))
+(left_area <- cdf(stu, 7.5))
 # Aire à droite de 8 + 0.5 :
-(right_area <- pt((8.5 - .mu)/.s, df = 8, lower.tail = FALSE))
+(right_area <- 1 - cdf(stu, 8.5))
 # Résultat final
 left_area + right_area
 ```
@@ -233,17 +242,17 @@ left_area + right_area
 Vous avez remarqué quelque chose de particulier ? Oui, les deux aires sont identiques. C'est parce que la distribution est symétrique. On peut donc simplifier le calcul en calculant d'un seul côté et en multipliant le résultat par deux :
 
 ```{r}
-.mu <- 8; .s <- 2/3
-pt((7.5 - .mu)/.s, df = 8, lower.tail = TRUE) * 2
+cdf(stu, 7.5) * 2
 ```
 
 Dans l'autre sens, il suffit donc de diviser la probabilité (= l'aire) par deux, parce qu'elle se répartit à parts égales à gauche et à droite dans les régions les plus extrêmes de la distribution. Ainsi, les quantiles qui définissent une aire extrême de 5% dans notre distribution sont (notez que la valeur de probabilité utilisée ici est 0,025, soit 2,5%) :
 
 ```{r}
 # Quantile à gauche
-.mu <- 8; .s <- 2/3; .mu + .s * qt(0.025, df = 8, lower.tail = TRUE)
+quantile(stu, p = 0.025)
+
 # Quantile à droite
-.mu <- 8; .s <- 2/3; .mu + .s * qt(0.025, df = 8, lower.tail = FALSE)
+quantile(stu, p = (1-0.025))
 ```
 
 ```{block, type='note'}
@@ -925,7 +934,7 @@ b <- chart(data = crabs, rear ~ sex) +
 combine_charts(list(a,b))
 ```
 
-Le graphique en barres et le nuage de point représentent identiquement la information. Ils représentent la moyenne avec des barres d’erreurs qui représentent l'intervalle de confiance à 0.95. Le graphe en dynamite avec des barres d'erreurs ne donne aucune information sur le nombre d'observations. Nous avons déjà abordé rapidement cette problématique dans la section \@ref(barres-mean). Il n'est donc pas le graphique optimal pour présenter un test *t* de Student.
+Le graphique en barres et le nuage de point représentent identiquement la information. Ils représentent la moyenne avec des barres d'erreurs qui représentent l'intervalle de confiance à 0.95. Le graphe en dynamite avec des barres d'erreurs ne donne aucune information sur le nombre d'observations. Nous avons déjà abordé rapidement cette problématique dans la section \@ref(barres-mean). Il n'est donc pas le graphique optimal pour présenter un test *t* de Student.
 
 Malgré le fait que le test *t* de Student est un test paramétrique, on retrouve dans la littérature scientifique la boite de dispersion qui est pourtant un graphique associé à des valeurs non paramétriques. Pour le test de Wilcoxon, la boite de dispersion est l'outil graphique recommandé.
 
