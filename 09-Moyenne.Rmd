@@ -1,7 +1,8 @@
 # Moyenne {#moyenne}
 
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE, results='hide'}
-SciViews::R
+SciViews::R("infer")
+library(BioDataScience1)
 ```
 
 ##### Objectifs {.unnumbered}
@@ -20,7 +21,7 @@ SciViews::R
 
 ##### Prérequis {.unnumbered}
 
-Ce module est élaboré sur les notions vues au module \@ref(proba) concernant les lois de distribution statistiques et sur le concept de test d'hypothèse abordé dans le module \@ref(chi2). Ces deux précédents modules doivent donc être maîtrisés avant d'aller plus avant ici.
+Ce module est élaboré sur les notions vues au module \@ref(proba) concernant les lois de distributions statistiques et sur le concept de test d'hypothèse abordé dans le module \@ref(chi2). Ces deux précédents modules doivent donc être maîtrisés avant d'aller plus avant ici.
 
 ## Une histoire de bière...
 
@@ -36,7 +37,7 @@ Mais au fait, pourquoi, cette distribution porte-t-elle le nom de "Student" ? V
 vembedr::embed_youtube("GFzCIA9kppM", width = 770, height = 433)
 ```
 
-Le contrat que Gosset a signé avec son employeur l'empêchait de publier des résultats scientifiques sous son vrai nom. Ainsi, il décida de publier sa trouvaille qui occupe aujourd'hui une place très importante en statistiques sous le pseudonyme de "Student" (l'étudiant). Ce n'est qu'à sa mort, en 1937, que l'on put révéler le nom de l'auteur qui est derrière cette fantastique trouvaille. Mais au fait, de quoi s'agit-il exactement ? Nous allons le découvrir dans la section suivante.
+Le contrat que Gosset a signé avec son employeur l'empêchait de publier des résultats scientifiques sous son vrai nom. Ainsi, il décida de publier sa trouvaille qui occupe aujourd'hui une place très importante en statistiques sous le pseudonyme de "Student" (l'étudiant). Ce n'est qu'à sa mort, en 1937, que l'on put révéler le nom de l'auteur qui est derrière cette fantastique découverte. Mais au fait, de quoi s'agit-il exactement ? Nous allons le découvrir dans la section suivante.
 
 ## Distribution d'échantillonnage
 
@@ -48,7 +49,7 @@ Pour rappel, nous faisons de l'**inférence** sur base d'un échantillon parce q
   (\#eq:moyenne)
 \end{equation}
 ```
-où $x$ est une variable quantitative (donc `numeric` dans R) et $n$ est la taille de l'échantillon, donc le nombre d'individus mesurés. On notera $\bar{x}$ la moyenne de $x$, que l'on prononcera "x barre".
+où $x$ est une variable quantitative (donc **numeric** dans R) et $n$ est la taille de l'échantillon, c'est à dire, le nombre d'individus mesurés. On notera $\bar{x}$ la moyenne de $x$, que l'on prononcera "x barre".
 
 Nous utiliserons également l'écart type, noté $\sigma_x$ pour la population et $s_x$ pour l'échantillon qui se calcule sur base de la somme des écarts à la moyenne au carré (eq. \@ref(eq:sd)) :
 
@@ -58,9 +59,9 @@ Nous utiliserons également l'écart type, noté $\sigma_x$ pour la population e
   (\#eq:sd)
 \end{equation}
 ```
-A noter que $s^2$ est également appelée la **variance**[^09-moyenne-2].
+À noter que $s^2$ est également appelée la **variance**[^09-moyenne-2].
 
-[^09-moyenne-2]: L'équation proposée est, en fait, valable pour un échantillon, et est calculé comme tel par R à l'aide des fonctions `sd()` pour l'écart type ou `var()` pour la variance. Pour la population ou pour un échantillon de taille très grande, voire infinie, nous pourrions plutôt diviser par $n$ au lieu de $n - 1$, ... mais puisque $n$ est très grand, cela ne change pas grand-chose au final.
+[^09-moyenne-2]: L'équation proposée est, en fait, valable pour un échantillon, et est calculée comme tel par R à l'aide des fonctions `sd()` pour l'écart type ou `var()` pour la variance. Pour la population ou pour un échantillon de taille très grande, voire infinie, nous pourrions plutôt diviser par $n$ au lieu de $n - 1$, ... mais puisque $n$ est très grand, cela ne change pas grand-chose au final.
 
 En fait, ce qui nous intéresse, ce n'est pas vraiment la moyenne de l'échantillon, mais celle de la population que l'on notera $\mu$[^09-moyenne-3].
 
@@ -70,7 +71,7 @@ En fait, ce qui nous intéresse, ce n'est pas vraiment la moyenne de l'échantil
 
 `r h5p(86, height = 400, toc = "Notation mathématique")`
 
-Nous pouvons nous poser la question : comment varie la moyenne d'un échantillon à l'autre ? Il est possible de répondre à cette question de manière empirique en utilisant le générateur pseudo-aléatoire de R. Partons d'une distribution théorique de la population qui soit normale, de moyenne $\mu$ = 8 et d'écart type $\sigma$ = 2. Nous pouvons échantillonner neuf individus. Cela donne :
+Nous pouvons nous poser la question : comment varie la moyenne d'un échantillon à l'autre ? Il est possible de répondre à cette question de manière empirique en utilisant le générateur pseudo-aléatoire de R. Partons d'une distribution théorique de la population qui soit Normale, de moyenne $\mu$ = 8 et d'écart type $\sigma$ = 2. Nous pouvons échantillonner neuf individus. Cela donne :
 
 ```{r}
 set.seed(8431641)
@@ -101,18 +102,18 @@ Nous obtenons une distribution symétrique centrée autour de 8. Elle ressemble 
 
 $$ddl = n-1$$
 
-Concernant la moyenne, et l'écart type, nous pouvons les calculer sur base de notre distribution d'échantillonnage empirique contenue dans le vecteur `means` :
+Concernant la moyenne, et l'écart type, nous pouvons les calculer sur base de notre distribution d'échantillonnage empirique contenue dans le vecteur `means_n9` :
 
 ```{r}
 mean(means_n9)
 sd(means_n9)
 ```
 
-La moyenne de la distribution d'échantillonnage est donc égale à la moyenne de la population. Elle peut donc être approximée par la moyenne d'un échantillon. Quant à l'écart type, il vaut 2/3 environ, soit l'écart type de la population divisé par 3.
+La moyenne de la distribution d'échantillonnage est donc égale à la moyenne de la population. Elle peut être approximée par la moyenne d'un échantillon. Quant à l'écart type, il vaut 2/3 environ, soit l'écart type de la population divisé par 3.
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(87, height = 400, toc = "Méta-expérience")`
+`r h5p(87, height = 400, toc = "Métaexpérience")`
 
 Détaillons la métaexpérience toujours à partir de la même population, mais avec des échantillons plus petits, par exemple, avec $n = 4$ :
 
@@ -124,7 +125,7 @@ chart(data = NULL, ~ means_n4) +
   geom_histogram(bins = 30)
 ```
 
-La distribution est plus étalée. Ses paramètres sont :
+La distribution est légèrement plus étalée (il faut bien observer pour le voir). Ses paramètres sont :
 
 ```{r}
 mean(means_n4)
@@ -160,57 +161,83 @@ On dira :
 
 $$\mu_x \sim t(\mu, \frac{\sigma}{\sqrt{n}}, n-1)$$
 
-La moyenne de l'échantillon suit une distribution *t* de Student avec pour moyenne, la moyenne de la population, pour écart type, l'écart type de la population divisé par la racine carrée de *n*, et comme degrés de liberté *n* moins un. La distribution *t* de Student dans R est représentée par `<x>t()`. Donc, `qt()` calcule un quantile à partir d'une probabilité, `pt()` une probabilité à partir d'un quantile, `rt()` renvoie un ou plusieurs nombres pseudo-aléatoires selon une distribution *t*, et `dt()` renvoie la densité de probabilité de la distribution. Dans la SciViews Box, vous y accédez également via les "snippets" à partir de `.it` pour `(d)istribution: t (Student)` :
+La moyenne de l'échantillon suit une distribution *t* de Student avec pour moyenne, la moyenne de la population, pour écart type, l'écart type de la population divisé par la racine carrée de *n*, et comme degrés de liberté *n* moins un. La distribution *t* de Student dans R est représentée par `<p|q|d|r>t()`. Donc, `qt()` calcule un quantile à partir d'une probabilité, `pt()` une probabilité à partir d'un quantile, `rt()` renvoie un ou plusieurs nombres pseudo-aléatoires selon une distribution *t*, et `dt()` renvoie la densité de probabilité de la distribution.
+
+```{=html}
+<!-- Dans la SciViews Box, vous y accédez également via les "snippets" à partir de `.it` pour `(d)istribution: t (Student)` :
 
 ![](images/sdd1_09/t-distribution-snippets.png)
-
-Le calcul est un peu plus complexe, car les fonctions `<x>t()` ne considèrent que les distributions *t* de Student *réduites* (donc avec moyenne valant zéro et écart type de un). Nous devons ruser pour transformer le résultat en fonction des valeurs désirées. Mais heureusement, les "snippets" nous aident en nous prémâchant la besogne. Considérons le cas $n = 9$ avec un moyenne de 8 et un écart type de 2/3. Voici quelques exemples de calculs réalisables :
+-->
+```
+Le calcul avec ces fonctions est un peu plus complexe, car les fonctions `<p|q|r|d>t()` ne considèrent que les distributions *t* de Student *réduites* (donc avec moyenne valant zéro et écart type de un). Nous devons ruser pour transformer le résultat en fonction des valeurs désirées. Considérons le cas $n = 9$ avec un moyenne de 8 et un écart type de 2/3. Voici quelques exemples de calculs réalisables :
 
 -   Quelle est la probabilité que la moyenne d'un échantillon soit égale ou supérieure à 8,5 ?
 
 ```{r}
-.mu <- 8; .s <- 2/3; pt((8.5 - .mu)/.s, df = 8, lower.tail = FALSE)
+mu <- 8
+s <- 2/3
+pt((8.5 - mu)/s, df = 8, lower.tail = FALSE)
 ```
 
-Elle est de 24% environ. Notez que nous avons renseigné la moyenne et l'écart type de la distribution *t* dans `.mu` et `.s`, respectivement. Ensuite, les degrés de liberté (9 - 1) sont indiqués dans l'argument `df =`. Enfin, nous avons précisé `lower.tail =  FALSE` pour obtenir l'aire à droite dans la distribution.
+Elle est de 24% environ. Notez que nous avons renseigné la moyenne et l'écart type de la distribution *t* dans `mu` et `s`, respectivement. Ensuite, les degrés de liberté (9 - 1) sont indiqués dans l'argument `df =`. Enfin, nous avons précisé `lower.tail =  FALSE` pour obtenir l'aire à droite dans la distribution.
 
 -   Considérant une aire à gauche de 5%, quelle est la moyenne de l'échantillon qui la délimite ?
 
 ```{r}
-.mu <- 8; .s <- 2/3; .mu + .s * qt(0.05, df = 8, lower.tail = TRUE)
+mu <- 8
+s <- 2/3
+mu + s * qt(0.05, df = 8, lower.tail = TRUE)
 ```
 
-Il s'agit du quantile 6,76. Le graphique correspondant est le suivant :
+Il s'agit du quantile 6,76. Tout cela est quand même un peu contraignant. Nous pouvons aussi utiliser la fonction `dist_student_t()` qui, elle, admet des arguments `df=`, `mu=` et `sigma=` afin d'effectuer les calculs pour n'importe quelle distribution *t* de Student, pas seulement la distribution réduite. Voilà ce que cela donne pour les deux calculs précédents :
+
+```{r}
+student_t <- dist_student_t(df = 8, mu = 8, sigma = 2/3)
+# Aire à droite du quantile 8.5 (1 - x car cdf() renvoie toujours l'aire à gauche)
+1 - cdf(student_t, 8.5)
+# Quantile délimitant une aire à gauche de 5%
+quantile(student_t, 0.05)
+```
+
+Dans ce cas-ci, l'utilisation de `dist_student_t()` simplifie considérablement les calculs... mais `<p|q|r|d>t()` restent plus concis si votre calcul concerne la distribution *t* de Student réduite. Le graphique correspondant au dernier calcul est le suivant :
 
 ```{r tdistri1, echo=FALSE, fig.cap="Une distribution de Student avec aire à gauche de 5% mise en évidence en rouge. La distribution Normale équivalente est superposée en bleu clair."}
 # Student's t distribution (density probability) with parameters:
-.mu <- 8; .s <- 2/3; .df <- 8 # .mu, .s (sigma) and .df
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
-.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
+#.mu <- 8; .s <- 2/3; .df <- 8 # .mu, .s (sigma) and .df
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
+#.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+#.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
 
 # Normal distribution (density probability) with parameters:s
-.d2 <- function(x) dnorm(x, mean = .mu, sd = .s) # Distribution function
+#.d2 <- function(x) dnorm(x, mean = .mu, sd = .s) # Distribution function
 
 # Data to represent the 5% area at left in red
-.x2 <- .x
-.x2[.x > 6.7603] <- NA
+#.x2 <- .x
+#.x2[.x > 6.7603] <- NA
 
-chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
-  Prob ~ Quantiles) +
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
+#  Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
+#  geom_line() +
+#  # Normal distribution superposed in blue
+#  geom_line(aes(y = Prob_N), col = "lightblue3") +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité") +
+#  annotate("text", x = 6.5, y = 0.02, label = "5%", col = "red")
+
+dists <- c(Normal = dist_normal(mu = 8, sigma = 2/3), `Student t` = dist_student_t(df = 8, mu = 8, sigma = 2/3))
+chart(dists) +
+  geom_funfill(fun = dfun(student_t), from = -8, to = quantile(student_t, 0.05)) +
   geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
-  geom_line() +
-  # Normal distribution superposed in blue
-  geom_line(aes(y = Prob_N), col = "lightblue3") +
-  xlab("Quantile") +
+  scale_color_manual(values = c("lightblue2", "black")) +
   ylab("Densité de probabilité") +
   annotate("text", x = 6.5, y = 0.02, label = "5%", col = "red")
 ```
 
-Nous pouvons voir sur la Fig. \@ref(fig:tdistri1) que la distribution *t* de Student est plus resserrée en son centre, mais plus étalée aux extrémités que la distribution Normale de même moyenne et écart type. Néanmoins, elle est d'autant plus proche d'une Normale que les degrés de liberté sont grands. On dit qu'elle converge vers une normale lorsque $dll \longrightarrow \infty$. En pratique, pour des degrés de liberté égaux ou supérieurs à 30, nous pourrons considérer que les deux distributions sont pratiquement confondues.
+Nous pouvons voir sur la Fig. \@ref(fig:tdistri1) que la distribution *t* de Student est plus resserrée en son centre, mais plus étalée aux extrémités que la distribution Normale de même moyenne et écart type. Néanmoins, elle est d'autant plus proche d'une Normale que les degrés de liberté sont grands. On dit qu'elle converge vers une Normale lorsque $dll \longrightarrow \infty$. En pratique, pour des degrés de liberté égaux ou supérieurs à 30, nous pourrons considérer que les deux distributions sont pratiquement confondues.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -221,29 +248,26 @@ Revenons à nos calculs de quantiles et probabilités. Les questions que l'on se
 -   Quelle est la probabilité que la moyenne d'un échantillon diffère de 0,5 unité de la vraie valeur ? Au lieu de considérer l'aire à gauche ou à droite, on considérera **une aire répartie symétriquement à moitié à gauche et à moitié à droite**. La réponse à la question est :
 
 ```{r}
-# Aire à gauche de 8 -0.5 :
-.mu <- 8; .s <- 2/3
-(left_area <- pt((7.5 - .mu)/.s, df = 8, lower.tail = TRUE))
-# Aire à droite de 8 + 0.5 :
-(right_area <- pt((8.5 - .mu)/.s, df = 8, lower.tail = FALSE))
-# Résultat final
+# Aire à gauche de 8 +/- 0.5 :
+student_t <- dist_student_t(df = 8, mu = 8, sigma = 2/3)
+(left_area <- cdf(student_t, 7.5))
+(right_area <- 1 - cdf(student_t, 8.5))
 left_area + right_area
 ```
 
-Vous avez remarqué quelque chose de particulier ? Oui, les deux aires sont identiques. C'est parce que la distribution est symétrique. On peut donc simplifier le calcul en calculant d'un seul côté et en multipliant le résultat par deux :
+Vous avez remarqué quelque chose de particulier ? Oui, les deux aires à gauche et à droite sont identiques. C'est parce que la distribution est symétrique. On peut donc simplifier le calcul en calculant d'un seul côté et en multipliant le résultat par deux :
 
 ```{r}
-.mu <- 8; .s <- 2/3
-pt((7.5 - .mu)/.s, df = 8, lower.tail = TRUE) * 2
+cdf(student_t, 7.5) * 2
 ```
 
 Dans l'autre sens, il suffit donc de diviser la probabilité (= l'aire) par deux, parce qu'elle se répartit à parts égales à gauche et à droite dans les régions les plus extrêmes de la distribution. Ainsi, les quantiles qui définissent une aire extrême de 5% dans notre distribution sont (notez que la valeur de probabilité utilisée ici est 0,025, soit 2,5%) :
 
 ```{r}
 # Quantile à gauche
-.mu <- 8; .s <- 2/3; .mu + .s * qt(0.025, df = 8, lower.tail = TRUE)
-# Quantile à droite
-.mu <- 8; .s <- 2/3; .mu + .s * qt(0.025, df = 8, lower.tail = FALSE)
+quantile(student_t, 0.025)
+# quantile à droite
+quantile(student_t, 1 - 0.025)
 ```
 
 ```{block, type='note'}
@@ -252,25 +276,32 @@ On pourra aussi dire que la moyenne d'un échantillon de neuf observations issu 
 
 ```{r tdistri2, echo=FALSE, fig.cap="Une distribution de Student avec aire extrême de 5% mise en évidence en rouge."}
 # Student's t distribution (density probability) with parameters:
-.mu <- 8; .s <- 2/3; .df <- 8 # .mu, .s (sigma) and .df
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
-.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
+#.mu <- 8; .s <- 2/3; .df <- 8 # .mu, .s (sigma) and .df
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
+#.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+#.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
 
 # Data to represent the 5% area at both extremes in red
-.x2 <- .x1 <- .x
-.x1[.x > 6.4627] <- NA
-.x2[.x < 9.5373] <- NA
+#.x2 <- .x1 <- .x
+#.x1[.x > 6.4627] <- NA
+#.x2[.x < 9.5373] <- NA
 
-chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
-  Prob ~ Quantiles) +
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
+#  Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité") +
+#  annotate("text", x = c(6.25, 9.75), y = 0.015, label = c("2.5%", "2.5%"), col = "red")
+
+chart(student_t) +
+  geom_funfill(fun = dfun(student_t), from = -8, to = quantile(student_t, 0.025)) +
+  geom_funfill(fun = dfun(student_t), from = quantile(student_t, 1 - 0.025), to = 20) +
   geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
-  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
-  geom_line() +
-  xlab("Quantile") +
   ylab("Densité de probabilité") +
   annotate("text", x = c(6.25, 9.75), y = 0.015, label = c("2.5%", "2.5%"), col = "red")
 ```
@@ -299,7 +330,7 @@ $$\mathrm{IC}(1 - \alpha) \simeq \bar{x} \pm t_{\alpha/2}^{n-1} \cdot \frac{s_x}
 
 ```{block, type='note'}
 
-Étant donné l'importance que revet $\frac{s_x}{\sqrt{n}}$, nous appelerons cette quantité **erreur standard** de x et nous la noterons $SE_x$.
+Étant donné l'importance que revêt $\frac{s_x}{\sqrt{n}}$, nous appellerons cette quantité **erreur standard** de *x* et nous la noterons $SE_x$.
 
 ```
 
@@ -315,43 +346,52 @@ Analogie avec l'homme invisible qui promène son chien. Si vous avez des difficu
 
 ##### Valeur α {.unnumbered}
 
-Quel est l'impact du choix de $\alpha$ sur le calcul de l'IC ? Plus $\alpha$ sera petit, plus le risque de se tromper sera faible. Cela peut paraître intéressant, donc, de réduire $\alpha$ le plus possible. Mais alors, la longueur de l'IC augmente. Si nous poussons à l'extrême, pour $\alpha$ = 0%, nous aurons toujours un IC compris entre $-\infty$ et $+\infty$. Et cela, nous en sommes certains à 100% ! Trivial, non? Et pas très utile.
+Quel est l'impact du choix de $\alpha$ sur le calcul de l'IC ? Plus $\alpha$ sera petit, plus le risque de se tromper sera faible. Cela peut paraître intéressant, donc, de réduire $\alpha$ le plus possible. Mais alors, la longueur de l'IC augmente. Si nous poussons à l'extrême, pour $\alpha$ = 0%, nous aurons toujours un IC compris entre $-\infty$ et $+\infty$. Et cela, nous en sommes certains à 100% ! Trivial, non ? Et pas très utile.
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(88, height = 400, toc = "Intervalle de confiance")`
 
-Comme pour tout en statistique, nous devons accepter un certain risque de nous tromper si nous voulons obtenir des résultats utilisables. Plus ce risque est grand, plus la réponse est précise (ici, plus l'IC sera petit, voir Fig. \@ref(fig:tdistri3)), mais plus le risque de se tromper augmente. On cherchera alors un compromis qui se matérialise souvent par le choix de $\alpha$ = 5%. Nous nous tromperons une fois sur vingt, et nous aurons un IC généralement raisonnable pour ce prix. Naturellement, rien ne vous oblige à utiliser 5%. Vous pouvez aussi choisir 1% ou 0,1% si vous voulez limiter les risques.
+Comme pour tout en statistique, nous devons accepter un certain risque de nous tromper si nous voulons obtenir des résultats utilisables. Plus ce risque est grand, plus la réponse est précise (ici, plus l'IC sera petit, voir Fig. \@ref(fig:tdistri3)), mais plus le risque de se tromper augmente. On cherchera alors un compromis qui se matérialise souvent par le choix de $\alpha$ = 5%. Nous nous tromperons une fois sur vingt, et nous aurons un IC généralement raisonnable pour ce prix. Naturellement, rien ne vous oblige à utiliser 5%. Vous pouvez aussi choisir 1% ou 0,1% si vous voulez limiter les risques.
 
-```{r tdistri3, echo=FALSE, fig.cap="Une distribution de Student avec comparaison de l'IC 95% (entre les aires en rouge) et l'IC 90% (entre les aires en orange)."}
-# Student's t distribution (density probability) with parameters:
-.mu <- 8; .s <- 2/3; .df <- 8 # .mu, .s (sigma) and .df
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
-.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
+```{r tdistri3, echo=FALSE, fig.cap="Une distribution de Student avec comparaison de l'IC 95% (entre les aires en rouge) et l'IC 90% (entre les aires en orange partiellement recouvertes par celles en rouge)."}
+## Student's t distribution (density probability) with parameters:
+#.mu <- 8; .s <- 2/3; .df <- 8 # .mu, .s (sigma) and .df
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
+#.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+#.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob#
 
-# Data to represent the 5% area at both extremes in red
-.x4 <- .x3 <- .x2 <- .x1 <- .x
-.x1[.x > 6.4627] <- NA
-.x2[.x < 9.5373] <- NA
-.x3[.x > .mu + .s * qt(0.05, df = 8, lower.tail = TRUE)] <- NA
-.x4[.x < .mu + .s * qt(0.05, df = 8, lower.tail = FALSE)] <- NA
+## Data to represent the 5% area at both extremes in red
+#.x4 <- .x3 <- .x2 <- .x1 <- .x
+#.x1[.x > 6.4627] <- NA
+#.x2[.x < 9.5373] <- NA
+#.x3[.x > .mu + .s * qt(0.05, df = 8, lower.tail = TRUE)] <- NA
+#.x4[.x < .mu + .s * qt(0.05, df = 8, lower.tail = FALSE)] <- NA
 
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
+#  Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x3, ymin = 0, ymax = .d(.x3)), fill = "orange", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x4, ymin = 0, ymax = .d(.x4)), fill = "orange", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité") +
+#  annotate("text", x = c(6.25, 9.75, 6.65, 9.35), y = 0.015,
+#    label = c("2.5%", "2.5%", "5%", "5%"), col = "red")
 
-chart(data = dtx(Quantiles = .x, Prob = .d(.x), Prob_N = .d2(.x)),
-  Prob ~ Quantiles) +
+chart(student_t) +
+  geom_funfill(fun = dfun(student_t), from = -8, to = quantile(student_t, 0.05), fill = "orange") +
+  geom_funfill(fun = dfun(student_t), from = quantile(student_t, 1 - 0.05), to = 20, fill = "orange") +
+  geom_funfill(fun = dfun(student_t), from = -8, to = quantile(student_t, 0.025), fill = "red") +
+  geom_funfill(fun = dfun(student_t), from = quantile(student_t, 1 - 0.025), to = 20, fill = "red") +
   geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
-  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
-  geom_ribbon(aes(x = .x3, ymin = 0, ymax = .d(.x3)), fill = "orange", alpha = 0.2) +
-  geom_ribbon(aes(x = .x4, ymin = 0, ymax = .d(.x4)), fill = "orange", alpha = 0.2) +
-  geom_line() +
-  xlab("Quantile") +
   ylab("Densité de probabilité") +
-  annotate("text", x = c(6.25, 9.75, 6.65, 9.35), y = 0.015,
-    label = c("2.5%", "2.5%", "5%", "5%"), col = "red")
+  annotate("text", x = c(6.25, 9.75, 6.55, 9.45), y = 0.015,
+    label = c("2.5%", "2.5%", " <5%", "5%>"), col = "red")
 ```
 
 ### Théorème central limite (encore)
@@ -377,12 +417,14 @@ m_unif_n4 <- numeric(10000) # Vecteur de 10000 valeurs
 for (i in 1:10000)
   m_unif_n4[i] <- mean(runif(4, min = xmin, max = xmax))
 # Distribution de Student correspondante pour comparaison
-.mu <- 8; .s <- 2/2; .df <- 3 # .mu, .s (sigma) and .df
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+mu <- 8
+s <- 2/2
+df <- 3
+x <- seq(-4.5 * s + mu, 4.5 * s + mu, l = 1000) # Quantiles
+student_t1 <- dist_student_t(df = df, mu = mu, sigma = s)
 chart(data = NULL, ~ m_unif_n4) +
   geom_histogram(bins = 30) +
-  geom_line(aes(x = .x, y = .d(.x) * 3000))
+  geom_line(aes(x = x, y = dfun(student_t1)(x) * 3000))
 ```
 
 Cette distribution *n'est pas* une Student. Par contre, elle y ressemble plus qu'à la distribution uniforme de départ. Avec $n$ = 9 elle s'en rapproche très, très fort, et pour $n$ = 100, nous avons une *t* de Student parfaite.
@@ -392,12 +434,14 @@ m_unif_n9 <- numeric(10000) # Vecteur de 10000 valeurs
 for (i in 1:10000)
   m_unif_n9[i] <- mean(runif(9, min = xmin, max = xmax))
 # Distribution de Student correspondante pour comparaison
-.mu <- 8; .s <- 2/3; .df <- 8 # .mu, .s (sigma) and .df
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+mu <- 8
+s <- 2/3
+df <- 8
+x <- seq(-4.5 * s + mu, 4.5 * s + mu, l = 1000) # Quantiles
+student_t2 <- dist_student_t(df = df, mu = mu, sigma = s)
 chart(data = NULL, ~ m_unif_n9) +
   geom_histogram(bins = 30) +
-  geom_line(aes(x = .x, y = .d(.x) * 2000))
+  geom_line(aes(x = x, y = dfun(student_t2)(x) * 2000))
 ```
 
 ```{r tdistri5, echo=FALSE, fig.cap="Distribution d'échantillonnage à partir d'une distribution uniforme, n = 100. Ajustement d'une distribution de Student équivalente par dessus l'histogramme."}
@@ -405,15 +449,17 @@ m_unif_n100 <- numeric(10000) # Vecteur de 10000 valeurs
 for (i in 1:10000)
   m_unif_n100[i] <- mean(runif(100, min = xmin, max = xmax))
 # Distribution de Student correspondante pour comparaison
-.mu <- 8; .s <- 2/10; .df <- 99 # .mu, .s (sigma) and .df
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+mu <- 8
+s <- 2/10
+df <- 99
+x <- seq(-4.5 * s + mu, 4.5 * s +  mu, l = 1000) # Quantiles
+student_t3 <- dist_student_t(df = df, mu = mu, sigma = s)
 chart(data = NULL, ~ m_unif_n100) +
   geom_histogram(bins = 30) +
-  geom_line(aes(x = .x, y = .d(.x) * 610))
+  geom_line(aes(x = x, y = dfun(student_t3)(x) * 610))
 ```
 
-Nous venons de montrer de manière empirique que lorsque la distribution de la population est différente d'une distribution Normale, la distribution d'échantillonnage tend vers une *t* de Student pour un $n$ grand. Ceci se démontre de manière mathématique par le fameux **théorème central limite** que nous avons déjà abordé et qui est si cher aux statisticiens (nous vous épargnons cette démonstration ici).
+Nous venons de montrer de manière empirique que lorsque la distribution de la population est différente d'une distribution Normale, la distribution d'échantillonnage tend vers une *t* de Student pour un $n$ grand (en tous les cas, dans le cas d'une distribution de la population uniforme). Ceci se démontre de manière mathématique par le fameux **théorème central limite** que nous avons déjà abordé et qui est si cher aux statisticiens (nous vous épargnons cette démonstration ici).
 
 ##### Conditions de validité de l'IC {.unnumbered}
 
@@ -422,9 +468,9 @@ L'IC sera pertinent si :
 -   l'échantillon est représentatif (par exemple, échantillonnage aléatoire),
 -   les observations au sein de l'échantillon sont indépendantes les unes des autres,
 -   la distribution de la population...
-    -   est normale, alors l'IC basé sur la distribution *t* de Student sera exact,
-    -   est approximativement normale, l'IC sera approximativement exact,
-    -   est non normale, l'IC sera approximativement exact si $n$ est grand.
+    -   est Normale, alors l'IC basé sur la distribution *t* de Student sera exact,
+    -   est approximativement Normale, l'IC sera approximativement exact,
+    -   est non Normale, l'IC sera approximativement exact si $n$ est grand.
 
 ## Test *t* de Student
 
@@ -480,7 +526,8 @@ Dans notre cas, cela donne :
 
 ```{r}
 crabs %>.%
-  group_by(., sex) |> summarise(
+  group_by(., sex) %>.% 
+  summarise(.,
     mean = mean(rear),
     var  = var(rear),
     n    = n()) %->%
@@ -495,42 +542,60 @@ crabs_stats
 
 Un premier raisonnement consiste à dire que si la valeur attendue sous $H_0$ est comprise dans l'intervalle de confiance, nous ne pouvons pas rejeter l'hypothèse nulle, puisqu'elle représente une des valeurs plausibles à l'intérieur l'IC. Dans le cas présent, l'intervalle de confiance à 95% sur $\Delta rear$ va de 0.81 à 2.19. Il ne contient donc pas zéro. Donc, nous pouvons rejeter $H_0$ au seuil $\alpha$ de 5%.
 
-Nous pouvons effectivement interpréter le test de cette façon, mais le test *t* de Student se définit de manière plus classique en comparant la valeur $t_{obs}$ à la distribution théorique, et en renvoyant une valeur *P* associée au test. Ainsi, le lecteur peut interpréter les résultats avec son propre seuil $\alpha$ éventuellement différent de celui choisi par l'auteur de l'analyse.
+Nous pouvons effectivement interpréter le test de cette façon, mais le test *t* de Student se définit de manière plus classique en comparant la valeur $t_{obs}$ à la distribution théorique, et en renvoyant une valeur *P* associée au test, selon le même principe que nous avions appliqué au module précédent pour le test $\chi^2$. Ainsi, le lecteur peut interpréter les résultats avec son propre seuil $\alpha$ éventuellement différent de celui choisi par l'auteur de l'analyse.
 
 Le raisonnement est le suivant. Sous $H_0$, la distribution de $\Delta rear$ est connue. Elle suit une distribution *t* de Student de moyenne égale à la vraie valeur de la différence des moyennes, d'écart type égal à l'erreur standard sur cette différence, et avec $n - 2$ degrés de liberté. En pratique, nous remplaçons les valeurs de la population pour la différence des moyennes et pour les erreurs standard par celles estimées par l'intermédiaire de l'échantillon. Comme dans le cas du test $\chi^2$, nous définissons les zones de rejet et de non-rejet par rapport à cette distribution théorique. Dans le cas du test de Student bilatéral, l'aire $\alpha$ est répartie à moitié à gauche et à moitié à droite (Fig. \@ref(fig:ttest1)).
 
 ```{r ttest1, echo=FALSE, fig.cap="Visualisation de la distribution de Student réduite sous l'hypothèse nulle du test bilatéral au seuil de 5%."}
-# Student's t distribution (density probability) with parameters:
-.mu <- 0; .s <- 1; .df <- 198 # .mu, .s (sigma) and .df
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
-.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
+## Student's t distribution (density probability) with parameters:
+#.mu <- 0; .s <- 1; .df <- 198 # .mu, .s (sigma) and .df
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
+#.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+#.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
 
-# Data to represent the 2.5% area at both extremes in red
-.x2 <- .x1 <- .x
-.x1[.x > qt(0.025, df = 198, lower.tail = TRUE)] <- NA
-.x2[.x < qt(0.025, df = 198, lower.tail = FALSE)] <- NA
+## Data to represent the 2.5% area at both extremes in red
+#.x2 <- .x1 <- .x
+#.x1[.x > qt(0.025, df = 198, lower.tail = TRUE)] <- NA
+#.x2[.x < qt(0.025, df = 198, lower.tail = FALSE)] <- NA
 
 
-chart(data = dtx(Quantiles = .x, Prob = .d(.x)),
-  Prob ~ Quantiles) +
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x)),
+#  Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité") +
+#  annotate("text", x = c(-2.2, 2.2), y = 0.015, label = c("2.5%", "2.5%"), col = "red") +
+#  geom_vline(xintercept = 4.29, col = "red") +
+#  annotate("text", x = 0, y = 0.11, label = "Zone de non rejet", col = "black") +
+#  annotate("text", x = 3, y = 0.11, label = "Zone de rejet", col = "red") +
+#  annotate("segment", x = 3, y = 0.09, xend = 2.8, yend = 0.01,
+#    size = 0.5, col = "red", arrow = arrow(length = unit(0.2, "cm"))) +
+#  annotate("segment", x = 3, y = 0.09, xend = -1.9, yend = 0.01,
+#    size = 0.5, col = "red", arrow = arrow(length = unit(0.2, "cm"))) +
+#  annotate("text", x = 3.5, y = 0.3, label = "t[obs] == 4.29", parse = TRUE,
+#    col = "red", fontface = "bold.italic")
+
+student_t <- dist_student_t(df = 198, mu = 0, sigma = 1)
+chart(student_t) +
+  geom_funfill(fun = dfun(student_t), from = -5, to = quantile(student_t, 0.025)) +
+  geom_funfill(fun = dfun(student_t), from = quantile(student_t, 1 - 0.025), to = 5) +
   geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
-  geom_ribbon(aes(x = .x2, ymin = 0, ymax = .d(.x2)), fill = "red", alpha = 0.2) +
-  geom_line() +
-  xlab("Quantile") +
   ylab("Densité de probabilité") +
   annotate("text", x = c(-2.2, 2.2), y = 0.015, label = c("2.5%", "2.5%"), col = "red") +
   geom_vline(xintercept = 4.29, col = "red") +
+  xlim(-5, 5) +
   annotate("text", x = 0, y = 0.11, label = "Zone de non rejet", col = "black") +
-  annotate("text", x = 3, y = 0.11, label = "Zone de rejet", col = "red") +
-  annotate("segment", x = 3, y = 0.09, xend = 2.8, yend = 0.01,
+  annotate("text", x = 3, y = 0.11, label = "Zones de rejet", col = "red") +
+  annotate("segment", x = 2.5, y = 0.09, xend = 2.7, yend = 0.01,
     size = 0.5, col = "red", arrow = arrow(length = unit(0.2, "cm"))) +
-  annotate("segment", x = 3, y = 0.09, xend = -1.9, yend = 0.01,
+  annotate("segment", x = 2.5, y = 0.09, xend = -1.9, yend = 0.01,
     size = 0.5, col = "red", arrow = arrow(length = unit(0.2, "cm"))) +
-  annotate("text", x = 3.5, y = 0.3, label = "t[obs] == 4.29", parse = TRUE,
+  annotate("text", x = 3.6, y = 0.3, label = "t[obs] == 4.29", parse = TRUE,
     col = "red", fontface = "bold.italic")
 ```
 
@@ -542,10 +607,12 @@ Nous pouvons calculer la valeur *P* nous-mêmes comme ceci, sachant la valeur de
 ```
 
 ```{block, type='warning'}
-Ne pas oublier de multiplier la probabilité obtenue par deux, car nous avons un test bilatéral qui considère une probabilité égale à gauche et à droite de la distribution\ !
+Ne pas oublier de multiplier la probabilité obtenue par deux, car nous avons un test bilatéral qui considère une probabilité égale à gauche et à droite de la distribution !
 ```
 
-Naturellement, R propose une fonction toute faite pour réaliser ce test afin que nous ne devions pas détailler les calculs à chaque fois. Il s'agit de la fonction `t.test()`. Dans la SciViews Box, le snippet équivalent est accessible depuis `.hm` pour `hypothesis tests: means`. Dans le menu qui apparaît, vous choisissez `independant Student's t-test`. Les arguments de la fonction sont les suivants. Le jeu de données dans `data =`, une formule qui reprend le nom de la variable quantitative à gauche (`rear`) et celui de la variable qualitative à deux niveaux à droite (`sex`), l'indication du type d'hypothèse alternative, ici `alternative = "two-sided"` pour un test bilatéral, le niveau de confiance égal à $1 - \alpha$, donc `conf.level = 0.95` et enfin si nous considérons les variances comme égales pour les deux sous-populations `var.equal = TRUE`.
+Naturellement, R propose une fonction toute faite pour réaliser ce test afin que nous ne devions pas détailler les calculs à chaque fois. Il s'agit de la fonction `t.test()`. Les arguments de la fonction sont les suivants. Le jeu de données dans `data =`, une formule qui reprend le nom de la variable quantitative à gauche (`rear`) et celui de la variable qualitative à deux niveaux à droite (`sex`), l'indication du type d'hypothèse alternative, ici `alternative = "two-sided"` pour un test bilatéral, le niveau de confiance égal à $1 - \alpha$, donc `conf.level = 0.95` et enfin si nous considérons les variances comme égales pour les deux sous-populations `var.equal = TRUE`.
+
+<!-- Dans la SciViews Box, le snippet équivalent est accessible depuis `.hm` pour `hypothesis tests: means`. Dans le menu qui apparaît, vous choisissez `independant Student's t-test`. -->
 
 ```{r}
 t.test(data = crabs, rear ~ sex,
@@ -560,9 +627,9 @@ Nous retrouvons exactement toutes les valeurs que nous avons calculées à la ma
 -   observations indépendantes les unes des autres,
 -   une variable numérique et une variable facteur à deux niveaux,
 -   distribution de la population...
-    -   normale, alors le test basé sur la distribution *t* de Student sera exact,
-    -   approximativement normale, le test sera approximativement exact,
-    -   non normale, le test sera approximativement exact si $n$ est grand.
+    -   Normale, alors le test basé sur la distribution *t* de Student sera exact,
+    -   approximativement Normale, le test sera approximativement exact,
+    -   non Normale, le test sera approximativement exact si $n$ est grand.
 
 ```{block, type='info'}
 Petite astuce... les mesures morphométriques sont dépendantes de la taille globale de l'animal qui varie d'un individu à l'autre, il vaut donc mieux étudier des rapports de tailles plutôt que des mesures absolues. Refaites le calcul sur base du ratio `rear / length` comme exercice et déterminez si la différence est plus ou moins nette entre les mâles et les femelles que dans le cas de `rear` seul.
@@ -602,7 +669,7 @@ Pour rappel, nous avions considéré ceci :
 
 L'hypothèse alternative $H_1$ est ici la plus générale. Parfois, nous avons plus d'information qui nous permet de dire que si $H_0$ n'est pas rencontrée, $\overline{rear_F} - \overline{rear_M}$ ne peut alors qu'être négatif (on parle de test **unilatéral à gauche**) ou positif (test **unilatéral à droite**). En effet, dans ce cas nous placerons la zone de rejet complètement à la gauche ou à la droite de la distribution.
 
-En épluchant la littérature, nous réalisons que les crabes de la famille des Grapsidae dont *L. variegatus* fait partie ont systématiquement un arrière plus large chez la femelle lorsqu'un dimorphisme sexuel existe. Nous pouvons modifier nos hypothèses comme suit :
+En épluchant la littérature, nous réalisons que les crabes de la famille des *Grapsidae* dont *L. variegatus* fait partie ont systématiquement un arrière plus large chez la femelle lorsqu'un dimorphisme sexuel existe. Nous pouvons modifier nos hypothèses comme suit :
 
 -   $H_0: \overline{rear_F} - \overline{rear_M} = 0$
 -   $H_1: \overline{rear_F} - \overline{rear_M} > 0$
@@ -617,24 +684,39 @@ t.test(data = crabs, rear ~ sex,
 Notez que la valeur *P* a été divisée par deux par rapport au test bilatéral. Ceci est le résultat d'une répartition différente de l'aire de rejet qui est placée ici entièrement sur la droite (Fig. \@ref(fig:ttest2)). Nous n'avons donc plus dû multiplier la valeur calculée par deux pour la répartir également de l'autre côté de la distribution.
 
 ```{r ttest2, echo=FALSE, fig.cap="Visualisation de la distribution de Student réduite sous l'hypothèse nulle d'un test unilatéral à droite au seuil de 5%. Toute la zone de rejet est à droite."}
-# Student's t distribution (density probability) with parameters:
-.mu <- 0; .s <- 1; .df <- 198 # .mu, .s (sigma) and .df
-.col <- 1; .add <- FALSE # Plot parameters
-.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
-.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
-.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
+## Student's t distribution (density probability) with parameters:
+#.mu <- 0; .s <- 1; .df <- 198 # .mu, .s (sigma) and .df
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(-4.5*.s + .mu, 4.5*.s + .mu, l = 1000) # Quantiles
+#.d <- function(x) dt((x - .mu)/.s, df = .df)/.s  # Distribution function
+#.q <- function(p) qt(p, df = .df) * .s + .mu     # Quantile for lower-tail prob
 
-# Data to represent the 2.5% area at both extremes in red
-.x1 <- .x
-.x1[.x < qt(0.05, df = 198, lower.tail = FALSE)] <- NA
+## Data to represent the 2.5% area at both extremes in red
+#.x1 <- .x
+#.x1[.x < qt(0.05, df = 198, lower.tail = FALSE)] <- NA
 
-chart(data = dtx(Quantiles = .x, Prob = .d(.x)),
-  Prob ~ Quantiles) +
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x)),
+#  Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité") +
+#  annotate("text", x = 2.1, y = 0.015, label = "5%", col = "red") +
+#  geom_vline(xintercept = 4.29, col = "red") +
+#  annotate("text", x = 0, y = 0.11, label = "Zone de non rejet", col = "black") +
+#  annotate("text", x = 3, y = 0.11, label = "Zone de rejet", col = "red") +
+#  annotate("segment", x = 3, y = 0.09, xend = 2.6, yend = 0.01,
+#    size = 0.5, col = "red", arrow = arrow(length = unit(0.2, "cm"))) +
+#  annotate("text", x = 3.5, y = 0.3, label = "t[obs] == 4.29", parse = TRUE,
+#    col = "red", fontface = "bold.italic")
+
+student_t <- dist_student_t(df = 198, mu = 0, sigma = 1)
+chart(student_t) +
+  geom_funfill(fun = dfun(student_t), from = quantile(student_t, 1 - 0.05), to = 5) +
   geom_hline(yintercept = 0, col = "gray") +
-  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-  geom_ribbon(aes(x = .x1, ymin = 0, ymax = .d(.x1)), fill = "red", alpha = 0.2) +
-  geom_line() +
-  xlab("Quantile") +
+  xlim(-5, 5) +
   ylab("Densité de probabilité") +
   annotate("text", x = 2.1, y = 0.015, label = "5%", col = "red") +
   geom_vline(xintercept = 4.29, col = "red") +
@@ -651,7 +733,7 @@ Un autre exemple évident de test unilatéral : si nous mesurons la concentrati
 -   $H_0: \overline{[S]} = 0$
 -   $H_1: \overline{[S]} > 0$
 
-Ce test sera nécessairement unilatéral à droite, car des concentrations négatives ne sont pas possibles.
+Ce test sera nécessairement unilatéral à droite, car des concentrations négatives ne sont pas possibles. Dans d'autres circonstances, nous pourrions aussi avoir un test unilatéral à gauche en renversant l'inégalité pour l'hypothèse alternative et en plaçant toute la zone de rejet à la gauche de la distribution.
 
 ### Test *t* apparié
 
@@ -668,10 +750,10 @@ Par exemple, si nous voulons déterminer si la largeur de la carapace de *L. var
 -   $H_0: \overline{front - rear} = 0$
 -   $H_1: \overline{front - rear} \neq 0$
 
-A chaque fois, les dimensions `front` et `rear` sont mesurées sur les mêmes individus. Nous soustrayons l'un de l'autre *d'abord* individu par individu.
+À chaque fois, les dimensions `front` et `rear` sont mesurées sur les mêmes individus. Nous soustrayons l'un de l'autre *d'abord* individu par individu.
 
 ```{block, type='warning'}
-Attention\ ! Les hypothèses se formulent différemment. Il s'agit de la différence des moyennes pour le test *t* indépendant et la moyenne des différences pour le test *t* apparié. Si le résultat du calcul en ce qui concerne la moyenne ne diffère pas, la distribution des valeurs est différente (variance, écart type, erreur standard, ...). 
+Attention ! Les hypothèses se formulent différemment. Il s'agit de la différence des moyennes pour le test *t* indépendant et la moyenne des différences pour le test *t* apparié. Si le résultat du calcul en ce qui concerne la moyenne ne diffère pas, la distribution des valeurs est différente (variance, écart type, erreur standard, ...). 
 ```
 
 Nous calculons la moyenne de cette différence notée `delta_f_r`. Nous résumons ces résultats en calculant successivement :
@@ -707,7 +789,9 @@ chart(data = crabs, rear ~ front) +
 
 Nous voyons très clairement que tous les points se situent du même côté de la bissectrice, ce qui suggère très fortement que $H_0$ ne tient pas la route ici.
 
-Le test correspondant s'obtient dans la SciViews Box à partir du menu `.hm` pour `hypothesis tests: means` et dans le menu qui apparaît, on sélectionne le "snippet" `paired Student's t test`. Il s'agit toujours de la fonction `t.test()` mais cette fois-ci au lieu d'une formule, nous indiquons les deux variables suivant la notation `<data.frame>$<variable>`, et nous spécifions `paired = TRUE`. Fixons notre seuil $\alpha$ à 5% avant de faire le test, puis exécutons l'instruction suivante :
+Le test correspondant s'obtient toujours avec la fonction `t.test()` mais cette fois-ci au lieu d'une formule, nous indiquons les deux variables suivant la notation `<data.frame>$<variable>`, et nous spécifions `paired = TRUE`. Fixons notre seuil $\alpha$ à 5% avant de faire le test, puis exécutons l'instruction suivante :
+
+<!-- dans la SciViews Box à partir du menu `.hm` pour `hypothesis tests: means` et dans le menu qui apparaît, on sélectionne le "snippet" `paired Student's t test`. -->
 
 ```{r}
 t.test(crabs$front, crabs$rear,
@@ -725,17 +809,17 @@ Nous rejetons $H_0$, car la valeur *P* est inférieure à $\alpha$. Nous en conc
 -   observations indépendantes les unes des autres,
 -   deux variables numériques,
 -   distribution de la population...
-    -   normale, alors le test basé sur la distribution *t* de Student sera exact,
-    -   approximativement normale, le test sera approximativement exact,
-    -   non normale, le test sera approximativement exact si $n$ est grand.
+    -   Normale, alors le test basé sur la distribution *t* de Student sera exact,
+    -   approximativement Normale, le test sera approximativement exact,
+    -   non Normale, le test sera approximativement exact si $n$ est grand.
 
 ```{block, type='warning'}
-Avant de réaliser une expérience, vous vous demanderez certainement s'il vaut mieux vous orienter vers une design pour un test apparié ou indépendant. Le test apparié n'est pas toujours possible. Par exemple, si vous comparez deux espèces, il est évident qu'un même individu ne peut appartenir simultanément aux deux espèces\ ! Mais dans tous les cas où c'est possible, **le design apparié est à préférer**. Il permet d'éliminer une bonne part de la variabilité inter-individuelle de l'analyse, puisque cet effet joue de manière équivalente sur les deux mesures pour chaque paire d'observations sur le même individu. Le choix du test apparié permet d'observer des différentes plus subtiles indétectables en mode indépendant pour un même nombre de réplicats, ou alors, il permet d'observer les mêmes effets mais avec un nombre de mesures bien plus faible. Dans tous les cas, on est gagnant.
+Avant de réaliser une expérience, vous vous demanderez certainement s'il vaut mieux vous orienter vers une design pour un test apparié ou indépendant. Le test apparié n'est pas toujours possible. Par exemple, si vous comparez deux espèces, il est évident qu'un même individu ne peut appartenir simultanément aux deux espèces ! Mais dans tous les cas où c'est possible, **le design apparié est à préférer**. Il permet d'éliminer une bonne part de la variabilité inter-individuelle de l'analyse, puisque cet effet joue de manière équivalente sur les deux mesures pour chaque paire d'observations sur le même individu. Le choix du test apparié permet d'observer des différentes plus subtiles indétectables en mode indépendant pour un même nombre de réplicats, ou alors, il permet d'observer les mêmes effets mais avec un nombre de mesures bien plus faible. Dans tous les cas, on est gagnant.
 ```
 
 ##### Encodage correct {.unnumbered}
 
-Faites très attention à l'encodage des données. Il vous faut un tableau cas par variables correct, sinon vous risquez de vous orienter vers un mauvais test. Prenez le jeu de données `sleep` du package `datasets`.
+Faites très attention à l'encodage des données. Il vous faut un tableau cas par variables correct, sinon vous risquez de vous orienter vers un mauvais test. Prenez le jeu de données `sleep` du package {datasets}.
 
 ```{r}
 sleep <- read("sleep", package = "datasets")
@@ -750,7 +834,7 @@ names(sleep2) <- c("id", "med1", "med2")
 rmarkdown::paged_table(sleep2)
 ```
 
-Dans `sleep2` nous avons un véritable tableau cas par variable c'est-à-dire, une ligne par individu. Nous avons alors deux variables numériques `med1` et `med2` mesurées sur les mêmes individus. Le test apparié suivant est correct. Un test indépendant effectué sur `sleep` aurait été **incorrect** !
+Dans `sleep2` nous avons un véritable tableau cas par variable, c'est-à-dire, une ligne par individu. Nous avons alors deux variables numériques `med1` et `med2` mesurées sur les mêmes individus. Le test apparié suivant est correct. Un test indépendant effectué sur `sleep` aurait été **incorrect** !
 
 -   $H_0: \overline{med1 - med2} = 0$
 -   $H_1: \overline{med1 - med2} \neq 0$
@@ -765,6 +849,8 @@ chart(data = sleep2, med2 ~ med1) +
 t.test(sleep2$med1, sleep2$med2,
   alternative = "two.sided", conf.level = 0.95, paired = TRUE)
 ```
+
+Comme exercice, interprétez ce test d'un point de vue statistique (rejet ou non de l'hypothèse nulle), et ensuite au niveau biologique (qu'est-ce que vous en concluez sur le phénomène biologique étudié) ?
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -791,14 +877,16 @@ chart(data = sleep2, med1 ~ "") +
   ylab("Sommeil supplémentaire avec med1 [h]")
 ```
 
-Le graphique suggère peut-être que les patient dorment plus, mais la boite de dispersion chevauche quand même le trait horizontal à zéro. Donc, qu'en est-il exactement ? Le test s'obtient à partir du "snippet" `univariate Student's t-test` depuis `.hm` pour `hypothesis tests: means`. Notez l'argument supplémentaire `mu =` qui permet de spécifier la valeur de référence (ici zéro). Fixons $\alpha$ avant d'effectuer le test. Ici, nous prenons toujours 5%.
+Le graphique suggère peut-être que les patient dorment plus, mais la boite de dispersion chevauche quand même le trait horizontal à zéro. Donc, qu'en est-il exactement ? Le test s'obtient toujours à partir de la fonction `t.test()`. Notez l'argument supplémentaire `mu =` qui permet de spécifier la valeur de référence (ici zéro). Fixons $\alpha$ avant d'effectuer le test. Ici, nous prenons toujours 5%.
+
+<!-- à partir du "snippet" `univariate Student's t-test` depuis `.hm` pour `hypothesis tests: means`.  -->
 
 ```{r}
 t.test(sleep2$med1,
   alternative = "two.sided", mu = 0, conf.level = 0.95)
 ```
 
-La valeur *P* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne pouvons pas dire que le médicament 1 change de manière significative la durée de sommeil chez les patients au seuil $\alpha$ de 5% (test t univarié = 1,33, ddl = 9, valeur *P* = 0,22). Notez également que dans le cas présent, l'intervalle de confiance [-0,53, 2,03] contient zéro.
+La valeur *P* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne pouvons pas dire que le médicament 1 change de manière significative la durée de sommeil chez les patients au seuil $\alpha$ de 5% (test t univarié = 1,33, ddl = 9, valeur *P* = 0,22). Notez également que dans le cas présent, l'intervalle de confiance [-0,53, 2,03] contient zéro (c'est l'autre façon de décider si l'hypothèse nulle est rejetée ou non).
 
 ##### Conditions d'application {.unnumbered}
 
@@ -806,9 +894,9 @@ La valeur *P* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne p
 -   observations indépendantes les unes des autres,
 -   une variable numérique,
 -   distribution de la population...
-    -   normale, alors le test basé sur la distribution *t* de Student sera exact,
-    -   approximativement normale, le test sera approximativement exact,
-    -   non normale, le test sera approximativement exact si $n$ est grand.
+    -   Normale, alors le test basé sur la distribution *t* de Student sera exact,
+    -   approximativement Normale, le test sera approximativement exact,
+    -   non Normale, le test sera approximativement exact si $n$ est grand.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -819,13 +907,11 @@ if (exists("assignment"))
   assignment("A09Ia_cardiovascular", part = NULL,
     url = "https://github.com/BioDataScience-Course/A09Ia_cardiovascular",
     course.ids = c(
-      'S-BIOG-027' = !"A09Ia_{YY}M_cardiovascular", 
-      'S-BIOG-921' = !"A09Ia_{YY}C_cardiovascular"),
+      'S-BIOG-027' = !"A09Ia_{YY}M_cardiovascular"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
-      'S-BIOG-027' = !"{W[27]+1} 15:00:00"),
+      'S-BIOG-027' = !"{W[27]+1} 13:00:00"),
     course.ends = c(
       'S-BIOG-027' = !"{W[29]+1} 23:59:59"),
     term = "Q2", level = 3,
@@ -834,9 +920,11 @@ if (exists("assignment"))
 
 ## Test de Wilcoxon
 
-Nous avons vu que le test *t* de Student se réfère à une distribution qui n'est exacte que si la population de départ est normale. Même si le théorème central limite permet encore d'utiliser le test dans le cas contraire lorsque *n* est grand, tous les cas ne sont pas rencontrés. Si *n* est petit et que l'on soupçonne une distribution non normale (pensez au graphique quantile-quantile pour visualiser la distribution) que faire ?
+Nous avons vu que le test *t* de Student se réfère à une distribution qui n'est exacte que si la population de départ est Normale. Même si le théorème central limite permet encore d'utiliser le test dans le cas contraire lorsque *n* est grand, tous les cas ne sont pas rencontrés. Si *n* est petit et que l'on soupçonne une distribution non Normale (pensez au graphique quantile-quantile pour visualiser la distribution, mais si *n* est très petit, il ne sera pas non plus d'une grande utilité) que faire ?
 
-En fait, il existe un test similaire qui ne fait **aucune** hypothèse sur la distribution des données : le test de Wilcoxon. Comme il ne se réfère pas aux paramètres d'une distribution théorique, ce type de test est appelé **non paramétrique**, par opposition au test *t* de Student qui est qualifié de **paramétrique**. Les mêmes variantes existent (test indépendant, test apparié, bilatéral *versus* unilatéral). Ce test se réalise à partir de la fonction `wilcox.test()` accessible à partir des "snippets" dans le menu `.hn` pour `hypothesis tests: nonparametric`. Bien que ce test ne travaille plus sur les moyennes mais est associé aux médianes, nous le présentons ici parce qu'il représente une alternative au test *t* de Student.
+En fait, il existe un test similaire qui ne fait **aucune** hypothèse sur la distribution des données : le test de Wilcoxon (encore appelé test de Mann-Whitney qui l'on découvert à peu près simultanément ; on pourrait encore écrire test de Wilcoxon-Mann-Whitney). Comme il ne se réfère pas aux paramètres d'une distribution théorique, ce type de test est appelé **non paramétrique**, par opposition au test *t* de Student qui est qualifié de **paramétrique**. Les mêmes variantes existent (test indépendant, test apparié, bilatéral *versus* unilatéral). Ce test se réalise à partir de la fonction `wilcox.test()`. Bien que ce test ne travaille plus sur les moyennes mais est associé aux médianes, nous le présentons ici parce qu'il représente une alternative au test *t* de Student.
+
+<!-- accessible à partir des "snippets" dans le menu `.hn` pour `hypothesis tests: nonparametric` -->
 
 Pour les données relatives à `med1` de `sleep2`, cela donne[^09-moyenne-7] :
 
@@ -870,7 +958,7 @@ Nous obtenons un résultat similaire au test *t* de Student indépendant. Nous r
 
 `r h5p(92, height = 400, toc = "Choix du test d'hypothèse")`
 
-Quand choisir le test *t* de Student ou le test de Wilcoxon ? Nous serions tentés d'effectuer un test de Wilcoxon à chaque fois puisqu'ainsi nous sommes certains de ne pas commettre d'impair concernant la distribution des données. Mais en fait, le test *t* de Student est à préférer à chaque fois que c'est possible, car il est plus **puissant**. Cela signifie qu'il sera capable de détecter un effet significatif plus tôt que le Wilcoxon. La bonne stratégie est donc d'utiliser le test *t* de Student autant que possible et de ne se rabattre sur le test de Wilcoxon que si on ne peut pas faire autrement, soit *n* petit et distribution non normale ou inconnue. A noter que quand *n* est vraiment petit, il est impossible d'étudier valablement la distribution des données sur cet échantillon. On doit alors se baser sur un échantillon plus grand prélevé sur des données similaires ou alors jouer la sécurité et effectuer un test de Wilcoxon.
+Quand choisir le test *t* de Student ou le test de Wilcoxon ? Nous serions tentés d'effectuer tout le temps un test de Wilcoxon puisqu'ainsi nous sommes certains de ne pas commettre d'impair concernant la distribution des données. Mais en fait, le test *t* de Student est à préférer à chaque fois que c'est possible, car il est plus **puissant**. Cela signifie qu'il sera capable de détecter un effet significatif plus tôt que le Wilcoxon. La bonne stratégie est donc d'utiliser le test *t* de Student autant que possible (ou la variante de Welch si l'on n'est pas certain que les variances sont égales pour le test *t* indépendant) et de ne se rabattre sur le test de Wilcoxon que si on ne peut pas faire autrement, soit *n* petit et distribution non Normale ou inconnue. À noter que quand *n* est vraiment petit, il est impossible d'étudier valablement la distribution des données sur cet échantillon. On doit alors se baser sur un échantillon plus grand prélevé sur des données similaires ou alors jouer la sécurité et effectuer un test de Wilcoxon d'office.
 
 Cette analyse est valable pour toute paire de test paramétrique *versus* non paramétrique. Le tableau suivant résume cela.
 
@@ -902,7 +990,7 @@ La puissance est de 0,954. Donc, $\beta$ vaut 1 - 0,954 = 0,046 ou pratiquement 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A09Lb_ttest_wmw", title = "Les tests t de Student et de Wilcoxon-Mann-Whitney", toc = "Les tests t de Student et de Wilcoxon-Mann-Whitney")`
+`r learnr("A09Lb_ttest_wmw", title = "Tests t de Student et de Wilcoxon-Mann-Whitney", toc = "Tests t de Student et de Wilcoxon-Mann-Whitney")`
 
 ## Représentation graphique
 
@@ -925,28 +1013,28 @@ b <- chart(data = crabs, rear ~ sex) +
 combine_charts(list(a,b))
 ```
 
-Le graphique en barres et le nuage de point représentent identiquement la information. Ils représentent la moyenne avec des barres d’erreurs qui représentent l'intervalle de confiance à 0.95. Le graphe en dynamite avec des barres d'erreurs ne donne aucune information sur le nombre d'observations. Nous avons déjà abordé rapidement cette problématique dans la section \@ref(barres-mean). Il n'est donc pas le graphique optimal pour présenter un test *t* de Student.
+Le graphique en barres (encore appelé graphique en dynamite, car il ressemble au déclencheur d'explosion de dynamite dans les Walt Disneys) et le nuage de point représentent identiquement l'information. Ils représentent la moyenne avec des barres d'erreurs qui représentent l'intervalle de confiance à 95%. Le graphique en dynamite avec des barres d'erreurs ne donne aucune information sur le nombre d'observations. Nous avons déjà abordé rapidement cette problématique dans la section \@ref(barres-mean). Il n'est donc pas le graphique optimal pour présenter un test *t* de Student. Donc, préférez systématiquement le graphique de droite ou une de ses variantes (graphique en violon au lieu des points et barres d'erreurs autour des moyennes superposées lorsque le nombre d'observations est très grand).
 
-Malgré le fait que le test *t* de Student est un test paramétrique, on retrouve dans la littérature scientifique la boite de dispersion qui est pourtant un graphique associé à des valeurs non paramétriques. Pour le test de Wilcoxon, la boite de dispersion est l'outil graphique recommandé.
+Malgré le fait que le test *t* de Student est un test paramétrique, on retrouve dans la littérature scientifique la boite de dispersion qui est pourtant un graphique associé à des valeurs non paramétriques. Pour le test de Wilcoxon, la boite de dispersion est le graphique descriptif le plus recommandé (on peut aussi y adjoindre les points, ou passer sur le graphique en violon si le nombre d'observations est très grand).
 
 ```{r}
 chart(data = crabs, rear ~ sex) +
   geom_boxplot()
 ```
 
-Parmi ces 3 choix, nous vous conseillons d'employer le nuage de point avec la valeur moyenne et l'intervalle de confiance.
+Parmi ces trois choix, nous vous conseillons d'employer le nuage de point avec la valeur moyenne et l'intervalle de confiance en priorité dans vos descriptions des données, sans présager nécessairement du test d'hypothèse qui sera réalisé ensuite.
 
 ```{r}
 chart(data = crabs, rear ~ sex) +
   geom_jitter(alpha = 0.3, width = 0.2) +
-  stat_summary(geom = "point", fun.y = "mean") +
+  stat_summary(geom = "point", fun = "mean") +
   stat_summary(geom = "errorbar", width = 0.1,
     fun.data = "mean_cl_normal", fun.args = list(conf.int = 0.95))
 ```
 
 ##### Pièges et astuces : barres d'erreurs {.unnumbered}
 
-Que vous utilisiez le nuage de points ou le graphique en barres, vous devez être extrêmement vigilant aux barres d'erreurs. Vous devez toujours préciser et bien comprendre ce que les barres d'erreurs cachent. Voici 4 graphiques qui présentent différentes barres d'erreurs (la taille de l'axe y a volontairement été figée).
+Que vous utilisiez le nuage de points ou le graphique en barres, vous devez être extrêmement vigilant aux barres d'erreurs. Vous devez toujours préciser et bien comprendre ce que les barres d'erreurs cachent. Voici quatre graphiques qui présentent différentes barres d'erreurs à partir des *mêmes* données (la taille de l'axe y a volontairement été figée).
 
 ```{r, fig.cap="Nuage de points de la largeur de l'arrière de la carapace en focntion du sexe avec la moyenne et des barres d'erreurs. Graphe A : moyenne et intervalle de confiance 0.95. Graphe B : moyenne et écart-type. Graphe C : moyenne et 2*écart-type. Graphe D : moyenne et erreur standard" }
 
@@ -1008,15 +1096,17 @@ $$SE_x = \frac{s_x}{\sqrt{n}}$$
 mean_se(crabs$rear)
 ```
 
-Comme nous venons de le voir, les barres d'erreurs sont calculées à partir de différentes fonctions. Il est donc indispensable de préciser explicitement ce que les barres d'erreurs représentent.
+Comme nous venons de le voir, les barres d'erreurs sont calculées à partir de différentes fonctions. Il est donc indispensable de préciser explicitement ce que les barres d'erreurs représentent. Dans le cas du test *t* de Student, nous avons vu qu'il est lié directement à la notion d'intervalle de confiance. C'est donc la version avec l'IC qui permet une comparaison visuelle immédiate de la "significativité" de la différence éventuellement observée. Par contre, cet IC, autant que l'erreur standard dépendent de *n*. Autement dit, comme ici, les barres d'erreurs peuvent devenir très petites si *n* est grand, indépendamment de la variation intrinsèque des mesures. C'est l'écart type qui représentera donc le mieux cette variation des observations. De plus, nous savons que si la distribution est Normale, deux fois l'écart type d'un côté et de l'autre représente à peu près l'intervalle dans lequel 95% des observations doivent se trouver, ce qui donne un sens à la variante qui représente deux fois l'écart type comme barre d'erreur. Donc, il n'y a pas un graphique meilleur que les autres, tout dépend de l'information que vous souhaitez mettre en évidence dans vos données et du contexte de votre analyse.
 
 ##### Pour en savoir plus {.unnumbered}
 
--   [Beware of dynamite](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/TatsukiRcode/Poster3.pdf). Démonstration de l'impact d'un graphe en barres pour représenter la moyenne (et l'écart type) = graphique en "dynamite".
+-   [Beware of dynamite](https://filedn.com/lzGVgfOGxb6mHFQcRn9ueUb/sdd-umons/sdd1_09/Koyama2003_BewareOfDynamite.pdf). Démonstration de l'impact d'un graphe en barres pour représenter la moyenne (et l'écart type) = graphique en "dynamite".
 
 -   [Dynamite plots : unmitigated evil?](http://emdbolker.wikidot.com/blog%3Adynamite) Une autre comparaison du graphe en dynamite avec des représentations alternatives qui montre que le premier peut avoir quand même quelques avantages dans des situations particulières.
 
--   [Comparaison de moyennes : indiquez la significativité des différences sur le graph](https://statistique-et-logiciel-r.com/comparaison-de-moyennes-indiquer-les-differences-significatives-sur-le-graph/). Tutoriel sur la comparaison de moyennes avec `ggpubr`
+-   [Annotation de graphiques avec {{ggpubr}](https://delladata.fr/afficher-p-values-sur-graphiques/). Comment afficher les p-values sur un graph ? Ces variantes annotées des résultats des tests d'hypothèses correspondants se retrouvent fréquemment dans les publications en biologie.
+
+<!-- Lien plus disponible ! [Comparaison de moyennes : indiquez la significativité des différences sur le graph](https://statistique-et-logiciel-r.com/comparaison-de-moyennes-indiquer-les-differences-significatives-sur-le-graph/). Tutoriel sur la comparaison de moyennes avec {ggpubr}. -->
 
 Pour terminer, bien que la moyenne soit un descripteur statistique très utile, il est parfois utilisé de manière abusive. Une distribution statistique ne se résume pas à un nombre, fût-ce la moyenne. De plus, si la distribution est *asymétrique*, la moyenne est un mauvais choix (préférer alors la médiane, ou transformer les données pour rendre la distribution plus symétrique). La vidéo suivante détaille le problème qui peut se produire :
 
@@ -1033,22 +1123,21 @@ if (exists("assignment2"))
   assignment2("A09Ga_human_health", part = "II",
     url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
     course.ids = c(
-      'S-BIOG-027' = !"A08Ga_{YY}M_human_health", 
-      'S-BIOG-921' = !"A08Ga_{YY}C_human_health"),
+      'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/...", 
-      'S-BIOG-921' = "https://classroom.github.com/g/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/wxbGLeOk"),
     course.starts = c(
-      'S-BIOG-027' = !"{W[27]+1} 10:00:00"),
+      'S-BIOG-027' = !"{W[27]+1} 13:00:00"),
     course.ends = c(
       'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
     term = "Q2", level = 4, n = 4,
     toc = "Biométrie humaine, part II")
 ```
 
-**Note : Le projet suivant est la continuité d'un exercice débuté au premier quadrimestre et approfondi au module précédent.**
+```{=html}
+<!-- **Note : Le projet suivant est la continuité d'un exercice débuté au premier quadrimestre et approfondi au module précédent.**
 
-```{r assign_A09Ga_urchin_III, echo=FALSE, results='asis'}
+{r assign_A09Ga_urchin_III, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A09Ga_urchin", part = "III",
     url = "https://github.com/BioDataScience-Course/A03Ga_urchin",
@@ -1064,8 +1153,9 @@ if (exists("assignment2"))
       'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
     term = "Q2", level = 4, n = 2,
     toc = "Biométrie de l'oursin violet, part III")
-```
 
+-->
+```
 ## Récapitulatif des exercices
 
 Vous venez de terminer le module 9. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière la moyenne qui peut nous sembler si simple. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
