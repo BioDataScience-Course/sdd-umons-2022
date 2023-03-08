@@ -181,6 +181,8 @@ pt((8.5 - mu)/s, df = 8, lower.tail = FALSE)
 
 Elle est de 24% environ. Notez que nous avons renseigné la moyenne et l'écart type de la distribution *t* dans `mu` et `s`, respectivement. Ensuite, les degrés de liberté (9 - 1) sont indiqués dans l'argument `df =`. Enfin, nous avons précisé `lower.tail =  FALSE` pour obtenir l'aire à droite dans la distribution.
 
+Dans ce cas, il n'est pas nécessaire de ruser car cet objet permet de traiter une distribution de Student non centrée sur 0. Rappelez vous cependant que les fonctions `cdf()` et `quantile()` ne permettent pas de spécifier que l'on souhaite l'aire à droite.
+
 -   Considérant une aire à gauche de 5%, quelle est la moyenne de l'échantillon qui la délimite ?
 
 ```{r}
