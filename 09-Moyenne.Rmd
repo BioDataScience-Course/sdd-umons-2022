@@ -904,20 +904,20 @@ La valeur *P* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne p
 
 `r h5p(91, height = 400, toc = "Variantes du test t de Student")`
 
-```{r assign_A09Ia_cardiovascular, echo=FALSE, results='asis'}
+```{r assign_A09Ia_ttest, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A09Ia_cardiovascular", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A09Ia_cardiovascular",
+  assignment("A09Ia_ttest", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A09Ia_ttest",
     course.ids = c(
-      'S-BIOG-027' = !"A09Ia_{YY}M_cardiovascular"),
+      'S-BIOG-027' = !"A09Ia_{YY}M_ttest"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/JnOVcRGe"),
     course.starts = c(
       'S-BIOG-027' = !"{W[27]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-027' = !"{W[29]+1} 23:59:59"),
+      'S-BIOG-027' = !"{W[28]+1} 23:59:59"),
     term = "Q2", level = 3,
-    toc = "Maladies cardiovasculaires")
+    toc = "Tests de Student adaptation d'algues")
 ```
 
 ## Test de Wilcoxon
