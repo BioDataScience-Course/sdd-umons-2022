@@ -41,6 +41,10 @@ chart(data = crabs2, rear ~ group) +
   
 ```
 
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(227, height = 270, toc = "Graphique associé à l'ANOVA")`
+
 Nous en profitons également pour essayer l'astuce proposée au module précédent. Au lieu de travailler sur la variable `rear` seule, nous allons étudier l'aspect ratio entre largeur à l'arrière (`rear`) et largeur maximale (`width`) de la carapace afin de nous débarrasser d'une source de variabilité triviale qui est qu'un grand crabe est grand partout, et de même un petit crabe est petit pour toutes ses mesures. Nous prenons soin également de libeller cette nouvelle variable correctement avec `labelise()`. Enfin, nous ne conservons que les variables `species`, `sex`, `group` et `aspect` avec `select()` (possible aussi avec `fmutate()` et `fselect()` bien sûr) :
 
 ```{r}
@@ -54,6 +58,10 @@ skimr::skim(crabs2)
 ```
 
 Nous avons 50 individus dans chacun des quatre groupes. **Lorsqu'il y a le même nombre de réplicas dans tous les groupes, on appelle cela un plan balancé**. C'est une situation optimale. Nous devons toujours essayer de nous en rapprocher le plus possible, car, si le nombre d'individus mesurés diffère fortement d'un groupe à l'autre, nous aurons forcément moins d'information disponible dans le ou les groupes moins nombreux, ce qui déforcera notre analyse.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(228, height = 270, toc = "Plan balancé d'un expérience")`
 
 Nous voyons également que la variable `aspect` semble avoir une distribution bimodale d'après le petit histogramme représenté dans le résumé. La Fig. \@ref(fig:anova0) avec `aspect montre une différence plus qu'avec`rear\` seul, à la Fig. \@ref(fig:crabs-rear).
 
@@ -97,6 +105,10 @@ Clairement, on oublie cette façon de faire\ ! Prendre le risque de se tromper 9
 ```
 
 Nous allons donc travailler différemment... Ci-après nous verrons qu'une simplification des hypothèses et l'approche par décomposition de la variance est une option bien plus intéressante (ANalysis Of VAriance ou ANOVA). Ensuite, nous reviendrons vers ces comparaisons multiples deux à deux, mais en prenant des précautions pour éviter l'inflation du risque global de nous tromper.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(229, height = 270, toc = "Comparaison 2 à 2 et erreurs associées")`
 
 ## ANOVA à un facteur
 
@@ -422,6 +434,10 @@ anova. %>.%
 Lorsque nous rejetons $H_0$ dans l'ANOVA comme dans le cas de notre exemple, nous savons qu'il y a au moins deux moyennes qui diffèrent l'une de l'autre, mais nous ne savons pas lesquelles. Notre analyse n'est pas terminée. Nous allons revisiter les tests de comparaison multiples deux à deux, mais en prenant des précautions particulières pour éviter l'inflation du risque d'erreur.
 
 Tout d'abord, nous mettons en place un garde-fou. Nous effectuons *toujours* une ANOVA en premier lieu, et nous n'envisageons les comparaisons multiples que lorsque $H_0$ est rejetée. Cela évite beaucoup de faux positifs. On appelle cela des tests "post hoc" car ils ne sont pas planifiés d'emblée, mais suivent un conclusion préalable (ici, le rejet de $H_0$ dans un test ANOVA).
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(230, height = 400, toc = "tests post hoc")`
 
 Une approche simple consisterait à modifier notre seuil $\alpha$ pour chaque test individuel vers le bas afin que le risque de se tromper dans au moins un des tests ne dépasse pas la valeur de $/alpha$ que nous nous sommes fixée. C'est la **correction de Bonferroni**. Elle consiste à diviser la valeur de $/alpha$ par le nombre de tests simultanés nécessaires, et d'utiliser cette valeur corrigée comme seuil $\alpha$ de chaque test de Student individuel. Dans le cas de quatre populations, nous avons vu qu'il y a six comparaisons multiples deux à deux. Donc, en appliquant un seuil corrigé de $\alpha/6 = 0,05 / 6 = 0,00833$ pour chaque test, on aura la probabilité suivante pour $1 - \alpha$ :
 
