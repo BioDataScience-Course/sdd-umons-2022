@@ -5,6 +5,8 @@ SciViews::R("infer")
 library(BioDataScience1)
 ```
 
+<!-- Here, we have to move functions from BioDataScience1 to inferit. Must add a power analysis + discuss the absolute effect. We also need a nicer output in reportit + labels, incl. in french. A supplemental section that presents alternative tests (G test, permutation test) and also the test on proportions. -->
+
 Dans ce module, nous entrons dans le monde de l'inférence statistique et des tests d'hypothèses qui nous permettront de répondre à des questions biologiques sur base de données empiriques malgré une incertitude inévitable (hasard de l'échantillonnage, variabilité individuelle, erreurs de mesure ...).
 
 ##### Objectifs {.unnumbered}

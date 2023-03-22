@@ -5,6 +5,8 @@ SciViews::R("infer")
 library(BioDataScience1)
 ```
 
+<!-- Here, we have to move functions from BioDataScience1 to inferit. We need also to look at a way to estimate best n given a goal. Work on effect size and absolute effect in a way that it would be homogeneous with those of Chi^2 and ANOVA. We also need a nicer presentation of output in reportit + labels, incl. in french. A Shiny app to feel the various aspects presented here. Also a supplemental section that presents bootstrap and bootstrapped t test + a Bayeasian alternative. -->
+
 ##### Objectifs {.unnumbered}
 
 -   De manière générale, pouvoir répondre à différentes questions concernant une ou deux moyennes

@@ -5,6 +5,8 @@ SciViews::R("infer", "model")
 library(BioDataScience1)
 ```
 
+<!-- Here, we have to move functions from BioDataScience1 to inferit. We need also to look at Type II versus type III + packages effectsize and afex. Discuss about eta^2, omega^2, Cohen's f etc (effect size in percent of variance) + the absolute effect. Also a power analysis with the pwr package and a way to estimate best n given a goal. We also need a nicer presentation of ANOVA table in reportit + labels, incl. in french. Finally, one or two Shiny apps that allow to play with partition of variance to feel it better. A supplemental section that presents alternate homoscédasticity tests (Levene, ...). For effect size: https://cran.r-project.org/web/packages/effectsize/vignettes/anovaES.html -->
+
 ##### Objectifs {.unnumbered}
 
 -   Pouvoir comparer plus de deux populations simultanément en utilisant des techniques de décomposition de la variance
@@ -489,7 +491,7 @@ Les conditions d'application pour le test post hoc de Tukey sont les mêmes que 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A10La_anova", title = "L'ANOVA et tests post-hoc", toc = "L'analyse de variance et les test post-hoc")`
+`r learnr("A10La_anova", title = "L'ANOVA et tests post-hoc", toc = "L'analyse de variance et les tests post-hoc")`
 
 ## Test de Kruskal-Wallis
 
