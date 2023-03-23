@@ -491,7 +491,23 @@ Les conditions d'application pour le test post hoc de Tukey sont les mêmes que 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A10La_anova", title = "L'ANOVA et tests post-hoc", toc = "L'analyse de variance et les tests post-hoc")`
+`r learnr("A10La_anova", title = "ANOVA et tests post-hoc", toc = "Analyse de variance et les tests post-hoc")`
+
+```{r assign_A10Ia_acidification_effect, echo=FALSE, results='asis'}
+if (exists("assignment"))
+  assignment("A01Ia_acidification_effect", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A10Ia_acidification_effect",
+    course.ids = c(
+      'S-BIOG-027' = !"A10Ia_{YY}M_acidification_effect"),
+    course.urls = c(
+      'S-BIOG-027' = "https://classroom.github.com/a/d5qvb_g0"),
+    course.starts = c(
+      'S-BIOG-027' = !"{W[29]+1} 13:00:00"),
+    course.ends = c(
+      'S-BIOG-027' = !"{W[32]+1} 23:59:59"),
+    term = "Q2", level = 3,
+    toc = "ANOVA (effet de l'acidification)")
+```
 
 ## Test de Kruskal-Wallis
 
@@ -560,6 +576,8 @@ La présentation des résultats est plus détaillée que pour le HSD de Tukey. P
 Au final que conclure ? Lorsque l'ANOVA peut être utilisée, elle est à préférer. Ici avec une transformation puissance cinq, nous stabilisons la variance qui est le critère le plus sensible. De plus tant avec l'ANOVA qu'avec le Kruskal-Wallis, nous détectons des différences significatives. Les tests "post hoc" nous indiquent des différences significatives au seuil $\alpha$ de 5% sauf peut-être pour les mâles (il faudrait prévoir des mesures supplémentaires pour confirmer ou infirmer à ce niveau). Dans notre exemple, puisque les deux tests donnent sensiblement le même résultat, nous pouvons jouer la sécurité et présenter le Kruskal_wallis dans notre publication. Ainsi, la question de la distribution des résidus ne se pose plus.
 
 ##### À vous de jouer ! {.unnumbered}
+
+`r learnr("A10Lb_kruskal", title = "Test de Kruskal-Wallis", toc = "Test de Kruskal-Wallis")`
 
 Appliquez vos nouvelles connaissances dans le projet de groupe que vous avez débuté aux deux modules précédents.
 
