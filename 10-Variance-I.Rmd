@@ -112,7 +112,7 @@ Nous allons donc travailler différemment... Ci-après nous verrons qu'une simpl
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(229, height = 270, toc = "Comparaison 2 à 2 et erreurs associées")`
+`r h5p(229, height = 270, toc = "Comparaison 2 à 2")`
 
 ## ANOVA à un facteur
 
