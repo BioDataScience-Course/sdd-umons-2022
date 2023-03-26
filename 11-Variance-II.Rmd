@@ -29,7 +29,7 @@ $$y \sim fact$$
 
 avec $y$ la variable numérique réponse et $fact$ la variable facteur explicative unique.
 
-Si nous prenons notre exemple des crabes *L. variegatus*, nous avions travaillé un peu artificiellement sur une seule variable facteur en regroupant les deux variables `species` et `sex` en une seule variable `group`. Qu'en est-il si nous voulons quand même considérer les deux variables `species` et `sex` séparément ? c'est possible avec une **ANOVA à deux facteurs**. N'oubliez pas que les variables facteurs dans vos équations doivent bien être encodées comme objets **factor** ou **ordered** dans R. Si ces variables sont encodées comme valeurs numériques, la fonction `lm()` utiliséed ici fera une *autre* analyse que l'ANOVA !
+Si nous prenons notre exemple des crabes *L. variegatus*, nous avions travaillé un peu artificiellement sur une seule variable facteur en regroupant les deux variables `species` et `sex` en une seule variable `group`. Qu'en est-il si nous voulons quand même considérer les deux variables `species` et `sex` séparément ? c'est possible avec une **ANOVA à deux facteurs**. N'oubliez pas que les variables facteurs dans vos équations doivent bien être encodées comme objets **factor** ou **ordered** dans R. Si ces variables sont encodées comme valeurs numériques, la fonction `lm()` utilisée ici fera une *autre* analyse que l'ANOVA !
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -90,14 +90,14 @@ crabs2 %>.%
 
 Pour la visualisation graphique, nous sommes tributaires du nombre d'observations. Avec moins d'une petite dizaine d'observations, nous représenterons des points pour chaque observation et superposerons les moyennes. Lorsque le nombre est plus grand, nous pourrons utiliser soit les boites de dispersion, soit le graphique en violon si ce nombre est encore plus élevé. Voyons cela sur notre exemple. La Fig. \@ref(fig:crabs2boxplot) montre ce que cela donne si l'on opte pour les boites de dispersion.
 
-<!-- (les "snippets" dans le menu `chart: bivariate` peuvent être utilisés comme point de départ auquel nous ajoutons la seconde variable facteur pour les facettes multi-graphiques séparée par un `|`) -->
+<!-- (les "snippets" dans le menu `chart: bivariate` peuvent être utilisés comme point de départ auquel nous ajoutons la seconde variable facteur pour les facettes multigraphiques séparée par un `|`) -->
 
 ```{r crabs2boxplot, fig.cap="Taille relative de la carapace à l'arrière de crabes *L. variegatus* (deux variétés et deux sexes), version simple."}
 chart(data = crabs2, aspect5 ~ species | sex) +
   geom_boxplot()
 ```
 
-La Fig. \@ref(fig:crabs2boxplot2) est une version améliorée avec les observations et les moyennes pour chaque sous-groupe ajouté au graphique selon la même technique que nous avions utilisé pour l'ANOVA à un facteur.
+La Fig. \@ref(fig:crabs2boxplot2) est une version améliorée avec les observations et les moyennes pour chaque sous-groupe ajouté au graphique selon la même technique que nous avions utilisée pour l'ANOVA à un facteur.
 
 ```{r crabs2boxplot2, fig.cap="Taille relative de la carapace à l'arrière de crabes *L. variegatus* (deux variétés et deux sexes), version annotée."}
 chart(data = crabs2, aspect5 ~ species | sex) +
@@ -535,7 +535,7 @@ if (exists("assignment"))
 
 ### Modèle à mesures répétées
 
-Un autre type de modèle aléatoire courant est le modèle à mesures répétées. Celui-ci se produit lorsque nous mesurons plusieurs fois les mêmes individus, par exemple, successivement dans le temps. Considérons l'expérience suivante. Dix huit volontaires (variable `Subject`) ont subi une privation de sommeil (restreint à 3h par 24h) pendant neuf jours (variable `Days`). Au jour zéro, ils ont eu un sommeil normal. Leur temps de réaction est mesuré en millisecondes à l'aide d'un test standardisé.
+Un autre type de modèle aléatoire courant est le modèle à mesures répétées. Celui-ci se produit lorsque nous mesurons plusieurs fois les mêmes individus, par exemple, successivement dans le temps. Considérons l'expérience suivante. Dix-huit volontaires (variable `Subject`) ont subi une privation de sommeil (restreint à 3h par 24h) pendant neuf jours (variable `Days`). Au jour zéro, ils ont eu un sommeil normal. Leur temps de réaction est mesuré en millisecondes à l'aide d'un test standardisé.
 
 ```{r}
 sleep <- read("sleepstudy", package = "lme4")
@@ -560,7 +560,7 @@ chart(data = sleep, Reaction ~ Days | Subject) +
   geom_line()
 ```
 
-Comme nous pouvons nous y attendre, le temps de réaction semble augmenter en fonction de la déprivation de sommeil, mais un effet individuel est possible. Attention : résistez à la tentation de représenter ici les valeurs moyennes par jour de temps de réaction. Il est important de conserver la continuité temporelle individu par individu sur le graphique en reliant les points relatifs à chaque patient comme ci-dessus.
+Comme nous pouvons nous y attendre, le temps de réaction semble augmenter en fonction de la privation de sommeil, mais un effet individuel est possible. Attention : résistez à la tentation de représenter ici les valeurs moyennes par jour de temps de réaction. Il est important de conserver la continuité temporelle individu par individu sur le graphique en reliant les points relatifs à chaque patient comme ci-dessus.
 
 Nous pouvons, par contre, faire la supposition que la variation du temps de réaction soit linéaire, et le représenter graphiquement comme suit :
 
@@ -591,7 +591,7 @@ L'effet des jours (`Days`) est significatif au seuil $\alpha$ de 5%. En réalit�
 summary(sleep_rep)
 ```
 
-En lisant dans le sous-tableau `Fixed effects:`, nous avons `a` = 10,5 et `b` = 251,4 dans la colonne `Estimate` en regard de `Days` et de `(Intercept)`, soit ordonnée à l'origine en anglais. Cela donne l'équation suivante : Réaction = 10,5 \* Days + 251,4. Le temps de réaction moyen au jour zéro est de 251 ms, et l'augmentation est de 10,5 ms par jour, toujours en moyenne (mais nous anticipons ici sur ce qu'on appelle un modèle linéaire que nous étudierons plus en détails au cours de SDD II l'an prochain).
+En lisant dans le sous-tableau `Fixed effects:`, nous avons `a` = 10,5 et `b` = 251,4 dans la colonne `Estimate` en regard de `Days` et de `(Intercept)`, soit ordonnée à l'origine en anglais. Cela donne l'équation suivante : Réaction = 10,5 \* Days + 251,4. Le temps de réaction moyen au jour zéro est de 251 ms, et l'augmentation est de 10,5 ms par jour, toujours en moyenne (mais nous anticipons ici sur ce qu'on appelle un modèle linéaire que nous étudierons plus en détail au cours de SDD II l'an prochain).
 
 Afin de déterminer si les variations entre sujets sont significatives, nous calculons les intervalles de confiance :
 
@@ -633,7 +633,7 @@ Le modèle utilisé ici considère une variation du temps de réaction identique
 
 ##### Conditions d'application {.unnumbered}
 
-Pour tous les modèles contenant un ou plusieurs effets aléatoires, les conditions générale de l'ANOVA restent de mise :
+Pour tous les modèles contenant un ou plusieurs effets aléatoires, les conditions générales de l'ANOVA restent de mise :
 
 -   échantillon représentatif (par exemple, aléatoire),
 -   observations indépendantes,
@@ -644,7 +644,7 @@ Pour tous les modèles contenant un ou plusieurs effets aléatoires, les conditi
 
 De plus, nous faisons l'hypothèse supplémentaire que les variables à effet aléatoire suivent une distribution Normale, mais nous ne pouvons pas facilement tester cette hypothèse à moins d'avoir un grand nombre de niveaux pour la variable en question dans notre échantillon, ce qui est très rarement le cas.
 
-Dans tous les cas, une analyse des résidus, en particulier un graphique quantile-quantile et un graphique des résidus par rapport aux valeurs ajustées sont indispensables pour confirmer que les conditions d'application sont rencontrées. Si ce n'est pas le cas, nous pouvons tenter de transformer les données. Sinon, nous devons utiliser une version non paramétrique du modèle si elle existe (e.g., [test de Friedman](https://www.datanovia.com/en/fr/lessons/test-de-friedman-dans-r/)), mais ce n'est pas toujours possible.
+Dans tous les cas, une analyse des résidus, en particulier un graphique quantile-quantile et un graphique des résidus par rapport aux valeurs ajustées sont indispensables pour confirmer que les conditions d'application sont rencontrées. Si ce n'est pas le cas, nous pouvons tenter de transformer les données. Sinon, nous devons utiliser une version non paramétrique du modèle si elle existe (p. ex., [test de Friedman](https://www.datanovia.com/en/fr/lessons/test-de-friedman-dans-r/)), mais ce n'est pas toujours possible.
 
 ##### Pour aller plus loin {.unnumbered}
 
@@ -664,7 +664,7 @@ Vous avez pu vous rendre compte que R n'est pas qu'un logiciel de science des do
 
 [^11-variance-ii-5]: Historiquement, ce langage s'appelait **S** à l'origine dans les années 1970 alors qu'il a été inventé par John Chambers et ses collègues aux laboratoires Bell. R est une implémentation open source de S écrite dans les années 1990 par Ross Ihaka et Robert Gentleman. Ensuite R a pris de l'importance à tel point qu'on parle maintenant du langage R (sachant bien qu'il s'agit d'un *dialecte* du langage S).
 
-Les langages informatiques sont, pour la plupart, conçus autour de standards bien définis. Mais R est toujours resté volontairement très libertaire à ce niveau. Comme R permet également de presque tout redéfinir dans son langage, il est apparu au cours du temps différents styles. Ces styles co-existent et co-existeront encore longtemps car ils ont tous des avantages et des inconvénients, ce qui mène à des choix personnels de chaque utilisateur dictés par l'usage qu'il fait de R, ses goûts, son caractère, et comment il a été formé (à quelle "école" il appartient). Nous n'entrerons pas dans les débats stériles autant que passionnés autour de ces questions de styles. Il est cependant utile de comprendre ces différentes approches au moins dans leurs grandes lignes.
+Les langages informatiques sont, pour la plupart, conçus autour de standards bien définis. Mais R est toujours resté volontairement très libertaire à ce niveau. Comme R permet également de presque tout redéfinir dans son langage, il est apparu au cours du temps différents styles. Ces styles co-existent et co-existeront encore longtemps, car ils ont tous des avantages et des inconvénients, ce qui mène à des choix personnels de chaque utilisateur dictés par l'usage qu'il fait de R, ses goûts, son caractère, et comment il a été formé (à quelle "école" il appartient). Nous n'entrerons pas dans les débats stériles autant que passionnés autour de ces questions de styles. Il est cependant utile de comprendre ces différentes approches au moins dans leurs grandes lignes.
 
 Aujourd'hui, on peut distinguer principalement trois styles dans R, [résumés dans un aide-mémoire](http://www.amelia.mn/Syntax-cheatsheet.pdf) :
 
@@ -672,7 +672,7 @@ Aujourd'hui, on peut distinguer principalement trois styles dans R, [résumés d
 
 -   La **syntaxe formule** qui utilise une formule (objet ressemblant à une équation mathématique et utilisant le tilde `~` pour séparer le membre de gauche et le membre de droite). Nous avons utilisé des formules dans le cadre de graphiques réalisés à l'aide de `chart()` ou pour nos ANOVAs par exemple. Une instruction se présente typiquement comme `fun(y ~ x, data = df)`, même si nous préférons dans SciViews inverser les deux arguments et écrire `fun(data = df, y ~ x)`. La syntaxe formule est souvent associée également à un **data.frame** (l'argument `data =`), même si une liste, un **tibble** (voir ci-dessous) ou tout autre objet similaire (comme un **data.table**) peut aussi souvent être utilisé.
 
--   La **syntaxe "tidyverse"** qui vise à produire des instruction aussi lisibles que possible (lecture proche d'un langage naturel humain). Cette syntaxe utilise quelques astuces de programmation pour rendre les instructions plus digestes et s'affranchir du `df$x` pour pouvoir écrire uniquement `x` à la place. Elle fait également la part belle au chaînage des instructions (opérateur de "pipe") que nous avons étudié à la fin du module \@ref(import). Une instruction type sera `df %>% fun(x, y)`, même si dans SciViews nous préférons l'opérateur plus explicite `%>.%` qui donne `df %>.% fun(., x, y)`. [Tidyverse](https://www.tidyverse.org) est constitué d'un ensemble de packages R qui se conforment à un style bien défini autour d'une version spéciale de data frame appelée **tibble**.
+-   La **syntaxe "tidyverse"** qui vise à produire des instructions aussi lisibles que possible (lecture proche d'un langage naturel humain). Cette syntaxe utilise quelques astuces de programmation pour rendre les instructions plus digestes et s'affranchir du `df$x` pour pouvoir écrire uniquement `x` à la place. Elle fait également la part belle au chaînage des instructions (opérateur de "pipe") que nous avons étudié à la fin du module \@ref(import). Une instruction type sera `df %>% fun(x, y)`, même si dans SciViews nous préférons l'opérateur plus explicite `%>.%` qui donne `df %>.% fun(., x, y)`. [Tidyverse](https://www.tidyverse.org) est constitué d'un ensemble de packages R qui se conforment à un style bien défini autour d'une version spéciale de data frame appelée **tibble**.
 
 Dans le cadre de ce cours, nous utilisons un style propre à SciViews, le style **SciViews-R**. Il est associé à une série de packages chargés à partir de l'instruction `SciViews::R`. Ce style tente de rendre l'utilisation de R plus cohérente et plus facile en reprenant le meilleur des trois styles précédents, et en y ajoutant une touche personnelle élaborée pour éliminer autant que possible les erreurs fréquentes observées lors de l'apprentissage ou de l'utilisation de R. Dans la suite de cette section, nous allons comparer quelques instructions équivalentes, mais rédigées dans différents styles pour nous familiariser avec eux et pour comprendre leurs atouts respectifs. Assurez-vous de conserver à proximité l'[aide-mémoire sur les différentes syntaxes de R](http://www.amelia.mn/Syntax-cheatsheet.pdf) pour vous aider. Mais avant toute chose, un petit complément concernant l'indiçage dans R est nécessaire.
 
@@ -710,7 +710,7 @@ v[-(2:3)]
 v[-length(v)]
 ```
 
-La troisième forme d'indiçage nécessite que le vecteur soit nommé, comme c'est le cas pour `v`. Nous pouvons alors indicer en utilisant des chaînes de caractères correspondant aux noms des différent éléments.
+La troisième forme d'indiçage nécessite que le vecteur soit nommé, comme c'est le cas pour `v`. Nous pouvons alors indicer en utilisant des chaînes de caractères correspondant aux noms des différents éléments.
 
 ```{r}
 # Élément de v s'appelant 'a'
@@ -719,7 +719,7 @@ v['a']
 v[c('b', 'd')]
 ```
 
-Enfin, la quatrième forme d'indiçage utilise un vecteur booléen (`TRUE` ou `FALSE` ; on dit **logical** en R) de même longueur que le vecteur, sinon les valeurs sont recyclée à concurrence de la longueur du vecteur. On ne garde que les éléments correspondant à `TRUE`.
+Enfin, la quatrième forme d'indiçage utilise un vecteur booléen (`TRUE` ou `FALSE` ; on dit **logical** en R) de même longueur que le vecteur, sinon les valeurs sont recyclées à concurrence de la longueur du vecteur. On ne garde que les éléments correspondants à `TRUE`.
 
 ```{r}
 # Garder le premier et le quatrième élément
@@ -730,7 +730,7 @@ v[c(TRUE, FALSE)]
 
 La dernière instruction mérite une petite explication supplémentaire. Le vecteur **logical** d'indiçage utilisé ne contient que deux éléments alors que le vecteur `v` qui est indicé en contient quatre. Les valeurs logiques sont alors recyclées comme suit. Lorsqu'on arrive la fin, on reprend au début. Donc, `TRUE`, on garde le premier, `FALSE` on élimine le second, et puis... retour au début : `TRUE` on garde le troisième, `FALSE` on jette le quatrième, et ainsi de suite si `v` était plus long. Donc, un indiçage avec `c(TRUE, FALSE)` permet de ne garder que les éléments d'ordre impair quel que soit la longueur de `v`, et `c(FALSE, TRUE)` ne gardera que les éléments d'ordre pair.
 
-La puissance de l'indiçage par valeur booléenne est immense car nous pouvons aussi utiliser une expression qui renvoie de telles valeurs. C'est le cas notamment de toutes les instruction de comparaison (opérateurs égal à `==`, différent de `!=`, plus grand que `>`, plus petit que `<`, plus grand ou égal `>=` ou plus petit ou égal `<=`). Par exemple pour ne garder que les valeurs plus grandes que 3, on fera :
+La puissance de l'indiçage par valeur booléenne est immense, car nous pouvons aussi utiliser une expression qui renvoie de telles valeurs. C'est le cas notamment de toutes les instructions de comparaison (opérateurs égal à `==`, différent de `!=`, plus grand que `>`, plus petit que `<`, plus grand ou égal `>=` ou plus petit ou égal `<=`). Par exemple pour ne garder que les valeurs plus grandes que 3, on fera :
 
 ```{r}
 # Déterminer quel élément est plus grand que 3 dans v
@@ -779,7 +779,7 @@ Les autres formes d'indiçage fonctionnent aussi.
 df[df$x > 3, c('y', 'z')]
 ```
 
-Notez bien que nous n'avons pas écrit `df[x > 3, ]` mais `df[df$x > 3, ]`. La première forme n'aurait pas utilisé la variable `x` du data frame `df` (notée `df$x`), mais aurait tenté d'utiliser un vecteur `x` directement. Ce qui nous amène à l'extraction d'un élément d'un tableau ou d'une liste à l'aide des opérateur `[[]]` ou `$`. Pour extraire la colonne `y` sous *forme d'un vecteur* de `df`, nous pourrons faire :
+Notez bien que nous n'avons pas écrit, `df[x > 3, ]` mais `df[df$x > 3, ]`. La première forme n'aurait pas utilisé la variable `x` du data frame `df` (notée `df$x`), mais aurait tenté d'utiliser un vecteur `x` directement. Ce qui nous amène à l'extraction d'un élément d'un tableau ou d'une liste à l'aide des opérateurs `[[]]` ou `$`. Pour extraire la colonne `y` sous *forme d'un vecteur* de `df`, nous pourrons faire :
 
 ```{r}
 df[[2]]
@@ -824,13 +824,13 @@ table(zoo$class)
 
 La fonction `table()` crée un objet du même nom qui se comporte de manière différente d'un data frame. Ainsi, l'impression de l'objet se présente comme un ensemble de valeurs nommées par le niveau dénombré pour un tableau de contingence à une seule entrée.
 
-Si vous voulez réaliser la même opération à l'aide d'une formule, vous pouvez utiliser la fonction `tally()` depuis le package {mosaic}. Vous pouvez charger ce package à l'aide de l'instruction `library(mosaic)`, et ensuite utiliser `tally()` comme si de rien était, ou alors vous spécifiez complètement la fonction à l'aide de `mosaic::tally()` (littéralement, "la fonction `tally()` du package {mosaic}"). Cette dernière approche est favorisée par SciViews-R car elle permet de comprendre immédiatement d'où vient la fonction et d'éviter aussi d'appeler malencontreusement une fonction du même nom qui serait définie dans un autre package.
+Si vous voulez réaliser la même opération à l'aide d'une formule, vous pouvez utiliser la fonction `tally()` depuis le package {mosaic}. Vous pouvez charger ce package à l'aide de l'instruction `library(mosaic)`, et ensuite utiliser `tally()` comme si de rien n’était, ou alors vous spécifiez complètement la fonction à l'aide de `mosaic::tally()` (littéralement, "la fonction `tally()` du package {mosaic}"). Cette dernière approche est favorisée par SciViews-R, car elle permet de comprendre immédiatement d'où vient la fonction et d'éviter aussi d'appeler malencontreusement une fonction du même nom qui serait définie dans un autre package.
 
 ```{r}
 mosaic::tally(data = zoo, ~ class)
 ```
 
-Tidyverse favorise l'assemblage d'un petit nombre de fonction (des "verbes") pour obtenir les mêmes résultats que des fonctions plus spécialisées dans les autres styles. Ainsi, ses instructions seront souvent plus verbeuses (inconvénient), mais aussi beaucoup plus lisibles et compréhensibles par un humain (immense avantage). La réalisation d'un tableau de contingence consiste en fait à regrouper les données en fonction de `class`, et ensuite à compter (contingenter) les observations dans chaque classe. Nous pouvons écrire une instruction qui réalise exactement ce traitement de manière explicite (sachant que la fonction `n()` sert à dénombrer) :
+Tidyverse favorise l'assemblage d'un petit nombre de fonctions (des "verbes") pour obtenir les mêmes résultats que des fonctions plus spécialisées dans les autres styles. Ainsi, ses instructions seront souvent plus verbeuses (inconvénient), mais aussi beaucoup plus lisibles et compréhensibles par un humain (immense avantage). La réalisation d'un tableau de contingence consiste en fait à regrouper les données en fonction de `class`, et ensuite à compter (contingenter) les observations dans chaque classe. Nous pouvons écrire une instruction qui réalise exactement ce traitement de manière explicite (sachant que la fonction `n()` sert à dénombrer) :
 
 ```{r}
 zoo %>%
@@ -849,9 +849,9 @@ Comme contingenter des observations est une opération fréquente, il existe *ex
 count(zoo, class) |> collect_dtx() # |> est l'opérateur de base de R
 ```
 
-Le résultat est le même. Comparons maintenant la fonction `table()` de base et `count()` de tidyverse du point de vue des arguments. `table()` prend un vecteur comme argument. À nous de l'extraire du data frame à l'aide de `zoo$class`, ce qui donne `table(zoo$class)`. Par contre, `count()` comme toute fonction tidyverse qui se respecte, prend comme premier argument un **tibble**, un **data.table** ou un **data.frame**, bref un tableau cas par variables. C'est ensuite au niveau du second argument que l'on spécifie la variable que nous souhaitons utiliser à partir de ce tableau. Ici, plus besoin d'indiquer que c'est une variable qui vient du tableau `zoo`, car `count()` le sait déjà. Bien que ce ne soit pas évident au premier cou d'œil, `count()` ne respecte *pas* la syntaxe de base de R et évalue `class` de manière particulière[^11-variance-ii-6]. Au final, l'appel à `table()` nécessite de comprendre ce que fait l'opérateur `$`. Au contraire, l'instruction tidyverse `count(zoo, class)` se lit et se comprend très bien presque comme si c'était écrit en anglais. Vous lisez en effet "compte dans zoo la classe" (avantage), mais le coût en est une évaluation non standard de ses arguments (inconvénient qui ne peut pas apparaître à ce stade mais que vous constaterez plus tard quand vous ferez des choses plus évoluées avec ces instructions).
+Le résultat est le même. Comparons maintenant la fonction `table()` de base et `count()` de tidyverse du point de vue des arguments. `table()` prends un vecteur comme argument. À nous de l'extraire du data frame à l'aide de `zoo$class`, ce qui donne `table(zoo$class)`. Par contre, `count()` comme toute fonction tidyverse qui se respecte, prend comme premier argument un **tibble**, un **data.table** ou un **data.frame**, bref un tableau cas par variables. C'est ensuite au niveau du second argument que l'on spécifie la variable que nous souhaitons utiliser à partir de ce tableau. Ici, plus besoin d'indiquer que c'est une variable qui vient du tableau `zoo`, car `count()` le sait déjà. Bien que ce ne soit pas évident au premier coup d'œil, `count()` ne respecte *pas* la syntaxe de base de R et évalue `class` de manière particulière[^11-variance-ii-6]. Au final, l'appel à `table()` nécessite de comprendre ce que fait l'opérateur `$`. Au contraire, l'instruction tidyverse `count(zoo, class)` se lit et se comprend très bien presque comme si c'était écrit en anglais. Vous lisez en effet "compte dans zoo la classe" (avantage), mais le coût en est une évaluation non standard de ses arguments (inconvénient qui ne peut pas apparaître à ce stade, mais que vous constaterez plus tard quand vous ferez des choses plus évoluées avec ces instructions).
 
-[^11-variance-ii-6]: Cette évaluation particulière s'appelle le *"tidyeval"*. Son explication est hors de propos dans cette introduction à la science des données mais si vous êtes curieux, vous pouvez toujours [lire ceci](https://thinkr.fr/tidyeval/).
+[^11-variance-ii-6]: Cette évaluation particulière s'appelle le *"tidyeval"*. Son explication est hors de propos dans cette introduction à la science des données, mais si vous êtes curieux, vous pouvez toujours [lire ceci](https://thinkr.fr/tidyeval/).
 
 ```{block, type='note'}
 Le style de SciViews-R accepte à la fois la syntaxe de base et celle de tidyverse, avec une préférence pour cette dernière lorsque la lisibilité des instructions est primordiale. De plus, le style formule est également abondamment utilisé dès qu'il s'agit de réaliser un graphique ou un modèle statistique (les deux étant d'ailleurs souvent associés).
@@ -865,7 +865,7 @@ zoo2 <- zoo[zoo$class == "Oeuf_allongé" | zoo$class == "Oeuf_rond",
 zoo2
 ```
 
-En tidyverse, les deux opérations (filtrage des lignes et sélection des variables en colonnes) restent deux opération successives distinctes dans le code. Notez au passage que nous repassons à l'opérateur de chaînage `%>.%` de SciViews-R que nous avons l'habitude d'utiliser à la place de l'opérateur correspondant de tidyverse `%>%`.
+En tidyverse, les deux opérations (filtrage des lignes et sélection des variables en colonnes) restent deux opérations successives distinctes dans le code. Notez au passage que nous repassons à l'opérateur de chaînage `%>.%` de SciViews-R que nous avons l'habitude d'utiliser à la place de l'opérateur correspondant de tidyverse `%>%`.
 
 ```{r}
 zoo %>.%
@@ -875,7 +875,7 @@ zoo %>.%
 zoo2
 ```
 
-Le résultat est le même, mais la syntaxe est très différente. Notez que les variables dans la syntaxe de base sont complètement qualifiées (`zoo$class`), ce qui nécessite de répéter plusieurs fois le nom du jeu de données `zoo` (inconvénient) mais lève toute ambiguïté (avantage). La version de tidyverse est plus "propre" (avantage), mais cela implique d'utiliser une évaluation non standard de `class` qui n'est pas une variable existante dans l'environnement où le code est évalué (inconvénient). La sélection des variables est également différente. Dans R de base, des chaînes de caractères doivent être compilées dans un vecteur d'indiçage à l'aide de `c()`, alors que `select()` de tidyverse permet de spécifier simplement les noms des variables sans autres fioritures (mais cela doit être évalué de manière non standard, encore une fois).
+Le résultat est le même, mais la syntaxe est très différente. Notez que les variables dans la syntaxe de base sont complètement qualifiées (`zoo$class`), ce qui nécessite de répéter plusieurs fois le nom du jeu de données `zoo` (inconvénient), mais lève toute ambiguïté (avantage). La version de tidyverse est plus "propre" (avantage), mais cela implique d'utiliser une évaluation non standard de `class` qui n'est pas une variable existante dans l'environnement où le code est évalué (inconvénient). La sélection des variables est également différente. Dans R de base, des chaînes de caractères doivent être compilées dans un vecteur d'indiçage à l'aide de `c()`, alors que `select()` de tidyverse permet de spécifier simplement les noms des variables sans autres fioritures (mais cela doit être évalué de manière non standard, encore une fois).
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -895,7 +895,7 @@ zoo2 %<-% mutate(zoo2, log_area = log10(area))
 head(zoo2)
 ```
 
-Toujours penser à collecter le résultat à l'aide de l'assignation alternative `%<-%` au lieu de `<-` ... ou alors utiliser la fonction non tidy `smutate()`, ce qui est en général une meilleure solution si une seule instruction constiute le pipeline comme ici :
+Toujours penser à collecter le résultat à l'aide de l'assignation alternative `%<-%` au lieu de `<-` ... ou alors, utiliser la fonction non tidy `smutate()`, ce qui est en général une meilleure solution si une seule instruction constitue le pipeline comme ici :
 
 ```{r}
 zoo2 <- smutate(zoo2, log_area = log10(area))
@@ -960,7 +960,7 @@ Il y aurait encore beaucoup à dire sur les différents styles de syntaxe dans R
 
 > De votre côté, vous êtes libre d'utiliser le style que vous préférez. si la curiosité vous pousse à essayer autre chose et à adopter un autre style que SciViews-R, nous en serons ravis. R est ouvert, il offre beaucoup et c'est à vous maintenant de créer votre propre boite à outils taillée réellement à *votre* mesure !
 
-Pour finir, il parait que les belges sont forts en auto-dérision. La caricature suivante devrait vous faire sourire :
+Pour finir, il parait que les belges sont forts en autodérision. La caricature suivante devrait vous faire sourire :
 
 <center>![Prolifération de standards par xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
 
@@ -970,7 +970,7 @@ Pour finir, il parait que les belges sont forts en auto-dérision. La caricature
 
 ##### Pour en savoir plus {.unnumbered}
 
--   [Swirl](https://swirlstats.com) vous permet d'apprendre la syntaxe de base de R de manière conviviale et interactive. Le site R maintient une page de documents et tutoriaux [ici](https://cran.r-project.org/other-docs.html) (descendez jusqu'à la section concernant les documents en français si vous préférez travailler dans cette langue). Enfin, les [manuels de R](https://cran.r-project.org/manuals.html) sont un peu techniques, mais ils décrivent dans le détail la syntaxe de base.
+-   [Swirl](https://swirlstats.com) vous permet d'apprendre la syntaxe de base de R de manière conviviale et interactive. Le site R maintient une page de documents et tutoriels [ici](https://cran.r-project.org/other-docs.html) (descendez jusqu'à la section concernant les documents en français si vous préférez travailler dans cette langue). Enfin, les [manuels de R](https://cran.r-project.org/manuals.html) sont un peu techniques, mais ils décrivent dans le détail la syntaxe de base.
 
 -   [Mosaic](http://mosaic-web.org) est une initiative américaine qui vise en partie un objectif assez similaire à celui de SciViews-R : homogénéiser l'interface de R et en faciliter l'apprentissage. [A student's guide to R](https://github.com/ProjectMOSAIC/LittleBooks/blob/master/StudentGuide/MOSAIC-StudentGuide.pdf) est un ouvrage en ligne qui vous apprendra à utiliser R selon le style mosaic qui fait la part belle à l'interface formule.
 
@@ -1017,7 +1017,7 @@ if (exists("assignment2"))
 ```
 ## Récapitulatif des exercices
 
-À l'issue de ce module 11 vous avez appris à utiliser l'ANOVA à deux facteurs sous différentes formes, vous avez aussi approfondi votre maîtrise de R à travers l'indiçage et les principaux styles syntaxiques de R. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
+À l'issue de ce module 11 vous avez appris à utiliser l'ANOVA à deux facteurs sous différentes formes, vous avez aussi approfondi votre maîtrise de R à travers l'indiçage et les principaux styles syntaxiques de R. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
