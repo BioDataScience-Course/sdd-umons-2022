@@ -316,6 +316,13 @@ chart(f) +
 
 Nous commençons à avoir l'habitude maintenant. La valeur *P* est calculée comme l'aire à droite du quantile correspondant à *F~obs~*. Enfin, nous rejetterons $H_0$ seulement si la valeur *P* est inférieure au seuil $\alpha$ qui a été choisi préalablement au test. Ceci revient à constater que, graphiquement, *F~obs~* vient se positionner dans la zone de rejet en rouge comme sur la Fig. \@ref(fig:fplot).
 
+```{block, type='info'}
+Lorsque nous réalisons une ANOVA, nous travaillons avec deux variables. La variable qualitative sert à découper l'échantillon en plusieurs sous-populations, alors que la variable quantitative est utilisée pour calculer les moyennes. Leurs rôles diffèrent donc, et elles ne sont bien évidemment pas interchangeables. En statistique, nous parlerons de **variable réponse** pour la variable qui mesure l'effet étudié et **variable explicative** pour la variable qui permet d'expliquer la réponse observée (et dans le cas de l'ANOVA, c'est le découpage en sous-populations).
+
+Si le modèle est représenté par une formule dans R, la variable réponse sera à la gauche de la formule, et la (ou les) variable(s) explicative(s) à droite : `var_réponse ~ var_explicative`.
+
+```
+
 ##### Conditions d'application {.unnumbered}
 
 -   échantillon représentatif (par exemple, aléatoire),
@@ -327,7 +334,7 @@ Nous commençons à avoir l'habitude maintenant. La valeur *P* est calculée com
 
 Les deux dernières conditions d'applications doivent être vérifiées. La Normalité des résidus doit être rencontrée aussi bien que possible. Un graphique quantile-quantile des résidus permet de se faire une idée, comme sur la Fig. \@ref(fig:resid1). Néanmoins, le test étant relativement robuste à des petites variations par rapport à la distribution Normale, surtout si ces variations sont symétriques, nous ne serons pas excessivement stricts ici.
 
-```{r resid1, echo = FALSE, results='hide', fig.cap="Graphique quantile-quantile appliqué aux résidus d'une ANOVA pour déterminer si leur distribution se rapproche d'un loi normale."}
+```{r resid1, echo=FALSE, results='hide', fig.cap="Graphique quantile-quantile appliqué aux résidus d'une ANOVA pour déterminer si leur distribution se rapproche d'un loi normale."}
 # Just a random dataset...
 trees <- read("trees", package = "datasets")
 ANOVA <- lm(data = trees, volume ~ diameter)
@@ -380,7 +387,7 @@ Si la valeur *P* est inférieure au seuil $\alpha$ fixé au préalable, nous dev
 
 ##### Résolution de notre exemple {.unnumbered}
 
-Nous commençons par déterminer si nous avons une homoscédasticité. Considérons un seuil $\alpha$ de 5% pour tous nos tests. Ensuite :
+Nous commençons par déterminer si nous avons une homoscédasticité. Considérons un seuil $\alpha$ de 5% pour tous nos tests. Ensuite, nous utilisons `bartlett.test()` avec une formule qui représente bien la variable réponse *en fonction de* (le tilde `~`) la variable explicative, soit ici, `aspect ~ group` :
 
 ```{r}
 bartlett.test(data = crabs2, aspect ~ group)
@@ -416,21 +423,22 @@ Nous poursuivons sur une description des données utile pour l'ANOVA :
 
 ```{r}
 crabs2 %>.%
-  sgroup_by(., group) |> ssummarise(
+  sgroup_by(., group) %>.%
+  ssummarise(.,
     mean  = fmean(aspect5),
     sd    = fsd(aspect5),
     count = fsum(!is.na(aspect5)))
 ```
 
-Ensuite l'ANOVA proprement dite :
+Ensuite l'ANOVA proprement dite se réalise en deux étapes : (1) `lm()` calcule le modèle sur base d'une formule de type `var_réponse ~ var_explicative` (ici, `aspect5 ~ group`) et nous récupérons le résultat de ce calcul dans `crabs2_anova` pour utilisation ultérieure, et (2) la fonction `anova()` appliquée sur cet objet nous produit le tableau de l'ANOVA :
 
 ```{r}
 anova(crabs2_anova <- lm(data = crabs2, aspect5 ~ group))
 ```
 
-Nous retrouvons ici le tableau de l'ANOVA. La valeur *P* est très faible et inférieure à $\alpha$. Nous rejetons $H_0$. Nous pouvons dire que le ratio largeur arrière / max à la puissance cinq diffère significativement entre les groupes (ANOVA, F = 150, ddl = 3 & 196, valeur *P* \<\< 10^-3^).
+Nous observons dans le tableau de l'ANOVA que la valeur *P* est très faible et inférieure à $\alpha$. Nous rejetons $H_0$. Nous pouvons dire que le ratio largeur arrière / max à la puissance cinq diffère significativement entre les groupes (ANOVA, F = 150, ddl = 3 & 196, valeur *P* \<\< 10^-3^).
 
-Ce n'est qu'une fois l'ANOVA réalisée que nous pouvons calculer et visionner la distribution des résidus (Fig. \@ref(fig:anova-resid)).
+Ce n'est qu'une fois l'ANOVA réalisée que nous pouvons calculer et visionner la distribution des résidus à partir de notre objet `crabs2_anova` (Fig. \@ref(fig:anova-resid)).
 
 ```{r anova-resid, echo=TRUE, fig.cap="Graphique quantile-quantile des résidus pour l'analyse de `aspect^5`."}
 chart$qqplot(crabs2_anova, lang = "fr")
@@ -560,7 +568,7 @@ Le test de Kruskal-Wallis est naturellement moins contraignant que l'ANOVA.
 
 ### Test "post hoc" non paramétrique
 
-Nous devrions également réaliser des tests "pot hoc" lorsque nous rejetons $H_0$ du Kruskal-Wallis. Les version non paramétriques des tests de comparaisons multiples sont moins connues. Nous pourrions effectuer des comparaisons deux à deux avec des tests de Wilcoxon en appliquant une correction de Bonferroni.
+Nous devrions également réaliser des tests "post hoc" lorsque nous rejetons $H_0$ du Kruskal-Wallis. Les version non paramétriques des tests de comparaisons multiples sont moins connues. Nous pourrions effectuer des comparaisons deux à deux avec des tests de Wilcoxon en appliquant une correction de Bonferroni.
 
 Une autre option consiste à utiliser une version non paramétrique du test de Tukey basée sur les rangs, dit test pot hoc non paramétrique asymptotique. Les explications assez techniques sont disponibles [ici](https://onlinelibrary.wiley.com/doi/abs/10.1002/1521-4036%28200109%2943%3A5%3C553%3A%3AAID-BIMJ553%3E3.0.CO%3B2-N). Ce test est disponible dans le package R {nparcomp}.
 
