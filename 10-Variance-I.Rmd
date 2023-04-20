@@ -503,7 +503,7 @@ Les conditions d'application pour le test post hoc de Tukey sont les mêmes que 
 
 ```{r assign_A10Ia_acidification_effect, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A01Ia_acidification_effect", part = NULL,
+  assignment("A10Ia_acidification_effect", part = NULL,
     url = "https://github.com/BioDataScience-Course/A10Ia_acidification_effect",
     course.ids = c(
       'S-BIOG-027' = !"A10Ia_{YY}M_acidification_effect"),
