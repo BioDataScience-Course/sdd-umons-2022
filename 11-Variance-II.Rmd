@@ -226,7 +226,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A11Ia_{YY}M_anova2"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/XmOGeiYB"),
     course.starts = c(
       'S-BIOG-027' = !"{W[33]+1} 13:00:00"),
     course.ends = c(
@@ -340,7 +340,7 @@ chart(eggs_means, Fat_mean ~ Lab) +
 bartlett.test(data = eggs_means, Fat_mean ~ Lab)
 ```
 
-Notez ceci : le test de Bartlett nous donne une valeur *p* de 6%, donc supérieure au seuil $\alpha$ de 5%. Nous serons donc tenté de considérer qu'il n'y a pas homoscédasticité... mais avec un regard plus critique, nous gardons à l'esprit que deux mesures par laboratoire, c'est vraiment pas beaucouo. Le graphique tend à nous montrer que les écarts entre les deux mesures peuvent varier quand même énormément d'un laboratoire à l'autre. Ici, il faudrait une étude avec plus de mesures pour réellement conclure sur ce test ! Effectuons quand même notre analyse de variance à un facteur.
+Notez ceci : le test de Bartlett nous donne une valeur *p* de 6%, donc supérieure au seuil $\alpha$ de 5%. Nous serons donc tenté de considérer qu'il y a homoscédasticité (no rejet de H~0~)... mais avec un regard plus critique, nous gardons à l'esprit que deux mesures par laboratoire, c'est vraiment pas beaucouo. Le graphique tend à nous montrer que les écarts entre les deux mesures peuvent varier quand même énormément d'un laboratoire à l'autre. Ici, il faudrait une étude avec plus de mesures pour réellement conclure sur ce test ! Nous pouvons quand même effecter notre analyse de variance à un facteur.
 
 ```{r}
 anova(eggs_means_anova <- lm(data = eggs_means, Fat_mean ~ Lab))
@@ -362,9 +362,9 @@ Les conditions d'application sont les mêmes que pour l'ANOVA à deux facteurs s
 
 Jusqu'à présent, nous avons considéré que nous échantillonnons toutes les modalités qui nous intéressent pour les variables facteurs explicatives. Il se peut que les modalités soient trop nombreuses et que nous ne puissions n'en étudier qu'une petite fraction. Nous avons deux possibilités.
 
--   Soit nous choisissons aléatoirement quelques modalités, et nous les étudions *systématiquement* pour les différentes modalités de l'autre variable. Nous nous ramenons à un modèle à facteurs fixes mais nous ne pouvons donner une réponse que pour les modalités échantillonnées (restriction de la population statistique étudiée).
+-   Soit nous choisissons quelques modalités, et nous les étudions *systématiquement* pour les différentes modalités de l'autre variable. Nous nous ramenons à un modèle à **facteurs fixes** mais nous ne pouvons donner une réponse que pour les modalités échantillonnées (restriction de la population statistique étudiée). Nous devons en rester bien conscients tout au long de l'analyse et de son interprétation.
 
--   Soit, nous échantillonnons aléatoirement dans la population un nombre restreint de modalités.
+-   Soit, nous échantillonnons aléatoirement dans la population un nombre restreint de modalités, et nous restons intéressés par tous les cas possibles. À ce moment-là, la variable fateur doit être traitée comme **aléatoire**.
 
 Considérez un plan d'expérience relativement classique où différents items sont comparés dans une sélection au hasard de réalisations. En agronomie, il peut s'agir de comparer différentes variétés d'une céréale cultivées dans quelques fermes. Si nous ne sommes intéressés que par ces fermes-là, alors les effets sont fixes, pas de problèmes. Par contre, si nous sommes intéressés par la production de cette céréale dans une région donnée, les fermes représentent seulement un *échantillon* de l'ensemble des fermes qui s'y trouvent. Autrement dit, toutes les *modalités possibles* ne sont pas reprises dans l'expérience. Dans ce cas, nous parlerons d'un **effet aléatoire** pour l'effet `ferme`.
 
@@ -646,6 +646,10 @@ De plus, nous faisons l'hypothèse supplémentaire que les variables à effet al
 
 Dans tous les cas, une analyse des résidus, en particulier un graphique quantile-quantile et un graphique des résidus par rapport aux valeurs ajustées sont indispensables pour confirmer que les conditions d'application sont rencontrées. Si ce n'est pas le cas, nous pouvons tenter de transformer les données. Sinon, nous devons utiliser une version non paramétrique du modèle si elle existe (p. ex., [test de Friedman](https://www.datanovia.com/en/fr/lessons/test-de-friedman-dans-r/)), mais ce n'est pas toujours possible.
 
+##### À vous de jouer ! {.unnumbered}
+
+`r learnr("A11Lb_anova2mixte", title = "ANOVA à 2 facteurs mixte", toc = "Analyse de variance à 2 facteurs mixte")`
+
 ##### Pour aller plus loin {.unnumbered}
 
 -   On s'y perd facilement dans les différents modèles et les formulations associées pour le code R avec `lm()`, `aov()` ou `lmer()`. Un récapitulatif (en anglais) est présenté [ici](http://conjugateprior.org/2013/01/formulae-in-r-anova/). Une version plus détaillée est [aussi disponible](http://www.dwoll.de/rexrepos/posts/anovaMixed.html).
@@ -824,7 +828,7 @@ table(zoo$class)
 
 La fonction `table()` crée un objet du même nom qui se comporte de manière différente d'un data frame. Ainsi, l'impression de l'objet se présente comme un ensemble de valeurs nommées par le niveau dénombré pour un tableau de contingence à une seule entrée.
 
-Si vous voulez réaliser la même opération à l'aide d'une formule, vous pouvez utiliser la fonction `tally()` depuis le package {mosaic}. Vous pouvez charger ce package à l'aide de l'instruction `library(mosaic)`, et ensuite utiliser `tally()` comme si de rien n’était, ou alors vous spécifiez complètement la fonction à l'aide de `mosaic::tally()` (littéralement, "la fonction `tally()` du package {mosaic}"). Cette dernière approche est favorisée par SciViews-R, car elle permet de comprendre immédiatement d'où vient la fonction et d'éviter aussi d'appeler malencontreusement une fonction du même nom qui serait définie dans un autre package.
+Si vous voulez réaliser la même opération à l'aide d'une formule, vous pouvez utiliser la fonction `tally()` depuis le package {mosaic}. Vous pouvez charger ce package à l'aide de l'instruction `library(mosaic)`, et ensuite utiliser `tally()` comme si de rien n'était, ou alors vous spécifiez complètement la fonction à l'aide de `mosaic::tally()` (littéralement, "la fonction `tally()` du package {mosaic}"). Cette dernière approche est favorisée par SciViews-R, car elle permet de comprendre immédiatement d'où vient la fonction et d'éviter aussi d'appeler malencontreusement une fonction du même nom qui serait définie dans un autre package.
 
 ```{r}
 mosaic::tally(data = zoo, ~ class)
@@ -966,7 +970,7 @@ Pour finir, il parait que les belges sont forts en autodérision. La caricature 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A11Lb_syntaxr", title = "Syntaxes dans R", toc = "Syntaxes dans R")`
+`r learnr("A11Lc_syntaxr", title = "Syntaxes dans R", toc = "Syntaxes dans R")`
 
 ##### Pour en savoir plus {.unnumbered}
 
