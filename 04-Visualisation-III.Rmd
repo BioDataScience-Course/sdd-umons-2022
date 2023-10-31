@@ -53,6 +53,13 @@ Outre les barres elles-mêmes, prêtez toujours attention aux éléments suivant
 -   les niveaux de la variable facteur (en rouge également)
 -   le label des axes (en bleu)
 
+```{=html}
+<!-- H5P en cours de validation
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(246, height = 270, toc = NULL)`
+-->
+```
 Les instructions dans R pour produire un graphique en barres à l'aide de la fonction `chart()` sont les suivantes. Nous partons d'un jeu de données `zooplankton` que nous importons et dont nous extrayons un sous-ensemble à l'aide de la fonction `sfilter()`(vous étudierez en détail les fonctions de remaniement de tableaux dans les deux prochains modules) avant de réaliser notre graphique à l'aide de `chart()` :
 
 ```{r barres-facteur2, fig.cap="Abondances de quatres types de copépodes dans un échantillon de zooplancton."}
@@ -89,6 +96,13 @@ label(biometry$year_measure) <- "Année de la mesure"
 
 Notez bien comment on se réfère à la variable `year_measure` à l'intérieur du jeu de données `biometry` avec `biometry$year_measure`. Et cette notation peut aussi bien être utilisée pour récupérer la colonne `year_measure` dans un argument d'une fonction (à droite), que comme résultat de l'assignation (à gauche de l'opérateur d'assignation `<-`). Ainsi l'instruction qui transforme en facteur **remplace** la version dans le jeu de données `biometry`. Maintenant, considérons que nous nous intéressons aux mesures antérieures à 2017 (cela nous permettra d'illustrer des points importants relatifs à l'utilisation de variables facteurs).
 
+```{=html}
+<!-- H5P en cours de validation
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(247, height = 270, toc = NULL)`
+-->
+```
 ```{block, type='note'}
 Les variables facteurs sont encodées dans R comme des entiers 1, 2, 3, ... pour les différents niveaux avec en plus, un attribut `levels` qui y associe une description textuelle à chacun des niveaux. Cela peut être perturbant quand la description textuelle est constituée d'un nombre comme ici pour `year_measure`. Mais les calculs sont prohibés sur les variables facteurs.
 ```
@@ -238,7 +252,9 @@ $$y \ en \ fonction \ de \ x$$
 
 Avec *y* une variable numérique et *x* une variable facteur. Considérez l'échantillon suivant :
 
-    1, 71, 55, 68, 78, 60, 83, 120, 82 ,53, 26
+```         
+1, 71, 55, 68, 78, 60, 83, 120, 82 ,53, 26
+```
 
 Calculez la moyenne sur base de la formule de la moyenne
 
@@ -322,6 +338,13 @@ chart(data = df, ~ Facteur %fill=% Facteur) +
 
 Dans ce dernier cas, c'est bien plus facile : il y a effectivement 24 observations relatives à la lettre **H** (vous ne voyez peut-être pas que l'effectif de *H* est exactement 24, mais vous pouvez voir sans problème qu'il est d'*environ* 25, alors que sur le graphique en camembert, nous le voyons beaucoup moins bien).
 
+```{=html}
+<!-- H5P en cours de validation
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(248, height = 270, toc = NULL)`
+-->
+```
 ##### À vous de jouer ! {.unnumbered}
 
 `r learnr("A04La_barplot", title = "Graphique en barres et camembert", toc = "Graphiques en barres et camembert")`
@@ -342,7 +365,9 @@ Vous souhaitez représenter graphiquement cette fois *un résumé* d'une variabl
 
 Considérez l'échantillon suivant :
 
-    1, 71, 55, 68, 78, 60, 83, 120, 82 ,53, 26
+```         
+1, 71, 55, 68, 78, 60, 83, 120, 82 ,53, 26
+```
 
 Ordonnons-le de la plus petite à la plus grande valeur :
 
@@ -767,7 +792,11 @@ if (exists("assignment2"))
 
 ## Différents moteurs graphiques
 
-<center>![Prolifération des standards d\'après xkcd.](https://imgs.xkcd.com/comics/standards.png)</center>
+<center>
+
+![Prolifération des standards d'après xkcd.](https://imgs.xkcd.com/comics/standards.png)
+
+</center>
 
 Depuis le début, l'ensemble des graphiques que nous vous avons proposés utilise la fonction `chart()` du package {chart}. Cependant, il ne s'agit pas de la seule fonction permettant de réaliser des graphiques dans R, loin de là. En fait {chart} est tout récent et a été développé pour homogénéiser autant que possible les graphiques issus de trois moteurs graphiques différents : {ggplot2}, {lattice} et les graphiques de base. La fonction `chart()` a d'autres avantages également :
 
